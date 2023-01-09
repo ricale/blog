@@ -1,9 +1,10 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import * as React from "react";
+import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
 
 type LayoutProps = {
   pageTitle: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 const Layout = ({ pageTitle, children }: LayoutProps) => {
   const data = useStaticQuery(graphql`
@@ -16,27 +17,27 @@ const Layout = ({ pageTitle, children }: LayoutProps) => {
     }
   `);
   return (
-    <div>
-      <header>{data.site.siteMetadata.title}</header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">about</Link>
-          </li>
-          <li>
-            <Link to="/blog">blog</Link>
-          </li>
-        </ul>
-      </nav>
-      <main>
-        <h1>{pageTitle}</h1>
-        {children}
-      </main>
-    </div>
+    <ThemeProvider theme={normalTheme}>
+      <GlobalStyle />
+      <Container>
+        <header>{data.site.siteMetadata.title}</header>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/posts">posts</Link>
+            </li>
+          </ul>
+        </nav>
+        <main>{children}</main>
+      </Container>
+    </ThemeProvider>
   );
 };
+
+const Container = styled.div`
+  max-width: 800px;
+  padding: ${(p) => p.theme.dimens.margin}px;
+`;
+const BlogHeader = styled.header``;
 
 export default Layout;

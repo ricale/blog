@@ -15,7 +15,7 @@ const Tags = ({ pageContext, data }: PageProps) => {
       <ul>
         {edges.map(({ node: { frontmatter } }: any) => (
           <li key={frontmatter.slug}>
-            <Link to={frontmatter.slug}>{frontmatter.title}</Link>
+            <Link to={`/posts/${frontmatter.slug}`}>{frontmatter.title}</Link>
           </li>
         ))}
       </ul>
