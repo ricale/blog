@@ -8,14 +8,13 @@ const TagsPage = ({ data }: PageProps) => {
     (a: any, b: any) => b.totalCount - a.totalCount
   );
   return (
-    <Layout pageTitle="My Blog Posts">
+    <Layout>
       <h1>tags</h1>
       <ul>
         {tags.map((tag: any) => (
           <li key={tag.fieldValue}>
-            <Link
-              to={`/tags/${tag.fieldValue}/`}
-            >{`${tag.fieldValue}(${tag.totalCount})`}</Link>
+            <Link to={`/tags/${tag.fieldValue}/`}>{`${tag.fieldValue}`}</Link>{" "}
+            <small>{`${tag.totalCount}`}</small>
           </li>
         ))}
       </ul>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
 type SeoProps = {
-  title: string;
+  title?: string;
 };
 const Seo = ({ title }: SeoProps) => {
   const data = useStaticQuery(graphql`
@@ -14,11 +14,8 @@ const Seo = ({ title }: SeoProps) => {
       }
     }
   `);
-  return (
-    <title>
-      {title} | {data.site.siteMetadata.title}
-    </title>
-  );
+  const siteTitle = data.site.siteMetadata.title;
+  return <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>;
 };
 
 export default Seo;

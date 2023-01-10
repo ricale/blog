@@ -24,7 +24,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
   const image = heroImage ? getImage(heroImage) : null;
 
   return (
-    <Layout pageTitle={title}>
+    <Layout>
       <h1>{title}</h1>
       <Tags>
         {tags.map((tag) => (
@@ -53,17 +53,6 @@ const Tags = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-
-  & > li {
-    padding: 0 ${(p) => p.theme.dimens.gutter}px;
-    border-radius: 8px;
-    background-color: lightgray;
-
-    > a {
-      color: black;
-      text-decoration: none;
-    }
-  }
 `;
 
 export const query = graphql`

@@ -5,7 +5,7 @@ import Seo from "../../components/Seo";
 
 const BlogPage = ({ data }: PageProps) => {
   return (
-    <Layout pageTitle="My Blog Posts">
+    <Layout>
       {(data as any).allMdx.nodes.map((node: any, i: number) => (
         <article key={i}>
           <h2>
@@ -13,7 +13,7 @@ const BlogPage = ({ data }: PageProps) => {
               {node.frontmatter.title}
             </Link>
           </h2>
-          <p>{node.frontmatter.date}</p>
+          <div>{node.frontmatter.date}</div>
           <p>{node.excerpt}</p>
         </article>
       ))}
@@ -27,7 +27,7 @@ export const query = graphql`
       nodes {
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY HH:mm:ss")
+          date(formatString: "YYYY. M. D.")
           slug
         }
         id

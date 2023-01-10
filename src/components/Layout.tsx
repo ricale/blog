@@ -3,10 +3,9 @@ import * as React from "react";
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
 
 type LayoutProps = {
-  pageTitle: string;
   children?: React.ReactNode;
 };
-const Layout = ({ pageTitle, children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -25,6 +24,9 @@ const Layout = ({ pageTitle, children }: LayoutProps) => {
           <ul>
             <li>
               <Link to="/posts">posts</Link>
+            </li>
+            <li>
+              <Link to="/tags">tags</Link>
             </li>
           </ul>
         </nav>

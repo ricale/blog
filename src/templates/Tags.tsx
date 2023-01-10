@@ -1,5 +1,6 @@
 import { graphql, Link, PageProps } from "gatsby";
 import React from "react";
+import Layout from "../components/Layout";
 
 const Tags = ({ pageContext, data }: PageProps) => {
   const { tag } = pageContext as any;
@@ -9,7 +10,7 @@ const Tags = ({ pageContext, data }: PageProps) => {
   } tagged with "${tag}"`;
 
   return (
-    <div>
+    <Layout>
       <h1>{tagHeader}</h1>
 
       <ul>
@@ -21,7 +22,7 @@ const Tags = ({ pageContext, data }: PageProps) => {
       </ul>
 
       <Link to="/tags">All tags</Link>
-    </div>
+    </Layout>
   );
 };
 
