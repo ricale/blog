@@ -1,6 +1,22 @@
 const base = 16;
 
-const colors = {};
+const colors = {
+  background: "black",
+  onBackground: "white",
+
+  codeblock: "#111111",
+  onCodeblock: "white",
+
+  blockquoteBorder: "#666666",
+  blockquote: "#111111",
+  onBlockquote: "white",
+
+  code: "#333333",
+  onCode: "#DDDDDD",
+
+  tag: "#111111",
+  onTag: "skyblue",
+};
 
 const normal = {
   dimens: {
