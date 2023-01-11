@@ -3,15 +3,21 @@ import { graphql, Link, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 
-const TagsPage = ({ data }: PageProps) => {
-  const tags = (data as any).allMdx.group.sort(
-    (a: any, b: any) => b.totalCount - a.totalCount
-  );
+type TagsPageData = {
+  allMdx: {
+    group: {
+      totalCount: number;
+      fieldValue: string;
+    }[];
+  };
+};
+const TagsPage = ({ data }: PageProps<TagsPageData>) => {
+  const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
   return (
     <Layout>
       <h1>tags</h1>
       <ul>
-        {tags.map((tag: any) => (
+        {tags.map((tag) => (
           <li key={tag.fieldValue}>
             <Link to={`/tags/${tag.fieldValue}/`}>{`${tag.fieldValue}`}</Link>{" "}
             <small>{`${tag.totalCount}`}</small>
@@ -33,6 +39,6 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => <Seo title="My Blog Posts" />;
+export const Head = () => <Seo title="태그 목록" />;
 
 export default TagsPage;

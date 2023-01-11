@@ -70,6 +70,8 @@ const Tags = styled.ul`
 `;
 
 const Content = styled.div`
+  word-break: keep-all;
+
   h1,
   h2,
   h3,
@@ -78,7 +80,6 @@ const Content = styled.div`
   h6,
   p {
     padding: 0;
-    word-break: keep-all;
   }
 
   h1 {
@@ -163,7 +164,7 @@ const Content = styled.div`
       ${(p) => p.theme.dimens.spacing}px ${(p) => p.theme.dimens.thin}px;
     border-radius: 2px;
 
-    font-size: 0.875rem;
+    font-size: 0.875em;
 
     background-color: ${(p) => p.theme.colors.code};
     color: ${(p) => p.theme.colors.onCode};

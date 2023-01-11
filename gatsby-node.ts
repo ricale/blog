@@ -1,27 +1,21 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 
+type TagGroupsQueryData = {
+  tagsGroup: {
+    group: {
+      fieldValue: string;
+    }[];
+  };
+};
+
 export const createPages: GatsbyNode["createPages"] = async ({
   actions,
   graphql,
   reporter,
 }) => {
-  const { createPage } = actions;
-
-  const tagTemplate = path.resolve("src/templates/Tags.tsx");
-
-  const result = await graphql(`
+  const result = await graphql<TagGroupsQueryData>(`
     {
-      postsRemark: allMdx(sort: { frontmatter: { date: DESC } }, limit: 2000) {
-        edges {
-          node {
-            frontmatter {
-              slug
-              tags
-            }
-          }
-        }
-      }
       tagsGroup: allMdx(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT } }) {
           fieldValue
@@ -30,17 +24,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
     }
   `);
 
-  if (result.errors) {
+  if (result.errors || !result.data) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
 
-  const tags = (result as any).data.tagsGroup.group;
+  const tagsTemplatePath = path.resolve(
+    "src/templates/TagDetailPageTemplate.tsx"
+  );
 
-  tags.forEach((tag) => {
-    createPage({
+  result.data.tagsGroup.group.forEach((tag) => {
+    actions.createPage({
       path: `/tags/${tag.fieldValue}/`,
-      component: tagTemplate,
+      component: tagsTemplatePath,
       context: { tag: tag.fieldValue },
     });
   });

@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin: 0;
     padding: 0;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 180%;
 
     overflow-x: hidden;
