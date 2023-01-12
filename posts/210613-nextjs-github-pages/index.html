@@ -1,0 +1,122 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">Next.js 로 GitHub Pages 배포하기 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.hCcrGi{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.hCcrGi > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.hCcrGi > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g16[id="sc-eDWCr"]{content:"hCcrGi,"}/*!sc*/
+.iOSYZg{word-break:keep-all;}/*!sc*/
+.iOSYZg h1,.iOSYZg h2,.iOSYZg h3,.iOSYZg h4,.iOSYZg h5,.iOSYZg h6,.iOSYZg p{padding:0;}/*!sc*/
+.iOSYZg h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.iOSYZg h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.iOSYZg h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.iOSYZg h4,.iOSYZg h5,.iOSYZg h6,.iOSYZg p,.iOSYZg blockquote,.iOSYZg pre,.iOSYZg ul,.iOSYZg ol,.iOSYZg table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.iOSYZg li > ul,.iOSYZg li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.iOSYZg blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.iOSYZg blockquote > :first-child{margin-top:0;}/*!sc*/
+.iOSYZg blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.iOSYZg blockquote > ul,.iOSYZg blockquote > ol{padding-left:20px;}/*!sc*/
+.iOSYZg blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.iOSYZg blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.iOSYZg code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.iOSYZg pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.iOSYZg pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.iOSYZg table{border-collapse:collapse;}/*!sc*/
+.iOSYZg table td,.iOSYZg table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g17[id="sc-bqWxrE"]{content:"iOSYZg,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>Next.js 로 GitHub Pages 배포하기</h1><ul class="sc-eDWCr hCcrGi"><li><a href="/blog/tags/github pages/">github pages</a></li><li><a href="/blog/tags/next.js/">next.js</a></li></ul><div>2021. 6. 13.</div><div class="sc-bqWxrE iOSYZg"><p>간단한 프로토타이핑 공유를 위해, Next.js로 구현한 웹앱을 GitHub Pages에 배포하기로 했다.</p>
+<p><a href="https://taeny.dev/javascript/nextjs-with-deployment-platform/#3-netlify-vs-vercel">nextJS 뭘로 배포할까? (Netlify, Vercel, Github page)</a> 문서를 보면 GitHub Pages는 물론이고 Netlify, Vercel 을 사용해 배포하는 방법과, 플랫폼간의 장단점까지 비교해 놓았다. 세 플랫폼에 모두 관심이 있다면 해당 글을 읽기를 권한다.</p>
+<p>이 글에서는 해당 글의 내용을 토대로 GitHub Pages에 배포하는 방법만 간략히 정리한다.</p>
+<h2>1. 배포 방법</h2>
+<p><a href="https://taeny.dev/javascript/nextjs-with-deployment-platform/#5--github-page-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">위 문서</a>에서는 아래의 명령어를 <code>package.json</code>에 등록해놓고 사용하라고 안내하고 있다.</p>
+<pre><code class="language-js">&quot;scripts&quot;: {
+  &quot;deploy&quot;: &quot;rm -rf node_modules/.cache &amp;&amp; next build &amp;&amp; next export &amp;&amp; touch out/.nojekyll &amp;&amp; git add out/ &amp;&amp; git commit -m \&quot;Deploy Next.js to gh-pages\&quot; &amp;&amp; git subtree push --prefix out origin gh-pages&quot;
+},
+</code></pre>
+<p>명령어를 하나하나 살펴보면 아래와 같다.</p>
+<pre><code class="language-shell">rm -rf node_modules/.cache
+next build
+next export
+touch out/.nojekyll
+git add out/
+git commit -m &quot;Deploy Next.js to gh-pages&quot;
+git subtree push --prefix out origin gh-pages
+</code></pre>
+<p>(각 명령어에 관한 설명은 <a href="https://taeny.dev/javascript/nextjs-with-deployment-platform/#5--github-page-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">원 문서</a>에 잘 되어있으므로 여기서는 생략하겠다.)</p>
+<p>대부분의 경우 위 명령어를 그대로 써도 문제가 없겠지만, 개인적으로는 이슈가 몇 개 있었다.</p>
+<h2>2. 이슈</h2>
+<h3>2.1. 빌드 결과물을 git 스테이지에 추가</h3>
+<p>위에서는 <code>git add out/</code> 명령어를 통해 빌드한 결과물을 git의 스테이지에 추가한다. 하지만 일반적인 Next.js 프로젝트에서 <code>out/</code> 디렉토리는 <code>.gitignore</code>에 등록되어있기 때문에, 해당 명령어로는 스테이지에 추가되지 않는다.</p>
+<p>해결 방법은 해당 디렉토리를 <code>.gitignore</code>에서 제외시키거나 <code>-f</code> 옵션을 주어서 <code>.gitignore</code>와 관계 없이 강제로 추가시키는 것이다.</p>
+<p>여기서는 <code>-f</code> 옵션을 사용한다. 왜냐면 빌드할 때만 <code>out/</code> 디렉토리를 스테이지에 포함시키고, 빌드 후에는 삭제할 생각이기 때문이다.</p>
+<h3>2.2. 커밋 및 푸시</h3>
+<p>위 문서에서는 아래 명령어를 사용해 빌드 결과를 커밋하고 푸시한다.</p>
+<pre><code class="language-shell">git commit -m &quot;Deploy Next.js to gh-pages&quot;
+git subtree push --prefix out origin gh-pages
+</code></pre>
+<p>이 경우 <code>out/</code> 디렉토리의 내용물을 <code>main</code>(혹은 <code>master</code>) 브랜치에 계속 유지해야 한다. <code>out/</code> 디렉토리 내용을 git 에서 계속 유지할 것이라면 문제 없다. 하지만 내 경우 <code>out/</code> 디렉토리의 내용을 <code>main</code> 브랜치에 유지하고 싶지 않았다. (유지하지 않는 편이 히스토리 관리에 더 좋다고 생각했다.) 내가 원하는 프로세스는 아래와 같다.</p>
+<ol>
+<li>git 스테이지에 임시로 <code>out/</code> 디렉  토리를 추가하고 커밋한다.</li>
+<li>해당 커밋을 가지고 <code>gh-pages</code> 브랜치에 배포를 진행한다. (배포하면 <code>gh-pages</code> 브랜치에 커밋이 새로 생성될 것이다.)</li>
+<li>배포가 끝난 후 1번에서 추가했던 커밋을 삭제한다.</li>
+</ol>
+<p>그럼 원하는 방향이 적용되게끔 명령어를 변경해보자.</p>
+<pre><code class="language-shell"># temp-for-deploy-gh-pages 브랜치를 생성한다.
+git checkout -b temp-for-deploy-gh-pages
+
+# 생성한 브랜치에 `out/` 디렉토리가 포함된 내용을 커밋한다.
+git commit -m &quot;Deploy Next.js to gh-pages&quot;
+
+# 해당 커밋을 사용해 `out/` 디렉토리만으로 로컬의 gh-pages 브랜치에 새로운 커밋을 만든다.
+git subtree split --prefix out -b gh-pages
+
+# 로컬의 gh-pages를 강제로 gh-pages 에 푸시한다.
+git push -f origin gh-pages:gh-pages
+
+# 로컬의 gh-pages 브랜치를 삭제한다.
+git branch -D gh-pages
+
+# temp-for-deploy-gh-pages 브랜치를 삭제한다.
+git checkout main
+git branch -D temp-for-deploy-gh-pages
+</code></pre>
+<p><code>gh-pages</code>를 강제로 푸시하는 이유는 이미 원격에 <code>gh-pages</code> 브랜치가 있을 경우, 새로운 커밋이 원격에 있는 기존의 커밋과 이어지지 않는 커밋이기 때문이다. (<code>gh-pages</code>에 추가되는 커밋의 부모 커밋이 <code>main</code> 브랜치 쪽에 유지되면, 이어지는 커밋으로 판단된다.)</p>
+<h2>3. 이슈 해결 결과</h2>
+<pre><code class="language-shell">rm -rf node_modules/.cache
+next build
+next export
+touch out/.nojekyll
+git add -f out/
+git checkout -b temp-for-deploy-gh-pages
+git commit -m &quot;Deploy Next.js to gh-pages&quot;
+git subtree split --prefix out -b gh-pages
+git push -f origin gh-pages:gh-pages
+git branch -D gh-pages
+git checkout main
+git branch -D temp-for-deploy-gh-pages
+</code></pre>
+<p>위 명령어들을 연달아 쓰면 Next.js 앱을 GitHub Pages에 배포할 수 있다. 매번 치기 귀찮을   것이므로 <code>package.json</code>에 등록해두고 사용하자.</p>
+<pre><code class="language-js">&quot;scripts&quot;: {
+  &quot;deploy-gh-pages&quot;: &quot;rm -rf node_modules/.cache &amp;&amp; next build &amp;&amp; next export &amp;&amp; touch out/.nojekyll &amp;&amp; git add -f out/ &amp;&amp; git checkout -b temp-for-deploy-gh-pages &amp;&amp; git commit -m \&quot;Deploy Next.js to gh-pages\&quot; &amp;&amp; git subtree split --prefix out -b gh-pages &amp;&amp; git push -f origin gh-pages:gh-pages &amp;&amp; git branch -D gh-pages &amp;&amp; git checkout main &amp;&amp; git branch -D temp-for-deploy-gh-pages&quot;
+},
+</code></pre>
+<h2>4. 주의</h2>
+<ul>
+<li>위 내용은 어디까지나 &quot;프로토타이핑 공유를 위한 GitHub Pages 배포&quot;를 목적으로 하고 있다. 다른 목적으로 사용할 경우 적절하지 않을 수 있다.</li>
+<li>환경변수와 관련된 내용은 이 문서에서 정리하지 않았다. 해당 내용은 <a href="https://taeny.dev/javascript/nextjs-with-deployment-platform/#5--github-page-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">원 문서</a>에 잘 설명되어 있다.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://taeny.dev/javascript/nextjs-with-deployment-platform/#3-netlify-vs-vercel">nextJS 뭘로 배포할까? (Netlify, Vercel, Github page)</a></li>
+<li><a href="https://gist.github.com/tduarte/eac064b4778711b116bb827f8c9bef7b">tduarte/publish-ghpages.md</a></li>
+</ul></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210613-nextjs-github-pages/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

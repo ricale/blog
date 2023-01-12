@@ -1,0 +1,224 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">Create React App 으로 GitHub Pages 적용하기 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.hREwCi{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.hREwCi > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.hREwCi > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g38[id="sc-ilhmMj"]{content:"hREwCi,"}/*!sc*/
+.jGlFRi{word-break:keep-all;}/*!sc*/
+.jGlFRi h1,.jGlFRi h2,.jGlFRi h3,.jGlFRi h4,.jGlFRi h5,.jGlFRi h6,.jGlFRi p{padding:0;}/*!sc*/
+.jGlFRi h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.jGlFRi h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.jGlFRi h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.jGlFRi h4,.jGlFRi h5,.jGlFRi h6,.jGlFRi p,.jGlFRi blockquote,.jGlFRi pre,.jGlFRi ul,.jGlFRi ol,.jGlFRi table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.jGlFRi li > ul,.jGlFRi li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.jGlFRi blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.jGlFRi blockquote > :first-child{margin-top:0;}/*!sc*/
+.jGlFRi blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.jGlFRi blockquote > ul,.jGlFRi blockquote > ol{padding-left:20px;}/*!sc*/
+.jGlFRi blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.jGlFRi blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.jGlFRi code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.jGlFRi pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.jGlFRi pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.jGlFRi table{border-collapse:collapse;}/*!sc*/
+.jGlFRi table td,.jGlFRi table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g39[id="sc-jIRcFI"]{content:"jGlFRi,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>Create React App 으로 GitHub Pages 적용하기</h1><ul class="sc-ilhmMj hREwCi"><li><a href="/blog/tags/React/">React</a></li><li><a href="/blog/tags/create react app/">create react app</a></li><li><a href="/blog/tags/github pages/">github pages</a></li></ul><div>2021. 5. 3.</div><div class="sc-jIRcFI jGlFRi"><h2>References</h2>
+<ul>
+<li><a href="https://create-react-app.dev/docs/deployment/">Create React App documentation - Deployment</a> - <a href="https://create-react-app.dev/docs/deployment/#github-pages">GitHub Pages</a></li>
+<li><a href="https://docs.github.com/en">GitHub Docs</a> - <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Managing a custom domain for your GitHub Pages site</a></li>
+</ul>
+<hr/>
+<p><a href="https://create-react-app.dev">Create React App</a>은 React 웹앱을 만들고자 할 때 프로젝트 초기 셋팅 (디펜던시 설치, 각종 설정 적용 등) 을 도와주는 편리한 툴이다. 이 글에서는 이 툴을 가지고 생성한 앱을 <a href="https://pages.github.com/">GitHub Pages</a>에 배포해 볼 것이다.</p>
+<p>이 글은 위 References 의 두 문서를 보며 진행한 작업을 정리한 것이다. 따라서 영어를 읽는데 문제가 없다면 이 문서를 보는 것 보다는 References 의 두 문서를 보는 것을 권한다.</p>
+<h2>1. React 앱 생성</h2>
+<p>먼저 Create React App 으로 웹앱을 만들자.</p>
+<p><code>create-react-app</code>을 설치하자. 전역적으로 설치해야 하므로 <code>yarn global add</code> 명령어를 쓴다.</p>
+<pre><code class="language-shell">yarn global add create-react-app
+</code></pre>
+<p>그리고 앱을 생성한다.</p>
+<pre><code class="language-shell"># ./app-name 폴더에 프로젝트 생성
+yarn create react-app app-name
+
+# 현재 폴더에 프로젝트 생성
+yarn create react-app .
+
+# 타입스크립트가 적용된 프로젝트 생성
+yarn create react-app app-name --template typescript
+</code></pre>
+<p><code>./src/index.ts</code>가 엔트리 포인트다. (앱을 구현하는 자세한 방법은 <a href="https://create-react-app.dev/docs/documentation-intro">Create React App 공식 문서</a>와 <a href="https://reactjs.org/docs/getting-started.html">React 공식 문서</a>를 참고하자.)</p>
+<p>개발 중에는 개발 서버를 띄워서 확인하고</p>
+<pre><code class="language-shell">yarn start # 로컬 개발 서버를 띄운다
+</code></pre>
+<p>개발이 끝나면 빌드한 뒤 그 결과물을 배포하면 된다.</p>
+<pre><code class="language-shell">yarn build # 빌드한다.
+</code></pre>
+<h3>1.1. <code>eject</code></h3>
+<p><code>create-react-app</code>은 webpack 등 설정과 관련된 것을 <a href="https://github.com/facebook/create-react-app/tree/master/packages/react-scripts">react-scripts</a> 모듈에 몰아넣어서, 사용자는 신경쓰지 않아도 되게끔 관리하고 있다. webpack 설정을 직접 수정할 일이 없다면 신경쓰지 않아도 되지만, 만약 직접 수정하고 싶다면 <code>eject</code>를 해주어야 한다.</p>
+<pre><code class="language-shell">yarn eject # `react-scripts` 내부에 숨겨져있던 설정 파일들이 프로젝트에 생성된다.
+</code></pre>
+<p><code>eject</code> 과정은 GitHub Pages 기능을 사용하는 데 필요한 과정은 아니므로 생략해도 무방하다.</p>
+<h2>2. 설정 및 배포</h2>
+<p>구현한 앱을 GitHub Pages 에 배포하려면 간단한 설정을 해주어야 한다.</p>
+<h3>2.1. 주소 설정</h3>
+<p>먼저 프로젝트의 <code>package.json</code> 파일에 아래 내용을 추가하자.</p>
+<pre><code class="language-javascript">&quot;homepage&quot;: &quot;https://username.github.io&quot;,
+</code></pre>
+<p>만약 username.github.io 코드저장소가 아닌, 기존 프로젝트에 GitHub Pages 기능을 사용하는 것이라면 아래 형식으로 해야 한다.</p>
+<pre><code class="language-javascript">&quot;homepage&quot;: &quot;https://username.github.io/my-app&quot;,
+</code></pre>
+<h3>2.2. 빌드 명령어 추가</h3>
+<p><a href="https://github.com/tschaub/gh-pages">gh-pages</a>를 설치한 뒤</p>
+<pre><code class="language-shell">yarn add --dev gh-pages
+</code></pre>
+<p><code>package.json</code>의 <code>scripts</code> 에 아래 내용을 추가하자.</p>
+<pre><code class="language-javascript">&quot;scripts&quot;: {
+  &quot;predeploy&quot;: &quot;yarn build&quot;,
+  &quot;deploy&quot;: &quot;gh-pages -b master -d build&quot;,
+  // ...
+}
+</code></pre>
+<p><code>-b master</code> 옵션은 빌드 결과를 <code>master</code> 브랜치로 올려주겠다는 옵션이다. 만약 다른 브랜치를 사용하려면 변경해주어도 좋다. 브랜치를 설정해주지 않으면 (<code>-b</code> 옵션을 제거하면) <code>gh-pages</code> 브랜치에 빌드 결과가 올라간다.</p>
+<h3>2.3. 빌드</h3>
+<pre><code class="language-shell">yarn deploy
+</code></pre>
+<p><code>yarn build</code> 명령어를 통해 생성된 빌드 결과가 <code>master</code> 브랜치의 새로운 커밋으로 푸시된다.</p>
+<h3>2.4. GitHub 코드저장소 설정</h3>
+<p>코드저장소의 [settings] 페이지의 [Pages] 메뉴에 들어가면 GitHub Pages 관련 설정을 수정할 수 있다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/d62cc85c6248ed362b219dff36f0e3a1/7960f/screenshot1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 84.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAADbElEQVR42l1T23IaRxBdJJBlwd5gZy+z9+ssC0jcgq1IDrZS5UoZyQ/+ks1XU8knZL3T6VmkRPbDqYZmOH26+7TEaEzns/jP6/Wqvl6s6rKc1/P5TR0lWe36Ye2HcR1Ece0LhALRD6BeUFuOi2+SOsuZK91Ui8cPd3fw+Y9HODx9g/v7Pbx7dwebzQ5ulmsoyxnkxRQKAVYBw+8ixzpUsFr/Ag+fn+DjxwdgbPYkhWH65bf977C73f+zfb9v8mLWBFHRTOfrZrO7bxbLXbPa/NosN7dNtdg2UTrtEGdVEyVlc42/bW/3ze72A6xWm0fpaqgc7KgCM922RrziGi34UCVcmThcIy5XDYrR4zpC5MaWz/2k4gaNue1nnLgJt7yU214Cy+UKCUfqQZlQMLyCE8TYCsCwA0Ay0F9BM2gXJ5YPxI3BpSEUfgzU8rqiphNg+2sklPWDeKxObC5rJlfGNihjC4aqASONgKxbP8GEoWaCitHQCWi6ya+wo4nlwXqzfZTevJUPFlb0IibI+EglqDCEtFxDnC9AR/UKEqlYRJ04HTTMqWMHRGeybvOhgoTmM+HlUD0IAj9mfGIHfCSqmy6QlIGdZzjbGMykBCubgRFEMPFxJEHYRYJRoy6XTQtn6p+WIgiJEwIOlWNL2LYFmonzirB6aIOKUY1S0JFUdjFHcSQC7gmq63AFYXhIuBSEV8qB0AhbLoS6TqFYSsquIUwq8KMS0CZA/VQUBeJEoNsptuqAeIsCXrX8SqFoWSh8IaxudpBXSwiQLC4WYsa43RTn5v68qM5m3VLWSPj2mdB6bvmFcL5636k8OcDpLKMYHshjig4gnQNOLjB/JHyDhLgMcPy0a1nYBc0L2XQJbpjDGFsRIxFFCb4TPhTQMa+a4WnLrwm1ofyFxTlkcfHdd4I2pGHrOX5bLjYtErYG5ry4bPOYtRaNWlTcYpEWL6dVid/KY7tFwu+CcCNso42UpzzMoGILSKMCfLwAdD+EaBM/mXZL6BR2KiMwaArimoRyAXEIYkw6oZCm2VfpcqR9Gmrkb7yUIxr4eKVMjljxiNdyFLkXaM8RzXxEguNINRCkA47pqI7NvxyHPkj987PL/vl5LkkS6/V67OLigg36A/x8xiSpx0T+f/TYGcZ+v88GA3w3GODn/5Dj/y//BY2AiQUgsDWKAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot1"
+        title=""
+        src="/blog/static/d62cc85c6248ed362b219dff36f0e3a1/5a190/screenshot1.png"
+        srcset="/blog/static/d62cc85c6248ed362b219dff36f0e3a1/772e8/screenshot1.png 200w,
+/blog/static/d62cc85c6248ed362b219dff36f0e3a1/e17e5/screenshot1.png 400w,
+/blog/static/d62cc85c6248ed362b219dff36f0e3a1/5a190/screenshot1.png 800w,
+/blog/static/d62cc85c6248ed362b219dff36f0e3a1/c1b63/screenshot1.png 1200w,
+/blog/static/d62cc85c6248ed362b219dff36f0e3a1/7960f/screenshot1.png 1274w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<h4>Source</h4>
+<p>GitHub Pages 로 쓰일 브랜치와 디렉토리를 지정할 수 있다. 기본값은 <code>master</code> 브랜치와 root 디렉토리이다. 위의 과정을 쭉 따라왔다면 이 값은 수정할 필요가 없다.</p>
+<h4>Custom domain</h4>
+<p>이 메뉴에서 커스텀 도메인 설정이 가능하다.</p>
+<h2>3. 커스텀 도메인 적용</h2>
+<p>usename.github.io 도메인이 마음에 들지 않는다면 위에서 언급한 Custom domain 메뉴 및 몇 가지 설정을 통해 자신이 갖고 있는 도메인으로 설정할 수 있다.</p>
+<h3>3.1. 주소 설정</h3>
+<p>먼저 &quot;2.1. 주소 설정&quot;에서처럼 <code>package.json</code>의 <code>homepage</code> 항목을 수정하자.</p>
+<pre><code class="language-javascript">&quot;homepage&quot;: &quot;http://mydomain.com&quot;,
+</code></pre>
+<h3>3.2. 도메인 네임서버 CNAME 설정</h3>
+<p>도메인 등록 업체로 가서 CNAME 을 설정해주어야 한다. 업체마다 설정 페이지가 다를 수 있다. <a href="https://whois.co.kr/">후이즈</a> 기준으로 [네임서버 고급설정] - [CNAME 레코드 관리] 메뉴로 들어가면 설정할 수 있다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 787px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/52aefe4b389ced368195ca83eb24d861/e619b/screenshot2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 32.49999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABP0lEQVR42qWRTW7bMBCFdf8jdFFkXXTROxhQEzcpCmdZW3DrpJFkSvyVROrHX8dyL1BkgIeZeW84eCSz/aEgz3M2mw1Pj4+ECKWZObsbLvxfZEVR8PBwz3a75Xm346xageatUqjWYq3FO7fmEDzWGKnN2mutMdJr3a7csixk2jhUI4TzaGN5KytOpxeqqmacJmIaGWL6h5F+iHR9XPkkuOk3fpxkoe9nnKBxcmC8EIaZLi6kCWodUcJHqa/cVRtGmC437Vh6ytbjukgvvO0mstAncaipaoVzgUWGrw5OryV/SkVZN3ItuzqZF1l0bvlZ/GZ/fOX4UqPqkuQVqXPygjOZDSMuJKz8hpV8deG6kbMOaDdgfFzh+2nVWttTNR5leoYh8fXguMtrPn+r+fRdk/HOuP818CFv+PJD83Hb8hcFoxc+ppVYPgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot2"
+        title=""
+        src="/blog/static/52aefe4b389ced368195ca83eb24d861/e619b/screenshot2.png"
+        srcset="/blog/static/52aefe4b389ced368195ca83eb24d861/772e8/screenshot2.png 200w,
+/blog/static/52aefe4b389ced368195ca83eb24d861/e17e5/screenshot2.png 400w,
+/blog/static/52aefe4b389ced368195ca83eb24d861/e619b/screenshot2.png 787w"
+        sizes="(max-width: 787px) 100vw, 787px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<table><thead><tr><th>호스트명</th><th>CNAME 레코드</th></tr></thead><tbody><tr><td><a href="http://www.mydomain.com">www.mydomain.com</a></td><td>username.github.io</td></tr></tbody></table>
+<p>위처럼 설정해준다.</p>
+<h3>3.3. 도메인 네임서버 A 레코드 설정</h3>
+<p>A 레코드도 설정해주자. <a href="https://whois.co.kr/">후이즈</a> 기준으로 [네임서버 고급설정] - [A 레코드 관리 (네임서버 호스팅)] 메뉴에서 설정할 수 있다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 771px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/be03165219a5dda23714baef497fe252/5d030/screenshot3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 50%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB20lEQVR42m1S247TMBDNryM+gn9g3/qyCN74AlaIS1v3EjbZNHEu9S2O7SSHsdsVCGHpaMZjz/H4zGTGOjw+fsBms8HDw3uw4y8UrcWpkmClQsEt6mFCCAHzPCfrvce6rgTc7R9kzjkcDwcwxrDbbXE6HbHf7XAmm+dnlGWBS1Uln7E9uq6D1pqSF/xvZZ5e5G2Prh/Q91fyu5s/XFE3HHXd4EKIfjwbrgLzsiaEeUl43S+ETBgPZRyaYYQgK/QNiuLRvnCFQU1Qo4e8x6xf0UkHOQaMbkHk6CTdsQGZGmfSxIF3A6RU6cW47DRRxQPKS0tVSVhrUzxWUtUcP/Y5nssLpsnB+QChTCLPtJ2TJpy3CZMjwSlRCGpIWdGXOVr6qqDHiAs+zNgecnz9zrAnK6SmgmYYM94IFREqpUknnnSyk0+JkmLVJWrXJty0AxwR/mQ5nr4RIU2EUCPlhERspjuhMZq619MX+1R+XPH7RflCpHWqXEqZ4iEsOOUFtuyMc/4MNxqanQWLt5j8EpsS0F0N+KDREoT2iDL0kuavk2h6TVDpTozHxkS/JxSNxJec5rUyeCLLpUeWBvKvOYr72P71n/mK+xhf4vn9sBABbz42ePe5wdtPDUrh8RtOmfsLlGC+8AAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot3"
+        title=""
+        src="/blog/static/be03165219a5dda23714baef497fe252/5d030/screenshot3.png"
+        srcset="/blog/static/be03165219a5dda23714baef497fe252/772e8/screenshot3.png 200w,
+/blog/static/be03165219a5dda23714baef497fe252/e17e5/screenshot3.png 400w,
+/blog/static/be03165219a5dda23714baef497fe252/5d030/screenshot3.png 771w"
+        sizes="(max-width: 771px) 100vw, 771px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<table><thead><tr><th>호스트명</th><th>IP 주소</th></tr></thead><tbody><tr><td>mydomain.com</td><td>185.199.108.153</td></tr><tr><td>mydomain.com</td><td>185.199.109.153</td></tr><tr><td>mydomain.com</td><td>185.199.110.153</td></tr><tr><td>mydomain.com</td><td>185.199.111.153</td></tr></tbody></table>
+<p>주의할 점은 여기에서는 <a href="http://www.mydomain.com">www.mydomain.com</a> 이 아니라 mydomain.com 이라는 것이다. www 를 뺀다.</p>
+<h3>3.4. 코드저장소의 Custom domain 설정</h3>
+<p>코드저장소의 Settings 페이지의 Pages 메뉴에 들어가면 Custom domain 섹션이 존재한다. 이곳에 사용하고자 하는 도메인(mydomain.com)을 적자.</p>
+<p>Save 버튼을 누르면 자동으로 <code>master</code> 브랜치에 추가 커밋이 생성되는데, 해당 커밋에서는 루트 디렉토리에 <code>CNAME</code> 파일을 자동 생성해준다. 해당 파일에는 방금 작성한 도메인이 작성되어 있다.</p>
+<p>주의할 점은, 작업 브랜치의 <code>./public</code> 디렉토리에도 동일한 파일을 생성해 주어야 한다. 만약 생성해주지 않으면 다음 <code>yarn deploy</code> 때는 <code>CNAME</code> 파일이 자동 생성되지 않는다.</p>
+<h3>3.4. 결과</h3>
+<p>이제 mydomain.com 으로 내 GitHub Pages 가 접속된다.</p>
+<h4>결과물 예시</h4>
+<p>이 <a href="https://github.com/ricale/ricale.github.io">코드저장소</a>에서 결과물을 볼 수 있다.</p>
+<h2>4. 이슈</h2>
+<h3>4.1. <code>NotServedByPagesError</code></h3>
+<p>&quot;3.4. 코드저장소의 Custom domain 설정&quot; 메뉴에서 도메인을 입력하고 Save 버튼을 누르면 아래와 같은 메시지가 뜰 때가 있다.</p>
+<blockquote>
+<p>Both <a href="http://www.mydomain.com">www.mydomain.com</a> and its alternate name are improperly configured
+Domain does not resolve to the GitHub Pages server. For more information, see Learn more (NotServedByPagesError). We recommend you change this to a CNAME record pointing to username.github.io.</p>
+</blockquote>
+<p>정확한 원인이 무엇인지 알아내지 못했는데, 네임서버 설정은 원래 전파되는데 시간이 걸릴 수 있어서 그렇다는 이야기가 있다. 실제로 몇 시간이 지나고 부터는 에러 메시지가 없어졌다.</p></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210503-create-react-app-github-pages/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

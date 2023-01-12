@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">빌드할 때마다 환경 변수 파일을 자동으로 갱신 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.hrzjQi{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.hrzjQi > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.hrzjQi > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g30[id="sc-iveFHk"]{content:"hrzjQi,"}/*!sc*/
+.eOyicL{word-break:keep-all;}/*!sc*/
+.eOyicL h1,.eOyicL h2,.eOyicL h3,.eOyicL h4,.eOyicL h5,.eOyicL h6,.eOyicL p{padding:0;}/*!sc*/
+.eOyicL h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.eOyicL h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.eOyicL h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.eOyicL h4,.eOyicL h5,.eOyicL h6,.eOyicL p,.eOyicL blockquote,.eOyicL pre,.eOyicL ul,.eOyicL ol,.eOyicL table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.eOyicL li > ul,.eOyicL li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.eOyicL blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.eOyicL blockquote > :first-child{margin-top:0;}/*!sc*/
+.eOyicL blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.eOyicL blockquote > ul,.eOyicL blockquote > ol{padding-left:20px;}/*!sc*/
+.eOyicL blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.eOyicL blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.eOyicL code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.eOyicL pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.eOyicL pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.eOyicL table{border-collapse:collapse;}/*!sc*/
+.eOyicL table td,.eOyicL table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g31[id="sc-cwSeag"]{content:"eOyicL,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>빌드할 때마다 환경 변수 파일을 자동으로 갱신</h1><ul class="sc-iveFHk hrzjQi"><li><a href="/blog/tags/android/">android</a></li><li><a href="/blog/tags/react native/">react native</a></li><li><a href="/blog/tags/환경변수/">환경변수</a></li></ul><div>2021. 3. 4.</div><div class="sc-cwSeag eOyicL"><p>사고가 발생했다.</p>
+<p>어제 배포한 앱에서 발생한 사고였다. 구글 로그인 기능이 동작하지 않았다. 확인해보니 구글 로그인 라이브러리 초기화 시 사용하는 토큰 값이 잘못되어 있었다. 해당 값은 환경 변수에 넣어서 관리하고 있었는데, 빌드한 사람(본인)의 환경 변수 최신화가 제대로 이뤄지지 않았던 것이다. 개발/테스트 환경에서는 해당 값이 문제가 없었기 때문에, 프로덕션 레벨까지 배포되고 나서야 문제를 인지할 수 있었다.</p>
+<p>부랴부랴 환경 변수를 최신화해서 앱을 재배포했다. 불행 중 다행으로 아직 사용자가 많지 않은 제품이었기에, 큰 사고로 이어지지는 않았다. 하지만 사고는 사고다. 5인 미만의 작은 팀이라 별다른 도구 없이도 잘 관리할 거라 생각했던 안일함이 사고를 불러왔다. 그리고 이대로라면 앞으로 같은 일이 반복되지 말란 법도 없었다.</p>
+<p>그래서 우리는 이 사고의 원인을 근본적으로 해결할 방법을 찾기로 했다.</p>
+<h2>현황</h2>
+<p>우리 앱은 <a href="https://github.com/facebook/react-native">React Native</a>로 구현되었다. 환경변수 사용에는 <a href="https://github.com/luggit/react-native-config">react-native-config</a> 라이브러리를 사용한다.</p>
+<p>앱은 안드로이드로만 배포된다. 추후에 iOS에도 앱을 출시할 생각이지만, 당장은 몇몇 사정 때문에 출시하지 않고 있다. (따라서 해결책을 찾을 때는 안드로이드 빌드만 고려할 생각이다. iOS에 대해서는 미래의 자신에게 맡기기로 했다.)</p>
+<p>환경 변수(Environment Variables)에는 보통 각 환경마다 다르게 적용되는 상수 값들이 들어 있다. 프로젝트의 성격에 따라 다르겠지만 그 값들에는 DB 접속 정보, 서드 파티 접속 정보 같이 보안상 민감한 정보들도 포함하고 있다. 따라서 환경 변수를 관리하는 파일을 코드 저장소에서 제외하도록 권장되고 있다. (보다 자세한 정보는 <a href="https://12factor.net/ko/">The Twelve-Factor App</a> 의 <a href="https://12factor.net/ko/config">3번 항목</a>을 참고)</p>
+<p>권장된 내용처럼 우리도 환경변수 파일들을 모두 코드 저장소에서 제외했다. 그리고 값이 변경될 경우 (인원이 많지 않다 보니) slack 등의 메신저를 통해 값을 주고 받아 각자 최신화를 해왔다.</p>
+<p>팀원들 모두 이것이 문제라고 인지하고는 있었지만, 당장은 고치지 않아도 된다고 생각하고 있었다.</p>
+<h2>어떻게 해결해야 할까?</h2>
+<p>첫번째 방법으로는 툴을 쓰는 것이다. <a href="https://www.vaultproject.io/">Vault</a>가 가장 널리 쓰이는 툴인 듯 하다. <a href="https://www.envkey.com/">EnvKey</a>, <a href="https://envault.dev/">Envault</a> 등의 대체제들도 눈에 띈다.</p>
+<p>하지만 일단 툴은 사용하지 않는다. 급박하게 돌아가고 있는 현재 스프린트에 최대한 지장을 주지 않는 선에서 빠르게 적용해야 하기 때문이다. 더군다나 보안과 관련된 툴을 급하게 적용하고 싶지는 않다.</p>
+<p>두번째 방법은 비공개 코드 저장소를 활용하는 것이다. 이미 익숙한 툴이고, 쉘스크립트를 통해 자동화하기도 쉽다.</p>
+<h3>비공개 코드 저장소</h3>
+<p><a href="https://github.com/">github</a>을 사용했다. 프로젝트의 루트 디렉토리에 환경변수 파일을 모두 저장했다.</p>
+<pre><code>.
++-- .env
++-- .env.dev
++-- .env.staging
++-- .env.production
+</code></pre>
+<h3>쉘스크립트</h3>
+<p>빌드 전에 환경 변수 파일들을 다운로드 받는다. 정확히는 위에서 만든 코드 저장소에서 clone 혹은 pull 로 코드를 받아온다.</p>
+<pre><code class="language-bash"># $1에는 dev/staging/production 등 환경 이름이 들어간다.
+ENVFILE_PATH=&quot;./env/.env.$1&quot;
+if [ -f &quot;$ENVFILE_PATH&quot; ]; then
+  # 파일이 존재하면 코드 저장소로부터 파일을 업데이트한다.
+  cd env &amp;&amp; git checkout master &amp;&amp; git pull origin master &amp;&amp; cd ../
+else
+  # 파일이 존재하지 않으면 코드 저장소로부터 파일을 다운로드 받는다.
+  git clone https://github.com/OWNER/PROJECT.git ./env
+fi
+</code></pre>
+<p>(당연하지만 <code>ENVFILE_PATH</code>로 사용된 경로 및 파일은 <code>.gitignore</code>에 포함되어 있어야 한다.)</p>
+<p>그다음에는 안드로이드 빌드 명령어를 실행한다.</p>
+<pre><code class="language-bash"># $2에는 assembleReleasedev 등 안드로이드 빌드 시 쓰이는 빌드 타입이 들어간다.
+cd ./android &amp;&amp; ENVFILE=env/.env.$1 ./gradlew $2 &amp;&amp; cd ../
+</code></pre>
+<p>보너스로 빌드가 완료되면 자동으로 폴더를 열어주자.</p>
+<pre><code class="language-bash">BUILD_DIR=&quot;$(echo ${2:8} | tr &#x27;[A-Z]&#x27; &#x27;[a-z]&#x27;)&quot;
+open ./android/app/build/outputs/apk/$BUILD_DIR
+</code></pre>
+<p>마지막으로 작성이 완료된 쉘스크립트를 <code>package.json</code> 에 등록하면 된다.</p>
+<pre><code class="language-javascript">// package.json
+{
+  // ...
+  &quot;scripts&quot;: {
+    // ...
+    &quot;build-android-dev&quot;: &quot;bash scripts/build-android.sh dev assembleReleasedev&quot;,
+    &quot;build-android-staging&quot;: &quot;bash scripts/build-android.sh staging assembleReleasedev&quot;,
+    // ...
+  }
+}
+</code></pre>
+<p>이제 빌드 시 위에 등록해둔 명령어를 사용하기만 하면, 환경 변수 파일은 빌드 전에 항상 자동으로 최신화 될 것이다.</p>
+<pre><code>$ yarn build-android-dev
+</code></pre>
+<h2>개선할 점</h2>
+<p>보안 상으로 문제가 있을까봐 앱 코드 저장소에서 제외시킨 환경변수 파일들을 <strong>같은 계정이 관리하는 다른 코드 저장소</strong>로 옮겼다. 결국 해당 계정이 뚫리면 환경변수 파일도 같이 뚫리는 거잖아? 라는 생각을 하지 않을 수 없다. 같은 코드 저장소에 있는 것보다야 당연히 낫겠지만, 하나마나한 짓을 한게 아닌가 하는 생각이 들기도 한다.</p>
+<p>다음에는 관련 툴(특히 <a href="https://www.vaultproject.io/">Vault</a>)에 대해 자세히 알아봐야 할 것 같다.</p>
+<h2>참고 자료</h2>
+<ul>
+<li><a href="https://www.reddit.com/r/ruby/comments/7fau96/question_how_does_your_team_manage_environment/">reddit.com - Question: How does your team manage environment variables?</a></li>
+<li><a href="https://dev.to/espoir/how-do-you-keep-your-environment-variable-synchronized-among-your-development-team-175a">dev.to - How do you keep your environment variable synchronized among your development team.</a></li>
+<li><a href="https://www.reddit.com/r/devops/comments/c7u29k/managing_env_variables_for_a_small_dev_team/">reddit.com - Managing env variables for a small dev team</a></li>
+<li><a href="https://www.vaultproject.io/">Vault</a></li>
+<li><a href="https://www.envkey.com/">EnvKey</a></li>
+<li><a href="https://envault.dev/">Envault</a></li>
+</ul></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210304-auto-update-env-variable-files/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

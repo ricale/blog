@@ -1,0 +1,553 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">React Native 환경별 빌드 설정 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.ggHxvy{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.ggHxvy > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.ggHxvy > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g4[id="sc-dkrFOg"]{content:"ggHxvy,"}/*!sc*/
+.YLLZo{word-break:keep-all;}/*!sc*/
+.YLLZo h1,.YLLZo h2,.YLLZo h3,.YLLZo h4,.YLLZo h5,.YLLZo h6,.YLLZo p{padding:0;}/*!sc*/
+.YLLZo h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.YLLZo h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.YLLZo h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.YLLZo h4,.YLLZo h5,.YLLZo h6,.YLLZo p,.YLLZo blockquote,.YLLZo pre,.YLLZo ul,.YLLZo ol,.YLLZo table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.YLLZo li > ul,.YLLZo li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.YLLZo blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.YLLZo blockquote > :first-child{margin-top:0;}/*!sc*/
+.YLLZo blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.YLLZo blockquote > ul,.YLLZo blockquote > ol{padding-left:20px;}/*!sc*/
+.YLLZo blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.YLLZo blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.YLLZo code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.YLLZo pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.YLLZo pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.YLLZo table{border-collapse:collapse;}/*!sc*/
+.YLLZo table td,.YLLZo table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g5[id="sc-hLBbgP"]{content:"YLLZo,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>React Native 환경별 빌드 설정</h1><ul class="sc-dkrFOg ggHxvy"><li><a href="/blog/tags/env/">env</a></li><li><a href="/blog/tags/multi env/">multi env</a></li><li><a href="/blog/tags/react native/">react native</a></li><li><a href="/blog/tags/react-native-config/">react-native-config</a></li><li><a href="/blog/tags/빌드 환경/">빌드 환경</a></li></ul><div>2021. 8. 31.</div><div class="sc-hLBbgP YLLZo"><p>한 프로젝트는 여러 환경에서 빌드 혹은 실행될 수 있다. 가장 단순하게는 개발 환경과 운영(production) 환경 두 환경으로 분리할 수 있고, local, dev, stage, test 등을 보다 세분화해서 분리할 수도 있다.</p>
+<p>이 글에서는 여러 환경에 따라 React Native 프로젝트를 빌드 및 실행해야 할 때, 어떻게 설정을 나누어 관리할 수 있는지 설명한다.</p>
+<h2>1. react-native-config 설치</h2>
+<p>일단 <a href="https://github.com/luggit/react-native-config">react-native-config</a>를 설치한다. 이 라이브러리는 <code>.env.ENV_NAME</code>파일들을 이용해 각 환경별로 필요한 값을 관리할 수 있다.</p>
+<h3>1.1. react-native-dotenv vs react-native-config</h3>
+<p>react-native-config 라이브러리와 비슷한 라이브러리로는 <a href="https://github.com/goatandsheep/react-native-dotenv">react-native-dotenv</a>가 있다. 두 라이브러리는 단일 환경 사용자 측면에서는 거의 동일하지만, 현재 react-native-dotenv 가 다중 환경 지원이 제대로 되지 않는 이슈가 있어서 여기서 사용하기에는 적합하지 않다. (GitHub issue - <a href="https://github.com/goatandsheep/react-native-dotenv/issues/131">APP_ENV doesn&#x27;t work as expected</a> 참고)</p>
+<p>따라서 이 글에서는 react-native-config 를 사용한다.</p>
+<h3>1.2. <code>.env</code> 파일 작성</h3>
+<p>프로젝트 root 디렉토리에, 만들려는 환경만큼 파일을 생성한다. (이 파일들은 <code>.gitignore</code> 에 추가되는 게 좋다. <a href="https://github.com/luggit/react-native-config/issues/422">참고</a>)</p>
+<pre><code class="language-json">.env             // 기본, local 환경을 위한 env 파일로 사용
+.env.dev         // dev 환경을 위한 env 파일
+.env.stage       // stage 환경을 위한 env 파일
+.env.production  // production 환경을 위한 env 파일
+</code></pre>
+<p>각 파일에서 원하는 값은 <code>key=value</code> 형식으로 작성하면 된다.</p>
+<pre><code class="language-json">BUILD_ENV=LOCAL
+BASE_URL=http://localhost:3000
+</code></pre>
+<h2>2. 안드로이드 설정</h2>
+<h3>2.1. <code>android/app/build.gradle</code></h3>
+<p>안드로이드 설정에서 가장 중요한 것은 이 <code>android/app/build.gradle</code> 파일이다. 하나씩 설정을 추가해보자.</p>
+<h4>2.1.1. react-native-config 를 위한 설정</h4>
+<p>react-native-config 는 <a href="https://github.com/luggit/react-native-config#extra-step-for-android">단일 환경이 아닌 여러 빌드 환경을 설정할 때는, autolinking 말고도 추가로 해줘야 할 설정이 있다.</a> 문서를 자세히 읽지 않으면 놓치기 쉬우므로 정리하고 넘어간다.</p>
+<p>파일 최상단에 (<code>apply plugin: &quot;com.android.application&quot;</code> 바로 아랫줄에) 아래 코드를 추가한다.</p>
+<pre><code class="language-js">apply from: project(&#x27;:react-native-config&#x27;).projectDir.getPath() + &quot;/dotenv.gradle&quot;
+</code></pre>
+<p><code>android.defaultConfig</code> 항목에는 아래 코드를 추가한다.</p>
+<pre><code class="language-js">android {
+    // ...
+    defaultConfig {
+        // ...
+        // APP_PACKAGE_NAME 대신 자신의 앱 패키지명을 넣으면 된다
+        resValue &quot;string&quot;, &quot;build_config_package&quot;, &quot;APP_PACKAGE_NAME&quot;
+    }
+    // ...
+}
+</code></pre>
+<h4>2.1.2. 환경 분리를 위한 설정</h4>
+<p><code>android.buildTypes</code> 항목에 환경별 설정을 추가한다.</p>
+<pre><code class="language-js">android {
+    // ...
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix &quot;.dev&quot;
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://facebook.github.io/react-native/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile(&quot;proguard-android.txt&quot;), &quot;proguard-rules.pro&quot;
+        }
+        //
+        // 아래부터가 추가되는 코드
+        //
+        devDebug {
+            initWith debug
+            applicationIdSuffix &quot;.dev&quot;
+            matchingFallbacks = [&#x27;debug&#x27;]
+        }
+        devRelease {
+            initWith release
+            applicationIdSuffix &quot;.dev&quot;
+            matchingFallbacks = [&#x27;release&#x27;]
+        }
+        stageDebug {
+            initWith debug
+            applicationIdSuffix &quot;.test&quot;
+            matchingFallbacks = [&#x27;debug&#x27;]
+        }
+        stageRelease {
+            initWith release
+            applicationIdSuffix &quot;.test&quot;
+            matchingFallbacks = [&#x27;release&#x27;]
+        }
+    }
+}
+</code></pre>
+<p><code>devDebug</code>, <code>devRelease</code> 등이 추가된 환경들이다. 앞에 붙은 <code>dev</code>, <code>stage</code> 가 빌드 환경 이름이고 뒤에 붙은 <code>Debug</code>, <code>Release</code> 가 빌드 유형 정보다. (네이밍 방식이 정해진 것은 아니다. 꼭 이 형식을 따를 필요는 없다.)</p>
+<ul>
+<li><code>initWith</code>: 해당 타입을 기반으로 새 타입을 생성하겠다는 의미다.</li>
+<li><code>applicationIdSuffix</code>: 앱이 빌드되면 패키지명 뒤에 이 값을 붙여준다. 즉 같은 앱을 환경별로 나눠서 설치할 수 있게 해준다.</li>
+<li><code>matchingFallbacks</code>: 앱 빌드 시 환경이름을 buildTypes 이름이 아니라 이 값으로 대체한다. (<code>devDebug</code>로 빌드해도 React Native 코드 상에서 환경 이름에 접근할 때는 <code>debug</code>가 된다.) 기본 node 환경에도 대응되게 하려면 이 값을 설정해주는 게 좋다.</li>
+</ul>
+<h4>2.1.3. 스토어키 등록</h4>
+<p>안드로이드 스튜디오에서는 실행 및 빌드 시 원하는 <code>.env.ENVNAME</code> 파일 적용을 할 수 없다. (사실 가능할 수도 있다. 찾아보진 않았다.) 커맨드라인에서는 가능한데, 실행은 아무 추가적 설정 없이 가능한 반면 (릴리즈)빌드는 스토어 키 설정을 해주어야 한다.</p>
+<p><code>android.signingConfigs</code> 에 릴리즈용 키 정보를 등록하면 된다.</p>
+<pre><code class="language-js">signingConfigs {
+    debug {
+        storeFile file(&#x27;debug.keystore&#x27;)
+        storePassword &#x27;android&#x27;
+        keyAlias &#x27;androiddebugkey&#x27;
+        keyPassword &#x27;android&#x27;
+    }
+    // 이름을 release 로 하긴 했지만 다른 이름도 가능하다.
+    // 단, 그 경우 `android.buildTypes.release`의 `signingConfig` 값도 같이 바꿔주어야 한다.
+    release {
+        if(project.hasProperty(&#x27;MYAPP_UPLOAD_STORE_FILE&#x27;)) {
+            storeFile file(MYAPP_UPLOAD_STORE_FILE)
+            storePassword MYAPP_UPLOAD_STORE_PASSWORD
+            keyAlias MYAPP_UPLOAD_KEY_ALIAS
+            keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+        }
+    }
+}
+</code></pre>
+<p>보다 자세한 내용은 React Native 공식 문서 (<a href="https://reactnative.dev/docs/signed-apk-android">Publishing to Google Play Store</a>) 를 참고.</p>
+<h3>2.2. 환경별 파일 분리</h3>
+<p><code>./android/app/src/main</code> 디렉토리에 아래와 같은 파일들이 존재할 것이다.</p>
+<ul>
+<li><code>AndroidManifest.xml</code></li>
+<li><code>MainActivity.java</code></li>
+<li><code>MainApplication.java</code></li>
+<li>각종 리소스(이미지, <code>res/values/*.xml</code> 등)</li>
+</ul>
+<p>해당 파일들을 환경별로 따로 관리하고 싶다면, 환경별로 디렉토리를 별도로 만들어 관리하면 된다.</p>
+<p>예를 들어 devDebug 환경의 <code>AndroidManifest.xml</code> 파일을 따로 관리하고 싶다면 <code>android/app/src/devDebug</code> 디렉토리를 만든 뒤, 해당 디렉토리에 <code>AndroidManifest.xml</code> 파일을 새로 작성하면 된다. (일반적으로는 기존의 파일을 복사해와서 수정하고 싶은 부분만 수정하게 될 것이다)</p>
+<h3>2.3. Firebase 설정 파일 분리</h3>
+<p>일반적으로 Firebase 설정 파일인 <code>google-services.json</code>은 <code>android/app</code> 디렉토리에 위치하게 된다. 하지만 환경별로 분리해주고 싶을 경우, 2.2. 와 동일한 방법으로 환경별로 각각 파일을 만들어주어야 한다.</p>
+<ul>
+<li><code>android/app/google-services.json</code>: 환경별 Firebase 설정 파일이 없을 경우 일괄적으로 적용되는 설정 파일</li>
+<li><code>android/app/src/ENV_NAME/google-services.json</code>: ENV_NAME 환경에만 적용되는 Firebase 설정 파일</li>
+</ul>
+<h3>2.4. 실행/빌드 명령어 작성</h3>
+<p>환경별 실행/빌드 명령어를 <code>package.json</code> 파일에 작성해두자.</p>
+<pre><code class="language-javascript">{
+  // ...
+  &quot;scripts&quot;: {
+    // ...
+    &quot;android&quot;: &quot;ENVFILE=.env react-native run-android --appIdSuffix=dev&quot;,
+    // 아래 주석 처리된 내용은 2.4.1. 항목 참고.
+    // &quot;android-dev&quot;: &quot;ENVFILE=.env.dev react-native run-android --variant=devDebug --appIdSuffix=dev&quot;,
+    // &quot;android-stage&quot;: &quot;ENVFILE=.env.stage react-native run-android --variant=stageDebug --appIdSuffix=test&quot;,
+    &quot;android-dev&quot;: &quot;ENVFILE=.env.dev react-native run-android&quot;,
+    &quot;android-stage&quot;: &quot;ENVFILE=.env.stage react-native run-android&quot;,
+    &quot;build-android-dev&quot;: &quot;cd ./android &amp;&amp; ENVFILE=.env.dev ./gradlew assembleDevRelease &amp;&amp; cd ../&quot;,
+    &quot;build-android-stage&quot;: &quot;cd ./android &amp;&amp; ENVFILE=.env.stage ./gradlew assembleStageRelease &amp;&amp; cd ../&quot;,
+    &quot;build-android-production&quot;: &quot;cd ./android &amp;&amp; ENVFILE=.env.production ./gradlew assembleRelease &amp;&amp; cd ../&quot;,
+  }
+}
+</code></pre>
+<p>이렇게 하면 커맨드라인에서 아래 같은 명령어들로 안드로이드앱을 실행 및 빌드하는 것이 가능해진다.</p>
+<pre><code class="language-bash">yarn android                  # 로컬/개발 환경 실행
+yarn android-dev              # dev/개발 환경 실행
+yarn android-stage            # stage/개발 환경 실행
+yarn build-android-dev        # dev 빌드
+yarn build-android-stage      # stage 빌드
+yarn build-android-production # production 빌드
+</code></pre>
+<h4>2.4.1. <code>react-native run-android --variant=VAR_NAME</code> 이슈</h4>
+<p>현재 <code>react-native run-android --variant=VAR_NAME</code> 명령어를 사용하면 metro 번들러가 정상적으로 동작하지 않아 에러가 발생한다. 의도적인 것인지 버그인지는 불명, 해결 방법도 불명이다.</p>
+<p><code>react-native bundle</code> 명령어를 선행하면 에러는 제거할 수 있지만 hot-reload 가 동작하지 않는다. (이 말은 js/ts 파일이 수정될 때마다 다시 빌드해줘야 함을 의미한다.)</p>
+<p>따라서 <code>react-native run-android</code> 명령어 사용 시에는 <code>variant</code> 옵션을 사용하지 않기를 권한다. <code>ENVFILE</code> 옵션만 써줘도 테스트는 충분히 할 수 있다.</p>
+<h2>3. iOS 설정</h2>
+<h3>3.1. Configuration 추가</h3>
+<p>PROJECT - [Info] - [Configuration] 에서 [+] 버튼 클릭한다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/ff4e3687a316f734ad42172da3e6a9dc/a2954/3-1-01.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 68.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAABmklEQVR42qWS2XLiMBRE9RVY8oYly3jDAxZbUpCpeQhh+IV5n///hB7dS5kBspHKQ5dtWeo6t1tisXSYdSWqiUFTVyhLUslauSV+bh6wWDj0fY/VaoXpdIq6rtE0zSvNf9QQpTvCdAek1S9EaY66KvlnmqawmYbVOeI4ZiVJgiiKoJR6pTBUkFJBbA5/MXv6g7g9QiYG5aRgijzPoY1GlFk+IGWA0WiEIAjeNBxMxe+XZyxd50k8gadwzsFayyRElHolSYyiKM6jaq3PxJeiNbHxGfW9Q920sJ5q+/jIh6uq8uNXbEJ5rtdr7Pd77HY7tG17Nqfn8E5TiTAMQQo8chEp1LmByS1TJGN9ovR50p7/o4XvStxunM/n2G23TDRbrNH6PImIYsiyjPWeKa2Lyw+i6bqOiaiAUMmrf5TRR3RnQh7Zt5cbw6XQuERyeU2IkqjH4zHvp/VbXRlKKb2J9uWcwqUihsMkWqM4hpE/NVR+PBUl0HbiDxvOjAiHvE53Ud5Xyr0N3qOrllm331+UoEbpEhtfSPhNM9I/7/9/ksTFXdUAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 1 01"
+        title=""
+        src="/blog/static/ff4e3687a316f734ad42172da3e6a9dc/5a190/3-1-01.png"
+        srcset="/blog/static/ff4e3687a316f734ad42172da3e6a9dc/772e8/3-1-01.png 200w,
+/blog/static/ff4e3687a316f734ad42172da3e6a9dc/e17e5/3-1-01.png 400w,
+/blog/static/ff4e3687a316f734ad42172da3e6a9dc/5a190/3-1-01.png 800w,
+/blog/static/ff4e3687a316f734ad42172da3e6a9dc/c1b63/3-1-01.png 1200w,
+/blog/static/ff4e3687a316f734ad42172da3e6a9dc/29007/3-1-01.png 1600w,
+/blog/static/ff4e3687a316f734ad42172da3e6a9dc/a2954/3-1-01.png 2037w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>[Duplicate &quot;Debug&quot; Configuration] (&quot;Release&quot; 도 크게 상관 없음) 눌러서 필요한 만큼 설정을 추가하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/233a111102ba2bd1d761a524b40e4854/baa75/3-1-02.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 79.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACF0lEQVR42qVTSZLbMAzUE3KxJVH7Qln7ZsuOMhNXKienavKAvGMu+X0HwIxcsj2HVHLoggQSzSbQNPbzM07THl0/oGk71N2AqulQVRXGaca4nzAMA/q+xziO6LoOTdM8gPOHsYKRt0ek5QAnzGF5CaIoRE1k+W6HXT0i0TtkOpV8nhcUIyil4DjOAzhv2N9ekVx+Y/v1FZ+6X1C2hTTVolCnCZI4QhBr2H4Mc7uBbdtSuMBeg9aM42nG+fwdYRhKIvB9NHWNIs/huR79e/Ap59K3w0WWdYWi/ZxboJQQnvDy8hPH45GuphG4DpqqpOjCpQ1reFRU0UENqWfoOL7m30CEKZHUpEhT9D0XVVFgGPcwSYH0hftD5Ay+1jzPuFx+4DNFx3GvexhMbvA1t9stLCIwKWZJjDzTsuiTWo8Jqa8C2lNkGfq2Qa7f9vC65yj4HJlwmY56byrHkWzy/PSE6XBAP31BQaqrspTokVK19Iz3LyAyGcqaiFXyANhTMmVSoUnRjiyUpimSJJHhsXXCMLqZ9sJzS2iaUjhNkxBvNhuYlGPwYYyMDmBC/r4nFB+uCbmXbOq2baUwp4myyrV5D9SG8/ksB3Pdg7Fvr2wijsnMZGxWGASBxPXLYHV82H3+Q0IxrBsgyUrxZEa9i8lr69chbqAW3L+Ymx7eT/lfcSXkU/lnibat3uPf40rId2dbsMeW9/w/+ANsWrbkGzZ6DAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 1 02"
+        title=""
+        src="/blog/static/233a111102ba2bd1d761a524b40e4854/5a190/3-1-02.png"
+        srcset="/blog/static/233a111102ba2bd1d761a524b40e4854/772e8/3-1-02.png 200w,
+/blog/static/233a111102ba2bd1d761a524b40e4854/e17e5/3-1-02.png 400w,
+/blog/static/233a111102ba2bd1d761a524b40e4854/5a190/3-1-02.png 800w,
+/blog/static/233a111102ba2bd1d761a524b40e4854/c1b63/3-1-02.png 1200w,
+/blog/static/233a111102ba2bd1d761a524b40e4854/29007/3-1-02.png 1600w,
+/blog/static/233a111102ba2bd1d761a524b40e4854/baa75/3-1-02.png 1746w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<h3>3.2. Scheme 추가</h3>
+<p>최상단 메뉴에서 [Product] - [Scheme] - [Edit Scheme] 을 선택한다. 이후 [Duplicate Scheme] 버튼으로 Scheme 추가한다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/d67f6f9ff61999ef336943e344f1d719/9b1e2/3-2-01.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 54.49999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABzElEQVR42qVSy46UUBBlrxvNdENfHs30C+jhDU0zwMDw6MTMGJfqbHShiT9g4ge48LOPdS8yaTtx5eLkFEXVqVM3JaWP31B//oXo/U+4736gqge0bYs8z1EUBaqqElyWJZIkged58H0fQRAgDEPBU8z/Sc7pC+oP37FvP8G6e4LrB0jThJAKcJGyLFDfd6j6Rwx9J4bwPBeJIkI4Igh8SMrWw427h/L6JWavXtAUXxSuVitsNhuB7Zaws+C4AbkbHUZxSn0+9i71854oEWYk5pXIaM1r08TVbI666WjdW1iWhcVicQYFiixDlhXI8zmM6zUMK4SxcWCYa5jE5toiwR1NjQ8wdE00qioDYwyapgn+J6h2jBdjTAM5S0xVoSiKEJuKz51dfosc5+c8G2PxzUjwr2n/D2lywC4csgtXl+BbTZs9OxUrn63EY1XVqHBsmNaaGvn7qvRE/H2XyyV0XYdG0CmvK1fQ1D+C584yuquHvsWb7h59VaBpGnR9L/iQ00Ucj3R7EbIsQ3o4IIkjRMcayekjguwOEp8o0zlwF7O5jPhmj7ck+EAH3N/maOoawzAIQT/J6d5iOI4D27ZhEzvWDruwgH36im1Y4TcmZj4d3ShcRgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 2 01"
+        title=""
+        src="/blog/static/d67f6f9ff61999ef336943e344f1d719/5a190/3-2-01.png"
+        srcset="/blog/static/d67f6f9ff61999ef336943e344f1d719/772e8/3-2-01.png 200w,
+/blog/static/d67f6f9ff61999ef336943e344f1d719/e17e5/3-2-01.png 400w,
+/blog/static/d67f6f9ff61999ef336943e344f1d719/5a190/3-2-01.png 800w,
+/blog/static/d67f6f9ff61999ef336943e344f1d719/c1b63/3-2-01.png 1200w,
+/blog/static/d67f6f9ff61999ef336943e344f1d719/29007/3-2-01.png 1600w,
+/blog/static/d67f6f9ff61999ef336943e344f1d719/9b1e2/3-2-01.png 1880w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>환경 이름 설정 후 [Run], [Test], [Profile], [Analyze], [Archive] 탭의 Build Configuration 항목을 모두 변경하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/187417b1e19bd49ef5c8d453419a83f1/fb1ef/3-2-02.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.00000000000001%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7ElEQVR42nWSzZKaQBSFeYRMReRfUZF/UAgIGBzMRB1rskg2SWUWqcoy69nOC+QF8gZ5z5N7m9HSqcriq9s0p0+f7r6SaVrw5jNYmgzl7Rs0TYvj8QFFUWBVVajqGvX6PepmjWWWIY4TJEmCmIjiWIyZNE0RBAGkw+MzPj/9xfrnHzSPv5FnJTJayKJVtkSdZ2jbD9i2LTZVSazQNTVumwrFYoE4ihARXH3fhxTVn7C4+wo72WCWtBjrOoaKAl1V4Y0s5KGHrm7w49t3fDkecNx2uO9u8XC3Rbf5CMOwoGkqoUGntdLYz5EWFUx1AF2+ga1r0OgHC0zDwNyZwfVDOnqLVfFOJPFcF1PbJjNDaPUXPX9LTpAjWRawLVOksw0dqkYi3pEN53O4ZMD3E4Qh1RAOzU0mU2JyNjtVyTYNTGghJxsTxiuBRRs5ro9lXiKle3UcR8BmpmleGap0TRJHVmmCU13GP9XTeDQanbEsqz/uhe6ckH+I4+n95P84mV9ypXnZQHqdhGMPBgPBcDiELMtizFWh12dYc4UiQx3cQBnKveEl/ADc1GVZYkF9xj3JY64hPQr3HD9Ujyu6wAkW8FYHTN2oP/JpZ04UU/fvdjtBS83cdR32+72oeZ6fjXuoqX0XXr5BcP8LTlrhH85jPK0Cm2DhAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 2 02"
+        title=""
+        src="/blog/static/187417b1e19bd49ef5c8d453419a83f1/5a190/3-2-02.png"
+        srcset="/blog/static/187417b1e19bd49ef5c8d453419a83f1/772e8/3-2-02.png 200w,
+/blog/static/187417b1e19bd49ef5c8d453419a83f1/e17e5/3-2-02.png 400w,
+/blog/static/187417b1e19bd49ef5c8d453419a83f1/5a190/3-2-02.png 800w,
+/blog/static/187417b1e19bd49ef5c8d453419a83f1/c1b63/3-2-02.png 1200w,
+/blog/static/187417b1e19bd49ef5c8d453419a83f1/29007/3-2-02.png 1600w,
+/blog/static/187417b1e19bd49ef5c8d453419a83f1/fb1ef/3-2-02.png 1879w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>여기서 Build Configuration 은 <em>&quot;3.1. Configuration 추가&quot;</em> 에서 추가했던 항목들을 선택할 수 있다. 되도록 Scheme과 Build Configuration은 1:1로 매칭해주는 것이 좋다. (반드시 그래야 하는 것은 아니고, 편의성을 위해서다)</p>
+<h5>&gt; Scheme - Build Configuration 설정 예</h5>
+<table><thead><tr><th>Scheme</th><th>Build Configuration</th></tr></thead><tbody><tr><td>my-project</td><td>(기본값 유지)</td></tr><tr><td>my-project-dev</td><td>Dev</td></tr><tr><td>my-project-stage</td><td>Stage</td></tr><tr><td>my-project-production</td><td>Production</td></tr></tbody></table>
+<h4>3.2.1. Scheme 의 Pre-actions, Post-actions 적용</h4>
+<p>iOS 는 환경별 <code>.env</code> 파일 적용이 자동으로 이루어지지 않기 때문에, 별도의 선행 스크립트를 삽입해주어야 한다.</p>
+<p>[Edit Scheme] 의 [Build] 탭에서 [Pre-actions] 선택해 스크립트를 작성하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/6375af5569d34f17fc1453ae6b750eb7/0e0c4/3-2-03.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.00000000000001%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABuklEQVR42qWTy46bMBSGeYoEG2xuA5jEDPdLSEUzkUpHXcwDdNtVt31/6e8xpGlGVRdVF58Ox8b/ObZ/W44MkGQarpDY7/fouhHL8oq2bdD3PcZxxDAMayzLElrrPzgej2vMsgyWW31B9fYD6fUb+PAVcXJAXddI0hTS8+ARQogtSgnXdSl31/wdvg9J8xb3npA3JyRKg4kAnDtU7Ygiz5GplLoccT6fqUiFoihQVyUyXdJiEiEBecOjosJxSFA1OJQdHLYDs/dwOYdONYa8Ra8LTN2El/mKUz+hem5QFw2edQ0VH5AZaEfqKUNJReIwhMXiArqdSJ2DMQ6XqoR+eMenM/alj8AL7oREFER3Qj9CEiWQ1KXFVIvqfKVBCdtmtGUOm9l32A37b9gPkbC48CE8H5xtYv8DIw3LCG1dbILsNrGN/wt83aH1qG7EpOust2W+jUUeOzD5ZhvxHpdDcLpQugfrcYE5g4Fs8Xp9wafLBR/GARNZZp7n1Tpd15Hh6cyr6jdlgZKcUH98g656WEbEvBDDbreDUgojvYyh71aDX0h4WZY1/hIx/6zQy8jSGEk1Q33+jig/4ScDRzlKuHI+dAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 2 03"
+        title=""
+        src="/blog/static/6375af5569d34f17fc1453ae6b750eb7/5a190/3-2-03.png"
+        srcset="/blog/static/6375af5569d34f17fc1453ae6b750eb7/772e8/3-2-03.png 200w,
+/blog/static/6375af5569d34f17fc1453ae6b750eb7/e17e5/3-2-03.png 400w,
+/blog/static/6375af5569d34f17fc1453ae6b750eb7/5a190/3-2-03.png 800w,
+/blog/static/6375af5569d34f17fc1453ae6b750eb7/c1b63/3-2-03.png 1200w,
+/blog/static/6375af5569d34f17fc1453ae6b750eb7/29007/3-2-03.png 1600w,
+/blog/static/6375af5569d34f17fc1453ae6b750eb7/0e0c4/3-2-03.png 1884w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<pre><code class="language-bash">echo &quot;.env.ENVNAME&quot; &gt; /tmp/envfile
+</code></pre>
+<p>[Post-actions] 에는 아래 스크립트를 삽입하자.</p>
+<pre><code class="language-bash">rm /tmp/envfile
+</code></pre>
+<h3>3.3. Firebase 설정 파일 관련 설정 추가</h3>
+<p>빌드될 때마다 각 환경에 맞는 firebase 설정 파일을 사용하게 하는 설정도 추가할 것이다.</p>
+<p>일단 <code>./ios/firebaseInfo</code> 디렉토리 생성(디렉토리 이름은 이후 설정에서 일관되게 유지하기만 하면 바꿔도 상관 없다)해 환경별로 <code>GoogleService-Info.plist</code>를 작성하자. 아래처럼 파일이 추가될 것이다.</p>
+<ul>
+<li><code>./ios/firebaseInfo/GoogleService-Info-dev.plist</code></li>
+<li><code>./ios/firebaseInfo/GoogleService-Info-stage.plist</code></li>
+<li><code>./ios/firebaseInfo/GoogleService-Info.plist</code></li>
+</ul>
+<p>TARGET - [Build Phases] 에서 [+] 버튼을 눌러서 스크립트 추가하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/1b09b777efdfa4cc87579813f34b7c67/e67a8/3-3-01.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 80%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACkElEQVR42o1UyW7bMBT0TzReI8uxtZKSKIpabCuxHQdJiqLopZf+SHvox0+HdGwETZD2MHjkIzVv3kINyvUOtamQFwqFKqFoVVmiJPI8h1L0F4Vbl5p+7tfbg0PFdc4zIQSklNynGERRjCCMMJvNECxvIKPodCHLEAQBYu5XqxXm87mzwSpAphrcHp6hS+0ChWGIiPdulisMwkTwgoY/9zAZXmHbNjju93g8HtFS0XKxwIKYjMcYv2DEe9PJ2Imw8DzP2SRJMEiffqH+9huz3U98Uj9gtMKu73G33aDIJKI4dsomkwmm0+kFdv8ao9HoRGjWB3z++h1N/4AgUciYatu2MHXt6iiluBB+BKvcEa6WC0iRsH4L+N61q19NsqoyMMZAa+3qYz94T9lZ+YVwOBzi6mroJNt1wHpVqoBm9xRTLomVP+f5+C9FL5icMCJhmrLLlvm1bP/6GhG7K1i7luNkSoUFO2wLPyc8nlvr03fGggGtL43Ct4Q20hWV2q5mSY5GVtjkJbZEVzXYdD26eg0RSRKckBBZkiFcLt8SntfedIZCGtzpHjsO8abbUfHW+dK0RBwrh4SNjKKcM9myF/IdwvHJWkLBD01GhfWGL6bhGBnkVJzTVwi+pPQEERcsTcvz7B+EjB4wuuRHX+6fcNg/4sAXctzs8Gg67HWDHdHlrLXuGOwDwjknXwjtFHaMbtdWsYUNIBnMBpQp02bQmoT/pTBhOhXTfd4/4HZ7j76/x213hwOV9arGpjBY5waNZtDz2LzGmdijQklVua2VtCmtURE1G1NbAqKiepuB4nlBG/LHMbAEMWfODqXv+xdiqzCJczc6urAvp3OdtKiYXiNLVEJBiwJlWiCN+Xfi2PwBJm7UVzo0SVsAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 3 01"
+        title=""
+        src="/blog/static/1b09b777efdfa4cc87579813f34b7c67/5a190/3-3-01.png"
+        srcset="/blog/static/1b09b777efdfa4cc87579813f34b7c67/772e8/3-3-01.png 200w,
+/blog/static/1b09b777efdfa4cc87579813f34b7c67/e17e5/3-3-01.png 400w,
+/blog/static/1b09b777efdfa4cc87579813f34b7c67/5a190/3-3-01.png 800w,
+/blog/static/1b09b777efdfa4cc87579813f34b7c67/c1b63/3-3-01.png 1200w,
+/blog/static/1b09b777efdfa4cc87579813f34b7c67/29007/3-3-01.png 1600w,
+/blog/static/1b09b777efdfa4cc87579813f34b7c67/e67a8/3-3-01.png 1740w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>스크린샷에서는 스크립트 이름을 &quot;Firebase GoogleService-Info.plist&quot; 라고 작성했으나, 다른 이름을 써도 무방하다.</p>
+<p>순서는 대략 &quot;Link Binary With Libraries&quot; 와 &quot;Copy Bundle Resources&quot; 사이로 했는데, 다른 위치에 있어도 정상 동작할 수도 있다.</p>
+<p>스크립트는 아래 형식으로 작성한다.</p>
+<pre><code class="language-bash">PATH_TO_GOOGLE_PLISTS=&quot;${PROJECT_DIR}/firebaseInfo&quot;
+PATH_TO_PROJECT=&quot;${PROJECT_DIR}&quot;
+
+echo &quot;CONFIGURATION: $CONFIGURATION&quot;
+
+case &quot;${CONFIGURATION}&quot; in
+
+&quot;Debug&quot; )
+                cp -r &quot;$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-dev.plist&quot; &quot;${PATH_TO_PROJECT}/GoogleService-Info.plist&quot; ;;
+
+           &quot;Stage&quot; )
+                cp -r &quot;$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-stage.plist&quot; &quot;${PATH_TO_PROJECT}/GoogleService-Info.plist&quot; ;;
+
+           &quot;Dev&quot; )
+                cp -r &quot;$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-dev.plist&quot; &quot;${PATH_TO_PROJECT}/GoogleService-Info.plist&quot; ;;
+
+           &quot;Release&quot; )
+                cp -r &quot;$PATH_TO_GOOGLE_PLISTS/GoogleService-Info.plist&quot; &quot;${PATH_TO_PROJECT}/GoogleService-Info.plist&quot; ;;
+
+            *)
+                ;;
+        esac
+</code></pre>
+<h3>3.4. Package 이름 분리</h3>
+<p>TARGET - [Build Settings] - [Packaging] - [Product Bundle Identifier] 항목을 수정하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/248db929d71acac91d8f23d94b05e80b/d4417/3-4-01.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 80%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACgklEQVR42m1U227aQBT0N0SADdhgMAZjjG+QODa3lIsaiUhVaCM1j1E+oi/tt0/PbLMpLXlYrbV7zpyZOXtszKo7XM9niNMciV6ZrCTBZDJRazwOkMQJytUOhcTnWYZY7uM4VnFhOME0ipCnIYxgHMIfjmDbNgaDgSSPkUnCYrHAarXG8fiA0+kr4ukU19UW2XwBX+IINpvNkKYJhsMhRqMRPG8Awx9PEE0TuB0bTctEr9dTwAwIwxCRVCYDRwq25L7ryN5qKQKdTgeO46Db7arvfr8PIzr+xPzLL9h3P1BLnzEa+oolA9rttloEaLXaAuJgfl1KoqfOm82muuNuWZbKMYrlHp8fTriR3Q9TXF1dYSryDocD1uu1kk8fyYSJ9IwqCKQLanAF6A/6mIQBfK8nsh2YpqmkVlWFPM8V23MA3/ff2VP2OaDneTBM00KjYSrKlhwSkIw2mw3KslTg9JTJBHVd9x+5F4B//Pm7Go2Gkrzf71EUhWrKOSAZM5ENoA0XkrWpGpAMCUKGlMxv3SSqSNNUntNKMddsNSC7fQGoGe52OwXKZFqg7+knE1n4f8kfAmqG2+1WSdbsdAPYlHOpPOf6EJB7vV5HEARqUtgUAlKqLsZnQwX0le+ROc23Zr57qMEcOQhkQtZViafTCd8eH7ES4CgcIxbZkYBXwnqzXKK6LTATPyPxMpQ7ekoiF112hbbdaiKXOVVyRR7Np3eURiteX1/x8vKCqryF+3ZPdowxNGU1PmqETHhuF/vtJxTzOdpNSxXoiF9mvYbj/T2+Pz3hIE2bSsHWmx3vo0dj+SMgG1Zil0P5XorULEvVOc1mnCU+FTc3Sl69VoP9wej9BskwzH6EZFayAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 4 01"
+        title=""
+        src="/blog/static/248db929d71acac91d8f23d94b05e80b/5a190/3-4-01.png"
+        srcset="/blog/static/248db929d71acac91d8f23d94b05e80b/772e8/3-4-01.png 200w,
+/blog/static/248db929d71acac91d8f23d94b05e80b/e17e5/3-4-01.png 400w,
+/blog/static/248db929d71acac91d8f23d94b05e80b/5a190/3-4-01.png 800w,
+/blog/static/248db929d71acac91d8f23d94b05e80b/c1b63/3-4-01.png 1200w,
+/blog/static/248db929d71acac91d8f23d94b05e80b/29007/3-4-01.png 1600w,
+/blog/static/248db929d71acac91d8f23d94b05e80b/d4417/3-4-01.png 1737w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<h3>3.5. 앱 이름 분리</h3>
+<p>먼저 TARGET - [Build Settings] 에서 앱 이름으로 사용될 User-defined 값을 추가하자.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/0a344/3-5-01.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 79.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAACjUlEQVR42nVU2XLaQBDkJ0CgW5xCAgkhkEGcwk7KTjkPzkP+/0863RtIAhU/TO0xMz1X77bK+oRqvUJelFdZ/l7zHLPZzEg8jVFmGY67M471EVWxQEZ9zjvZpWlq7MoiQSueTjEaj+G6DkajEWZULpdLbLc1drs93t6+4ePjB4r5HC/7C5qnPSayy3IsaJfnC4zpP5lMMBgM0RpOEszmOULfR7fbNSJlVVVYr9eo6xrH4xF+GMHvdrDPEhyqFS7bJzRc4yiEHwQIAh/9fh+t9+cX/Hx9xZeqxCxJMCZYopVRJWEYwrIs9Ho9eK6Lihml/QgxAWLfg2/b6FInvc+kWnuW9f39HYddjSnLV4ZZNmfJW5RliaIoTMZRFMFxHKyfakSDAXoGyIbNO90LMGCmreFwaJqqVRftdtucm6bB4XAwUrJX0itYkkwRMBObgO4V7A5Q5XQ6nT/90/nWQ0nGSU7jmA0fwKaT2iFH5x+wO0BFehT1UbSICRSyVIuBVKJEwK7nmf1/AbURyG0dkxLLRY4+m+7aPbhqNh086gJSa56KER5Cz6X+PpE7wBuo0+NQhn2cOaQiZXk8RwSSaH/mEL9eGiSkS8iA9mcZ2tfxezQKrDZWpWg0ZQBmSDCflOlZHTw3Z1w4MIEpiM37TwHNnjIOfZzrDTbLAuloiIEydFhS18KGz25bLjFi2a7zt4+flqy13bEw53QH7KeyVlkSDWLCQRkiP/RP7DDEfgQUdfRCduyhytZz8jhVl6XJRuTXR6B3L3qJCeLtarUyd60biOS2l+J0OhkjOY3N5+EanX6XzWZj+KmMdH8LaN6y6peTIqsHAlX6OsvATJ42ctBe2elZ6keSvX3lo4KJo78AZBvGoEC/gKcAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 5 01"
+        title=""
+        src="/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/5a190/3-5-01.png"
+        srcset="/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/772e8/3-5-01.png 200w,
+/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/e17e5/3-5-01.png 400w,
+/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/5a190/3-5-01.png 800w,
+/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/c1b63/3-5-01.png 1200w,
+/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/29007/3-5-01.png 1600w,
+/blog/static/a3ae8f8bf4571e77be86fd0a2d38c410/0a344/3-5-01.png 1741w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>그 추가한 값을 Info.plist - [Bundle display name] 에 적용하면 된다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/ab40b/3-5-02.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 79.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB60lEQVR42p2SyY7bMBBE9Rle5VVeJG+KrMWW5TU5BMgx//8rlX4EOHEGxmAmhwJFqrtYVc0gq6/K80LnOlVZ5qpPjQ6Hg4qicOsuTbVer7Xb7bRarT5EsV8rOFalvt/vOjdnVWWpb0awMYLlYqF1kuhopKmRnZvG/UvipZbLpeI4VmL/49jgVvYrBfsk1u8fd/2sTdVipiyaaDceKul3lU5GyheRNqNQjyLTr6bWI880nU41GAzU7/f/wdDOgvlspvp41HazUa/bVbvVcmu303EFkTWHVoxKalC/MPXj8Vgdq+lS+4QAqY/HQ6fTSalZCo2kYz8oHg6Hms/nCsPQcs5djuTZ6/XUsovfkzlCGhgAucxMLc3+Zggnk4kjIC9qUQaw+JIQotvtZhMutd1unR3ygZQVRaxHi+Vuw6vrWpfLxdXv93snot1u/yWE4Hq9qrEpUgABt3vLxDAajZyLqqrcHrCH7FkdfY7QvztyghBL2EQZGbPyziCA3NsmHuoAhOzdUFAIvHWaeRoohISbUUUk7H3eiAHe0VuG5IMd1pWFDxEFqImiyBUyFOAVvYIjpIHssixz68beGtPkViwwZb5RTNOrt+fhLPPBlCj0xd7C8/nz/v3589kb4WfgGz9CgI1XN/4vvqTwM/gDO2nHiSFYmNsAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="3 5 02"
+        title=""
+        src="/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/5a190/3-5-02.png"
+        srcset="/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/772e8/3-5-02.png 200w,
+/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/e17e5/3-5-02.png 400w,
+/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/5a190/3-5-02.png 800w,
+/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/c1b63/3-5-02.png 1200w,
+/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/29007/3-5-02.png 1600w,
+/blog/static/fcd48fb5bb24e6763fafc9f4696b36ac/ab40b/3-5-02.png 1736w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<h3>3.6. 실행 및 빌드</h3>
+<p>이제 Xcode 에서 알맞는 Scheme 을 고른 뒤 [Run] 혹은 [Archive]를 하면 앱을 실행 혹은 빌드할 수 있다.</p>
+<p>(커맨드라인에서 하는 방법은 찾고 있다.)</p>
+<h2>4. 이슈</h2>
+<ul>
+<li>현재 iOS 빌드 시 <code>GoogleService-Info.plist</code>가 제대로 생성되지 않아 에러가 발생하는 현상이 있다. 이 경우 다시 빌드를 하면 문제 없이 된다. 원인 및 해결 방법은 찾는 중이다.</li>
+<li><code>.env</code>파일들을 어떻게 공유하는 게 좋을지 방법을 고민 중이다. 수정할 때마다 팀원들에게 넘겨주기에는 번거롭고 실수를 유발하기도 쉽다.</li>
+</ul></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210831-react-native-build-setting-for-envs/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

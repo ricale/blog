@@ -1,0 +1,248 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">sqlite3 데이터 타입 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.fhFOfB{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.fhFOfB > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.fhFOfB > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g32[id="sc-lllmON"]{content:"fhFOfB,"}/*!sc*/
+.cPTDSI{word-break:keep-all;}/*!sc*/
+.cPTDSI h1,.cPTDSI h2,.cPTDSI h3,.cPTDSI h4,.cPTDSI h5,.cPTDSI h6,.cPTDSI p{padding:0;}/*!sc*/
+.cPTDSI h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.cPTDSI h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.cPTDSI h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.cPTDSI h4,.cPTDSI h5,.cPTDSI h6,.cPTDSI p,.cPTDSI blockquote,.cPTDSI pre,.cPTDSI ul,.cPTDSI ol,.cPTDSI table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.cPTDSI li > ul,.cPTDSI li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.cPTDSI blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.cPTDSI blockquote > :first-child{margin-top:0;}/*!sc*/
+.cPTDSI blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.cPTDSI blockquote > ul,.cPTDSI blockquote > ol{padding-left:20px;}/*!sc*/
+.cPTDSI blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.cPTDSI blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.cPTDSI code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.cPTDSI pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.cPTDSI pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.cPTDSI table{border-collapse:collapse;}/*!sc*/
+.cPTDSI table td,.cPTDSI table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g33[id="sc-iJnaPW"]{content:"cPTDSI,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>sqlite3 데이터 타입</h1><ul class="sc-lllmON fhFOfB"><li><a href="/blog/tags/sqlite/">sqlite</a></li><li><a href="/blog/tags/sqlite3/">sqlite3</a></li></ul><div>2021. 3. 20.</div><div class="sc-iJnaPW cPTDSI"><p>아래 내용은 sqlite 의 공식 문서인 <a href="https://www.sqlite.org/datatype3.html">Datatypes In SQLite Version 3</a>를 간단히 인용 및 정리한 것이다. 정확한 내용은 본문보다는 해당 문서 참고를 권장한다.</p>
+<hr/>
+<h2>1. Datatypes In SQLite</h2>
+<blockquote>
+<p>In SQLite, the datatype of a value is associated with the value itself, not with its container.</p>
+</blockquote>
+<p>sqlite는 SQL이지만 데이터 타입은 동적 타입을 사용한다.</p>
+<h2>2. Storage Classes and Datatypes</h2>
+<p>Storage class 는 다섯 가지가 있다.</p>
+<ul>
+<li>NULL</li>
+<li>INTEGER. signed 1,2,3,4,5,6,8 byte number.</li>
+<li>REAL: floating point value. 8 byte.</li>
+<li>TEXT</li>
+<li>BLOB: blob of data</li>
+</ul>
+<blockquote>
+<p>A storage class is more general than a datatype. (...) And so for the most part, &quot;storage class&quot; is indistinguishable from &quot;datatype&quot; and the two terms can be used interchangeably.</p>
+</blockquote>
+<p>Storage class 는 데이터 타입보다 더 일반적인 개념이다. (...) 대부분의 경우, storage class 와 데이터 타입은 구분할 수 없다. 두 용어는 혼용될수 있다.</p>
+<blockquote>
+<p>Any column in an SQLite version 3 database, except an INTEGER PRIMARY KEY column, may be used to store a value of any storage class.</p>
+</blockquote>
+<p>INTEGER PRIMARY KEY 컬럼을 제외한 모든 컬럼은, 어떤 storage class 의 값이라도 저장할 수 있다.</p>
+<h3>2.1. Boolean Datatype</h3>
+<blockquote>
+<p>Boolean values are stored as integers 0 (false) and 1 (true).</p>
+</blockquote>
+<h3>2.2. Date and Time Datatype</h3>
+<blockquote>
+<p>SQLite does not have a storage class set aside for storing dates and/or times. Instead, the <a href="https://www.sqlite.org/lang_datefunc.html">built-in Date And Time Functions</a> of SQLite are capable of storing dates and times as TEXT, REAL, or INTEGER values</p>
+</blockquote>
+<p>일시(날짜 및 시간)을 위한 storage class 는 따로 없고, 해당 값을 TEXT, REAL, INTEGER 로 저장할 수 있게 도와주는 함수들이 존재한다.</p>
+<h2>3. Type Affinity</h2>
+<blockquote>
+<p>The type affinity of a column is the recommended type for data stored in that column. The important idea here is that the type is recommended, not required.</p>
+</blockquote>
+<p>Type affinity 는 특정 컬럼에 저장하도록 <strong>권장</strong>하는 데이터 타입을 말한다.</p>
+<p>아래와 같은 다섯 가지 Type affinity 가 존재함</p>
+<ul>
+<li>TEXT: 숫자 타입(INTEGER, REAL)은 TEXT 로 변환되어 저장된다. 나머지 storage class 는 그대로 저장된다.</li>
+<li>NUMERIC: 문자열은 가능하면 REAL 혹은 INTEGER 로 변환되어 저장되고, 가능하지 않다면 TEXT 로 저장된다. 숫자도 (실수라고 해도) INTEGER 로 변환 가능하다면 (변환해도 잃는 값이 없다면) 변환된다. 나머지 storage class 는 그대로 저장된다.</li>
+<li>INTEGER: <a href="https://www.sqlite.org/lang_expr.html#castexpr">CAST expression</a> 을 제외하고 NUMERIC 과 동일하다.</li>
+<li>REAL: INTERGER 를 REAL 로 변환하여 저장함. 나머지는 NUMERIC 과 동일하다.</li>
+<li>BLOB: 별다른 타입 변환 없이 그대로 저장된다.</li>
+</ul>
+<h3>3.1. Determination Of Column Affinity</h3>
+<blockquote>
+<ol>
+<li>If the declared type contains the string &quot;INT&quot; then it is assigned INTEGER affinity.</li>
+<li>If the declared type of the column contains any of the strings &quot;CHAR&quot;, &quot;CLOB&quot;, or &quot;TEXT&quot; then that column has TEXT affinity. Notice that the type VARCHAR contains the string &quot;CHAR&quot; and is thus assigned TEXT affinity.</li>
+<li>If the declared type for a column contains the string &quot;BLOB&quot; or if no type is specified then the column has affinity BLOB.</li>
+<li>If the declared type for a column contains any of the strings &quot;REAL&quot;, &quot;FLOA&quot;, or &quot;DOUB&quot; then the column has REAL affinity.</li>
+<li>Otherwise, the affinity is NUMERIC.</li>
+</ol>
+</blockquote>
+<p>CREATE TABLE 문 등으로 컬럼의 타입 선언 시</p>
+<ol>
+<li>컬럼의 선언된 타입 이름에 &quot;INT&quot; 가 들어가면 INTEGER affinity</li>
+<li>선언된 타입 이름에 &quot;CHAR&quot;, &quot;CLOB&quot;, &quot;TEXT&quot;가 들어가면 TEXT affinity</li>
+<li>이름에 &quot;BLOB&quot;가 들어가거나 타입이 지정되지 않으면 BLOB affinity</li>
+<li>이름에 &quot;REAL&quot;, &quot;FLOA&quot;, &quot;DOUB&quot;가 들어가면 REAL affinity</li>
+<li>위 조건에 모두 걸리지 않으면, NUMERIC affinity</li>
+</ol>
+<p>가 지정된다.</p>
+<h4>3.1.1. Affinity Name Examples</h4>
+<p>해당 문서의 해당 항목 참고</p>
+<h3>3.2. Affinity Of Expression</h3>
+<blockquote>
+<p>Every table column has a type affinity (one of BLOB, TEXT, INTEGER, REAL, or NUMERIC) but expressions do not necessarily have an affinity.</p>
+</blockquote>
+<p>모든 테이블 컬럼은 type affinity 를 갖지만, 표현식(Expression)은 type affinity 가 필수적이지 않다.</p>
+<blockquote>
+<ul>
+<li>The right-hand operand of an IN or NOT IN operator has no affinity if the operand is a list and has the same affinity as the affinity of the result set expression if the operand is a SELECT.</li>
+</ul>
+</blockquote>
+<p>IN/NOT IN 문의 오른쪽 피연산자는 리스트면서 피연산자가 SELECT 인 결과 표현식의 affinity 와 같은 affinity 를 갖는다면 affinity 가 없다. <span style="color:darkgray">(무슨 말인지 모르겠다..)</span></p>
+<blockquote>
+<ul>
+<li>When an expression is a simple reference to a column of a real table (not a VIEW or subquery) then the expression has the same affinity as the table column.<!-- -->
+<ul>
+<li>Parentheses around the column name are ignored.</li>
+<li>Any operators applied to column names, including the no-op unary &quot;+&quot; operator, convert the column name into an expression which always has no affinity.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>표현식이 테이블의 컬럼에 대한 레퍼런스라면, affinity 는 해당 컬럼과 동일하다.</p>
+<ul>
+<li>affinity 판단 시 괄호는 무시된다.</li>
+<li>연산자를 사용했다면, 해당 표현식은 무조건 affinity 가 없다.</li>
+</ul>
+<blockquote>
+<p>An expression of the form &quot;CAST(expr AS type)&quot; has an affinity that is the same as a column with a declared type of &quot;type&quot;.</p>
+</blockquote>
+<p>&quot;CAST(expr AS type)&quot; 형식의 표현식은 &quot;type&quot; affinity 를 갖는다.</p>
+<blockquote>
+<p>A COLLATE operator has the same affinity as its left-hand side operand.</p>
+</blockquote>
+<p>COLLATE 연산자는 왼쪽 피연산자와 같은 affinity 를 갖는다.</p>
+<blockquote>
+<p>Otherwise, an expression has no affinity.</p>
+</blockquote>
+<p>여기까지 해당사항이 없으면, 해당 표현식에 affinity 는 없다.</p>
+<h3>3.3. Column Affinity For Views And Subqueries</h3>
+<span style="color:darkgray"><p>(뷰와 서브쿼리는 사용해 본 적이 거의 없으므로, 이 문단은 생략.)</p></span>
+<h3>3.4. Column Affinity Behavior Example</h3>
+<p>해당 문서의 해당 항목 참고</p>
+<h2>4. Comparison Expressions</h2>
+<blockquote>
+<p>&quot;=&quot;, &quot;==&quot;, &quot;&lt;&quot;, &quot;&lt;=&quot;, &quot;&gt;&quot;, &quot;&gt;=&quot;, &quot;!=&quot;, &quot;&quot;, &quot;IN&quot;, &quot;NOT IN&quot;, &quot;BETWEEN&quot;, &quot;IS&quot;, and &quot;IS NOT&quot;</p>
+</blockquote>
+<h3>4.1. Sort Order</h3>
+<p>정렬 시 순서는 아래처럼 적용된다.</p>
+<ul>
+<li>NULL &lt; not NULL</li>
+<li>INTEGER/REAL &lt; TEXT &lt; BLOB</li>
+<li>BLOB 끼리의 비교에는 memcmp() 사용</li>
+</ul>
+<h3>4.2. Type Conversion Prior To Comparison</h3>
+<blockquote>
+<ul>
+<li>If one operand has INTEGER, REAL or NUMERIC affinity and the other operand has TEXT or BLOB or no affinity then NUMERIC affinity is applied to other operand.</li>
+<li>If one operand has TEXT affinity and the other has no affinity, then TEXT affinity is applied to the other operand.</li>
+<li>Otherwise, no affinity is applied and both operands are compared as is.</li>
+</ul>
+</blockquote>
+<ul>
+<li>피연산자 하나가 INTEGER/REAL/NUMERIC 이고 다른 피연산자가 TEXT/BLOB/affinity없음 이면, 숫자 유형이 다른 피연산자 유형으로 변환된다.</li>
+<li>피연산자 하나가 TEXT 이고 다른 피연산자의 affinity 가 없으면 TEXT 가 다른 피연산자 유형으로 적용된다. <span style="color:darkgray">(?? affinity 가 없는 걸로 적용된다고? 3.1. 항목을 보면 affinity 가 없는 경우는 없는 것 같은데, BLOB 를 말하는 건가?)</span></li>
+<li>그렇지 않으면, 두 피연산자는 affinity 변환 없이 있는 그대로 비교된다.</li>
+</ul>
+<h3>4.3. Comparison Example</h3>
+<p>해당 문서의 해당 항목 참고</p>
+<span style="color:darkgray">(예시에 있는 CREATE 문을 보면</span>
+<pre><code class="language-sql">CREATE TABLE t1(
+    a TEXT,      -- text affinity
+    b NUMERIC,   -- numeric affinity
+    c BLOB,      -- no affinity
+    d            -- no affinity
+);
+</code></pre>
+<span style="color:darkgray"><p>c 는 BLOB 로 지정하고 d 는 지정하지 않았는데, 주석으로 no affinity 라고
+되어있다. 3.1. 항목에 나온대로라면 BLOB affinity 가 적용되어야 하는 것 아닌가?
+의문.)</p></span>
+<h2>5. Operators</h2>
+<blockquote>
+<p>+, -, *, /, %, &lt;&lt;, &gt;&gt;, &amp;, and |</p>
+</blockquote>
+<blockquote>
+<p>The implied type conversion of mathematical operands is slightly different from <a href="https://www.sqlite.org/lang_expr.html#castexpr">CAST to NUMERIC</a> in that string and BLOB values that look like real numbers but have no fractional part are kept as REAL instead of being converted into INTEGER as they would be for <a href="https://www.sqlite.org/lang_expr.html#castexpr">CAST to NUMERIC</a>.</p>
+</blockquote>
+<p>수학적 피연산자의 암시적 타입 변환은 <a href="https://www.sqlite.org/lang_expr.html#castexpr">CAST to NUMERIC</a> 문서에 나온 것과는 약간 다르다. 문자열이나 BLOB 값이 REAL 형식이면서 소숫점 아래 값이 없을 경우, INTEGER 로 자동 변환하는 것이 아니라 REAL 로 유지한다.</p>
+<blockquote>
+<p>The conversion from STRING or BLOB into REAL or INTEGER is performed even if it is lossy and irreversible.</p>
+</blockquote>
+<p>수학적 피연산자로 사용된 문자열이나 BLOB 값은 무조건 REAL/INTEGER 로 변환된다. 심지어는 변환으로 인해 값의 손실이 생기더라도.</p>
+<blockquote>
+<p>Some mathematical operators (%, &lt;&lt;, &gt;&gt;, &amp;, and |) expect INTEGER operands. For those operators, REAL operands are converted into INTEGER in the same way as a CAST to INTEGER.</p>
+</blockquote>
+<p>어떤 연산자들은 피연산자로 INTEGER 값만을 사용한다. 이런 연산자들은 만약 REAL 이 피연산자로 사용되면, 값의 손실이 생기더라도 이 값을 INTEGER 로 변환한다.</p>
+<h2>6. Sorting, Grouping and Compound SELECTs</h2>
+<blockquote>
+<p>When query results are sorted by an ORDER BY clause, values with storage class NULL come first, followed by INTEGER and REAL values interspersed in numeric order, followed by TEXT values in collating sequence order, and finally BLOB values in memcmp() order.</p>
+</blockquote>
+<p>쿼리 결과가 ORDER BY 문으로 정렬될 경우, 아래 순서대로 값이 나온다.</p>
+<ol>
+<li>NULL 값이 먼저 나옴. 그 뒤를 따라서</li>
+<li>INTEGER/REAL 값들이 숫자 순서에 따라 정렬됨. 그 뒤를 따라서</li>
+<li>TEXT 값들이 collaing sequence 순서에 따라 정렬됨. 그 뒤를 따라서</li>
+<li>BLOB 값이 memcmp() 순서에 따라 정렬됨</li>
+</ol>
+<blockquote>
+<p>When grouping values with the GROUP BY clause values with different storage classes are considered distinct, except for INTEGER and REAL values which are considered equal if they are numerically equal.</p>
+</blockquote>
+<p>쿼리 결과를 GROUP BY 절에 의해 묶을 경우, storage class 가 다른 값은 별개의 값으로 판단된다. 단, INTEGER/REAL 의 경우 같은 숫자값이라면 같은 값으로 판단된다.</p>
+<blockquote>
+<p>The compound SELECT operators UNION, INTERSECT and EXCEPT perform implicit comparisons between values. No affinity is applied to comparison operands for the implicit comparisons associated with UNION, INTERSECT, or EXCEPT - the values are compared as is.</p>
+</blockquote>
+<p>UNION, INTERSEC, EXCEPT 문을 사용할 때 각 값 간에 암시적 비교가 실시된다. 이 때 변환은 일어나지 않고 값들은 있는 그대로 비교된다.</p>
+<h2>7. Collating Sequences</h2>
+<blockquote>
+<p>When SQLite compares two strings, it uses a collating sequence or collating function (two words for the same thing) to determine which string is greater or if the two strings are equal. SQLite has three built-in collating functions: BINARY, NOCASE, and RTRIM.</p>
+</blockquote>
+<p>두 문자열을 비교할 때, collating sequence 혹은 collating function 을 사용한다. sqlite 는 세 개의 내장 collating function 을 제공한다.</p>
+<ul>
+<li>BINARY: 문자열 비교에 memcmp() 사용</li>
+<li>NOCASE: 문자열 비교에 <a href="https://www.sqlite.org/c3ref/stricmp.html">sqlite3_strnicmp()</a> 사용</li>
+<li>RTRIM: BINARY 와 동일하나 앞뒤 공백 문자는 제거한 뒤 비교</li>
+</ul>
+<h3>7.1. Assigning Collating Sequences from SQL</h3>
+<blockquote>
+<ol>
+<li>If either operand has an explicit collating function assignment using the postfix COLLATE operator, then the explicit collating function is used for comparison, with precedence to the collating function of the left operand.</li>
+</ol>
+</blockquote>
+<p>만약 두 피연산자가 COLLATE 문을 사용해 collating function 이 지정되어 있다면, 두 값의 비교를 위해 이 명시적 collating function 이 사용된다. 왼쪽 피연산자의 collating function 가 우선권을 가진다.</p>
+<blockquote>
+<ol start="2">
+<li>If either operand is a column, then the collating function of that column is used with precedence to the left operand. For the purposes of the previous sentence, a column name preceded by one or more unary &quot;+&quot; operators and/or CAST operators is still considered a column name.</li>
+</ol>
+</blockquote>
+<span style="color:darkgray">(무슨 말인지 잘 모르겠다..)</span>
+<blockquote>
+<ol start="3">
+<li>Otherwise, the BINARY collating function is used for comparison.</li>
+</ol>
+</blockquote>
+<p>그렇지 않으면 BINARY collating function 이 사용된다.</p>
+<h3>7.2. Collating Sequence Example</h3>
+<p>해당 문서의 해당 항목 참고</p></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210320-sqlite3-data-types/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>

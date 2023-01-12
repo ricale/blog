@@ -1,0 +1,226 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><title data-gatsby-head="true">React Native WebView 안드로이드 백버튼 처리 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.eQmufE{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.eQmufE > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.eQmufE > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g8[id="sc-gKPRtg"]{content:"eQmufE,"}/*!sc*/
+.eQcwpR{word-break:keep-all;}/*!sc*/
+.eQcwpR h1,.eQcwpR h2,.eQcwpR h3,.eQcwpR h4,.eQcwpR h5,.eQcwpR h6,.eQcwpR p{padding:0;}/*!sc*/
+.eQcwpR h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.eQcwpR h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.eQcwpR h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.eQcwpR h4,.eQcwpR h5,.eQcwpR h6,.eQcwpR p,.eQcwpR blockquote,.eQcwpR pre,.eQcwpR ul,.eQcwpR ol,.eQcwpR table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.eQcwpR li > ul,.eQcwpR li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.eQcwpR blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.eQcwpR blockquote > :first-child{margin-top:0;}/*!sc*/
+.eQcwpR blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.eQcwpR blockquote > ul,.eQcwpR blockquote > ol{padding-left:20px;}/*!sc*/
+.eQcwpR blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.eQcwpR blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.eQcwpR code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.eQcwpR pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.eQcwpR pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.eQcwpR table{border-collapse:collapse;}/*!sc*/
+.eQcwpR table td,.eQcwpR table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g9[id="sc-iBYQkv"]{content:"eQcwpR,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>React Native WebView 안드로이드 백버튼 처리</h1><ul class="sc-gKPRtg eQmufE"><li><a href="/blog/tags/html5/">html5</a></li><li><a href="/blog/tags/onNavigationStateChange/">onNavigationStateChange</a></li><li><a href="/blog/tags/pushState/">pushState</a></li><li><a href="/blog/tags/react native/">react native</a></li><li><a href="/blog/tags/react native webview/">react native webview</a></li><li><a href="/blog/tags/webview/">webview</a></li></ul><div>2021. 8. 21.</div><div class="sc-iBYQkv eQcwpR"><p>React Native 를 웹뷰 컨테이너로 사용해 웹앱을 구현하고 있다.</p>
+<p>웹뷰를 사용한 하이브리드앱 구현 시 주의해야 할 점 중 하나는 안드로이드 기기의 백버튼(뒤로가기 버튼)에 대한 처리다. 사람들은 이전 웹페이지로 돌아가길 기대하며 백버튼을 누르지만, React Native 는 웹뷰 내에서의 이전 페이지로 이동하는 것이 아니라 React Native 상의 이전 화면으로 돌아가기 때문이다.</p>
+<p>만약 웹뷰 화면이 해당 앱의 첫 화면이라면, 백버튼을 눌렀을 때 이전 웹페이지로 가는 것이 아니라 앱이 종료되는 것을 경험할 수 있다. 당연하게도 그것은 개발자가 의도한 사항도, 사용자가 의도한 사항도 아니다.</p>
+<p>그러면 웹뷰가 있는 화면에서 백버튼을 눌렀을 때 React Native 의 이전 화면이 아닌 웹뷰의 이전 웹페이지가로 가도록 코드를 수정해보자.</p>
+<h2>1. <code>onNavigationStateChange</code></h2>
+<p>React Native WebView 를 사용하고 있다면 <a href="https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#onnavigationstatechange"><code>onNavigationStateChange</code> 콜백</a>과 <a href="https://reactnative.dev/docs/backhandler"><code>BackHandler</code> API</a>를 사용해 이전 웹페이지로 이동하도록 백버튼의 기능을 조정할 수 있다.</p>
+<pre><code class="language-js">const HomeScreen = (props) =&gt; {
+  const ref = useRef();
+  const [navState, setNavState] = useState();
+
+  useEffect(() =&gt; {
+    const onPress = () =&gt; {
+      if (navState.canGoBack) {
+        // 뒤로 갈 수 있는 상태라면 이전 웹페이지로 이동한다
+        ref.current.goBack();
+        // 기본 뒤로가기 동작을 수행하지 않을 거라면 true 를 리턴한다.
+        return true;
+      } else {
+        // 뒤로 갈 수 없는 상태라면
+        // 다른 원하는 행동을 하면 된다
+        console.log(&quot;do something&quot;);
+        // 기본 뒤로가기 동작을 수행하지 않을 거라면 true 가 아닌 값을 리턴한다.
+        return false;
+      }
+    };
+
+    // 안드로이드 백버튼이 눌렸을 때 이벤트 리스너를 등록한다.
+    BackHandler.addEventListener(&quot;hardwareBackPress&quot;, onPress);
+    return () =&gt; {
+      BackHandler.removeEventListener(&quot;hardwareBackPress&quot;, onPress);
+    };
+  }, [navState.canGoBack]);
+
+  return (
+    &lt;WebView
+      // ...
+      ref={ref}
+      // 웹뷰의
+      onNavigationStateChange={setNavState}
+    /&gt;
+  );
+};
+</code></pre>
+<p><code>onNavigationStateChange</code> 콜백의 첫 번째 인자(<code>navState</code>)는 웹뷰의 현재 상태가 담긴 객체인데, 해당 객체의 <code>canGoBack</code> 값은 현재 웹뷰에서 뒤로가기가 가능한 상태인지를 알려준다 (예를 들어 첫페이지에서는 뒤로 갈 수 없을 것이다. 그런 경우에는 <code>false</code> 값을 가진다).</p>
+<p>뒤로 갈 수 있다면 <code>ref.current.goBack()</code>메서드를 사용해 이전 페이지로 돌아가고, 그렇지 않다면 필요한 다른 작업을 하면 되겠다.</p>
+<h2>2. HTML5 History API 대응</h2>
+<p>하지만 <code>onNavigationStateChange</code> 콜백에 문제가 있으니, 바로 <code>pushState()</code>, <code>replaceState()</code> 등 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">HTML5 History API</a>로 추가된 기능으로 페이지 이동을 하면 동작하지 않는다는 것이다. 이는 <code>canGoBack</code> 값이 최신화되지 않는다는 뜻이고, 위에서 작성한 코드가 정상적으로 동작할 수 없다는 뜻이다.</p>
+<p>물론 여기서 주저앉을 수는 없다. 이제 우리는 <a href="https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#onmessage"><code>onMessage</code> 콜백</a>과 <a href="https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#injectjavascriptstr"><code>webview.injectJavaScript()</code> 메서드</a>를 통해 <code>pushState()</code>, <code>replaceState()</code> 동작 시 웹뷰의 상태를 받아오도록 할 것이다.</p>
+<h3>2.1. <code>webview.injectJavaScript()</code></h3>
+<p><code>webview.injectJavaScript()</code> 메서드는 웹뷰에 자바스크립트 코드를 삽입할 수 있도록 해주는 메서드이다. 해당 메서드를 통해 <code>pushState()</code>와 <code>replaceState()</code> 메서드를 래핑해줄 것이다.</p>
+<pre><code class="language-js">const INJECTED_CODE = `
+(function() {
+  function wrap(fn) {
+    return function wrapper() {
+      var res = fn.apply(this, arguments);
+      window.ReactNativeWebView.postMessage(&#x27;navigationStateChange&#x27;);
+      return res;
+    }
+  }
+
+  history.pushState = wrap(history.pushState);
+  history.replaceState = wrap(history.replaceState);
+  window.addEventListener(&#x27;popstate&#x27;, function() {
+    window.ReactNativeWebView.postMessage(&#x27;navigationStateChange&#x27;);
+  });
+})();
+
+true;
+`;
+const HomeScreen = (props) =&gt; {
+  // ...
+  return (
+    &lt;WebView
+      // ...
+      ref={ref}
+      onLoadStart={() =&gt; ref.current.injectJavaScript(INJECTED_CODE)}
+      onNavigationStateChange={setNavState}
+    /&gt;
+  );
+};
+</code></pre>
+<h4>2.1.1. <code>injectedJavaScript</code> props 는 안 되나?</h4>
+<p>React Native WebView 에는 <code>webview.injectJavaScript()</code>메서드와 비슷한 기능을 하는 <a href="https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#injectedjavascript"><code>injectedJavaScript</code> prop</a>도 존재한다. 하지만 결정적인 차이점이 존재하는데, <code>webview.injectJavaScript()</code>는 우리가 원하는 때에만 골라서 코드를 삽입할 수 있지만, <code>injectedJavaScript</code>는 <code>onLoad</code> 이벤트가 발생할 때마다 코드를 삽입된다는 것이다.</p>
+<p><code>onLoadStart</code> 이벤트는 실제 페이지 이동이 일어날 때만 발생하는데 반해 <code>onLoad</code> 이벤트는 History API 등으로 로딩이 발생할 때도 발생한다. 때문에 같은 코드가 중복적으로 삽입될 수 있고, 우리는 그러한 현상을 피하기 위해 <code>onLoadStart</code>와 <code>injectJavaScript()</code> 메서드를 조합해서 코드를 삽입한다.</p>
+<p>(단, <code>injectedJavaScriptBeforeContentLoaded</code> prop 을 사용하면 위 코드와 거의 동일한 효과를 낼 수 있다.)</p>
+<h4>2.1.2. 삽입된 코드는 어떤 코드?</h4>
+<p>위 코드에는 삽입된 코드가 통문자열로 되어있기 때문에 알아보기 힘들다. 하이라이트된 코드로 다시 살펴보자.</p>
+<pre><code class="language-js">(function () {
+  function wrap(fn) {
+    return function wrapper() {
+      var res = fn.apply(this, arguments);
+      window.ReactNativeWebView.postMessage(&quot;navigationStateChange&quot;);
+      return res;
+    };
+  }
+
+  history.pushState = wrap(history.pushState);
+  history.replaceState = wrap(history.replaceState);
+  window.addEventListener(&quot;popstate&quot;, function () {
+    window.ReactNativeWebView.postMessage(&quot;navigationStateChange&quot;);
+  });
+})();
+
+true;
+</code></pre>
+<p><code>pushState()</code>와 <code>replaceState()</code>를 래핑하고 <code>popState</code> 이벤트에 리스너를 붙이는 코드라는 것을 알 수 있다. 모든 코드들은 공통적으로 <a href="https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#postmessagestr"><code>ReactNativeWebView.postMessage()</code> 메서드</a>를 호출하는 것을 볼 수 있다. 이 메서드가 호출될 때마다 웹뷰는 웹페이지의 상태를 <code>onMessage</code> 콜백으로 받아볼 수 있다.</p>
+<h3>2.2. <code>onMessage</code></h3>
+<p>그럼 <code>onMessage</code> 콜백도 넣어보자.</p>
+<pre><code class="language-js">const HomeScreen = (props) =&gt; {
+  // ...
+  return (
+    &lt;WebView
+      // ...
+      ref={ref}
+      onLoadStart={() =&gt; ref.current.injectJavaScript(INJECTED_CODE)}
+      onNavigationStateChange={setNavState}
+      onMessage={({ nativeEvent }) =&gt; {
+        if (nativeEvent.data === &quot;navigationStateChange&quot;) {
+          setNavState(nativeEvent);
+        }
+      }}
+    /&gt;
+  );
+};
+</code></pre>
+<p>됐다. 이제 <code>pushState()</code>, <code>replaceState()</code>도 놓치지 않게 되었다.</p>
+<h2>3. 전체 코드</h2>
+<p>(아래 코드는 이해를 돕기 위한 의사코드로, 실제로는 동작하지 않을 수도 있다)</p>
+<pre><code class="language-js">const INJECTED_CODE = `
+(function() {
+  function wrap(fn) {
+    return function wrapper() {
+      var res = fn.apply(this, arguments);
+      window.ReactNativeWebView.postMessage(&#x27;navigationStateChange&#x27;);
+      return res;
+    }
+  }
+
+  history.pushState = wrap(history.pushState);
+  history.replaceState = wrap(history.replaceState);
+  window.addEventListener(&#x27;popstate&#x27;, function() {
+    window.ReactNativeWebView.postMessage(&#x27;navigationStateChange&#x27;);
+  });
+})();
+
+true;
+`;
+
+const HomeScreen = (props) =&gt; {
+  const ref = useRef();
+  const [navState, setNavState] = useState();
+
+  useEffect(() =&gt; {
+    const onPress = () =&gt; {
+      if (navState.canGoBack) {
+        // 뒤로 갈 수 있는 상태라면 이전 웹페이지로 이동한다
+        ref.current.goBack();
+      } else {
+        // 뒤로 갈 수 없는 상태라면
+        // 다른 원하는 행동을 하면 된다
+      }
+    };
+
+    // 안드로이드 백버튼이 눌렸을 때 이벤트 리스너를 등록한다.
+    BackHandler.addEventListener(&quot;hardwareBackPress&quot;, onPress);
+    return () =&gt; {
+      BackHandler.removeEventListener(&quot;hardwareBackPress&quot;, onPress);
+    };
+  }, [navState.canGoBack]);
+
+  return (
+    &lt;WebView
+      // ...
+      ref={ref}
+      onLoadStart={() =&gt; ref.current.injectJavaScript(INJECTED_CODE)}
+      onNavigationStateChange={setNavState}
+      onMessage={({ nativeEvent }) =&gt; {
+        if (nativeEvent.data === &quot;navigationStateChange&quot;) {
+          setNavState(nativeEvent);
+        }
+      }}
+    /&gt;
+  );
+};
+</code></pre>
+<h2>4. 참고</h2>
+<ul>
+<li><a href="https://github.com/react-native-webview/react-native-webview">React Native WebView</a></li>
+<li><a href="https://github.com/react-native-webview/react-native-webview/issues/24#issuecomment-483956651">MIGRATED: iOS WebView doesn&#x27;t support hash url change. The onNavigationStateChange listener will not be called when url hash changes. (#20447) #24</a></li>
+</ul></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/210821-react-native-webview-android-back-button/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-a70e30a2867718dd8547.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-6fd233e28f5feff77ca3.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-008cb4c3d7c987dfb403.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8e265dba375b5d50c203.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-000000-gatsby-2-index-mdx-4923452597bddc646609.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210304-auto-update-env-variable-files-index-mdx-c7eb36fc4514bac5d50a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210320-sqlite-3-data-types-index-mdx-a6902ef7f6c28c407bae.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210325-apply-eslint-index-mdx-dbefe7a1101bbcc06049.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210330-chrome-web-worker-issue-index-mdx-7881be7bfe86337a230e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210416-create-n-length-array-index-mdx-4738472d12a9736835ee.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-1-index-mdx-1c3536077a7869099c4f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210430-tech-interview-questions-2-index-mdx-be47a6e2dc0e20634e85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210503-create-react-app-github-pages-index-mdx-ecd311cb4f338ca7a28f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210505-cra-webpack-1-resolve-alias-index-mdx-cabc3826dfd9098d4bcc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210527-cra-webpack-2-module-index-mdx-4f5460d0a99e06b7c4f4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210613-nextjs-github-pages-index-mdx-8d549a09b65d0de7506a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210628-read-writings-index-mdx-00b3eb1e0dc67c35c128.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210705-read-writings-index-mdx-cfd38068d3d19921f817.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210724-read-writings-index-mdx-d0f3ef470e9eb91185b5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210821-react-native-webview-android-back-button-index-mdx-90fe092cf934cbd0c274.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210823-react-native-ios-build-error-index-mdx-98ee5005761cec7f30b2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210831-react-native-build-setting-for-envs-index-mdx-57a15a632034e54d49d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-210901-github-ssh-multi-account-index-mdx-980529500beea507406b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211013-read-writings-index-mdx-e6d786e41822657a8214.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211116-read-writings-index-mdx-7ba00f9d54f900d216f2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211118-firbase-authentication-issue-in-production-index-mdx-52313a84fd2654901fe2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-211202-read-writings-index-mdx-93f1dd97ccf069075b81.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-eb0887b6fc6087dd0765.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-bc123b89b2c173f857dc.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="30b9b35c9bc3ee779a73";</script><script src="/blog/webpack-runtime-5a88a66b48aae25d9175.js" async></script><script src="/blog/framework-12ad414a7cb907c8f9b9.js" async></script><script src="/blog/app-a70e30a2867718dd8547.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
