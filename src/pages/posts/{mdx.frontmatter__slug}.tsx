@@ -14,13 +14,11 @@ type PostDetailPageData = {
       tags: string[];
       heroImage?: ImageDataLike;
       heroImageAlt?: string;
-      heroImageCreditLink?: string;
-      heroImageCreditText?: string;
     };
   };
 };
 const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
-  const { title, date, tags, heroImage } = data.mdx.frontmatter;
+  const { title, date, tags, heroImage, heroImageAlt } = data.mdx.frontmatter;
   const image = heroImage ? getImage(heroImage) : null;
 
   return (
@@ -34,12 +32,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
         ))}
       </Tags>
       <div>{date}</div>
-      {!!image && (
-        <GatsbyImage
-          image={image}
-          alt={data.mdx.frontmatter.heroImageAlt ?? ""}
-        />
-      )}
+      {!!image && <GatsbyImage image={image} alt={heroImageAlt ?? ""} />}
       <Content>{children}</Content>
     </Layout>
   );
@@ -104,7 +97,8 @@ const Content = styled.div`
   blockquote,
   pre,
   ul,
-  ol {
+  ol,
+  table {
     margin-top: ${(p) => p.theme.dimens.margin}px;
     margin-bottom: ${(p) => p.theme.dimens.margin}px;
   }
@@ -186,6 +180,16 @@ const Content = styled.div`
     background-color: unset;
     color: unset;
   }
+
+  table {
+    border-collapse: collapse;
+    td,
+    th {
+      border: 1px solid ${(p) => p.theme.colors.tableBorder};
+      padding: ${(p) => p.theme.dimens.spacing}px
+        ${(p) => p.theme.dimens.gutter}px;
+    }
+  }
 `;
 
 export const query = graphql`
@@ -196,8 +200,6 @@ export const query = graphql`
         date(formatString: "YYYY. M. D.")
         tags
         heroImageAlt
-        heroImageCreditLink
-        heroImageCreditText
         heroImage {
           childImageSharp {
             gatsbyImageData

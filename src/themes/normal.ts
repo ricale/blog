@@ -16,6 +16,8 @@ const colors = {
 
   tag: "#111111",
   onTag: "skyblue",
+
+  tableBorder: "white",
 };
 
 const normal = {
