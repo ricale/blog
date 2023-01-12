@@ -3,10 +3,24 @@ import { graphql, Link, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 
-const BlogPage = ({ data }: PageProps) => {
+type BlogPageData = {
+  allMdx: {
+    nodes: {
+      frontmatter: {
+        title: string;
+        date: string;
+        slug: string;
+      };
+      id: string;
+      excerpt: string;
+    }[];
+  };
+};
+const BlogPage = ({ data }: PageProps<BlogPageData>) => {
   return (
     <Layout>
-      {(data as any).allMdx.nodes.map((node: any, i: number) => (
+      <p>{data.allMdx.nodes.length}개 글</p>
+      {data.allMdx.nodes.map((node, i) => (
         <article key={i}>
           <h2>
             <Link to={`/posts/${node.frontmatter.slug}`}>
