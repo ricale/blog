@@ -5,16 +5,19 @@ import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import styled from "../../themes";
+import MdxContent from "../../components/MdxContent";
 
 type PostDetailPageData = {
   mdx: {
     frontmatter: {
       title: string;
+      slug: string;
       date: string;
       tags: string[];
       heroImage?: ImageDataLike;
       heroImageAlt?: string;
     };
+    excerpt: string;
   };
 };
 const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
@@ -33,7 +36,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
       </Tags>
       <div>{date}</div>
       {!!image && <GatsbyImage image={image} alt={heroImageAlt ?? ""} />}
-      <Content>{children}</Content>
+      <MdxContent>{children}</MdxContent>
     </Layout>
   );
 };
@@ -62,141 +65,12 @@ const Tags = styled.ul`
   }
 `;
 
-const Content = styled.div`
-  word-break: keep-all;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    padding: 0;
-  }
-
-  h1 {
-    margin-top: ${(p) => p.theme.dimens.margin * 3.5}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
-  }
-
-  h2 {
-    margin-top: ${(p) => p.theme.dimens.margin * 3}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
-  }
-
-  h3 {
-    margin-top: ${(p) => p.theme.dimens.margin * 2.5}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
-  }
-
-  h4,
-  h5,
-  h6,
-  p,
-  blockquote,
-  pre,
-  ul,
-  ol,
-  table {
-    margin-top: ${(p) => p.theme.dimens.margin}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
-  }
-
-  li > ul,
-  li > ol {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  blockquote {
-    position: relative;
-
-    margin-left: 0;
-    margin-right: 0;
-    padding: 16px 30px;
-    border-left: 1px solid ${(p) => p.theme.colors.blockquoteBorder};
-    border-left-width: 10px;
-
-    background-color: ${(p) => p.theme.colors.blockquote};
-
-    > :first-child {
-      margin-top: 0;
-    }
-    > :last-child {
-      margin-bottom: 0;
-    }
-    > ul,
-    > ol {
-      padding-left: 20px;
-    }
-  }
-
-  blockquote:before {
-    content: '"';
-
-    position: absolute;
-    top: 15px;
-    left: 5px;
-
-    font-size: 3rem;
-    color: ${(p) => p.theme.colors.blockquoteBorder};
-  }
-  blockquote:after {
-    content: '"';
-
-    position: absolute;
-    bottom: -15px;
-    right: 10px;
-
-    font-size: 3rem;
-    color: ${(p) => p.theme.colors.blockquoteBorder};
-  }
-
-  code {
-    padding: ${(p) => p.theme.dimens.spacing}px
-      ${(p) => p.theme.dimens.spacing}px ${(p) => p.theme.dimens.thin}px;
-    border-radius: 2px;
-
-    font-size: 0.875em;
-
-    background-color: ${(p) => p.theme.colors.code};
-    color: ${(p) => p.theme.colors.onCode};
-  }
-
-  pre {
-    margin: ${(p) => p.theme.dimens.margin}px 0;
-    padding: ${(p) => p.theme.dimens.margin}px;
-
-    background-color: ${(p) => p.theme.colors.codeblock};
-    color: ${(p) => p.theme.colors.onCodeblock};
-    line-height: 140%;
-    overflow-x: auto;
-  }
-
-  pre > code {
-    padding: unset;
-    border-radius: unset;
-    background-color: unset;
-    color: unset;
-  }
-
-  table {
-    border-collapse: collapse;
-    td,
-    th {
-      border: 1px solid ${(p) => p.theme.colors.tableBorder};
-      padding: ${(p) => p.theme.dimens.spacing}px
-        ${(p) => p.theme.dimens.gutter}px;
-    }
-  }
-`;
-
 export const query = graphql`
   query ($id: String) {
     mdx(id: { eq: $id }) {
       frontmatter {
         title
+        slug
         date(formatString: "YYYY. M. D.")
         tags
         heroImageAlt
@@ -206,12 +80,28 @@ export const query = graphql`
           }
         }
       }
+      excerpt
     }
   }
 `;
 
-export const Head = ({ data }: HeadProps<PostDetailPageData>) => (
-  <Seo title={data.mdx.frontmatter.title} />
-);
+export const Head = ({ data }: HeadProps<PostDetailPageData>) => {
+  const {
+    frontmatter: { title, slug, tags, heroImage },
+    excerpt,
+  } = data.mdx;
+  const image = heroImage ? getImage(heroImage) : null;
+
+  return (
+    <Seo
+      title={title}
+      description={excerpt}
+      path={`posts/${slug}`}
+      thumbnail={image?.images?.fallback?.src}
+      keywords={tags}
+      ogType="article"
+    />
+  );
+};
 
 export default PostDetailPage;
