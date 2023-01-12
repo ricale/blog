@@ -1,0 +1,48 @@
+---
+title: "읽은 좋은 글들 (~21.7.5)"
+date: "2021-07-05"
+slug: "210705-read-writings"
+tags: ["CSS", "JavaScript", "redux", "코드 리뷰", "페어 프로그래밍"]
+heroImage: "./goodarticles-narrow.jpg"
+heroImageAlt: "thumbnail"
+---
+
+## CSS
+
+### [Perfect Tooltips With CSS Clipping and Masking](https://css-tricks.com/perfect-tooltips-with-css-clipping-and-masking/)
+
+CSS로 말풍선 모양의 툴팁을 구현하는 내용이다. 단순히 네모와 그 아래 세모를 붙이는 것으로 끝나지 않고, 말풍선 모양으로 사진을 클리핑하는 것까지 구현한다. `svg`(특히 `clip-path`)를 활용한다.
+
+### [Using Performant Next-Gen Images in CSS with image-set](https://css-tricks.com/using-performant-next-gen-images-in-css-with-image-set/)
+
+이제는 거의 모든 모던 브라우저에 탑재된 `image-set` 속성에 대해 설명하는 글이다. 간단히 설명하면 모바일 앱처럼 사용자의 해상도나 네트워크 상태에 따라 적절한 이미지를 보여주는 기능이다. 글에서는 다른 비슷한 기능들과 비교하며 사용 예를 설명해고 있다.
+
+### [Detecting Hover-Capable Devices](https://css-irl.info/detecting-hover-capable-devices/)
+
+`hover`가 가능한 기기와 그렇지 않은 기기를 구분할 수 있는 미디어 쿼리에 대해 설명하는 글이다.
+
+## JavaScript
+
+### [Modern Javascript: Everything you missed over the last 10 years (ECMAScript 2020)](https://turriate.com/articles/modern-javascript-everything-you-missed-over-10-years)
+
+지난 10년간 있었던 자바스크립트의 새로운 기능들에 대해 간략히 정리한다. 제목의 말마따나 빼먹은 게 있는지 체크해볼 수 있다.
+
+### [THE REDUX BEST PRACTICE “DO NOT PUT NON-SERIALIZABLE VALUES IN STATE OR ACTIONS” EXPLAINED](https://blog.bam.tech/developer-news/the-redux-best-practice-do-not-put-non-serializable-values-in-state-or-actions-explained)
+
+Redux 사용 시 `state`나 `action`에 non-serializable 데이터를 사용하면 안 되는 이유에 대해 설명한다. (여기서 seriealizable 데이터란 `JSON.parse()`와 `JSON.stringify()`를 차례로 써서 원본 데이터를 얻을 수 있는 데이터라고 이해하면 쉽다.)
+
+당연히 쓰지 않는 게 좋지만 개발자의 판단에 따라 쓰고 싶다면 써도 된다고 말하기도 하는데, 이 글에서 인용한 [Redux 공식 문서](https://redux.js.org/faq/organizing-state#can-i-put-functions-promises-or-other-non-serializable-items-in-my-store-state)에 재미있는 말이 나와있다.
+
+> If you are okay with things like persistence and time-travel debugging potentially not working as intended, then you are totally welcome to put non-serializable items into your Redux store. Ultimately, it's _your application_, and how you implement it is up to you.
+
+*your application*이 강조되어 있는 게 재미있다.
+
+## 개발문화
+
+### [페어 프로그래밍이란 무엇 일까?](https://kihoonkim.github.io/2018/01/01/Agile/pair-programming/)
+
+페어프로그래밍의 장단점, 하는 방법 등이 읽기 좋게 정리되어 있다.
+
+### [코드 리뷰 in 뱅크샐러드 개발 문화](https://blog.banksalad.com/tech/banksalad-code-review-culture/#:~:text=%EC%BD%94%EB%93%9C%20%EB%A6%AC%EB%B7%B0%EB%9E%80%20%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80,%EC%9D%84%20%EB%B0%9C%EA%B2%AC%ED%95%A0%20%EC%88%98%EB%8F%84%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.)
+
+뱅크샐러드의 코드 리뷰 문화가 정리되어 있는 글이다. 잘 읽히는 상세한 글이다.

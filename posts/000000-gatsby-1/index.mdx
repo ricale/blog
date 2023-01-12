@@ -1,0 +1,237 @@
+---
+title: "Gatsby 블로그 만들기 1 - 기본 구현 및 태그 기능 구현"
+date: "2023-01-12"
+slug: "000000-gatsby-1"
+tags: ["Gatsby", "Gatsby blog", "Gatsby blog tag", "blog", "blog tag"]
+---
+
+# 0. 발단
+
+쓰던 블로그 서비스가 안드로이드 모바일에서 광고를 삽입하는 것을 발견했다. (광고는 다시 없어졌다. 아마 운영자의 테스트였던 것 같다.) 개인적으로 개인 개발 블로그에 광고가 들어가는 걸 원치 않으므로 서비스를 바꿔야 겠다는 생각이 들었다. 그리고 그러던 와중에 GitHub Pages 에 정적 페이지 생성 프레임워크로 블로그를 운영하는 것도 괜찮겠다 싶었다.
+
+Jekyll 과 Gatsby 두 서비스 중 고민하다가 Gatsby 를 선택했다. 자 그러면 천천히 하나씩 적용해보자.
+
+# 1. 프로젝트 기본 구성
+
+[공식 튜토리얼 문서](https://www.gatsbyjs.com/docs/tutorial/)가 잘 정리되어 있다. 튜토리얼에서는 아래 일곱가지 내용을 설명한다.
+
+0. [개발 환경 구성하기](https://www.gatsbyjs.com/docs/tutorial/part-0/)
+1. [로컬에서 프로젝트 생성 및 실행하고, Gatsby 클라우드에 배포하기](https://www.gatsbyjs.com/docs/tutorial/part-1/)
+2. [React 로 페이지 구현하기](https://www.gatsbyjs.com/docs/tutorial/part-2/)
+3. [플러그인 적용하기](https://www.gatsbyjs.com/docs/tutorial/part-3/)
+   - gatsby-plugin-image 플러그인으로 정적 이미지를 사이트에 추가하기
+4. [GraphQL 사용하기](https://www.gatsbyjs.com/docs/tutorial/part-4/)
+   - 사이트의 메타 데이터 다루기
+   - gatsby-source-filesystem 플러그인을 적용해 GraphQL 로 MDX 파일 목록 가져오기
+5. [MDX 사용하기](https://www.gatsbyjs.com/docs/tutorial/part-5/)
+   - MDX 로 블로그 컨텐츠 작성하기
+   - gatsby-plugin-mdx 플러그인을 적용해 GraphQL 로 MDX 파일 내용 가져오기
+6. [동적으로 페이지 생성하기](https://www.gatsbyjs.com/docs/tutorial/part-6/)
+   - MDX 의 frontmatter 와 `{mdx.frontmatter__slug}.tsx` 형식의 파일명을 사용해 페이지 동적으로 생성하기
+   - 생성된 페이지에 알맞는 MDX 데이터를 GraphQL 로 가져와 사용하기
+7. [데이터에 따라 동적으로 이미지 추가하기](https://www.gatsbyjs.com/docs/tutorial/part-7/)
+   - gatsby-transformer-sharp 플러그인을 적용해 MDX 의 frontmatter 에 따라 알맞는 이미지를 가져와 사용하기
+
+본문이 훌륭하기 때문에 굳이 여기에 다시 정리하지는 않겠다. 위 과정을 모두 거치면 기본적인 글 작성이 가능한 블로그 사이트가 완성된다.
+
+# 2. 태그 구현
+
+태그 구현 또한 [공식 문서](https://www.gatsbyjs.com/docs/adding-tags-and-categories-to-blog-posts/)가 잘 정리되어 있다. 하지만 약간 옛날 버전인 듯 위 튜토리얼 문서와 과 맞지 않는 부분이 있어서 해당 부분을 정정할 겸 정리해보겠다.
+
+## 2.1. MDX 에 태그 추가
+
+MDX 파일의 frontmatter 영역에 tags 를 추가하자
+
+```mdx
+---
+title: "Create React App 으로 GitHub Pages 적용하기"
+date: "2021-05-03"
+slug: "210503-create-react-app-github-pages"
+tags: ["React", "create react app", "github pages"] # 이렇게 추가하자
+---
+```
+
+https://eneaxharja.com/add-tags-to-mdx-blog
+
+## 2.2. 태그 페이지 템플릿 추가
+
+태그 페이지에 쓰일 템플릿을 만들어보자.
+
+여기서 `{mdx.frontmatter__slug}.tsx}` 형식의 파일을 만들지 않고 템플릿을 만드는 이유는 페이지가 MDX 파일의 정적 데이터(frontmatter 의 slug 필드)에 의해 만들어지는 것이 아니라, 동적인 데이터 (frontmatter 의 tags 정보를 수집) 에 의해 만들어져야 하기 때문이다.
+
+```tsx
+// src/templates/TagDetailPageTemplate.tsx
+import * as React from "react";
+import { graphql, Link, PageProps } from "gatsby";
+import Layout from "../components/Layout";
+
+type TagDetailPageTemplateData = {
+  allMdx: {
+    totalCount: number;
+    edges: {
+      node: {
+        frontmatter: {
+          slug: string;
+          title: string;
+        };
+      };
+    }[];
+  };
+};
+type TagDetailPageTemplateContext = {
+  tag: string;
+};
+const TagDetailPageTemplate = ({
+  pageContext,
+  data,
+}: PageProps<TagDetailPageTemplateData, TagDetailPageTemplateContext>) => {
+  const { tag } = pageContext;
+  const { totalCount, edges } = data.allMdx;
+
+  return (
+    <Layout>
+      <h1>{`태그 "${tag}"`}</h1>
+      <p>{`글 ${totalCount}개`}</p>
+
+      <ul>
+        {edges.map(({ node: { frontmatter } }) => (
+          <li key={frontmatter.slug}>
+            <Link to={`/posts/${frontmatter.slug}`}>{frontmatter.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  );
+};
+
+export const pageQuery = graphql`
+  query ($tag: String) {
+    allMdx(
+      limit: 2000
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default TagDetailPageTemplate;
+```
+
+## 2.3. `gatsby-node.ts` 작성
+
+위에서 만든 템플릿으로 페이지를 만들기 위해서는 `gatsby-node.ts` 를 작성해야 한다. 이미 해당 파일을 만들었다면 `createPage()` 함수 안에 아래 내용을 적당히 끼워넣으면 된다.
+
+```ts
+// gatsby-node.ts
+import { GatsbyNode } from "gatsby";
+import path from "path";
+
+type TagGroupsQueryData = {
+  tagsGroup: {
+    group: {
+      fieldValue: string;
+    }[];
+  };
+};
+
+export const createPages: GatsbyNode["createPages"] = async ({
+  actions,
+  graphql,
+  reporter,
+}) => {
+  const result = await graphql<TagGroupsQueryData>(`
+    {
+      tagsGroup: allMdx(limit: 2000) {
+        group(field: { frontmatter: { tags: SELECT } }) {
+          fieldValue
+        }
+      }
+    }
+  `);
+
+  if (result.errors || !result.data) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const tagsTemplatePath = path.resolve(
+    "src/templates/TagDetailPageTemplate.tsx"
+  );
+
+  result.data.tagsGroup.group.forEach((tag) => {
+    actions.createPage({
+      path: `/tags/${tag.fieldValue}/`,
+      component: tagsTemplatePath,
+      context: { tag: tag.fieldValue },
+    });
+  });
+};
+```
+
+## 2.4. 태그 목록 페이지 추가
+
+태그 목록 페이지를 추가하자.
+
+```tsx
+// src/pages/tags/index.tsx
+import * as React from "react";
+import { graphql, Link, PageProps } from "gatsby";
+import Layout from "../../components/Layout";
+import Seo from "../../components/Seo";
+
+type TagsPageData = {
+  allMdx: {
+    group: {
+      totalCount: number;
+      fieldValue: string;
+    }[];
+  };
+};
+const TagsPage = ({ data }: PageProps<TagsPageData>) => {
+  const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
+  return (
+    <Layout>
+      <h1>tags</h1>
+      <ul>
+        {tags.map((tag) => (
+          <li key={tag.fieldValue}>
+            <Link to={`/tags/${tag.fieldValue}/`}>{`${tag.fieldValue}`}</Link>{" "}
+            <small>{`${tag.totalCount}`}</small>
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  );
+};
+
+export const query = graphql`
+  query {
+    allMdx(limit: 2000) {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`;
+
+export const Head = () => <Seo title="태그 목록" />;
+
+export default TagsPage;
+```
+
+`graphql` 쿼리에서 바로 totalCount 로 정렬하고 싶었지만 (GraphQL 을 잘 몰라서) 방법을 찾지 못했다. 대신 `TagsPage` 컴포넌트 첫번째 줄에서 `.sort()` 를 사용해 정렬하고 있다.
+
+# 3. 다음
+
+다음 글에서는 글 내용 안에 이미지를 삽입하는 방법을 정리한다.

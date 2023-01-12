@@ -1,0 +1,137 @@
+---
+title: "Gatsby 블로그 만들기 2 - MDX 글 안에 인라인 이미지, 테이블 삽입"
+date: "2023-01-12"
+slug: "000000-gatsby-1"
+tags:
+  [
+    "Gatsby",
+    "Gatsby blog",
+    "Gatsby inline image",
+    "Gatsby inline table",
+    "Gatsby gfm",
+  ]
+---
+
+이전 글에서는 Gatsby 기본 기능을 구현을 위한 튜토리얼을 소개했고 태그 기능을 구현했다. 오늘은 MDX 글 안에 인라인 이미지와 테이블을 삽입해보자.
+
+# 1. 이미지 삽입
+
+정적 이미지는 `gatsby-plugin-image` 플러그인과 `StaticImage` 컴포넌트로 적용한다. 페이지 컴포넌트에 들어가는 동적 이미지는 `gatsby-transformer-sharp` 플러그인과 `GatsbyImage` 컴포넌트로 적용한다. 그렇다면 MDX 본문 안에 들어가는 이미지는 어떻게 적용할까?
+
+[공식 문서](https://www.gatsbyjs.com/docs/how-to/images-and-media/working-with-images-in-markdown/)에도 잘 나와있지만 그럼에도 불구하고 적용에 살짝 애를 먹었기 때문에 기록해두도록 하겠다.
+
+## 1.1. `gatsby-remark-images` 플러그인 적용
+
+일단 플러그인을 설치하자.
+
+```sh
+$ npm i gatsby-remark-images
+```
+
+그리고 `gatsby-config.ts` 를 수정하자.
+
+```ts
+// gatsby-config.ts
+import type { GatsbyConfig } from "gatsby";
+
+const config: GatsbyConfig = {
+  // ...
+  plugins: [
+    // ...
+    // "gatsby-plugin-mdx", // <- 이렇게 문자열 형식으로 gatsby-plugin-mdx 를 쓰고 있었다면, 이 줄은 삭제하자.
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 800,
+              backgroundColor: "none",
+            },
+          },
+        ],
+      },
+    },
+    // ....
+  ],
+};
+
+export default config;
+```
+
+## 1.2. MDX 에 인라인 이미지 사용
+
+https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxoptions
+
+```mdx
+![Alt message](./screenshot.png)
+```
+
+# 2. 인라인 테이블 문법 적용
+
+Markdown 은 원래 아래와 같은 문법으로 테이블을 삽입할 수 있다.
+
+```mdx
+| 호스트명     | IP 주소         |
+| ------------ | --------------- |
+| mydomain.com | 111.111.111.222 |
+| mydomain.com | 111.111.222.111 |
+| mydomain.com | 111.222.111.111 |
+| mydomain.com | 222.111.111.111 |
+```
+
+...있는 줄 알았다. 그런데 알고 보니 이 문법은 원래 마크다운 기본 문법이 아니라 GitHub 에서 만든 [GitHub Flavored Markdown](https://github.github.com/gfm/)(GFM) 스펙에서 지원하는 문법이었다. 당연히 MDX 에서도 기본적으로 적용되지 않는다. 하지만 다행히도 Gatsby 에서 GFM 을 적용할 수 있는 방법을 제공한다.
+
+## 2.1. `remark-gfm` 플러그인 적용
+
+일단 플러그인을 설치하자.
+
+```sh
+$ npm i remark-gfm@^1
+```
+
+여기서 버전 1을 설치하는 이유는 Gatsby 가 ESM 을 아직 지원하지 않는데, remark-gfm 버전 2부터는 ESM 이기 때문이다. [공식 문서](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxoptions)에도 잘 설명되어 있다. (mdxOptions 섹션의 Please Note 부분을 보자.)
+
+그리고 `gatsby-config.ts` 에 플러그인을 적용하자.
+
+```ts
+import type { GatsbyConfig } from "gatsby";
+
+const config: GatsbyConfig = {
+  // ...
+  plugins: [
+    // ...
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        mdxOptions: {
+          remarkPlugins: [require("remark-gfm")],
+        },
+        // ...
+      },
+    },
+    // ...
+  ],
+};
+
+export default config;
+```
+
+## 2.2. MDX 에 테이블 사용
+
+```mdx
+| 호스트명     | IP 주소         |
+| ------------ | --------------- |
+| mydomain.com | 111.111.111.222 |
+| mydomain.com | 111.111.222.111 |
+| mydomain.com | 111.222.111.111 |
+| mydomain.com | 222.111.111.111 |
+```
+
+| 호스트명     | IP 주소         |
+| ------------ | --------------- |
+| mydomain.com | 111.111.111.222 |
+| mydomain.com | 111.111.222.111 |
+| mydomain.com | 111.222.111.111 |
+| mydomain.com | 222.111.111.111 |
