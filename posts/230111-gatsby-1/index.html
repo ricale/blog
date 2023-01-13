@@ -1,0 +1,254 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><meta name="description" content="쓰던 블로그 서비스가 안드로이드 모바일에서 광고를 삽입하는 것을 발견했다. (광고는 다시 없어졌다. 아마 운영자의 테스트였던 것 같다.) 개인적으로 개인 개발 블로그에 광고가 들어가는 걸 원치 않으므로 서비스를 바꿔야 겠다는 생각이 들었다. 그리고…" data-gatsby-head="true"/><meta name="author" content="ricale" data-gatsby-head="true"/><meta name="keywords" content="Gatsby, Gatsby blog, Gatsby blog tag, blog, blog tag" data-gatsby-head="true"/><meta property="og:type" content="article" data-gatsby-head="true"/><meta property="og:title" content="Gatsby 블로그 만들기 1 - 기본 구현 및 태그 기능 구현" data-gatsby-head="true"/><meta property="og:description" content="쓰던 블로그 서비스가 안드로이드 모바일에서 광고를 삽입하는 것을 발견했다. (광고는 다시 없어졌다. 아마 운영자의 테스트였던 것 같다.) 개인적으로 개인 개발 블로그에 광고가 들어가는 걸 원치 않으므로 서비스를 바꿔야 겠다는 생각이 들었다. 그리고…" data-gatsby-head="true"/><meta property="og:url" content="https://ricale.kr/blog/posts/230111-gatsby-1" data-gatsby-head="true"/><meta property="og:image" content="https://ricale.kr/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg" data-gatsby-head="true"/><meta property="twitter:card" content="summary_large_image" data-gatsby-head="true"/><meta property="twitter:title" content="Gatsby 블로그 만들기 1 - 기본 구현 및 태그 기능 구현" data-gatsby-head="true"/><meta property="twitter:description" content="쓰던 블로그 서비스가 안드로이드 모바일에서 광고를 삽입하는 것을 발견했다. (광고는 다시 없어졌다. 아마 운영자의 테스트였던 것 같다.) 개인적으로 개인 개발 블로그에 광고가 들어가는 걸 원치 않으므로 서비스를 바꿔야 겠다는 생각이 들었다. 그리고…" data-gatsby-head="true"/><meta property="twitter:url" content="https://ricale.kr/blog/posts/230111-gatsby-1" data-gatsby-head="true"/><meta property="twitter:image" content="https://ricale.kr/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg" data-gatsby-head="true"/><title data-gatsby-head="true">Gatsby 블로그 만들기 1 - 기본 구현 및 태그 기능 구현 | ricalelog</title><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-size:18px;line-height:180%;overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+a{color:skyblue;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-gZZXIw1"]{content:"sc-global-gZZXIw1,"}/*!sc*/
+.eCGCbN{max-width:800px;padding:16px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"eCGCbN,"}/*!sc*/
+.kFNtng{word-break:keep-all;}/*!sc*/
+.kFNtng h1,.kFNtng h2,.kFNtng h3,.kFNtng h4,.kFNtng h5,.kFNtng h6,.kFNtng p{padding:0;}/*!sc*/
+.kFNtng h1{margin-top:56px;margin-bottom:16px;}/*!sc*/
+.kFNtng h2{margin-top:48px;margin-bottom:16px;}/*!sc*/
+.kFNtng h3{margin-top:40px;margin-bottom:16px;}/*!sc*/
+.kFNtng h4,.kFNtng h5,.kFNtng h6,.kFNtng p,.kFNtng blockquote,.kFNtng pre,.kFNtng ul,.kFNtng ol,.kFNtng table{margin-top:16px;margin-bottom:16px;}/*!sc*/
+.kFNtng li > ul,.kFNtng li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.kFNtng blockquote{position:relative;margin-left:0;margin-right:0;padding:16px 30px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.kFNtng blockquote > :first-child{margin-top:0;}/*!sc*/
+.kFNtng blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.kFNtng blockquote > ul,.kFNtng blockquote > ol{padding-left:20px;}/*!sc*/
+.kFNtng blockquote:before{content:'"';position:absolute;top:15px;left:5px;font-size:3rem;color:#666666;}/*!sc*/
+.kFNtng blockquote:after{content:'"';position:absolute;bottom:-15px;right:10px;font-size:3rem;color:#666666;}/*!sc*/
+.kFNtng code{padding:4px 4px 2px;border-radius:2px;font-size:0.875em;background-color:#333333;color:#DDDDDD;}/*!sc*/
+.kFNtng pre{margin:16px 0;padding:16px;background-color:#111111;color:white;line-height:140%;overflow-x:auto;}/*!sc*/
+.kFNtng pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.kFNtng table{border-collapse:collapse;}/*!sc*/
+.kFNtng table td,.kFNtng table th{border:1px solid white;padding:4px 8px;}/*!sc*/
+data-styled.g4[id="sc-dkrFOg"]{content:"kFNtng,"}/*!sc*/
+.cEhRCB{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.cEhRCB > li{padding:2px 8px 0px;border-radius:2px;background-color:#111111;color:skyblue;}/*!sc*/
+.cEhRCB > li > a{-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g31[id="sc-cwSeag"]{content:"cEhRCB,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe eCGCbN"><header>ricalelog</header><nav><ul><li><a href="/blog/posts/">posts</a></li><li><a href="/blog/tags/">tags</a></li></ul></nav><main><h1>Gatsby 블로그 만들기 1 - 기본 구현 및 태그 기능 구현</h1><ul class="sc-cwSeag cEhRCB"><li><a href="/blog/tags/Gatsby/">Gatsby</a></li><li><a href="/blog/tags/Gatsby blog/">Gatsby blog</a></li><li><a href="/blog/tags/Gatsby blog tag/">Gatsby blog tag</a></li><li><a href="/blog/tags/blog/">blog</a></li><li><a href="/blog/tags/blog tag/">blog tag</a></li></ul><div>2023. 1. 11.</div><div data-gatsby-image-wrapper="" class="gatsby-image-wrapper gatsby-image-wrapper-constrained"><div style="max-width:1111px;display:block"><img alt="" role="presentation" aria-hidden="true" src="data:image/svg+xml;charset=utf-8,%3Csvg height=&#x27;625&#x27; width=&#x27;1111&#x27; xmlns=&#x27;http://www.w3.org/2000/svg&#x27; version=&#x27;1.1&#x27;%3E%3C/svg%3E" style="max-width:100%;display:block;position:static"/></div><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#181818;position:absolute;top:0;left:0;bottom:0;right:0"></div><picture><source type="image/webp" data-srcset="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/c92a3/kier-in-sight-pisLNJo0I88-unsplash.webp 278w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/5f30d/kier-in-sight-pisLNJo0I88-unsplash.webp 556w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/cc716/kier-in-sight-pisLNJo0I88-unsplash.webp 1111w" sizes="(min-width: 1111px) 1111px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 1111px) 1111px, 100vw" decoding="async" loading="lazy" data-src="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg" data-srcset="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/86943/kier-in-sight-pisLNJo0I88-unsplash.jpg 278w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/cddea/kier-in-sight-pisLNJo0I88-unsplash.jpg 556w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg 1111w" alt="kier-in-sight-pisLNJo0I88-unsplash"/></picture><noscript><picture><source type="image/webp" srcSet="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/c92a3/kier-in-sight-pisLNJo0I88-unsplash.webp 278w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/5f30d/kier-in-sight-pisLNJo0I88-unsplash.webp 556w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/cc716/kier-in-sight-pisLNJo0I88-unsplash.webp 1111w" sizes="(min-width: 1111px) 1111px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 1111px) 1111px, 100vw" decoding="async" loading="lazy" src="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg" srcSet="/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/86943/kier-in-sight-pisLNJo0I88-unsplash.jpg 278w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/cddea/kier-in-sight-pisLNJo0I88-unsplash.jpg 556w,/blog/static/fd61a54ee6666c8e4225d97ac9a5510c/a757a/kier-in-sight-pisLNJo0I88-unsplash.jpg 1111w" alt="kier-in-sight-pisLNJo0I88-unsplash"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div><div class="sc-dkrFOg kFNtng"><h1>0. 발단</h1>
+<p>쓰던 블로그 서비스가 안드로이드 모바일에서 광고를 삽입하는 것을 발견했다. (광고는 다시 없어졌다. 아마 운영자의 테스트였던 것 같다.) 개인적으로 개인 개발 블로그에 광고가 들어가는 걸 원치 않으므로 서비스를 바꿔야 겠다는 생각이 들었다. 그리고 그러던 와중에 GitHub Pages 에 정적 페이지 생성 프레임워크로 블로그를 운영하는 것도 괜찮겠다 싶었다.</p>
+<p>Jekyll 과 Gatsby 두 서비스 중 고민하다가 Gatsby 를 선택했다. 자 그러면 천천히 하나씩 적용해보자.</p>
+<h1>1. 프로젝트 기본 구성</h1>
+<p><a href="https://www.gatsbyjs.com/docs/tutorial/">공식 튜토리얼 문서</a>가 잘 정리되어 있다. 튜토리얼에서는 아래 일곱가지 내용을 설명한다.</p>
+<ol start="0">
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-0/">개발 환경 구성하기</a></li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-1/">로컬에서 프로젝트 생성 및 실행하고, Gatsby 클라우드에 배포하기</a></li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-2/">React 로 페이지 구현하기</a></li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-3/">플러그인 적용하기</a>
+<ul>
+<li>gatsby-plugin-image 플러그인으로 정적 이미지를 사이트에 추가하기</li>
+</ul>
+</li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-4/">GraphQL 사용하기</a>
+<ul>
+<li>사이트의 메타 데이터 다루기</li>
+<li>gatsby-source-filesystem 플러그인을 적용해 GraphQL 로 MDX 파일 목록 가져오기</li>
+</ul>
+</li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-5/">MDX 사용하기</a>
+<ul>
+<li>MDX 로 블로그 컨텐츠 작성하기</li>
+<li>gatsby-plugin-mdx 플러그인을 적용해 GraphQL 로 MDX 파일 내용 가져오기</li>
+</ul>
+</li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-6/">동적으로 페이지 생성하기</a>
+<ul>
+<li>MDX 의 frontmatter 와 <code>{mdx.frontmatter__slug}.tsx</code> 형식의 파일명을 사용해 페이지 동적으로 생성하기</li>
+<li>생성된 페이지에 알맞는 MDX 데이터를 GraphQL 로 가져와 사 용하기</li>
+</ul>
+</li>
+<li><a href="https://www.gatsbyjs.com/docs/tutorial/part-7/">데이터에 따라 동적으로 이미지 추가하기</a>
+<ul>
+<li>gatsby-transformer-sharp 플러그인을 적용해 MDX 의 frontmatter 에 따라 알맞는 이미지를 가져와 사용하기</li>
+</ul>
+</li>
+</ol>
+<p>본문이 훌륭하기 때문에 굳이 여기에 다시 정리하지는 않겠다. 위 과정을 모두 거치면 기본적인 글 작성이 가능한 블로그 사이트가 완성된다.</p>
+<h1>2. 태그 구현</h1>
+<p>태그 구현 또한 <a href="https://www.gatsbyjs.com/docs/adding-tags-and-categories-to-blog-posts/">공식 문서</a>가 잘 정리되어 있다. 하지만 약간 옛날 버전인 듯 위 튜토리얼 문서와 과 맞지 않는 부분이 있어서 해당 부분을 정정할 겸 정리해보겠다.</p>
+<h2>2.1. MDX 에 태그 추가</h2>
+<p>MDX 파일의 frontmatter 영역에 tags 를 추가하자</p>
+<pre><code class="language-mdx">---
+title: &quot;Create React App 으로 GitHub Pages 적용하기&quot;
+date: &quot;2021-05-03&quot;
+slug: &quot;210503-create-react-app-github-pages&quot;
+tags: [&quot;React&quot;, &quot;create react app&quot;, &quot;github pages&quot;] # 이렇게 추가하자
+---
+</code></pre>
+<p><a href="https://eneaxharja.com/add-tags-to-mdx-blog">https://eneaxharja.com/add-tags-to-mdx-blog</a></p>
+<h2>2.2. 태그 페이지 템플릿 추가</h2>
+<p>태그 페이지에 쓰일 템플릿을 만들어보자.</p>
+<p>여기서 <code>{mdx.frontmatter__slug}.tsx}</code> 형식의 파일을 만들지 않고 템플릿을 만드는 이유는 페이지가 MDX 파일의 정적 데이터(frontmatter 의 slug 필드)에 의해 만들어지는 것이 아니라, 동적인 데이터 (frontmatter 의 tags 정보를 수집) 에 의해 만들어져야 하기 때문이다.</p>
+<pre><code class="language-tsx">// src/templates/TagDetailPageTemplate.tsx
+import * as React from &quot;react&quot;;
+import { graphql, Link, PageProps } from &quot;gatsby&quot;;
+import Layout from &quot;../components/Layout&quot;;
+
+type TagDetailPageTemplateData = {
+  allMdx: {
+    totalCount: number;
+    edges: {
+      node: {
+        frontmatter: {
+          slug: string;
+          title: string;
+        };
+      };
+    }[];
+  };
+};
+type TagDetailPageTemplateContext = {
+  tag: string;
+};
+const TagDetailPageTemplate = ({
+  pageContext,
+  data,
+}: PageProps&lt;TagDetailPageTemplateData, TagDetailPageTemplateContext&gt;) =&gt; {
+  const { tag } = pageContext;
+  const { totalCount, edges } = data.allMdx;
+
+  return (
+    &lt;Layout&gt;
+      &lt;h1&gt;{`태그 &quot;${tag}&quot;`}&lt;/h1&gt;
+      &lt;p&gt;{`글 ${totalCount}개`}&lt;/p&gt;
+
+      &lt;ul&gt;
+        {edges.map(({ node: { frontmatter } }) =&gt; (
+          &lt;li key={frontmatter.slug}&gt;
+            &lt;Link to={`/posts/${frontmatter.slug}`}&gt;{frontmatter.title}&lt;/Link&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/Layout&gt;
+  );
+};
+
+export const pageQuery = graphql`
+  query ($tag: String) {
+    allMdx(
+      limit: 2000
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default TagDetailPageTemplate;
+</code></pre>
+<h2>2.3. <code>gatsby-node.ts</code> 작성</h2>
+<p>위에서 만든 템플릿으로 페이지를 만들기 위해서는 <code>gatsby-node.ts</code> 를 작성해야 한다. 이미 해당 파일을 만들었다면 <code>createPage()</code> 함수 안에 아래 내용을 적당히 끼워넣으면 된다.</p>
+<pre><code class="language-ts">// gatsby-node.ts
+import { GatsbyNode } from &quot;gatsby&quot;;
+import path from &quot;path&quot;;
+
+type TagGroupsQueryData = {
+  tagsGroup: {
+    group: {
+      fieldValue: string;
+    }[];
+  };
+};
+
+export const createPages: GatsbyNode[&quot;createPages&quot;] = async ({
+  actions,
+  graphql,
+  reporter,
+}) =&gt; {
+  const result = await graphql&lt;TagGroupsQueryData&gt;(`
+    {
+      tagsGroup: allMdx(limit: 2000) {
+        group(field: { frontmatter: { tags: SELECT } }) {
+          fieldValue
+        }
+      }
+    }
+  `);
+
+  if (result.errors || !result.data) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const tagsTemplatePath = path.resolve(
+    &quot;src/templates/TagDetailPageTemplate.tsx&quot;
+  );
+
+  result.data.tagsGroup.group.forEach((tag) =&gt; {
+    actions.createPage({
+      path: `/tags/${tag.fieldValue}/`,
+      component: tagsTemplatePath,
+      context: { tag: tag.fieldValue },
+    });
+  });
+};
+</code></pre>
+<h2>2.4. 태그 목록 페이지 추가</h2>
+<p>태그 목록 페이지를 추가하자.</p>
+<pre><code class="language-tsx">// src/pages/tags/index.tsx
+import * as React from &quot;react&quot;;
+import { graphql, Link, PageProps } from &quot;gatsby&quot;;
+import Layout from &quot;../../components/Layout&quot;;
+import Seo from &quot;../../components/Seo&quot;;
+
+type TagsPageData = {
+  allMdx: {
+    group: {
+      totalCount: number;
+      fieldValue: string;
+    }[];
+  };
+};
+const TagsPage = ({ data }: PageProps&lt;TagsPageData&gt;) =&gt; {
+  const tags = data.allMdx.group.sort((a, b) =&gt; b.totalCount - a.totalCount);
+  return (
+    &lt;Layout&gt;
+      &lt;h1&gt;tags&lt;/h1&gt;
+      &lt;ul&gt;
+        {tags.map((tag) =&gt; (
+          &lt;li key={tag.fieldValue}&gt;
+            &lt;Link to={`/tags/${tag.fieldValue}/`}&gt;{`${tag.fieldValue}`}&lt;/Link&gt;{&quot; &quot;}
+            &lt;small&gt;{`${tag.totalCount}`}&lt;/small&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/Layout&gt;
+  );
+};
+
+export const query = graphql`
+  query {
+    allMdx(limit: 2000) {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`;
+
+export const Head = () =&gt; &lt;Seo title=&quot;태그 목록&quot; /&gt;;
+
+export default TagsPage;
+</code></pre>
+<p><code>graphql</code> 쿼리에서 바로 totalCount 로 정렬하고 싶었지만 (GraphQL 을 잘 몰라서) 방법을 찾지 못했다. 대신 <code>TagsPage</code> 컴포넌트 첫번째 줄에서 <code>.sort()</code> 를 사용해 정렬하고 있다.</p>
+<h1>3. 다음</h1>
+<p>다음 글에서는 글 내용 안에 이미지를 삽입하는 방법을 정리한다.</p></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/230111-gatsby-1/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-c136d68b0b51aa078980.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-63a1897aa71f53d27af1.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-483b636c66e029c90fbb.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-3ce6fa6173b42efb5669.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx-0b281da8ce99e8f22aff.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx-24ba6ab9d46ca4fa79cc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx-ac9aab2348f7044c6e99.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx-6cb47b9b79081016c5da.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx-44e27caf3b8349382f9e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx-6a8578cb0921cc8f2528.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx-3b5b22e8ca88a8c19432.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx-6063abc7508c6492ce3f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx-f383d8ce34fa7de42273.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx-ac5e1ad074f7a6b73ce5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx-85853955c490a482a505.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx-42c0c7bf6bb4f2eb7a45.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx-1b3cbd4730440c7a6337.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx-7c0497e738906c55a88c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx-d14f8e94d613dd719e0f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx-742d97968e9a20a23574.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx-376b4aa82c1f20a8d7ff.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx-62e0f7bfb39a15313909.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx-888f122d92f3593d8664.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx-6d274a7163f7e940d98b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx-fb7d2fc4398aeb020a11.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx-a456f0b2935fa1fc19e6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx-3d8f97306198bd17b7d8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx-8305e5ffee0842bcd7f5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx-fdb8502ef88a2d639578.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx-3bc10aebb70d6eb47a85.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx-b2da07023fecf850370c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx-ca1382611e736c2bb8a0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx-cccc76f340707b2fc3c3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx-38c279c7f3b094f3d71e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx-b69edd32d89e1186ade7.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx-e74cb56362bc90fdd6ff.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx-88ccff97478817b9459c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx-10c230b5b835227b99d2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx-81fcda86191783dc62fa.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx-84d4be647e153b5b0b7c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx-934259ce1c5d6abebc75.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx-2459b58932293998a43d.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx-16820fb6d488f3f0fdaf.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx-617d32859865a80d4d9e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx-b96a67ff770b576a1fb9.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx-f02882200d1c5d2a6ee4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx-596ffb755b613dcf815e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx-0cf0b5ce8f92cd11cd65.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx-e2d112046f6103363648.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx-05977987feb5e6ef8e50.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx-c64f7089d60dd66f5a7a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx-a0466f1c18fc8b8fd5e9.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx-5876639475e79bc4ffdc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx-bd644257c0a57ef5231c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx-15ccd6fc19e78153bdaa.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx-ef4ca3bf3ab2ae431f3f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx-efabeae98d176e8f99a3.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-503344ff73fc1ff56cad.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-741ac1cffc48ae2ecb67.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="6f54e4d49a6aaebb3cc1";</script><script src="/blog/webpack-runtime-1460abcfaed59e47a137.js" async></script><script src="/blog/framework-722053c27c5e7561dbbb.js" async></script><script src="/blog/app-c136d68b0b51aa078980.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
