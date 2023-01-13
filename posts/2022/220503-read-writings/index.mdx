@@ -1,0 +1,69 @@
+---
+title: "읽은 좋은 글들 (~22.5.3)"
+date: "2022-05-03"
+slug: "220503-read-writings"
+tags:
+  [
+    "Embed",
+    "JavaScript",
+    "Prototype",
+    "Web Storage",
+    "function composition",
+    "indexedDB",
+    "typescript",
+  ]
+heroImage: "./goodarticles-narrow.jpg"
+heroImageAlt: "thumbnail"
+---
+
+## JavsScript
+
+### [JavaScript function composition: What’s the big deal?](https://jrsinclair.com/articles/2022/javascript-function-composition-whats-the-big-deal/)
+
+함수 합성(Function composition)에 관한 글. 함수 합성이 무엇이며, 어떻게 구현하며, 함수 합성을 사용하지 않는 다른 구현과는 어떻게 다른가를 설명한다.
+
+글쓴이는 구현 자체보다는 생각/발상의 전환이 가장 큰 장점이라고 말한다. 그 말이 인상깊었다.
+
+> But the real beauty of composition isn’t in the code, but in how it changes us. How it gives us new ways of thinking about code.
+
+### [자바스크립트는 왜 프로토타입을 선택했을까](https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42)
+
+자바스크립트의 `prototype` 의 존재 이유를, 서양의 철학적인 배경을 기반으로 설명하는 글. ES6 부터 프론트엔드 개발자로 입문했다면, 그래서 `prototype` 을 써 본 적이 없는 사람이라면 이해하는데 도움이 될지도 모르겠다.
+
+## TypeScript
+
+### [How Microsoft Wants To Change TypeScript](https://betterprogramming.pub/how-microsoft-wants-to-destroy-typescript-1f1a53b18de6)
+
+MS의 타입스크립트 개발진이, 자바스크립트에 타입을 적용하는 제안서를 TC39에 제출했다고 한다. 그 이슈에 대한 의견을 담은 글이다.
+
+일단 MS 개발진이 제안한 타이핑은 기존 코드에 영향이 가지 않도록 주석 형태로 타이핑을 하는 것이라고 한다.
+
+글쓴이는 주석 타이핑으로는 TypeScript 의 모든 기능을 대체할 수는 없으며, 때문에 타이핑은 JavsScript 와 독립적으로 관리되어야 한다고 주장한다.
+
+간략한 타입스크립트 역사와 함께 이슈가 정리되어있어 읽어볼 만 한 글이다.
+
+## Etc
+
+### [\[번역\] 웹 스토리지 : 무엇을 써야할까요?](https://han41858.tistory.com/54)
+
+브라우저에서 스토리지는 무엇을 쓰는 게 좋을까? 라는 주제의 글인데, 서문에서부터 cache storage 와 indexedDB 를 쓰라고 운을 띄우면서 시작한다.
+
+> 최근 브라우저들은 IndexedDB와 캐시 스토리지 API를 모두 지원합니다. 이 스토리지들은 모두 비동기(asynchronous)로 동작하기 때문에 메인 스레드 연산에 영향을 주지 않습니다.
+
+local storage, session storage 가 동기적이어서 메인 스레드를 붙잡는데 반해 indexedDB 는 비동기적으로 동작한다고 한다. 이것 하나만으로도 쓸만한 가치가 있는 것 같다.
+
+이외에도 저장 용량 확인, 에러 핸들링, 디버깅 등 유용한 정보가 많으니 읽어보기를 권한다.
+
+### [Securely embed content on your site](https://developer.chrome.com/blog/embed-content/)
+
+보안상 안전하게 컨텐츠를 embedding 하는 방법에 대해 소개한다. `<iframe />` 의 `sandbox`, `allow` 속성, `<fencedframe />`, `<portal />` 엘리먼트에 대해 나와있다.
+
+임베드 컨텐츠를 많이 써보지 않아서 그다지 와닿는 글은 아니지만, 관련 키워드를 알아둬서 나쁠 것은 없다. 나중에 사용하게 될 때 되새김질하면 될 듯 하다.
+
+### [Explain the First 10 Lines of Twitter’s Source Code to Me](https://css-tricks.com/explain-the-first-10-lines-of-twitter-source-code/)
+
+Twitter 소스 코드의 첫 열 라인에 대한 설명이 담긴 글.
+
+본문도 재미있지만 댓글도 재미있다. 글의 서두에서 글쓴이가 "이 열 줄을 얼마나 알고 있는가"로 기술 면접을 한다고 말했는데, 몇몇 사람들이 대부분 이 내용이 기술면접에 쓰이기에는 적절하지 않다고 말하고 있다. 누구의 의견이 옳던 간에 (공격적인 내용은 적당히 흘리고) 다른 사람들의 의견들을 같이 읽어보는 것도 좋을 것 같다.
+
+한 번 읽어보기에는 나쁘지 않은 글이다.

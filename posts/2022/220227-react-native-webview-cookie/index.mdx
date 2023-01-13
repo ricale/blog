@@ -1,0 +1,73 @@
+---
+title: "React Native WebView 에서 쿠키가 유지되지 않는 문제"
+date: "2022-02-27 01:00:00"
+slug: "220227-react-native-webview-cookie"
+tags: ["cookie", "react native", "react native webview", "버그", "웹뷰", "쿠키"]
+---
+
+우리 회사의 앱은 [React Native WebView](https://github.com/react-native-webview/react-native-webview) 를 사용해 하이브리드 앱으로 구현되어 있다. 최근 웹앱 쪽에서 로그인 인증 토큰을 쿠키로 유지하는 업데이트를 적용했는데, RN 쪽에서 별안간 쿠키가 유지되지 않는 버그가 발견되었다.
+
+## 1. 버그 개요
+
+일단 브라우저 상에서 웹앱을 사용할 때는 쿠키에 관한 이슈가 전혀 없다.
+
+앱에서도 사용하는 동안에는 문제가 없다. 문제는 앱 프로세스를 완전히 종료한 뒤 다시 실행했을 때다. 이 때 쿠키에 저장되어 있던 값들이 롤백된다. 누군가는 로그인이 유지된다는 걸로 봐서는 항상 롤백되는 건 아닌 것 같은데, 규칙성을 찾기가 어려웠다.
+
+이 버그 때문에 쿠키 값이 유지되지 않으면서 로그인이 풀린다는 제보가 잇따르기 시작했다.
+
+React Native WebView 리파지토리의 [이슈들](https://github.com/react-native-webview/react-native-webview/issues?q=is%3Aissue+cookie)을 살펴봐도, 우리처럼 쿠키 때문에 고생하고 있는 사람들은 제법 있었지만 해결책은 보이지 않았다.
+
+## 2. 해결 과정
+
+### 2.1. React Native WebView prop 확인
+
+일단 혹시나 [React Native WebView 에서 제공하는 prop](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md) 으로 해결할 수 있을까 싶어 쿠키와 관련된 prop 들 (`incognite`, `sharedCookiesEnabled`, `thirdPartyCookiesEnabled`) 을 적용해보았지만 해결되지 않았다.
+
+고민 끝에 우리는 React Native WebView 의 버그라고 판단하고 우회책을 찾기로 했다.
+
+### 2.2. 쿠키를 RN 에 별도로 저장해두자.
+
+우회방법으로 웹앱 쪽에서 쿠키 값이 변경될 때마다 [`postMessage()`](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#postmessagestr) 로 쿠키 전문을 보내주는 방법을 선택했다.
+
+```js
+postMessage(JSON.stringify({ type: "cookie", content: document.cookie }));
+```
+
+쿠키를 받으면 RN 쪽에서는 AsyncStorage 등에 저장해두었다가 앱의 프로세스가 재실행될 때 웹뷰의 헤더에 쿠키를 넣어주었다.
+
+```jsx
+const [source, setSource] = useState({ uri: SOME_URI });
+// 저장해놓은 쿠키가 있으면 source 에 저장한다.
+useEffect(() => {
+  AsyncStorage.getItem('cookie').then((content) => {
+    setSource(st => ({
+      ...st,
+      headers: res ? { Cookie: JSON.parse(content) } : null
+    }));
+  });
+}, []);
+// ...
+return (
+  <WebView
+    // ...
+    incognite // <- incognite 가 없으면 source.headers.Cookie 값이 적용되지 않는다. 이유는 아직 불명
+    source={source}
+    onMessage={(evt) => {
+      const { type, content } = evt.nativeEvent.data;
+      // 웹앱으로부터 postMessage 로 쿠키가 오면 저장해둔다.
+      if(type === 'cookie') {
+        AsyncStorage.setItem('cookie', content);
+        return;
+      }
+      // ...
+    }}
+    />
+```
+
+### 2.3. 그럼에도 이슈가 남아있다.
+
+신기하게도 이렇게 해도 때때로 웹앱의 `postMessage()` 를 통해 넘어온 쿠키 값에서 인증 리프레시 토큰 값만 누락되어 넘어오는 현상이 있었다 (하필이면 제일 중요한 녀석이..). 이것 또한 원인을 찾지 못하고 결국 임시 방편으로 "액세스 토큰과 리프레시 토큰 중 하나라도 값이 있으면 이전 쿠키로부터 다른 하나의 값을 복구하도록" 로직을 넣었다.
+
+## 3. 근본적인 해결책
+
+회사에 iOS/안드로이드 네이티브 개발자가 없어서 라이브러리를 뜯어가며 근본적인 해결책을 찾는 것은 어려울 것 같다. 일단 임시 방편으로 대응하면서 React Native WebView 가 업데이트 되기를 기다리는 수밖에 없는 것 같다.
