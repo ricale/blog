@@ -1,0 +1,70 @@
+---
+title: "읽은 글들 (~22.9.29)"
+date: "2022-09-29"
+slug: "220929-read-writings"
+tags:
+  [
+    "Cache-Control",
+    "JavaScript",
+    "Message Queue",
+    "React",
+    "Web API",
+    "call stack",
+    "component",
+    "event loop",
+    "form",
+    "mini app",
+    "promise.all",
+    "yarn-berry",
+    "리액트",
+    "자바스크립트",
+  ]
+heroImage: "./goodarticles-narrow.jpg"
+heroImageAlt: "thumbnail"
+---
+
+## JavaScript
+
+### [[JS] Javascript 동작 원리와 비동기처리](https://ingg.dev/js-work/)
+
+자바스크립트 런타임 환경에서의 스레드 구성과 콜스택, 이벤트루프, 메시지큐, Web API 스레드가 어떻게 같이 동작하는지에 대해 설명하는 글. 이해하기 쉽게 잘 정리되어 있다.
+
+### [Event Loop (이벤트 루프)](https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84)
+
+바로 위의 글과 비슷한 주제이지만 좀 더 이벤트루프에 집중한 느낌이고 마이크로테스크큐, 애니메이션프레임*requestAnimationFrame* 등 몇 가지 개념을 더 언급한다.
+
+### [Does Promise.all Execute in Parallel? How Promise.all Works in JavaScript](https://javascript.plainenglish.io/does-promise-all-execute-in-parallel-how-promise-all-works-in-javascript-fffc2e8d455d)
+
+Promise.all 이 정말 평행적으로 실행되는가? 에 대한 글. 사실 직접 로그를 찍어보며 돌려도 알 수 있기는 한데, 그래도 다른 사람이 문장으로 정리된 것을 읽어보는 것도 의미는 있다.
+
+### [node_modules로부터 우리를 구원해 줄 Yarn Berry](https://toss.tech/article/node-modules-and-yarn-berry)
+
+yarn/npm 이 디펜던시를 관리하는 방법에서의 단점을 보완한 Yarn Berry 에 대한 소개글이다.
+
+## React
+
+### [When to break up a component into multiple components](https://kentcdodds.com/blog/when-to-break-up-a-component-into-multiple-components)
+
+> Breaking a single component into multiple components is what's called "abstraction." Abstraction is awesome, but every abstraction comes with a cost, and you have to be aware of that cost and the benefits before you take the plunge
+
+"컴포넌트를 나누는 것 또한 비용이다. 그러니 나누기 전에 비용과 이점을 알아야 한다."
+
+컴포넌트를 어떤 경우에는 나눠야 하는지 설명한다. 그리고 그 "경우"에 포함되지 않을 경우, 굳이 컴포넌트를 미리 나누지 말라고 말한다.
+
+여러모로 조심스럽게 읽고 조심스럽게 받아들여야 하는 글이다.
+
+### [How to use Forms in React](https://www.robinwieruch.de/react-form/)
+
+React 에서 `<form />` 을 어떻게 사용할 것인다. 여러 예제 코드와 함께 설명한다. 예제코드만 쓱 훓어보더라도 나쁘지 않은 글이다.
+
+## Etc
+
+### [웹 서비스 캐시 똑똑하게 다루기](https://toss.tech/article/smart-web-service-cache)
+
+http 의 Cache-Control 헤더에 대한 설명과, 토스에서는 환경 및 리소스 종류에 따라 어떻게 캐시를 적용하고 있는지에 대한 글.
+
+### [웹 표준 미니앱의 어려움](https://cho.sh/ko/blog/A370F3)
+
+미니앱은 슈퍼앱의 앱 내부에서 돌아가는 서드파티 앱들의 총칭이다. 일반적으로 iframe 상에서 돌아간다. 어떻게하면 웹 표준을 잘 지키며 좋은 미니앱을 만들 수 있을지에 대한 글이다.
+
+인상깊은 부분은 단일 스레드 문제를 해결하기 위해 WebWorker 에 fake DOM API 를 심어 멀티 스레드를 구현한다는 부분이었다. 이게 보편화될 수 있다면 프론트엔드 사이드에서 꽤나 혁신적인 일이 되지 않을까 싶다.

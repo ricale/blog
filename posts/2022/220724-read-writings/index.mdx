@@ -1,0 +1,83 @@
+---
+title: "읽은 글들 (~22.7.24)"
+date: "2022-07-24"
+slug: "220724-read-writings"
+tags:
+  [
+    "JavaScript",
+    "React",
+    "Spread",
+    "component",
+    "concat",
+    "es2022",
+    "floyd algorithm",
+    "headless",
+    "react native",
+    "redis",
+    "sorted set",
+    "toss",
+    "zset",
+    "토스",
+  ]
+heroImage: "./goodarticles-narrow.jpg"
+heroImageAlt: "thumbnail"
+---
+
+## JavaScript
+
+### [spread operator vs array.concat()](https://stackoverflow.com/questions/48865710/spread-operator-vs-array-concat)
+
+spread 연산자 (`[...arr]`)로 배열을 합치는 것과 `.concat()` 메서드를 사용해 배열을 합치는 것 중 어느 것의 성능이 더 나은가? 에 관한 글. 결론만 말하자면 `.concat()` 이 성능적으로 더 유리하다.
+
+### [ES2022 Features!](https://h3manth.com/ES2022/)
+
+ES2022 에 새로 도입되는 문법/함수들을 소개하는 글. 개인적으로 Top-Level await 와 클래스 쪽에 추가된 문법들이 눈에 들어온다.
+
+## React
+
+### [토스ㅣSLASH 22 - Effective Component 지속 가능한 성장과 컴포넌트](https://www.youtube.com/watch?v=fR8tsJ2r7Eg) (영상)
+
+지속 가능한 컴포넌트 개발을 위한 방법론? 소개 세션. 여기서 말하는 "지속 가능한"은 유지보수와 재사용성 측면을 이야기한다.
+
+- Headless UI 로 구현하자.
+  - UI 와 로직, 이벤트 처리 등 각각의 역할을 각각의 모듈로 분리해 개발하는 것을 말한다.
+- 컴포넌트는 하나의 역할만 하거나, 하나의 역할만 하는 컴포넌트들의 조합이어야 한다.
+- 도메인을 분리해야 한다.
+
+모두 공감가는 내용이며 대부분 (완벽하지는 않지만) 실천하고 있는 내용이기도 하다. 설령 알고 있던 내용일지라도 세션이 내용 정리를 잘 해주고 있기 때문에, 들어볼만 하다.
+
+## React Native
+
+### [토스ㅣSLASH 22 - 미친 생산성을 위한 React Native](https://www.youtube.com/watch?v=b_6CjuvVg8o) (영상)
+
+토스에서 토스 글로벌 앱 구현을 위해 네이티브에서 RN 으로 전환했던 경험을 소개하는 세션.
+
+- 도입 전 Flutter 와도 비교해보았다고 하는데, React Native 의 낮은 진입 장벽과 코드 푸시 기능 때문에 RN 을 선택했다고 한다.
+- 코드 푸시 기능을 굉장히 강조한다. 각 스토어의 심사 후 배포라는 느린 프로세스에 스트레스를 많이 받았던 것 같다.
+- 네이티브 개발자들도 RN 에서 같이 개발을 했다고 한다. 네이티브 이슈 대응에서 매우 유리했을 것 같다. (네이티브 개발자들의 JavaScript/React 학습 소요가 발생하긴 했다.)
+  - iOS 개발자는 Swift 로 개발하는 것 보다 RN 으로 개발하는 게 생산성이 훨씬 좋았다고 말한다. 특히 핫 리로딩 (Swift 도 제공하긴 하지만 RN 의 기능이 더 조핬다고 한다) 기능을 언급했다.
+
+## Algorithm
+
+### [플로이드의 토끼와 거북이 알고리즘(Floyd's Tortoise & Hare Algorithm) / 증명 / leetcode 287번 / 파이썬](https://fierycoding.tistory.com/45)
+
+"링크드 리스트가 cycle 을 갖고 있는지 알아내라고? 좋다. Two Pointer 를 사용하면 쉽게 알 수 있으니까. 엥? 그런데 cycle 이 시작하는 지점을 찾아내라고? 그건 어떻게 하는 건데?"
+
+끙끙대다가 결국 답을 찾아봤는데 **_플로이드의 순환 탐색 알고리즘_** 을 쓰라고 한다. 해당 알고리즘을 쓰니 너무 쉽게 풀 수 있었다. 그런데 도대체 이 알고리즘의 원리가 뭔데? 아무리 생각을 해봐도, 설명한 글을 찾아봐도 이해되지가 않았다.
+
+결국 찾아낸 이 글이, 해당 알고리즘을 가장 쉽게 설명한 글이다. 수학 공식을 삽화와 같이 몇 번이고 반복해서 본 뒤에야 겨우겨우 이해할 수 있었다.
+
+### [Redis SKIP List of ZSETS (SORTED SETS)](http://redisgate.kr/redis/configuration/internal_skiplist.php)
+
+Redis 의 sorted set 의 구현 알고리즘에 대해 정리한 글. 그냥 삽입될 때마다 정렬하는 거 아냐? 라고 우습게 생각했던 나 자신을 반성하게 되었다. 인메모리 DB 임에도 속도를 위해서는 이 정도 알고리즘을 써야 한다는 것이 놀랍다.
+
+## Etc
+
+### [토스에서의 시간을 돌아보며](https://evan-moon.github.io/2022/05/07/toss-retrospective/)
+
+토스에서 일했던 엔지니어의 회고. 큰 주제는 아래와 같다.
+
+- 토스가 어떻게 빨리 일할 수 있는가, 토스의 의사 결정 구조와 방식
+- 급성장한 프론트엔드 엔지니어 그룹을 이끌기 위한 여러가지 시도와 일화
+
+읽어 볼만한 글이다.
