@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import styled from "../../themes";
 import MdxContent from "../../components/MdxContent";
+import Comments from "../../components/Comments";
 
 type PostDetailPageData = {
   mdx: {
@@ -37,6 +38,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
       <div>{date}</div>
       {!!image && <GatsbyImage image={image} alt={heroImageAlt ?? ""} />}
       <MdxContent>{children}</MdxContent>
+      <Comments />
     </Layout>
   );
 };
