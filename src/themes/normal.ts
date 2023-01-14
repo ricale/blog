@@ -14,7 +14,7 @@ const colors = {
   code: "#333333",
   onCode: "#DDDDDD",
 
-  tag: "#111111",
+  tag: "#222222",
   onTag: "skyblue",
 
   tableBorder: "white",

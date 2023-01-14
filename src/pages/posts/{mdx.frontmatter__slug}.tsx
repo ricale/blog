@@ -27,21 +27,38 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
 
   return (
     <Layout>
-      <h1>{title}</h1>
-      <Tags>
-        {tags.map((tag) => (
-          <li key={tag}>
-            <Link to={`/tags/${tag}`}>{tag}</Link>
-          </li>
-        ))}
-      </Tags>
-      <div>{date}</div>
+      <Header>
+        <h1>{title}</h1>
+        <WrittenDate>{date}</WrittenDate>
+        <Tags>
+          {tags.map((tag) => (
+            <li key={tag}>
+              <Link to={`/tags/${tag}`}>{tag}</Link>
+            </li>
+          ))}
+        </Tags>
+      </Header>
       {!!image && <GatsbyImage image={image} alt={heroImageAlt ?? ""} />}
       <MdxContent>{children}</MdxContent>
       <Comments />
     </Layout>
   );
 };
+
+const Header = styled.div`
+  margin: 60px 0 72px;
+  padding: 0 24px;
+
+  & > h1 {
+    font-size: 2.5rem;
+    word-break: keep-all;
+    margin: 0;
+  }
+`;
+
+const WrittenDate = styled.div`
+  margin: 16px 0;
+`;
 
 const Tags = styled.ul`
   display: flex;
@@ -54,8 +71,8 @@ const Tags = styled.ul`
   list-style: none;
 
   > li {
-    padding: ${(p) => p.theme.dimens.thin}px ${(p) => p.theme.dimens.gutter}px
-      0px;
+    padding: ${(p) => p.theme.dimens.spacing}px
+      ${(p) => p.theme.dimens.gutter}px;
     border-radius: 2px;
 
     background-color: ${(p) => p.theme.colors.tag};

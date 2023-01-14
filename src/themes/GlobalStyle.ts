@@ -5,8 +5,16 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin: 0;
     padding: 0;
-    font-size: 18px;
-    line-height: 180%;
+
+    font-family: -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Noto Sans",
+      Helvetica,
+      Arial,
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji";
 
     overflow-x: hidden;
 

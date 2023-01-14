@@ -2,11 +2,19 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import * as React from "react";
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
 
+type LayoutQueryData = {
+  site: {
+    siteMetadata: {
+      title: string;
+      author: string;
+    };
+  };
+};
 type LayoutProps = {
   children?: React.ReactNode;
 };
 const Layout = ({ children }: LayoutProps) => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<LayoutQueryData>(graphql`
     query {
       site {
         siteMetadata {
@@ -19,17 +27,20 @@ const Layout = ({ children }: LayoutProps) => {
     <ThemeProvider theme={normalTheme}>
       <GlobalStyle />
       <Container>
-        <header>{data.site.siteMetadata.title}</header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/posts">posts</Link>
-            </li>
-            <li>
-              <Link to="/tags">tags</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header>
+          <header>{data.site.siteMetadata.title}</header>
+          <address>by ricale</address>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/posts">글</Link>
+              </li>
+              <li>
+                <Link to="/tags">태그</Link>
+              </li>
+            </ul>
+          </nav>
+        </Header>
         <main>{children}</main>
       </Container>
     </ThemeProvider>
@@ -38,8 +49,38 @@ const Layout = ({ children }: LayoutProps) => {
 
 const Container = styled.div`
   max-width: 800px;
-  padding: ${(p) => p.theme.dimens.margin}px;
+  margin: 0 auto;
+
+  > main {
+    padding-left: ${(p) => p.theme.dimens.margin}px;
+    padding-right: ${(p) => p.theme.dimens.margin}px;
+    padding-bottom: ${(p) => p.theme.dimens.margin}px;
+  }
 `;
-const BlogHeader = styled.header``;
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  margin: 8px 16px;
+
+  & > header {
+    font-weight: 900;
+  }
+
+  & > address {
+    margin-left: 8px;
+  }
+
+  & > nav > ul {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin: 0;
+    margin-left: 16px;
+    padding: 0;
+    list-style: none;
+  }
+`;
 
 export default Layout;

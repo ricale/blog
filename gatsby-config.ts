@@ -2,7 +2,7 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: "ricalelog",
+    title: "기슬 블로그",
     author: "ricale",
     siteUrl: "https://ricale.kr",
     description: "기술 블로그 by ricale",

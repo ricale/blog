@@ -1,44 +1,77 @@
 import styled from "../themes";
 
 const MdxContent = styled.div`
-  word-break: keep-all;
+  font-size: 16px;
+  line-height: 1.5;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
 
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6,
-  p {
-    padding: 0;
+  h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    line-height: 1.25;
+    font-weight: 600;
   }
 
   h1 {
-    margin-top: ${(p) => p.theme.dimens.margin * 3.5}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #21262d;
+    font-size: 2em;
   }
 
   h2 {
-    margin-top: ${(p) => p.theme.dimens.margin * 3}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #21262d;
+    font-size: 1.5em;
   }
 
   h3 {
-    margin-top: ${(p) => p.theme.dimens.margin * 2.5}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
+    font-size: 1.25em;
   }
 
-  h4,
-  h5,
-  h6,
-  p,
-  blockquote,
-  pre,
+  h4 {
+    font-size: 1em;
+  }
+
+  h5 {
+    font-size: 0.875em;
+  }
+
   ul,
   ol,
+  .gatsby-resp-image-wrapper {
+    margin-bottom: 16px;
+  }
+
   table {
-    margin-top: ${(p) => p.theme.dimens.margin}px;
-    margin-bottom: ${(p) => p.theme.dimens.margin}px;
+    width: max-content;
+    max-width: 100%;
+    margin-bottom: 16px;
+    border-collapse: collapse;
+    tr {
+      border-top: 1px solid #21262d;
+    }
+    td,
+    th {
+      padding: 6px 13px;
+      border: 1px solid #30363d;
+    }
+  }
+
+  hr {
+    height: 0.25em;
+    margin: 24px 0;
+    border: 0;
+
+    background-color: #30363d;
   }
 
   li > ul,
@@ -52,7 +85,8 @@ const MdxContent = styled.div`
 
     margin-left: 0;
     margin-right: 0;
-    padding: 16px 30px;
+    margin-bottom: 16px;
+    padding: 16px 32px;
     border-left: 1px solid ${(p) => p.theme.colors.blockquoteBorder};
     border-left-width: 10px;
 
@@ -74,42 +108,46 @@ const MdxContent = styled.div`
     content: '"';
 
     position: absolute;
-    top: 15px;
+    top: -10px;
     left: 5px;
 
-    font-size: 3rem;
+    font-size: 3em;
     color: ${(p) => p.theme.colors.blockquoteBorder};
   }
   blockquote:after {
     content: '"';
 
     position: absolute;
-    bottom: -15px;
-    right: 10px;
+    bottom: -30px;
+    right: 5px;
 
-    font-size: 3rem;
+    font-size: 3em;
     color: ${(p) => p.theme.colors.blockquoteBorder};
   }
 
   code {
-    padding: ${(p) => p.theme.dimens.spacing}px
-      ${(p) => p.theme.dimens.spacing}px ${(p) => p.theme.dimens.thin}px;
+    padding: 0.2em 0.4em;
     border-radius: 2px;
 
-    font-size: 0.875em;
+    font-size: 0.85em;
 
     background-color: ${(p) => p.theme.colors.code};
     color: ${(p) => p.theme.colors.onCode};
+    white-space: break-spaces;
   }
 
   pre {
-    margin: ${(p) => p.theme.dimens.margin}px 0;
-    padding: ${(p) => p.theme.dimens.margin}px;
+    padding: 16px;
+    margin-bottom: 16px;
 
     background-color: ${(p) => p.theme.colors.codeblock};
-    color: ${(p) => p.theme.colors.onCodeblock};
-    line-height: 140%;
     overflow-x: auto;
+
+    color: ${(p) => p.theme.colors.onCodeblock};
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+      Liberation Mono, monospace;
+    font-size: 0.85em;
+    line-height: 1.45;
   }
 
   pre > code {
@@ -117,16 +155,6 @@ const MdxContent = styled.div`
     border-radius: unset;
     background-color: unset;
     color: unset;
-  }
-
-  table {
-    border-collapse: collapse;
-    td,
-    th {
-      border: 1px solid ${(p) => p.theme.colors.tableBorder};
-      padding: ${(p) => p.theme.dimens.spacing}px
-        ${(p) => p.theme.dimens.gutter}px;
-    }
   }
 `;
 
