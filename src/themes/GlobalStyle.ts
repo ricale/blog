@@ -24,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     color: skyblue;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 
   input, button, select {
