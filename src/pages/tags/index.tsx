@@ -6,8 +6,8 @@ import Seo from "../../components/Seo";
 type TagsPageData = {
   allMdx: {
     group: {
-      totalCount: number;
       fieldValue: string;
+      totalCount: number;
     }[];
   };
 };

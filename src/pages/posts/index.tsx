@@ -10,6 +10,7 @@ type BlogPageData = {
         title: string;
         date: string;
         slug: string;
+        previewContent: string;
       };
       id: string;
       excerpt: string;
@@ -28,7 +29,7 @@ const BlogPage = ({ data }: PageProps<BlogPageData>) => {
             </Link>
           </h2>
           <div>{node.frontmatter.date}</div>
-          <p>{node.excerpt}</p>
+          <p>{node.frontmatter.previewContent ?? node.excerpt}</p>
         </article>
       ))}
     </Layout>
@@ -43,6 +44,7 @@ export const query = graphql`
           title
           date(formatString: "YYYY. M. D.")
           slug
+          previewContent
         }
         id
         excerpt

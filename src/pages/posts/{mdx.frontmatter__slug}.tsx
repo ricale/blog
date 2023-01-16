@@ -7,6 +7,7 @@ import Seo from "../../components/Seo";
 import styled from "../../themes";
 import MdxContent from "../../components/MdxContent";
 import Comments from "../../components/Comments";
+import SameSeriesPosts from "../../components/SameSeriesPosts";
 
 type PostDetailPageData = {
   mdx: {
@@ -15,14 +16,26 @@ type PostDetailPageData = {
       slug: string;
       date: string;
       tags: string[];
+      series?: string;
       heroImage?: ImageDataLike;
       heroImageAlt?: string;
+      previewContent?: string;
     };
+    sameSeriesPosts:
+      | null
+      | {
+          frontmatter: {
+            title: string;
+            slug: string;
+          };
+        }[];
     excerpt: string;
   };
 };
 const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
-  const { title, date, tags, heroImage, heroImageAlt } = data.mdx.frontmatter;
+  const { frontmatter, sameSeriesPosts } = data.mdx;
+  const { title, slug, date, tags, series, heroImage, heroImageAlt } =
+    frontmatter;
   const image = heroImage ? getImage(heroImage) : null;
 
   return (
@@ -38,7 +51,10 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
           ))}
         </Tags>
       </Header>
-      {!!image && <GatsbyImage image={image} alt={heroImageAlt ?? ""} />}
+
+      <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
+
+      {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
       <MdxContent>{children}</MdxContent>
       <Comments />
     </Layout>
@@ -54,6 +70,10 @@ const Header = styled.div`
     word-break: keep-all;
     margin: 0;
   }
+`;
+
+const ThumbnailImage = styled(GatsbyImage)`
+  margin-bottom: 16px;
 `;
 
 const WrittenDate = styled.div`
@@ -92,11 +112,19 @@ export const query = graphql`
         slug
         date(formatString: "YYYY. M. D.")
         tags
+        series
         heroImageAlt
         heroImage {
           childImageSharp {
             gatsbyImageData
           }
+        }
+        previewContent
+      }
+      sameSeriesPosts {
+        frontmatter {
+          title
+          slug
         }
       }
       excerpt
@@ -106,7 +134,7 @@ export const query = graphql`
 
 export const Head = ({ data }: HeadProps<PostDetailPageData>) => {
   const {
-    frontmatter: { title, slug, tags, heroImage },
+    frontmatter: { title, slug, tags, heroImage, previewContent },
     excerpt,
   } = data.mdx;
   const image = heroImage ? getImage(heroImage) : null;
@@ -114,7 +142,7 @@ export const Head = ({ data }: HeadProps<PostDetailPageData>) => {
   return (
     <Seo
       title={title}
-      description={excerpt}
+      description={previewContent ?? excerpt}
       path={`posts/${slug}`}
       thumbnail={image?.images?.fallback?.src}
       keywords={tags}

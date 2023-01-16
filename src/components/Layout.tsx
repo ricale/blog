@@ -38,6 +38,9 @@ const Layout = ({ children }: LayoutProps) => {
               <li>
                 <Link to="/tags">태그</Link>
               </li>
+              <li>
+                <Link to="/series">시리즈</Link>
+              </li>
             </ul>
           </nav>
         </Header>
