@@ -137,17 +137,9 @@ const MdxContent = styled.div`
   }
 
   pre {
-    padding: 16px;
     margin-bottom: 16px;
 
-    background-color: ${(p) => p.theme.colors.codeblock};
     overflow-x: auto;
-
-    color: ${(p) => p.theme.colors.onCodeblock};
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-      Liberation Mono, monospace;
-    font-size: 0.85em;
-    line-height: 1.45;
   }
 
   pre > code {

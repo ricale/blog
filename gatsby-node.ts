@@ -93,7 +93,9 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({
             type: "Mdx",
           });
 
-          return entries;
+          return [...entries].sort((a: any, b: any) =>
+            a.frontmatter.date.localeCompare(b.frontmatter.date)
+          );
         },
       },
     },
