@@ -2,31 +2,62 @@ import * as React from "react";
 import { graphql, Link, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
+import SeriesItem from "../../components/SeriesItem";
+import { ImageDataLike } from "gatsby-plugin-image";
+import styled from "../../themes";
 
 type SeriesPageData = {
   allMdx: {
     group: {
       fieldValue: string;
       totalCount: number;
+      edges: {
+        node: {
+          frontmatter: {
+            title: string;
+            originalDate: string;
+            date: string;
+            heroImage?: ImageDataLike;
+            heroImageAlt?: string;
+          };
+        };
+      }[];
     }[];
   };
 };
 const SeriesPage = ({ data }: PageProps<SeriesPageData>) => {
-  const series = data.allMdx.group;
+  const series = data.allMdx.group
+    .map(({ edges, ...sr }) => ({
+      ...sr,
+      node: edges.sort((a, b) =>
+        b.node.frontmatter.originalDate.localeCompare(
+          a.node.frontmatter.originalDate
+        )
+      )[0].node,
+    }))
+    .sort((a, b) =>
+      b.node.frontmatter.originalDate.localeCompare(
+        a.node.frontmatter.originalDate
+      )
+    );
+
   return (
     <Layout>
       <h1>시리즈</h1>
-      <ul>
+      <SeriesList>
         {series.map((sr) => (
-          <li key={sr.fieldValue}>
-            <Link to={`/series/${sr.fieldValue}/`}>{`${sr.fieldValue}`}</Link>{" "}
-            <small>{sr.totalCount}</small>
-          </li>
+          <SeriesItem key={sr.fieldValue} {...sr} />
         ))}
-      </ul>
+      </SeriesList>
     </Layout>
   );
 };
+
+const SeriesList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export const query = graphql`
   query {
@@ -34,6 +65,21 @@ export const query = graphql`
       group(field: { frontmatter: { series: SELECT } }) {
         fieldValue
         totalCount
+        edges {
+          node {
+            frontmatter {
+              title
+              originalDate: date
+              date(formatString: "YYYY. M. D.")
+              heroImageAlt
+              heroImage {
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
