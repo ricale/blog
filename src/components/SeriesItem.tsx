@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import styled from "styled-components";
-import { Link, navigate } from "gatsby";
+import { navigate } from "gatsby";
 
 type SeriesItemProps = {
   fieldValue: string;
