@@ -55,7 +55,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
       {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
-      <MdxContent>{children}</MdxContent>
+      <PostContent>{children}</PostContent>
       <Comments />
     </Layout>
   );
@@ -102,6 +102,10 @@ const Tags = styled.ul`
       text-decoration: none;
     }
   }
+`;
+
+const PostContent = styled(MdxContent)`
+  margin-bottom: 60px;
 `;
 
 export const query = graphql`

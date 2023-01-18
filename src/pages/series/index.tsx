@@ -1,9 +1,10 @@
 import * as React from "react";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
+import { ImageDataLike } from "gatsby-plugin-image";
+
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import SeriesItem from "../../components/SeriesItem";
-import { ImageDataLike } from "gatsby-plugin-image";
 import styled from "../../themes";
 
 type SeriesPageData = {

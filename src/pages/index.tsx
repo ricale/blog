@@ -1,5 +1,5 @@
-import { HeadFC } from "gatsby";
 import * as React from "react";
+import { HeadFC } from "gatsby";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 
