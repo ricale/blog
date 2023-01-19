@@ -1,9 +1,20 @@
 ---
-title: "Gatsby 블로그 만들기 3 - 시리즈"
+title: "Gatsby 블로그 만들기 3 - 시리즈 기능 구현"
 date: "2023-01-19"
 slug: "230119-gatsby-3-series"
-tags: ["Gatsby", "Gatsby blog", "Gatsby series", "series"]
+tags:
+  [
+    "Gatsby",
+    "Gatsby blog",
+    "Gatsby series",
+    "blog series",
+    "series",
+    "블로그 시리즈",
+    "시리즈",
+  ]
 series: "Gatsby 블로그 만들기"
+heroImage: "./girl-with-red-hat-mWI9FhbS43I-unsplash.jpg"
+heroImageAlt: "girl-with-red-hat-mWI9FhbS43I-unsplash"
 ---
 
 이전 글에서는 Gatsby [기본 기능을 구현을 위한 튜토리얼을 소개했고 태그 기능을 구현](https://ricale.kr/blog/posts/230111-gatsby-1/)했으며, [MDX 글 안에 인라인 이미지와 테이블을 삽입](https://ricale.kr/blog/posts/230112-gatsby-2/)했다.
@@ -238,7 +249,7 @@ const ThumbnailImage = styled(GatsbyImage)`
 // ...
 ```
 
-그럼 이제 이렇게 보일 것이다.
+그럼 이제 시리즈 목록 페이지는 완성이다. 아래처럼 보일 것이다.
 
 ![](./ricalekrblog-screenshot-1.png)
 
@@ -257,7 +268,7 @@ const ThumbnailImage = styled(GatsbyImage)`
 
 빌드 타임에 현재 존재하는 모든 시리즈 이름을 GraphQL 로 가져와서, 시리즈 별로 상세 페이지를 만들어 줄 것이다. 상세 페이지에는 해당 시리즈에 속한 글들이 작성일자 순으로 정렬되어 보일 것이다.
 
-이것을 위해 페이지를 만들 때 쓰일 템플릿을 만들고, 빌드 타임에 실행될 스크립트를 작성할 것이다.
+이것을 위해 페이지를 만들 때 쓰일 템플릿을 만들고, 빌드 타임에 실행될 스크립트를 작성하자.
 
 ### 2.3.1. 탬플릿 작성
 
@@ -274,7 +285,9 @@ type SeriesDetailPageTemplateContext = {
   series: string;
 };
 const SeriesDetailPageTemplate = ({
+  // `pageContext` 에는 gatsby-node.ts 의 createPages 에서 넘겨주는 값들이 들어있다.
   pageContext,
+  // `data` 에는 아래 쪽에 있는 pageQuery 쿼리의 결과값이 들어있다.
   data,
 }: PageProps<
   SeriesDetailPageTemplateData,
@@ -297,6 +310,7 @@ const SeriesDetailPageTemplate = ({
   );
 };
 
+// $series 는 gatsby-node.ts 의 createPages 로부터 넘겨받는다.
 export const pageQuery = graphql`
   query ($series: String) {
     allMdx(
@@ -322,7 +336,7 @@ export default SeriesDetailPageTemplate;
 
 ### 2.3.2. `gatsby-node.ts` 의 `createPages` 수정
 
-`gatsby-node.ts` 의 `createPages` 함수에서는 빌드 타임에 페이지를 생성할 수 있다. 만약 기존에 해당 함수를 구현한 적이 없었다면, 아래 코드를 `gatsby-node.ts` 에 그대로 추가해주면 된다. 만약 해당 함수가 이미 있다면, 아래 내용을 적당히 끼워넣어주자.
+`gatsby-node.ts` 의 `createPages` 함수에서는 빌드 타임에 페이지를 생성할 수 있다. 만약 기존에 해당 함수를 구현한 적이 없었다면, 아래 코드를 `gatsby-node.ts` 에 그대로 추가해주면 된다. 만약 해당 함수가 이미 있다면, 아래 내용의 함수 안 코드를 기존의 `createPages` 안에 적당히 끼워넣어주자.
 
 ```ts
 // gatsby-node.ts
@@ -331,6 +345,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   reporter,
 }) => {
+  // 존재하는 모든 시리즈를 가져온다.
   const result = await graphql<TagGroupsQueryData>(`
     {
       seriesGroup: allMdx(limit: 2000) {
@@ -346,12 +361,15 @@ export const createPages: GatsbyNode["createPages"] = async ({
     return;
   }
 
+  // 상세 페이지 생성에 쓰일 템플릿 컴포넌트의 경로를 가져온다.
   const seriesTemplatePath = path.resolve(
     "src/templates/SeriesDetailPageTemplate.tsx"
   );
 
   const { seriesGroup } = result.data;
 
+  // 시리즈 별로 페이지를 생성한다.
+  // `context` 를 통해 시리즈 이름을 템플릿에 넘겨주자.
   seriesGroup.group.forEach((series) => {
     actions.createPage({
       path: `/series/${series.fieldValue}/`,
@@ -370,14 +388,16 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
 ### 2.3.3. 상세 코드
 
-위 코드 조각들은 생략된 부분이 있으므로, 코드 전문을 보고 싶다면 아래를 참고하자.
+위 코드 조각들의 원문을 보고 싶다면 아래를 참고하자.
 
 - [src/templates/SeriesDetailPageTemplate.tsx](https://github.com/ricale/blog/blob/0106af9fd1f92b86c0f1b486a0b687e538dbc282/src/templates/SeriesDetailPageTemplate.tsx)
 - [gatsby-node.ts](https://github.com/ricale/blog/blob/0106af9fd1f92b86c0f1b486a0b687e538dbc282/gatsby-node.ts)
 
 ## 2.4. 글 상세 페이지에 해당 글이 속한 시리즈의 글 목록 추가
 
-글의 상세 페이지에서 해당 글이 속한 시리즈의 글 목록을 얻기 위해, 일단 `gatsby-node.ts` 를 또 수정할 것이다.
+글이 특정 시리즈에 속해있다면, 해당 글의 상세 페이지 상단에 시리즈의 글 목록을 넣어주자.
+
+상세 페이지(`src/pages/posts/{mdx.frontmatter__slug}.tsx`)에서 해당 글이 속한 시리즈의 글 목록을 얻기 위해, 일단 `gatsby-node.ts` 를 또 수정할 것이다.
 
 ### 2.4.1. `gatsby-node.ts` 의 `createResolvers` 수정
 
@@ -411,7 +431,8 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({
             type: "Mdx",
           });
 
-          // 공식 문서에 의하면 createResolvers 내에서 GraphQL 기능으로 정렬하는 건 불가능하다고 한다.
+          //  공식 문서에 의하면 createResolvers 내에서
+          // GraphQL 기능으로 정렬하는 건 불가능하다고 한다.
           // 스크립트 코드로 직접 정렬해주자
           return [...entries].sort((a, b) =>
             a.frontmatter.date.localeCompare(b.frontmatter.date)
@@ -436,7 +457,9 @@ import SameSeriesPosts from "../../components/SameSeriesPosts";
 const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
   const {
     frontmatter,
-    sameSeriesPosts, // 아까 `createResolvers` 에서 추가한 필드를 GraphQL 쿼리로 가져올 수 있다.
+    //  아까 `createResolvers` 에서 추가한 필드인
+    // `sameSeriesPosts` 를, GraphQL 쿼리로 가져올 수 있다.
+    sameSeriesPosts,
   } = data.mdx;
   const { title, slug, date, tags, series, heroImage, heroImageAlt } =
     frontmatter;
@@ -456,7 +479,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
         </Tags>
       </Header>
 
-      {/* 상세 코드는 생략 */}
+      {/* 뷰 상세 코드는 생략 */}
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
       {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
@@ -494,3 +517,24 @@ export const query = graphql`
 
 - [gatsby-node.ts](https://github.com/ricale/blog/blob/0106af9fd1f92b86c0f1b486a0b687e538dbc282/gatsby-node.ts)
 - [src/pages/posts/\{mdx.frontmatter\_\_slug\}.tsx](https://github.com/ricale/blog/blob/0106af9fd1f92b86c0f1b486a0b687e538dbc282/src/pages/posts/%7Bmdx.frontmatter__slug%7D.tsx)
+
+# 3. 다음
+
+이로서 시리즈 기능을 구현해보았다. 다음으로 구현 및 정리할 것들은 아래와 같다.
+
+- 댓글 기능 구현
+- 코드블록 문법 하이라이팅 기능 구현
+- 글의 목차 기능 구현
+- 임시글 기능 구현
+- GitHub Pages 배포
+- 등등
+
+순서는 미정이다.
+
+# 4. 참고
+
+- Gatsby Docs
+  - [Gatsby Node APIs - createResolvers](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createResolvers)
+  - [GraphQL Query Options](https://www.gatsbyjs.com/docs/graphql-reference/#intro)
+  - [Customizing the GraphQL Schema - Custom query fields](https://www.gatsbyjs.com/docs/reference/graphql-data-layer/schema-customization/#custom-query-fields)
+- [Rename Fields by Using Aliases in GraphQL](https://devinschulz.com/rename-fields-by-using-aliases-in-graphql/)
