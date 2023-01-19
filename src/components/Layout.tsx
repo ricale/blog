@@ -1,5 +1,6 @@
-import { graphql, Link, useStaticQuery } from "gatsby";
 import * as React from "react";
+import { graphql, Link, useStaticQuery } from "gatsby";
+
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
 
 type LayoutQueryData = {
