@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
     color: ${(p) => p.theme.colors.onBackground};
   }
 
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+
   a {
     color: skyblue;
     text-decoration: none;

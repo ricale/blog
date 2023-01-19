@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import SeriesItem from "../../components/SeriesItem";
 import styled from "../../themes";
+import ListPageHeader from "../../components/ListPageHeader";
 
 type SeriesPageData = {
   allMdx: {
@@ -44,7 +45,7 @@ const SeriesPage = ({ data }: PageProps<SeriesPageData>) => {
 
   return (
     <Layout>
-      <h1>시리즈</h1>
+      <ListPageHeader title="시리즈" />
       <SeriesList>
         {series.map((sr) => (
           <SeriesItem key={sr.fieldValue} {...sr} />
