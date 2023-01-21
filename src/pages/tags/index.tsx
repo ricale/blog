@@ -4,6 +4,8 @@ import { graphql, Link, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import ListPageHeader from "../../components/ListPageHeader";
+import Tag from "../../components/Tag";
+import styled from "../../themes";
 
 type TagsPageData = {
   allMdx: {
@@ -18,17 +20,24 @@ const TagsPage = ({ data }: PageProps<TagsPageData>) => {
   return (
     <Layout>
       <ListPageHeader title="태그" />
-      <ul>
+      <TagList>
         {tags.map((tag) => (
           <li key={tag.fieldValue}>
-            <Link to={`/tags/${tag.fieldValue}/`}>{`${tag.fieldValue}`}</Link>{" "}
-            <small>{`${tag.totalCount}`}</small>
+            <Tag value={tag.fieldValue} />{" "}
+            <small>{`(${tag.totalCount})`}</small>
           </li>
         ))}
-      </ul>
+      </TagList>
     </Layout>
   );
 };
+
+const TagList = styled.ul`
+  padding-left: 15px;
+  & > li {
+    margin-bottom: 4px;
+  }
+`;
 
 export const query = graphql`
   query {

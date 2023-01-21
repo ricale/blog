@@ -8,6 +8,7 @@ import styled from "../../themes";
 import MdxContent from "../../components/MdxContent";
 import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
+import TagList from "../../components/TagList";
 
 type PostDetailPageData = {
   mdx: {
@@ -43,13 +44,8 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
       <Header>
         <h1>{title}</h1>
         <WrittenDate>{date}</WrittenDate>
-        <Tags>
-          {tags.map((tag) => (
-            <li key={tag}>
-              <Link to={`/tags/${tag}`}>{tag}</Link>
-            </li>
-          ))}
-        </Tags>
+
+        <TagList tags={tags} />
       </Header>
 
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
