@@ -20,7 +20,11 @@ function ListPageHeader({ title, subtitle, note }: ListPageHeaderProps) {
 
 const Container = styled.div`
   margin: 40px 0;
-  padding: 0 40px;
+  padding-left: 40px;
+
+  @media (max-width: 414px) {
+    padding-left: 20px;
+  }
 `;
 
 const Subtitle = styled.p``;
@@ -29,6 +33,11 @@ const TitleRow = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 8px;
+
+  @media (max-width: 414px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Note = styled.p`

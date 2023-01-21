@@ -49,6 +49,14 @@ const Container = styled.div`
 `;
 const Item = styled(SeriesListItem)`
   width: calc(25% - 12px);
+
+  @media (max-width: 768px) {
+    width: calc(33% - 10px);
+  }
+
+  @media (max-width: 500px) {
+    width: calc(50% - 8px);
+  }
 `;
 
 export default SeriesList;

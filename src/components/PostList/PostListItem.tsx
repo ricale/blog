@@ -32,8 +32,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 2px;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: #666666;
+  }
 `;
 
 const ThumbnailWrapper = styled.div`
