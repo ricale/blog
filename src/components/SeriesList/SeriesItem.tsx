@@ -1,18 +1,15 @@
 import * as React from "react";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { navigate } from "gatsby";
+
+import { PostFrontmatter } from "../../types";
 
 type SeriesItemProps = {
   fieldValue: string;
   totalCount: number;
   node: {
-    frontmatter: {
-      title: string;
-      date: string;
-      heroImage?: ImageDataLike;
-      heroImageAlt?: string;
-    };
+    frontmatter: Omit<PostFrontmatter, "slug" | "tags">;
   };
 };
 function SeriesItem({ fieldValue, totalCount, node }: SeriesItemProps) {

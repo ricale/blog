@@ -1,14 +1,10 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import { SiteMetadata } from "../types";
 
 type SeoQueryData = {
   site: {
-    siteMetadata: {
-      title: string;
-      author: string;
-      siteUrl: string;
-      description: string;
-    };
+    siteMetadata: SiteMetadata;
     pathPrefix: string;
   };
 };

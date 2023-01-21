@@ -15,7 +15,7 @@ type TagsPageData = {
     }[];
   };
 };
-const TagsPage = ({ data }: PageProps<TagsPageData>) => {
+function TagsPage({ data }: PageProps<TagsPageData>) {
   const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
   return (
     <Layout>
@@ -30,7 +30,7 @@ const TagsPage = ({ data }: PageProps<TagsPageData>) => {
       </TagList>
     </Layout>
   );
-};
+}
 
 const TagList = styled.ul`
   padding-left: 15px;

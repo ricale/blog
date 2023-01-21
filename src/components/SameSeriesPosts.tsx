@@ -2,16 +2,14 @@ import * as React from "react";
 import { Link } from "gatsby";
 
 import styled, { css } from "../themes";
+import { PostFrontmatter } from "../types";
 
 type SameSeriesPostsProps = {
   name?: string;
   data?:
     | null
     | {
-        frontmatter: {
-          title: string;
-          slug: string;
-        };
+        frontmatter: Pick<PostFrontmatter, "title" | "slug">;
       }[];
   current?: string;
 };

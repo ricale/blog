@@ -3,9 +3,9 @@ import { HeadFC } from "gatsby";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 
-const IndexPage = () => {
+function IndexPage() {
   return <Layout></Layout>;
-};
+}
 
 export const Head: HeadFC = () => <Seo />;
 

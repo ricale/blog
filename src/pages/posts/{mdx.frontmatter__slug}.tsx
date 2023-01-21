@@ -1,6 +1,6 @@
 import * as React from "react";
-import { graphql, HeadProps, Link, PageProps } from "gatsby";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { graphql, HeadProps, PageProps } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
@@ -9,31 +9,20 @@ import MdxContent from "../../components/MdxContent";
 import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import TagList from "../../components/TagList";
+import { PostFrontmatter } from "../../types";
 
 type PostDetailPageData = {
   mdx: {
-    frontmatter: {
-      title: string;
-      slug: string;
-      date: string;
-      tags: string[];
-      series?: string;
-      heroImage?: ImageDataLike;
-      heroImageAlt?: string;
-      previewContent?: string;
-    };
+    frontmatter: PostFrontmatter;
     sameSeriesPosts:
       | null
       | {
-          frontmatter: {
-            title: string;
-            slug: string;
-          };
+          frontmatter: Pick<PostFrontmatter, "title" | "slug">;
         }[];
     excerpt: string;
   };
 };
-const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
+function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
   const { frontmatter, sameSeriesPosts } = data.mdx;
   const { title, slug, date, tags, series, heroImage, heroImageAlt } =
     frontmatter;
@@ -55,7 +44,7 @@ const PostDetailPage = ({ data, children }: PageProps<PostDetailPageData>) => {
       <Comments />
     </Layout>
   );
-};
+}
 
 const Header = styled.div`
   margin: 60px 0 72px;

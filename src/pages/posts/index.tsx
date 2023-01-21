@@ -1,46 +1,28 @@
 import * as React from "react";
 import { graphql, PageProps } from "gatsby";
-import { ImageDataLike } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
-import PostListItem from "../../components/PostListItem";
-import styled from "../../themes";
 import ListPageHeader from "../../components/ListPageHeader";
+import { PostFrontmatter } from "../../types";
+import PostList from "../../components/PostList";
 
 type BlogPageData = {
   allMdx: {
     nodes: {
-      frontmatter: {
-        title: string;
-        slug: string;
-        date: string;
-        heroImage?: ImageDataLike;
-        heroImageAlt?: string;
-      };
+      frontmatter: PostFrontmatter;
     }[];
   };
 };
-const PostsPage = ({ data }: PageProps<BlogPageData>) => {
+function PostsPage({ data }: PageProps<BlogPageData>) {
   const posts = data.allMdx.nodes;
   return (
     <Layout>
       <ListPageHeader title="글" note={posts.length} />
-
-      <PostList>
-        {posts.map(({ frontmatter, ...item }, i) => (
-          <PostListItem key={i} {...frontmatter} {...item} />
-        ))}
-      </PostList>
+      <PostList data={posts} />
     </Layout>
   );
-};
-
-const PostList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
+}
 
 export const query = graphql`
   query {

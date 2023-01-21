@@ -2,13 +2,11 @@ import * as React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
+import { SiteMetadata } from "../types";
 
 type LayoutQueryData = {
   site: {
-    siteMetadata: {
-      title: string;
-      author: string;
-    };
+    siteMetadata: SiteMetadata;
   };
 };
 type LayoutProps = {

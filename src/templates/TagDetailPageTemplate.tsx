@@ -3,17 +3,14 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import ListPageHeader from "../components/ListPageHeader";
 import SimplePostList from "../components/SimplePostList";
+import { PostFrontmatter } from "../types";
 
 type TagDetailPageTemplateData = {
   allMdx: {
     totalCount: number;
     edges: {
       node: {
-        frontmatter: {
-          slug: string;
-          title: string;
-          date: string;
-        };
+        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
       };
     }[];
   };

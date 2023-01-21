@@ -1,16 +1,12 @@
 import * as React from "react";
 import { navigate } from "gatsby";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import styled from "../themes";
+import styled from "../../themes";
+import { PostFrontmatter } from "../../types";
 
-type PostListItemProps = {
-  title: string;
-  slug: string;
-  date: string;
-  heroImage?: ImageDataLike;
-  heroImageAlt?: string;
-};
+type PostListItemProps = Omit<PostFrontmatter, "tags">;
+
 function PostListItem({
   title,
   slug,

@@ -1,15 +1,12 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import styled from "../themes";
+import { PostFrontmatter } from "../types";
 
 type SimplePostListProps = {
   data: {
     node: {
-      frontmatter: {
-        title: string;
-        slug: string;
-        date: string;
-      };
+      frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
     };
   }[];
 };

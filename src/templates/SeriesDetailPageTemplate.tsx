@@ -1,21 +1,17 @@
 import * as React from "react";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 
 import Layout from "../components/Layout";
-import styled from "../themes";
 import ListPageHeader from "../components/ListPageHeader";
 import SimplePostList from "../components/SimplePostList";
+import { PostFrontmatter } from "../types";
 
 type SeriesDetailPageTemplateData = {
   allMdx: {
     totalCount: number;
     edges: {
       node: {
-        frontmatter: {
-          title: string;
-          slug: string;
-          date: string;
-        };
+        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
       };
     }[];
   };
