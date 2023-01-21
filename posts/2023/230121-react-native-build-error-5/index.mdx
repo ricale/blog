@@ -1,0 +1,43 @@
+---
+title: "React Native 빌드 에러 (5)"
+date: "2023-01-21"
+slug: "230121-react-native-build-error-5"
+tags: ["iOS", "react native", "빌드 에러", "에러"]
+series: "React Native 빌드 에러"
+heroImage: "./reactnativebuilderror.png"
+heroImageAlt: "thumbnail"
+---
+
+## iOS
+
+### 1. Command ValidateEmbeddedBinary failed with a nonzero exit code
+
+iOS 에서 발생하는 빌드 에러다. React Native Firebase 의 [iOS Notification Images](https://rnfirebase.io/messaging/ios-notification-images) 를 적용한 후 간헐적으로 발생한다.
+
+구글링하면 [이 글](https://stackoverflow.com/questions/68760126/m1-command-validateembeddedbinary-failed-with-a-nonzero-exit-code-archiving-er)이 가장 위에 나오는데 우리랑 그다지 맞는 상황은 아닌 것 같다.
+
+왜 위에 "간헐적으로 발생"한다고 썼냐면, 정말로 발생할 때도 있고 발생하지 않을 때도 있기 때문이다. 지금까지는 _재부팅_ 직후에는 항상 에러 없이 성공했다. 그러니 해당 에러를 본다면 재부팅을 해보자. (..)
+
+### 2. Library not loaded: /opt/homebrew/opt/icu4c/lib/libicui18n.70.dylib
+
+에러 전문은 다음과 같다
+
+```sh
+dyld[4737]: Library not loaded: /opt/homebrew/opt/icu4c/lib/libicui18n.70.dylib
+  Referenced from: \<577D4D03-3CB0-3278-8BEF-121EFA8ABCBE\> /opt/homebrew/Cellar/node/18.2.0/bin/node
+  Reason: tried: '/opt/homebrew/opt/icu4c/lib/libicui18n.70.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/icu4c/lib/libicui18n.70.dylib' (no such file), '/opt/homebrew/opt/icu4c/lib/libicui18n.70.dylib' (no such file), '/usr/local/lib/libicui18n.70.dylib' (no such file), '/usr/lib/libicui18n.70.dylib' (no such file, not in dyld cache), '/opt/homebrew/Cellar/icu4c/71.1/lib/libicui18n.70.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/Cellar/icu4c/71.1/lib/libicui18n.70.dylib' (no such file), '/opt/homebrew/Cellar/icu4c/71.1/lib/libicui18n.70.dylib' (no such file), '/usr/local/lib/libicui18n.70.dylib' (no such file), '/usr/lib/libicui18n.70.dylib' (no such file, not in dyld cache)
+/Users/ricale/Library/Developer/Xcode/DerivedData/Frism-dgzfyqoaoiwbhpetiazaoylzkbxf/Build/Intermediates.noindex/Frism.build/Debug-iphoneos/Frism.build/Script-00DD1BFF1BD5951E006B06BC.sh: line 7: 4737 Abort trap: 6 ../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh
+Command PhaseScriptExecution failed with a nonzero exit code
+```
+
+icu4c 라는 라이브러리에 대해 현재 NPM 에서 사용하려는 버전과 실제 내 컴퓨터에 설치된 버전이 달라서 생기는 버그라고 한다. 최근에 OS 를 업데이트했는데 그 때 뭔가 영향을 끼친 것 같다. 방법은 npm 의 버전을 올리거나 npm 이 현재 설치된 버전의 icu4u 를 사용하도록 해주면 된다고 한다. 나는 전자를 선택했다.
+
+```sh
+$ brew upgrade npm
+```
+
+#### 참고
+
+- [[react 설치 중 오류] dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.67.dylib](https://choisee02.tistory.com/91)
+- [Node.js와 npm 실행시 icu4c 관련 오류 해결하기](http://paikwiki.github.io/2018/06/icu4c-issue-of-nodejs)
+- [dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.62.dylib error running php after installing node with brew on Mac](https://stackoverflow.com/questions/53828891/dyld-library-not-loaded-usr-local-opt-icu4c-lib-libicui18n-62-dylib-error-run)
