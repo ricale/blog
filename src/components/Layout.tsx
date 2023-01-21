@@ -4,6 +4,15 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
 import { SiteMetadata } from "../types";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
+const menuItems = [
+  { path: "/posts", title: "글" },
+  { path: "/series", title: "시리즈" },
+  { path: "/tags", title: "태그" },
+  ...(isDevelopment ? [{ path: "/drafts", title: "임시글" }] : []),
+];
+
 type LayoutQueryData = {
   site: {
     siteMetadata: SiteMetadata;
@@ -31,15 +40,11 @@ function Layout({ children }: LayoutProps) {
           <address>by ricale</address>
           <nav>
             <ul>
-              <li>
-                <Link to="/posts">글</Link>
-              </li>
-              <li>
-                <Link to="/series">시리즈</Link>
-              </li>
-              <li>
-                <Link to="/tags">태그</Link>
-              </li>
+              {menuItems.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path}>{item.title}</Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </Header>

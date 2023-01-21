@@ -7,19 +7,19 @@ import ListPageHeader from "../../components/ListPageHeader";
 import { PostFrontmatter } from "../../types";
 import PostList from "../../components/PostList";
 
-type PostsPageData = {
+type DraftsPageData = {
   allMdx: {
     nodes: {
       frontmatter: PostFrontmatter;
     }[];
   };
 };
-function PostsPage({ data }: PageProps<PostsPageData>) {
-  const posts = data.allMdx.nodes;
+function DraftsPage({ data }: PageProps<DraftsPageData>) {
+  const drafts = data.allMdx.nodes;
   return (
     <Layout>
-      <ListPageHeader title="글" note={posts.length} />
-      <PostList data={posts} />
+      <ListPageHeader title="임시글" note={drafts.length} />
+      <PostList data={drafts} />
     </Layout>
   );
 }
@@ -27,7 +27,7 @@ function PostsPage({ data }: PageProps<PostsPageData>) {
 export const query = graphql`
   query {
     allMdx(
-      filter: { frontmatter: { date: { ne: "" } } }
+      filter: { frontmatter: { date: { eq: "" } } }
       sort: { frontmatter: { date: DESC } }
     ) {
       nodes {
@@ -49,4 +49,4 @@ export const query = graphql`
 
 export const Head = () => <Seo />;
 
-export default PostsPage;
+export default DraftsPage;
