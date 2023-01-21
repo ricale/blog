@@ -1,5 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: "기슬 블로그",
@@ -40,18 +42,21 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "pages",
-        path: "./src/pages/",
-      },
-      __key: "pages",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
         name: "posts",
         path: `${__dirname}/posts`,
       },
     },
+    ...(isDevelopment
+      ? [
+          {
+            resolve: "gatsby-source-filesystem",
+            options: {
+              name: "drafts",
+              path: `${__dirname}/drafts`,
+            },
+          },
+        ]
+      : []),
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
