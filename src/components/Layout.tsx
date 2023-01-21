@@ -2,19 +2,17 @@ import * as React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
 import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
+import { SiteMetadata } from "../types";
 
 type LayoutQueryData = {
   site: {
-    siteMetadata: {
-      title: string;
-      author: string;
-    };
+    siteMetadata: SiteMetadata;
   };
 };
 type LayoutProps = {
   children?: React.ReactNode;
 };
-const Layout = ({ children }: LayoutProps) => {
+function Layout({ children }: LayoutProps) {
   const data = useStaticQuery<LayoutQueryData>(graphql`
     query {
       site {
@@ -37,10 +35,10 @@ const Layout = ({ children }: LayoutProps) => {
                 <Link to="/posts">글</Link>
               </li>
               <li>
-                <Link to="/tags">태그</Link>
+                <Link to="/series">시리즈</Link>
               </li>
               <li>
-                <Link to="/series">시리즈</Link>
+                <Link to="/tags">태그</Link>
               </li>
             </ul>
           </nav>
@@ -49,7 +47,7 @@ const Layout = ({ children }: LayoutProps) => {
       </Container>
     </ThemeProvider>
   );
-};
+}
 
 const Container = styled.div`
   max-width: 800px;

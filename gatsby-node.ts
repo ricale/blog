@@ -1,7 +1,7 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 
-type TagGroupsQueryData = {
+type CreatePagesQueryData = {
   tagsGroup: {
     group: {
       fieldValue: string;
@@ -19,7 +19,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   reporter,
 }) => {
-  const result = await graphql<TagGroupsQueryData>(`
+  const result = await graphql<CreatePagesQueryData>(`
     {
       tagsGroup: allMdx(limit: 2000) {
         group(field: { frontmatter: { tags: SELECT } }) {

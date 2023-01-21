@@ -1,14 +1,10 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import { SiteMetadata } from "../types";
 
 type SeoQueryData = {
   site: {
-    siteMetadata: {
-      title: string;
-      author: string;
-      siteUrl: string;
-      description: string;
-    };
+    siteMetadata: SiteMetadata;
     pathPrefix: string;
   };
 };
@@ -20,14 +16,14 @@ type SeoProps = {
   keywords?: string[];
   ogType?: string;
 };
-const Seo = ({
+function Seo({
   title,
   description,
   path,
   thumbnail,
   ogType,
   keywords,
-}: SeoProps) => {
+}: SeoProps) {
   const data = useStaticQuery<SeoQueryData>(graphql`
     query {
       site {
@@ -74,6 +70,6 @@ const Seo = ({
       {!!imageUrl && <meta property="twitter:image" content={imageUrl} />}
     </>
   );
-};
+}
 
 export default Seo;

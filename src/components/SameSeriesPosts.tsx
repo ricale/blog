@@ -2,20 +2,18 @@ import * as React from "react";
 import { Link } from "gatsby";
 
 import styled, { css } from "../themes";
+import { PostFrontmatter } from "../types";
 
 type SameSeriesPostsProps = {
   name?: string;
   data?:
     | null
     | {
-        frontmatter: {
-          title: string;
-          slug: string;
-        };
+        frontmatter: Pick<PostFrontmatter, "title" | "slug">;
       }[];
   current?: string;
 };
-const SameSeriesPosts = ({ name, data, current }: SameSeriesPostsProps) => {
+function SameSeriesPosts({ name, data, current }: SameSeriesPostsProps) {
   const [collapsed, setCollapsed] = React.useState(true);
   if (!data) {
     return null;
@@ -39,7 +37,7 @@ const SameSeriesPosts = ({ name, data, current }: SameSeriesPostsProps) => {
       )}
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   margin-bottom: 16px;

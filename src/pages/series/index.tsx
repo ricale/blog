@@ -1,11 +1,11 @@
 import * as React from "react";
 import { graphql, PageProps } from "gatsby";
-import { ImageDataLike } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
-import SeriesItem from "../../components/SeriesItem";
-import styled from "../../themes";
+import ListPageHeader from "../../components/ListPageHeader";
+import { PostFrontmatter } from "../../types";
+import SeriesList from "../../components/SeriesList";
 
 type SeriesPageData = {
   allMdx: {
@@ -14,51 +14,22 @@ type SeriesPageData = {
       totalCount: number;
       edges: {
         node: {
-          frontmatter: {
-            title: string;
+          frontmatter: Omit<PostFrontmatter, "slug" | "tags"> & {
             originalDate: string;
-            date: string;
-            heroImage?: ImageDataLike;
-            heroImageAlt?: string;
           };
         };
       }[];
     }[];
   };
 };
-const SeriesPage = ({ data }: PageProps<SeriesPageData>) => {
-  const series = data.allMdx.group
-    .map(({ edges, ...sr }) => ({
-      ...sr,
-      node: edges.sort((a, b) =>
-        b.node.frontmatter.originalDate.localeCompare(
-          a.node.frontmatter.originalDate
-        )
-      )[0].node,
-    }))
-    .sort((a, b) =>
-      b.node.frontmatter.originalDate.localeCompare(
-        a.node.frontmatter.originalDate
-      )
-    );
-
+function SeriesPage({ data }: PageProps<SeriesPageData>) {
   return (
     <Layout>
-      <h1>시리즈</h1>
-      <SeriesList>
-        {series.map((sr) => (
-          <SeriesItem key={sr.fieldValue} {...sr} />
-        ))}
-      </SeriesList>
+      <ListPageHeader title="시리즈" />
+      <SeriesList data={data.allMdx.group} />
     </Layout>
   );
-};
-
-const SeriesList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
+}
 
 export const query = graphql`
   query {

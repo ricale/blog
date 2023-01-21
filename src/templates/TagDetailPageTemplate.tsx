@@ -1,16 +1,16 @@
 import * as React from "react";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import Layout from "../components/Layout";
+import ListPageHeader from "../components/ListPageHeader";
+import SimplePostList from "../components/SimplePostList";
+import { PostFrontmatter } from "../types";
 
 type TagDetailPageTemplateData = {
   allMdx: {
     totalCount: number;
     edges: {
       node: {
-        frontmatter: {
-          slug: string;
-          title: string;
-        };
+        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
       };
     }[];
   };
@@ -27,16 +27,8 @@ const TagDetailPageTemplate = ({
 
   return (
     <Layout>
-      <h1>{`태그 "${tag}"`}</h1>
-      <p>{`글 ${totalCount}개`}</p>
-
-      <ul>
-        {edges.map(({ node: { frontmatter } }) => (
-          <li key={frontmatter.slug}>
-            <Link to={`/posts/${frontmatter.slug}`}>{frontmatter.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <ListPageHeader title={tag} subtitle="태그" note={totalCount} />
+      <SimplePostList data={edges} />
     </Layout>
   );
 };
@@ -52,8 +44,9 @@ export const pageQuery = graphql`
       edges {
         node {
           frontmatter {
-            slug
             title
+            slug
+            date(formatString: "YYYY.MM.DD.")
           }
         }
       }

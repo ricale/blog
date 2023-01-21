@@ -1,7 +1,11 @@
 import * as React from "react";
 import { graphql, Link, PageProps } from "gatsby";
+
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
+import ListPageHeader from "../../components/ListPageHeader";
+import Tag from "../../components/Tag";
+import styled from "../../themes";
 
 type TagsPageData = {
   allMdx: {
@@ -11,22 +15,29 @@ type TagsPageData = {
     }[];
   };
 };
-const TagsPage = ({ data }: PageProps<TagsPageData>) => {
+function TagsPage({ data }: PageProps<TagsPageData>) {
   const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
   return (
     <Layout>
-      <h1>tags</h1>
-      <ul>
+      <ListPageHeader title="태그" />
+      <TagList>
         {tags.map((tag) => (
           <li key={tag.fieldValue}>
-            <Link to={`/tags/${tag.fieldValue}/`}>{`${tag.fieldValue}`}</Link>{" "}
-            <small>{`${tag.totalCount}`}</small>
+            <Tag value={tag.fieldValue} />{" "}
+            <small>{`(${tag.totalCount})`}</small>
           </li>
         ))}
-      </ul>
+      </TagList>
     </Layout>
   );
-};
+}
+
+const TagList = styled.ul`
+  padding-left: 15px;
+  & > li {
+    margin-bottom: 4px;
+  }
+`;
 
 export const query = graphql`
   query {
