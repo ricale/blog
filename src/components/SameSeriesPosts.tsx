@@ -15,7 +15,7 @@ type SameSeriesPostsProps = {
       }[];
   current?: string;
 };
-const SameSeriesPosts = ({ name, data, current }: SameSeriesPostsProps) => {
+function SameSeriesPosts({ name, data, current }: SameSeriesPostsProps) {
   const [collapsed, setCollapsed] = React.useState(true);
   if (!data) {
     return null;
@@ -39,7 +39,7 @@ const SameSeriesPosts = ({ name, data, current }: SameSeriesPostsProps) => {
       )}
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   margin-bottom: 16px;

@@ -18,7 +18,6 @@ function TagList({ tags, ...props }: TagListProps) {
     <Container {...props}>
       {items.map((tag) => (
         <li key={tag.fieldValue}>
-          {/* <Link to={`/tags/${tag.fieldValue}`}>{tag.fieldValue}</Link> */}
           <Tag value={tag.fieldValue} />
         </li>
       ))}

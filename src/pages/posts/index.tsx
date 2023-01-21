@@ -25,7 +25,7 @@ const PostsPage = ({ data }: PageProps<BlogPageData>) => {
   const posts = data.allMdx.nodes;
   return (
     <Layout>
-      <ListPageHeader title="글" note={`${posts.length}`} />
+      <ListPageHeader title="글" note={posts.length} />
 
       <PostList>
         {posts.map(({ frontmatter, ...item }, i) => (
