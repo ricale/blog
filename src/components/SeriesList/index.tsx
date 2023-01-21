@@ -2,7 +2,7 @@ import * as React from "react";
 
 import styled from "../../themes";
 import { PostFrontmatter } from "../../types";
-import SeriesItem from "./SeriesItem";
+import SeriesListItem from "./SeriesListItem";
 
 type SeriesListProps = {
   data: {
@@ -35,7 +35,7 @@ function SeriesList({ data: source }: SeriesListProps) {
   return (
     <Container>
       {data.map((sr) => (
-        <SeriesItem key={sr.fieldValue} {...sr} />
+        <Item key={sr.fieldValue} {...sr} />
       ))}
     </Container>
   );
@@ -43,8 +43,12 @@ function SeriesList({ data: source }: SeriesListProps) {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 16px;
+`;
+const Item = styled(SeriesListItem)`
+  width: calc(25% - 12px);
 `;
 
 export default SeriesList;

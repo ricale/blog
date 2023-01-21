@@ -5,26 +5,32 @@ import { navigate } from "gatsby";
 
 import { PostFrontmatter } from "../../types";
 
-type SeriesItemProps = {
+type SeriesListItemProps = {
   fieldValue: string;
   totalCount: number;
   node: {
     frontmatter: Omit<PostFrontmatter, "slug" | "tags">;
   };
 };
-function SeriesItem({ fieldValue, totalCount, node }: SeriesItemProps) {
+function SeriesListItem({
+  fieldValue,
+  totalCount,
+  node,
+  ...props
+}: SeriesListItemProps) {
   const { date, heroImage, heroImageAlt } = node.frontmatter;
 
   const image = heroImage ? getImage(heroImage) : null;
 
   return (
-    <Container onClick={() => navigate(`/series/${fieldValue}`)}>
+    <Container onClick={() => navigate(`/series/${fieldValue}`)} {...props}>
       <ThumbnailWrapper>
         {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
-        <small>{`${totalCount}`}</small>
       </ThumbnailWrapper>
       <Info>
-        <h3>{fieldValue}</h3>
+        <h3>
+          {fieldValue} <small>{`${totalCount}`}</small>
+        </h3>
         <small>{`~ ${date}`}</small>
       </Info>
     </Container>
@@ -32,31 +38,21 @@ function SeriesItem({ fieldValue, totalCount, node }: SeriesItemProps) {
 }
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
+  position: relative;
   cursor: pointer;
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
 `;
 
 const ThumbnailWrapper = styled.div`
-  position: relative;
-
-  width: 80px;
-  height: 80px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 
   background-color: #222222;
-
-  & > small {
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-
-    padding: 2px 4px;
-
-    background-color: #444444;
-    font-size: 0.85em;
-  }
 `;
 
 const ThumbnailImage = styled(GatsbyImage)`
@@ -66,9 +62,34 @@ const ThumbnailImage = styled(GatsbyImage)`
 `;
 
 const Info = styled.div`
-  h3 {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  & > h3 {
+    flex: 1;
     margin: 0 0 4px;
+    word-break: keep-all;
+  }
+  & > small {
+    text-align: right;
+  }
+  & > h3 > small {
+    padding: 2px 4px;
+
+    background-color: rgba(183, 179, 204, 0.6);
+    color: #ffff00;
+    font-size: 0.85rem;
+    font-weight: normal;
   }
 `;
 
-export default SeriesItem;
+export default SeriesListItem;
