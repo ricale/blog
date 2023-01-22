@@ -24,25 +24,29 @@ const MdxContent = styled.div`
   h1 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid #21262d;
-    font-size: 2em;
+    font-size: 2.125em;
   }
 
   h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid #21262d;
-    font-size: 1.5em;
+    font-size: 1.625em;
   }
 
   h3 {
-    font-size: 1.25em;
+    font-size: 1.5em;
   }
 
   h4 {
-    font-size: 1em;
+    font-size: 1.25em;
   }
 
   h5 {
-    font-size: 0.875em;
+    font-size: 1em;
+  }
+
+  h6 {
+    font-size: 0.9375em;
   }
 
   ul,
@@ -136,10 +140,10 @@ const MdxContent = styled.div`
     white-space: break-spaces;
   }
 
-  pre {
+  pre[class*="language-"] {
     margin-bottom: 16px;
 
-    overflow-x: auto;
+    /* overflow-x: auto; */
   }
 
   pre > code {
