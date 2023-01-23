@@ -7,7 +7,7 @@ import { SiteMetadata } from "../types";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 const menuItems = [
-  { path: "/posts", title: "글" },
+  { path: "/posts", title: "모든글" },
   { path: "/series", title: "시리즈" },
   { path: "/tags", title: "태그" },
   ...(isDevelopment ? [{ path: "/drafts", title: "임시글" }] : []),
@@ -27,17 +27,23 @@ function Layout({ children }: LayoutProps) {
       site {
         siteMetadata {
           title
+          author
         }
       }
     }
   `);
+  const { title, author } = data.site.siteMetadata;
   return (
     <ThemeProvider theme={normalTheme}>
       <GlobalStyle />
       <Container>
         <Header>
-          <header>{data.site.siteMetadata.title}</header>
-          <address>by ricale</address>
+          <header>
+            <Link to="/">{title}</Link>
+          </header>
+          <address>
+            <a href="https://ricale.kr">{`by ${author}`}</a>
+          </address>
           <nav>
             <ul>
               {menuItems.map((item) => (
@@ -71,22 +77,43 @@ const Header = styled.div`
   margin: 8px 16px;
 
   & > header {
-    font-weight: 900;
+    font-weight: 600;
+    font-size: 1.125rem;
+    > a {
+      color: white;
+    }
   }
 
   & > address {
     margin-left: 8px;
+    font-size: 0.875rem;
+    font-style: normal;
+    > a {
+      color: white;
+    }
   }
 
-  & > nav > ul {
+  & > nav {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    justify-content: flex-end;
 
-    margin: 0;
-    margin-left: 16px;
-    padding: 0;
-    list-style: none;
+    flex: 1;
+    > ul {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+
+      margin: 0;
+      margin-left: 16px;
+      padding: 0;
+      list-style: none;
+
+      > li > a {
+        display: inline-block;
+        /* padding: 0px 8px; */
+      }
+    }
   }
 `;
 
