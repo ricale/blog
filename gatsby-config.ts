@@ -23,6 +23,7 @@ const config: GatsbyConfig = {
           remarkPlugins: [require("remark-gfm")],
         },
         gatsbyRemarkPlugins: [
+          "gatsby-remark-autolink-headers",
           {
             resolve: "gatsby-remark-prismjs",
             options: {

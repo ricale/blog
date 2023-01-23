@@ -19,6 +19,10 @@ const MdxContent = styled.div`
     margin-bottom: 16px;
     line-height: 1.25;
     font-weight: 600;
+
+    > a.anchor path {
+      fill: white;
+    }
   }
 
   h1 {
