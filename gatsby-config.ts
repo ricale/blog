@@ -57,6 +57,12 @@ const config: GatsbyConfig = {
           },
         ]
       : []),
+    {
+      resolve: "gatsby-plugin-google-gtag",
+      options: {
+        trackingIds: ["G-SGJDRX2QGE"],
+      },
+    },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
