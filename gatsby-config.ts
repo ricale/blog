@@ -4,9 +4,9 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: "기슬 블로그",
+    title: "tech blog",
     author: "ricale",
-    siteUrl: "https://ricale.kr",
+    siteUrl: "https://ricale.kr/blog/",
     description: "기술 블로그 by ricale",
   },
   pathPrefix: "/blog",

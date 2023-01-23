@@ -34,6 +34,10 @@ const TitleRow = styled.div`
   align-items: flex-end;
   gap: 8px;
 
+  & > h1 {
+    word-break: keep-all;
+  }
+
   @media (max-width: 414px) {
     flex-direction: column;
     align-items: flex-start;
