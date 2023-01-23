@@ -68,6 +68,11 @@ const Container = styled.div`
     padding-left: ${(p) => p.theme.dimens.margin}px;
     padding-right: ${(p) => p.theme.dimens.margin}px;
     padding-bottom: ${(p) => p.theme.dimens.margin}px;
+
+    @media (max-width: 800px) {
+      padding-left: ${(p) => p.theme.dimens.margin + 4}px;
+      padding-right: ${(p) => p.theme.dimens.margin + 4}px;
+    }
   }
 `;
 const Header = styled.div`
