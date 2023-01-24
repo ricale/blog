@@ -9,8 +9,9 @@ function isStringArray(arr: unknown[]): arr is string[] {
 
 type TagListProps = {
   tags: string[] | { fieldValue: string; totalCount: number }[];
+  showCount?: boolean;
 };
-function TagList({ tags, ...props }: TagListProps) {
+function TagList({ tags, showCount, ...props }: TagListProps) {
   const items = isStringArray(tags)
     ? tags.map((tag) => ({ fieldValue: tag, totalCount: undefined }))
     : tags;
@@ -19,6 +20,7 @@ function TagList({ tags, ...props }: TagListProps) {
       {items.map((tag) => (
         <li key={tag.fieldValue}>
           <Tag value={tag.fieldValue} />
+          {showCount && !!tag.totalCount && <sup>{`${tag.totalCount}`}</sup>}
         </li>
       ))}
     </Container>

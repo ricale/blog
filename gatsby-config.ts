@@ -15,7 +15,6 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-styled-components",
     {
       resolve: "gatsby-plugin-mdx",
       options: {
@@ -64,6 +63,7 @@ const config: GatsbyConfig = {
         trackingIds: ["G-SGJDRX2QGE"],
       },
     },
+    "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",

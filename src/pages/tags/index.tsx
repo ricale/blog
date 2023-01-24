@@ -6,37 +6,53 @@ import Seo from "../../components/Seo";
 import ListPageHeader from "../../components/ListPageHeader";
 import Tag from "../../components/Tag";
 import styled from "../../themes";
+import TagList from "../../components/TagList";
 
+type TagData = {
+  fieldValue: string;
+  totalCount: number;
+};
 type TagsPageData = {
   allMdx: {
-    group: {
-      fieldValue: string;
-      totalCount: number;
-    }[];
+    group: TagData[];
   };
 };
 function TagsPage({ data }: PageProps<TagsPageData>) {
   const tags = data.allMdx.group.sort((a, b) => b.totalCount - a.totalCount);
+  const [tagsMoreThanOnce, tagsOnlyOnce] = tags.reduce(
+    (acc, tag) => {
+      acc[tag.totalCount > 1 ? 0 : 1].push(tag);
+      return acc;
+    },
+    [[], []] as [TagData[], TagData[]]
+  );
   return (
     <Layout>
       <ListPageHeader title="태그" />
-      <TagList>
-        {tags.map((tag) => (
+      {/* <Tags>
+        {tagsMoreThanOnce.map((tag) => (
           <li key={tag.fieldValue}>
             <Tag value={tag.fieldValue} />{" "}
-            <small>{`(${tag.totalCount})`}</small>
+            {tag.totalCount > 1 && <sup>{`${tag.totalCount}`}</sup>}
           </li>
         ))}
-      </TagList>
+      </Tags> */}
+      <Tags tags={tagsMoreThanOnce} showCount />
+      <Tags tags={tagsOnlyOnce} />
+      {/* <Tags>
+        {tagsOnlyOnce.map((tag) => (
+          <li key={tag.fieldValue}>
+            <Tag value={tag.fieldValue} />{" "}
+            {tag.totalCount > 1 && <sup>{`${tag.totalCount}`}</sup>}
+          </li>
+        ))}
+      </Tags> */}
     </Layout>
   );
 }
 
-const TagList = styled.ul`
-  padding-left: 15px;
-  & > li {
-    margin-bottom: 4px;
-  }
+const Tags = styled(TagList)`
+  margin-bottom: 24px;
 `;
 
 export const query = graphql`
