@@ -43,7 +43,9 @@ function Seo({
     pathPrefix,
   } = data.site;
 
-  const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+  const pageTitle = title
+    ? `${title} | ${siteTitle}`
+    : `${siteTitle} by ${author}`;
   const seoTitle = title ?? siteTitle;
   const desc = description || siteDesc;
   const pageUrl = `${siteUrl}${pathPrefix}${path ? `/${path}` : ""}`;
