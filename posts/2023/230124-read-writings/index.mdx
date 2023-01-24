@@ -1,0 +1,96 @@
+---
+title: "읽은 글들 (~23.1.24)"
+date: "2023-01-24"
+slug: "230124-read-writings"
+tags:
+  [
+    "promise",
+    "memory leak",
+    "3d css",
+    "javascript promise",
+    "css",
+    "cdn",
+    "메모리 누수",
+    "크롬 개발자 도구",
+    "react profiler",
+    "리엑트 프로파일러",
+    "react hook",
+    "react",
+  ]
+series: "읽은 글들"
+previewContent: "메일링, 블로그, 구글링 등을 통해 읽은 글들을 간단히 리뷰하는 글이다."
+heroImage: "./goodarticles-narrow.jpg"
+heroImageAlt: "thumbnail"
+---
+
+## React
+
+### [(번역) 리액트 상호 작용 시간 4배 향상하기](https://velog.io/@superlipbalm/improving-react-interaction-times-by-4x?utm_source=substack&utm_medium=email)
+
+원문 저자가 본인의 서비스에서 React 성능 문제를 개선했던 경험에 대한 글이다. 대체로 AG Grid 라는 라이브러리에 의한 과도한 리렌더링으로 인해 발생하는 이슈들이었다. 크롬 개발자 도구와 리엑트 프로파일러를 이용해 이슈를 추적하고 확인한 뒤 해결하는 과정이 재미있고 유익하다.
+
+### [The Ugliest Pattern In React](https://sebastiancarlos.com/the-ugliest-pattern-in-react-%EF%B8%8F-adjusting-state-in-response-to-rendering-e8f651fa958b)
+
+[React 공식 문서](https://beta.reactjs.org/reference/react/useState#storing-information-from-previous-renders)에서 추천한 아래 코드를 비판하는 글이다.
+
+```jsx
+function CountLabel({ count }) {
+  const [prevCount, setPrevCount] = useState(count);
+  const [trend, setTrend] = useState(null);
+  if (prevCount !== count) {
+    setPrevCount(count);
+    setTrend(count > prevCount ? "increasing" : "decreasing");
+  }
+  return (
+    <>
+      <h1>{count}</h1>
+      {trend && <p>The count is {trend}</p>}
+    </>
+  );
+}
+```
+
+`useEffect` 를 사용해서 prop 의존적인 state 를 수정할 경우 자식 컴포넌트들도 두 번 더 렌더링되므로, 위 방법을 사용하라는 것이었다.
+
+이에 대해 저자는 가독성도 없고 순수 함수 규칙마저 어긴다며 최악이라고 말하고 있다.
+
+음.. 나도 쓰고 싶지 않은 코드다.
+
+## JavaScript
+
+### [Promise는 왜 취소가 안 될까?](https://tech.kakao.com/2023/01/11/promise-cancelation-in-javascript/)
+
+Promise 취소 기능의 표준 지정과 관련된 역사와, 본인이 맡은 서비스에서는 취소 기능을 어떻게 구현했는지 설명하는 글. 쉽게 잘 읽힌다.
+
+### [Reasons to avoid Javascript CDNs](https://blog.wesleyac.com/posts/why-not-javascript-cdn)
+
+웹페이지/웹앱의 자바스크립트 파일을 저장할 곳으로 CDN 사용을 피해야 하는 이유에 대해 설명하는 글.
+
+분명 CDN은 쉽게 사용할 수 있고 빠르다고들 말하긴 하지만, 그 못지 않은 단점이 있다고 말한다. 요약하면 아래와 같다.
+
+- 프라이버시: CDN 서비스들은 개인이 어느 사이트들에 방문했는지 추적할 수 있다.
+- 속도: 대체로 CDN 이 빠르지만 일부 경우에는 오히려 CDN 이 느릴 수 있다. (특히 자바스크립 파일 용량이 작을 경우)
+- 보안: CDN 을 통한 해커의 공격에 노출될 수 있다. [SRI](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) 로 보안이 어느정도 해결 가능하지만, 이는 한 라이브러리를 여러 파일로 나눠 관리할 때 제대로 적용되지 않는 허점이 있다.
+- 시스템적 위험: (AWS 나 cloudflare 가 그랬던 것처럼) CDN 서비스가 장애에 빠지면 전세계 웹의 큰 부분이 다운될 수 있다.
+
+그리고 작성자는 특별한 이유가 없다면 CDN 보다는 웹페이지와 같은 서버에서 자바스크립트 파일을 관리하는 게 좋다고 글을 마무리한다.
+
+자세한 내용은 본문을 참고하자.
+
+### [[번역] 당신이 모르는 자바스크립트의 메모리 누수의 비밀](https://ui.toast.com/posts/ko_20210611)
+
+메모리 누수가 생기는 대표적인 상황들을 크롬 개발자도구로 확인해보는 글이다. 글에서 확인하는 대표적인 메모리 누수 케이스는 아래와 같다.
+
+- 클로저
+- 전역변수
+- DOM 노드 삭제
+- `console` 모듈
+- 타이머
+
+메모리 누수 케이스도 케이스지만 크롬 개발자도구의 기능으로 메모리 누수를 추적하는 것이 매우 유익하다.
+
+## CSS
+
+### [3D in CSS](https://garden.bradwoods.io/notes/css/3d)
+
+CSS 의 `perspective` 와 `transform` 을 사용해서 3D 애니메이션을 적용하는 방법에 대한 글. 내용도 내용이지만, (값을 즉석에서 바꿔가며 확인해볼 수 있는) 예제들이 훌륭하다.
