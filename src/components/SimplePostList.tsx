@@ -34,7 +34,10 @@ const SeriesPostList = styled.ol`
 
   li {
     display: flex;
-    margin-bottom: 8px;
+    align-items: center;
+
+    padding: 2px;
+    margin-bottom: 4px;
     :hover {
       background-color: #666666;
     }
@@ -52,7 +55,9 @@ const SeriesPostList = styled.ol`
   @media (max-width: 414px) {
     li {
       flex-direction: column;
-      margin-bottom: 16px;
+      align-items: flex-start;
+
+      margin-bottom: 12px;
       > .date {
         order: 2;
         font-size: 0.75rem;
