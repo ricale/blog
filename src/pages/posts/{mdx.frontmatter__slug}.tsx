@@ -65,30 +65,6 @@ const WrittenDate = styled.div`
   margin: 16px 0;
 `;
 
-const Tags = styled.ul`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: ${(p) => p.theme.dimens.gutter}px;
-
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  > li {
-    padding: ${(p) => p.theme.dimens.spacing}px
-      ${(p) => p.theme.dimens.gutter}px;
-    border-radius: 2px;
-
-    background-color: ${(p) => p.theme.colors.tag};
-    color: ${(p) => p.theme.colors.onTag};
-
-    > a {
-      text-decoration: none;
-    }
-  }
-`;
-
 const PostContent = styled(MdxContent)`
   margin-bottom: 60px;
 `;

@@ -11,7 +11,9 @@ type SeriesDetailPageTemplateData = {
     totalCount: number;
     edges: {
       node: {
-        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
+        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date"> & {
+          originalDate: string;
+        };
       };
     }[];
   };
@@ -41,8 +43,8 @@ export const pageQuery = graphql`
   query ($series: String) {
     allMdx(
       limit: 2000
-      sort: { frontmatter: { date: ASC } }
-      filter: { frontmatter: { series: { in: [$series] } } }
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { series: { in: [$series] }, date: { ne: "" } } }
     ) {
       totalCount
       edges {
@@ -51,6 +53,7 @@ export const pageQuery = graphql`
             title
             slug
             date(formatString: "YYYY.MM.DD.")
+            originalDate: date
           }
         }
       }

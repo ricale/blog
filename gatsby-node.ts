@@ -87,6 +87,7 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({
                   series: {
                     eq: source.frontmatter.series,
                   },
+                  date: { ne: "" },
                 },
               },
             },
