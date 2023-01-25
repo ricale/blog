@@ -6,28 +6,70 @@ import { PostFrontmatter } from "../types";
 type SimplePostListProps = {
   data: {
     node: {
-      frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
+      frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date"> & {
+        originalDate: string;
+      };
     };
   }[];
 };
 
-function SimplePostList({ data }: SimplePostListProps) {
+function SimplePostList({ data: source }: SimplePostListProps) {
+  const [orderByAsc, setOrderByAsc] = React.useState(false);
+  const data = [...source].sort(
+    (a, b) =>
+      a.node.frontmatter.originalDate.localeCompare(
+        b.node.frontmatter.originalDate
+      ) * (orderByAsc ? 1 : -1)
+  );
+
   return (
-    <SeriesPostList>
-      {data.map(({ node: { frontmatter } }) => (
-        <li
-          key={frontmatter.slug}
-          onClick={() => navigate(`/posts/${frontmatter.slug}`)}
-        >
-          <span className="date">{frontmatter.date}</span>
-          <span className="title">{frontmatter.title}</span>
-        </li>
-      ))}
-    </SeriesPostList>
+    <Container>
+      <SortingAction>
+        <span>정렬:</span>
+        <SortingToggleButton onClick={() => setOrderByAsc((st) => !st)}>
+          {`작성일 ${orderByAsc ? "오름차순" : "내림차순"}`}
+        </SortingToggleButton>
+      </SortingAction>
+      <SeriesPostList>
+        {data.map(({ node: { frontmatter } }) => (
+          <li
+            key={frontmatter.slug}
+            onClick={() => navigate(`/posts/${frontmatter.slug}`)}
+          >
+            <span className="date">{frontmatter.date}</span>
+            <span className="title">{frontmatter.title}</span>
+          </li>
+        ))}
+      </SeriesPostList>
+    </Container>
   );
 }
 
+const Container = styled.div``;
+
+const SortingAction = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+
+  > span {
+    font-size: 0.875rem;
+    color: #ffffff;
+  }
+`;
+const SortingToggleButton = styled.button`
+  border: 0;
+  text-decoration: underline;
+
+  font-size: 0.875rem;
+  color: #ffffff;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
 const SeriesPostList = styled.ol`
+  margin-top: 8px;
   padding-left: 0px;
   list-style: none;
   cursor: pointer;

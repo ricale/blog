@@ -10,7 +10,9 @@ type TagDetailPageTemplateData = {
     totalCount: number;
     edges: {
       node: {
-        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date">;
+        frontmatter: Pick<PostFrontmatter, "title" | "slug" | "date"> & {
+          originalDate: string;
+        };
       };
     }[];
   };
@@ -38,7 +40,7 @@ export const pageQuery = graphql`
     allMdx(
       limit: 2000
       sort: { frontmatter: { date: DESC } }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, date: { ne: "" } } }
     ) {
       totalCount
       edges {
@@ -47,6 +49,7 @@ export const pageQuery = graphql`
             title
             slug
             date(formatString: "YYYY.MM.DD.")
+            originalDate: date
           }
         }
       }
