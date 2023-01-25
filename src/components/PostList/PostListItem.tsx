@@ -5,6 +5,8 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "../../themes";
 import { PostFrontmatter } from "../../types";
 
+const INVALID_DATE_STRING = "Invalid date";
+
 type PostListItemProps = Omit<PostFrontmatter, "tags">;
 
 function PostListItem({
@@ -15,6 +17,7 @@ function PostListItem({
   heroImageAlt,
 }: PostListItemProps) {
   const image = heroImage ? getImage(heroImage) : null;
+  const dateIsValid = date !== INVALID_DATE_STRING;
   return (
     <Container onClick={() => navigate(`/posts/${slug}`)}>
       <ThumbnailWrapper>
@@ -22,7 +25,7 @@ function PostListItem({
       </ThumbnailWrapper>
       <Info>
         <h2>{title}</h2>
-        <WrittenDate>{date}</WrittenDate>
+        <Subtitle>{dateIsValid ? date : slug}</Subtitle>
       </Info>
     </Container>
   );
@@ -65,7 +68,7 @@ const Info = styled.div`
   }
 `;
 
-const WrittenDate = styled.div`
+const Subtitle = styled.div`
   font-size: 0.8125rem;
   color: #dddddd;
 `;
