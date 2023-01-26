@@ -49,7 +49,7 @@ function PostDetailPage({
 
       {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
 
-      <TableOfContents data={tableOfContents.items} slug={slug} />
+      {/* <TableOfContents data={tableOfContents.items} slug={slug} /> */}
 
       <PostContent>{children}</PostContent>
       <Comments />
