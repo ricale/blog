@@ -21,3 +21,10 @@ export type SiteMetadata = {
   siteUrl: string;
   description: string;
 };
+
+type TableOfPostContentsItem = {
+  url: string;
+  title: string;
+  items?: TableOfPostContentsItem[];
+};
+export type TableOfPostContents = TableOfPostContentsItem[];
