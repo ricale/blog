@@ -9,8 +9,7 @@ import MdxContent from "../../components/MdxContent";
 import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import TagList from "../../components/TagList";
-import { PostFrontmatter, TableOfPostContents } from "../../types";
-import TableOfContents from "../../components/TableOfContnets";
+import { PostFrontmatter } from "../../types";
 
 type PostDetailPageData = {
   mdx: {
@@ -21,17 +20,10 @@ type PostDetailPageData = {
           frontmatter: Pick<PostFrontmatter, "title" | "slug">;
         }[];
     excerpt: string;
-    tableOfContents: {
-      items: TableOfPostContents;
-    };
   };
 };
-function PostDetailPage({
-  data,
-  children,
-  ...props
-}: PageProps<PostDetailPageData>) {
-  const { frontmatter, sameSeriesPosts, tableOfContents } = data.mdx;
+function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
+  const { frontmatter, sameSeriesPosts } = data.mdx;
   const { title, slug, date, tags, series, heroImage, heroImageAlt } =
     frontmatter;
   const image = heroImage ? getImage(heroImage) : null;
@@ -48,8 +40,6 @@ function PostDetailPage({
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
       {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
-
-      {/* <TableOfContents data={tableOfContents.items} slug={slug} /> */}
 
       <PostContent>{children}</PostContent>
       <Comments />
@@ -97,7 +87,6 @@ export const query = graphql`
         }
         previewContent
       }
-      tableOfContents
       sameSeriesPosts {
         frontmatter {
           title
