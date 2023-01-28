@@ -11,10 +11,6 @@ const defaultPrefs = {
 const transformer = (markdownAST, pluginOptions) => {
   const prefs = { ...defaultPrefs };
 
-  if (!prefs.className.match(/^[ a-zA-Z0-9_-]*$/)) {
-    prefs.className = defaultPrefs.className;
-  }
-
   const tocMarkdownAST = {
     ...markdownAST,
     children: [],
@@ -36,7 +32,23 @@ const transformer = (markdownAST, pluginOptions) => {
   });
 
   if (result.map) {
-    markdownAST.children = [result.map, ...markdownAST.children];
+    markdownAST.children = [
+      {
+        type: "parent",
+        children: [
+          {
+            type: "heading",
+            depth: 3,
+            children: [{ type: "text", value: "목차" }],
+          },
+          result.map,
+        ],
+        data: {
+          hProperties: { className: "toc" },
+        },
+      },
+      ...markdownAST.children,
+    ];
   }
 
   return markdownAST;

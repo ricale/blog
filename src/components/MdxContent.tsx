@@ -4,6 +4,33 @@ const MdxContent = styled.div`
   font-size: 16px;
   line-height: 1.5;
 
+  .toc {
+    margin: 0 16px 16px;
+    padding: 16px 0 0 16px;
+    background-color: #1a1a1a;
+    > h3 {
+      margin: 0;
+      font-size: 1.125rem;
+    }
+    > ul {
+      position: relative;
+      margin: 0;
+      padding: 8px 0 16px 20px;
+
+      font-size: 1rem;
+      list-style: none;
+
+      a {
+        color: #dddddd;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 30px;
+      }
+    }
+  }
+
   p {
     margin-top: 0;
     margin-bottom: 16px;
