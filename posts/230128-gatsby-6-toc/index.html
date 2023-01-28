@@ -1,0 +1,686 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><meta name="description" content="목차 1. 개요2. 구현
+2.1. tableOfContents2.1. tableOfContents 의 버그2.3. gatsby-remark-table-of-contents 플러그인2.4. gatsby-remark-table-of…" data-gatsby-head="true"/><meta name="author" content="ricale" data-gatsby-head="true"/><meta name="keywords" content="Gatsby, Gatsby blog, 목차, table of contents, toc" data-gatsby-head="true"/><meta property="og:type" content="article" data-gatsby-head="true"/><meta property="og:title" content="Gatsby 블로그 만들기 6 - 목차 자동 생성" data-gatsby-head="true"/><meta property="og:description" content="목차 1. 개요2. 구현
+2.1. tableOfContents2.1. tableOfContents 의 버그2.3. gatsby-remark-table-of-contents 플러그인2.4. gatsby-remark-table-of…" data-gatsby-head="true"/><meta property="og:url" content="https://ricale.kr/blog/blog/posts/230128-gatsby-6-toc" data-gatsby-head="true"/><meta property="og:image" content="https://ricale.kr/blog/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" data-gatsby-head="true"/><meta property="twitter:card" content="summary_large_image" data-gatsby-head="true"/><meta property="twitter:title" content="Gatsby 블로그 만들기 6 - 목차 자동 생성" data-gatsby-head="true"/><meta property="twitter:description" content="목차 1. 개요2. 구현
+2.1. tableOfContents2.1. tableOfContents 의 버그2.3. gatsby-remark-table-of-contents 플러그인2.4. gatsby-remark-table-of…" data-gatsby-head="true"/><meta property="twitter:url" content="https://ricale.kr/blog/blog/posts/230128-gatsby-6-toc" data-gatsby-head="true"/><meta property="twitter:image" content="https://ricale.kr/blog/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" data-gatsby-head="true"/><meta name="theme-color" content="#87ceeb"/><style data-href="/blog/styles.9e907bc32054b7771552.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><title data-gatsby-head="true">Gatsby 블로그 만들기 6 - 목차 자동 생성 | tech blog</title><link rel="icon" href="/blog/favicon-32x32.png?v=e4b26f44c4d5cbdfa5de205fa43822e7" type="image/png"/><link rel="manifest" href="/blog/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/blog/icons/icon-48x48.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="72x72" href="/blog/icons/icon-72x72.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="96x96" href="/blog/icons/icon-96x96.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="144x144" href="/blog/icons/icon-144x144.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="192x192" href="/blog/icons/icon-192x192.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="256x256" href="/blog/icons/icon-256x256.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="384x384" href="/blog/icons/icon-384x384.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="512x512" href="/blog/icons/icon-512x512.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><link rel="alternate" type="application/rss+xml" title="tech blog by ricale" href="/blog/rss.xml"/><style data-styled="" data-styled-version="5.3.6">html,body,#root{width:100%;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";overflow-x:hidden;background-color:black;color:white;}/*!sc*/
+h1,h2,h3,h4,h5,h6,p{margin:0;}/*!sc*/
+a{color:skyblue;-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+a:hover{-webkit-text-decoration:underline;text-decoration:underline;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-iKJPlL1"]{content:"sc-global-iKJPlL1,"}/*!sc*/
+.chkzGJ{max-width:800px;margin:0 auto;}/*!sc*/
+.chkzGJ > main{padding-left:16px;padding-right:16px;padding-bottom:16px;}/*!sc*/
+@media (max-width:800px){.chkzGJ > main{padding-left:20px;padding-right:20px;}}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"chkzGJ,"}/*!sc*/
+.blVyGE{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;margin:8px 16px;}/*!sc*/
+.blVyGE > header{font-weight:600;font-size:1.125rem;}/*!sc*/
+.blVyGE > header > a{color:white;}/*!sc*/
+.blVyGE > address{margin-left:8px;font-size:0.875rem;font-style:normal;}/*!sc*/
+.blVyGE > address > a{color:white;}/*!sc*/
+.blVyGE > nav{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end;-webkit-flex:1;-ms-flex:1;flex:1;}/*!sc*/
+.blVyGE > nav > ul{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;gap:8px;margin:0;margin-left:16px;padding:0;list-style:none;}/*!sc*/
+.blVyGE > nav > ul > li > a{display:inline-block;}/*!sc*/
+data-styled.g3[id="sc-gswNZR"]{content:"blVyGE,"}/*!sc*/
+.cWuGnJ{font-size:16px;line-height:1.5;}/*!sc*/
+.cWuGnJ .toc{margin:0 16px 16px;padding:16px 0 0 16px;background-color:#1a1a1a;}/*!sc*/
+.cWuGnJ .toc > h3{margin:0;font-size:1.125rem;}/*!sc*/
+.cWuGnJ .toc > ul{position:relative;margin:0;padding:8px 0 16px 20px;font-size:1rem;list-style:none;}/*!sc*/
+.cWuGnJ .toc > ul a{color:#dddddd;}/*!sc*/
+.cWuGnJ .toc > ul ul{list-style:none;padding-left:30px;}/*!sc*/
+.cWuGnJ p{margin-top:0;margin-bottom:16px;}/*!sc*/
+.cWuGnJ h1,.cWuGnJ h2,.cWuGnJ h3,.cWuGnJ h4,.cWuGnJ h5,.cWuGnJ h6{margin-top:24px;margin-bottom:16px;line-height:1.25;font-weight:600;}/*!sc*/
+.cWuGnJ h1 > a.anchor path,.cWuGnJ h2 > a.anchor path,.cWuGnJ h3 > a.anchor path,.cWuGnJ h4 > a.anchor path,.cWuGnJ h5 > a.anchor path,.cWuGnJ h6 > a.anchor path{fill:white;}/*!sc*/
+.cWuGnJ h1{padding-bottom:0.3em;border-bottom:1px solid #21262d;font-size:2.125em;}/*!sc*/
+.cWuGnJ h2{padding-bottom:0.3em;border-bottom:1px solid #21262d;font-size:1.625em;}/*!sc*/
+.cWuGnJ h3{font-size:1.5em;}/*!sc*/
+.cWuGnJ h4{font-size:1.25em;}/*!sc*/
+.cWuGnJ h5{font-size:1em;}/*!sc*/
+.cWuGnJ h6{font-size:0.9375em;}/*!sc*/
+.cWuGnJ ul,.cWuGnJ ol,.cWuGnJ .gatsby-resp-image-wrapper{margin-bottom:16px;}/*!sc*/
+.cWuGnJ table{width:-webkit-max-content;width:-moz-max-content;width:max-content;max-width:100%;margin-bottom:16px;border-collapse:collapse;}/*!sc*/
+.cWuGnJ table tr{border-top:1px solid #21262d;}/*!sc*/
+.cWuGnJ table td,.cWuGnJ table th{padding:6px 13px;border:1px solid #30363d;}/*!sc*/
+.cWuGnJ hr{height:0.25em;margin:24px 0;border:0;background-color:#30363d;}/*!sc*/
+.cWuGnJ li > ul,.cWuGnJ li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.cWuGnJ blockquote{position:relative;margin-left:0;margin-right:0;margin-bottom:16px;padding:16px 32px;border-left:1px solid #666666;border-left-width:10px;background-color:#111111;}/*!sc*/
+.cWuGnJ blockquote > :first-child{margin-top:0;}/*!sc*/
+.cWuGnJ blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.cWuGnJ blockquote > ul,.cWuGnJ blockquote > ol{padding-left:20px;}/*!sc*/
+.cWuGnJ blockquote:before{content:'"';position:absolute;top:-10px;left:5px;font-size:3em;color:#666666;}/*!sc*/
+.cWuGnJ blockquote:after{content:'"';position:absolute;bottom:-30px;right:5px;font-size:3em;color:#666666;}/*!sc*/
+.cWuGnJ code{padding:0.2em 0.4em;border-radius:2px;font-size:0.85em;background-color:#333333;color:#DDDDDD;white-space:break-spaces;}/*!sc*/
+.cWuGnJ a > code{color:skyblue;}/*!sc*/
+.cWuGnJ pre[class*="language-"]{margin-bottom:16px;}/*!sc*/
+.cWuGnJ pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.cWuGnJ img{border:1px solid #333333;}/*!sc*/
+data-styled.g12[id="sc-jrcTuL"]{content:"cWuGnJ,"}/*!sc*/
+.bUfzSF{margin-bottom:16px;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#111111;}/*!sc*/
+data-styled.g13[id="sc-kDvujY"]{content:"bUfzSF,"}/*!sc*/
+.gqbUTE{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding:16px;cursor:pointer;}/*!sc*/
+.gqbUTE > h2{margin:0;font-size:1rem;}/*!sc*/
+.gqbUTE > span{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}/*!sc*/
+data-styled.g14[id="sc-ipEyDJ"]{content:"gqbUTE,"}/*!sc*/
+.eyYgkR{display:inline-block;padding:4px 8px;border-radius:2px;background-color:#222222;color:skyblue;-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g17[id="sc-bqWxrE"]{content:"eyYgkR,"}/*!sc*/
+.fyhhHm{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+data-styled.g18[id="sc-ksBlkl"]{content:"fyhhHm,"}/*!sc*/
+.dvBPua{margin:60px 0 72px;padding:0 24px;}/*!sc*/
+.dvBPua > h1{font-size:2.5rem;word-break:keep-all;margin:0;}/*!sc*/
+data-styled.g175[id="sc-ciEjBl"]{content:"dvBPua,"}/*!sc*/
+.fbNNYy{margin-bottom:16px;}/*!sc*/
+data-styled.g176[id="sc-ifSILs"]{content:"fbNNYy,"}/*!sc*/
+.bwgJoX{margin:16px 0;}/*!sc*/
+data-styled.g177[id="sc-IQBGL"]{content:"bwgJoX,"}/*!sc*/
+.fEEcQL{margin-bottom:60px;}/*!sc*/
+data-styled.g178[id="sc-gGfaQS"]{content:"fEEcQL,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-bcXHqe chkzGJ"><div class="sc-gswNZR blVyGE"><header><a href="/blog/">tech blog</a></header><address><a href="https://ricale.kr">by ricale</a></address><nav><ul><li><a href="/blog/posts/">모든글</a></li><li><a href="/blog/series/">시리즈</a></li><li><a href="/blog/tags/">태그</a></li></ul></nav></div><main><div class="sc-ciEjBl dvBPua"><h1>Gatsby 블로그 만들기 6 - 목차 자동 생성</h1><div class="sc-IQBGL bwgJoX">2023. 1. 28.</div><ul class="sc-ksBlkl fyhhHm"><li><a class="sc-bqWxrE eyYgkR" href="/blog/tags/Gatsby/">Gatsby</a></li><li><a class="sc-bqWxrE eyYgkR" href="/blog/tags/Gatsby blog/">Gatsby blog</a></li><li><a class="sc-bqWxrE eyYgkR" href="/blog/tags/목차/">목차</a></li><li><a class="sc-bqWxrE eyYgkR" href="/blog/tags/table of contents/">table of contents</a></li><li><a class="sc-bqWxrE eyYgkR" href="/blog/tags/toc/">toc</a></li></ul></div><div class="sc-kDvujY bUfzSF"><div class="sc-ipEyDJ gqbUTE"><h2>시리즈 <a href="/blog/series/Gatsby 블로그 만들기/">&quot;Gatsby 블로그 만들기&quot;</a></h2><span>▲</span></div></div><div data-gatsby-image-wrapper="" class="gatsby-image-wrapper gatsby-image-wrapper-constrained sc-ifSILs fbNNYy"><div style="max-width:4600px;display:block"><img alt="" role="presentation" aria-hidden="true" src="data:image/svg+xml;charset=utf-8,%3Csvg height=&#x27;3067&#x27; width=&#x27;4600&#x27; xmlns=&#x27;http://www.w3.org/2000/svg&#x27; version=&#x27;1.1&#x27;%3E%3C/svg%3E" style="max-width:100%;display:block;position:static"/></div><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#d8d8d8;position:absolute;top:0;left:0;bottom:0;right:0"></div><picture><source type="image/webp" data-srcset="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/5bd91/jeshoots-com-pUAM5hPaCRI-unsplash.webp 1150w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/69462/jeshoots-com-pUAM5hPaCRI-unsplash.webp 2300w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/93d92/jeshoots-com-pUAM5hPaCRI-unsplash.webp 4600w" sizes="(min-width: 4600px) 4600px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 4600px) 4600px, 100vw" decoding="async" loading="lazy" data-src="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" data-srcset="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/33c6c/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 1150w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/dbecc/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 2300w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 4600w" alt="jeshoots-com-pUAM5hPaCRI-unsplash"/></picture><noscript><picture><source type="image/webp" srcSet="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/5bd91/jeshoots-com-pUAM5hPaCRI-unsplash.webp 1150w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/69462/jeshoots-com-pUAM5hPaCRI-unsplash.webp 2300w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/93d92/jeshoots-com-pUAM5hPaCRI-unsplash.webp 4600w" sizes="(min-width: 4600px) 4600px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 4600px) 4600px, 100vw" decoding="async" loading="lazy" src="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg" srcSet="/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/33c6c/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 1150w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/dbecc/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 2300w,/blog/static/52c24b026422fe2a4793d4fc56ba8d7d/27cc2/jeshoots-com-pUAM5hPaCRI-unsplash.jpg 4600w" alt="jeshoots-com-pUAM5hPaCRI-unsplash"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div><div class="sc-jrcTuL sc-gGfaQS cWuGnJ fEEcQL"><div class="toc"><h3 id="목차" style="position:relative"><a href="#%EB%AA%A9%EC%B0%A8" aria-label="목차 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>목차</h3><ul>
+<li><a href="#1-%EA%B0%9C%EC%9A%94">1. 개요</a></li>
+<li><a href="#2-%EA%B5%AC%ED%98%84">2. 구현</a>
+<ul>
+<li><a href="#21-tableofcontents">2.1. <code>tableOfContents</code></a></li>
+<li><a href="#21-tableofcontents-%EC%9D%98-%EB%B2%84%EA%B7%B8">2.1. <code>tableOfContents</code> 의 버그</a></li>
+<li><a href="#23-gatsby-remark-table-of-contents-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8">2.3. <code>gatsby-remark-table-of-contents</code> 플러그인</a></li>
+<li><a href="#24-gatsby-remark-table-of-contents-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%EC%9D%98-%EB%B2%84%EA%B7%B8">2.4. <code>gatsby-remark-table-of-contents</code> 플러그인의 버그</a></li>
+<li><a href="#25-%EC%A7%81%EC%A0%91-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%9E%91%EC%84%B1">2.5. 직접 플러그인 작성</a>
+<ul>
+<li><a href="#251-gatsby-remark-table-of-contents-%ED%95%B5%EC%8B%AC-%EB%A1%9C%EC%A7%81-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0">2.5.1. <code>gatsby-remark-table-of-contents</code> 핵심 로직 가져오기</a></li>
+<li><a href="#252-%EB%A1%9C%EC%BB%AC-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0">2.5.2. 로컬 플러그인으로 만들기</a></li>
+<li><a href="#253-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%88%98%EC%A0%95">2.5.3. 스타일 수정</a></li>
+<li><a href="#254-%EC%83%81%EC%84%B8-%EC%BD%94%EB%93%9C">2.5.4. 상세 코드</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-%EB%8B%A4%EC%9D%8C">3. 다음</a></li>
+<li><a href="#4-%EC%B0%B8%EA%B3%A0">4. 참고</a></li>
+</ul></div>
+<p>이전 글들에서는 Gatsby <a href="https://ricale.kr/blog/posts/230111-gatsby-1/">기본 기능을 구현을 위한 튜토리얼을 소개했고 태그 기능을 구현</a>했고, <a href="https://ricale.kr/blog/posts/230112-gatsby-2/">MDX 글 안에 인라인 이미지와 테이블을 삽입</a>했으며, <a href="https://ricale.kr/blog/posts/230119-gatsby-3-series/">시리즈 기능도 만들어</a>보았고, <a href="https://ricale.kr/blog/posts/230122-gatsby-4-drafts/">임시글 기능도 구현</a>했고. <a href="https://ricale.kr/blog/posts/230126-gatsby-5-ga/">Google Analytics 도 적용</a>해보았다.</p>
+<p>이번에는 목차를 추가해보자.</p>
+<h1 id="1-개요" style="position:relative"><a href="#1-%EA%B0%9C%EC%9A%94" aria-label="1 개요 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>1. 개요</h1>
+<p>목차는 글 안에 있는 제목들을 모아서 보여주는 목록이다. 이 글에서는 글마다 제목들을 자동으로 모아서 목차를 만들어주는 기능을 블로그에 적용할 것이다.</p>
+<h1 id="2-구현" style="position:relative"><a href="#2-%EA%B5%AC%ED%98%84" aria-label="2 구현 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2. 구현</h1>
+<p>본래는 <code>gatsby-plugin-mdx</code> 에서 기본 제공해주는 <code>tableOfContents</code> 필드로 해결하려 했으나 이슈가 있었다. 그래서 이슈를 어떻게 해결했는지를 기록한다.</p>
+<h2 id="21-tableofcontents" style="position:relative"><a href="#21-tableofcontents" aria-label="21 tableofcontents permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.1. <code>tableOfContents</code></h2>
+<p><code>gatsby-plugin-mdx</code> 는 <code>tableOfContents</code> 필드를 자동으로 만들어준다. 글 상세 페이지의 GraphQL 쿼리에 아래처럼 <code>tableOfContents</code> 필드를 추가하면 사용할 수 있다.</p>
+<div><div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// src/pages/posts/{mdx.frontmatter__slug}.tsx</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> query <span class="token operator">=</span> graphql<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
+      frontmatter {
+        # ...
+      }
+      excerpt
+      # ...
+      tableOfContents # 이렇게 추가해주자.
+    }
+  }
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span></code></pre></div></div>
+<p><code>tableOfContents</code> 데이터는 아래와 같은 형식으로 나온다.</p>
+<div><div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// mdx.tableOfContents</span>
+<span class="token punctuation">{</span>
+  items<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#1-개요"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"1. 개요"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      url<span class="token operator">:</span> <span class="token string">"#2-구현"</span><span class="token punctuation">,</span>
+      title<span class="token operator">:</span> <span class="token string">"2. 구현"</span><span class="token punctuation">,</span>
+      items<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          url<span class="token operator">:</span> <span class="token string">"#21-개발-환경에서만-보이는-임시글-디렉토리-환경-설정"</span><span class="token punctuation">,</span>
+          title<span class="token operator">:</span> <span class="token string">"2.1. 개발 환경에서만 보이는 임시글 디렉토리 환경 설정"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          url<span class="token operator">:</span> <span class="token string">"#22-임시글-목록-페이지-구현"</span><span class="token punctuation">,</span>
+          title<span class="token operator">:</span> <span class="token string">"2.2. 임시글 목록 페이지 구현"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          url<span class="token operator">:</span> <span class="token string">"#23-임시글-링크를-메뉴에-추가"</span><span class="token punctuation">,</span>
+          title<span class="token operator">:</span> <span class="token string">"2.3. 임시글 링크를 메뉴에 추가"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#24-상세-코드"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"2.4. 상세 코드"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#3-다음"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"3. 다음"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#4-참고"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"4. 참고"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div>
+<p>해당 데이터를 사용해서 목차를 렌더링하는 <code>&lt;TableOfContents /&gt;</code> 컴포넌트는 아래처럼 구현해주었다.</p>
+<div><div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// src/components/TableOfContents.tsx</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">function</span> <span class="token function">TableOfContents</span><span class="token punctuation">(</span><span class="token punctuation">{</span> data<span class="token punctuation">,</span> slug <span class="token punctuation">}</span><span class="token operator">:</span> TableOfContentsProps<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Container</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span>data<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Link</span></span> <span class="token attr-name">to</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/posts/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>slug<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>item<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>title<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token punctuation">{</span><span class="token operator">!</span><span class="token operator">!</span>item<span class="token punctuation">.</span>items <span class="token operator">&amp;&amp;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TableOfContents</span></span> <span class="token attr-name">data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>items<span class="token punctuation">}</span></span> <span class="token attr-name">slug</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>slug<span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">}</span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Container</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> TableOfContents<span class="token punctuation">;</span></code></pre></div></div>
+<p>이 <code>&lt;TableOfContents /&gt;</code> 컴포넌트를 글 상세 페이지에서 사용하자.</p>
+<div><div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// src/pages/posts/{mdx.frontmatter__slug}.tsx</span>
+
+<span class="token keyword">function</span> <span class="token function">PostDetailPage</span><span class="token punctuation">(</span><span class="token punctuation">{</span> data<span class="token punctuation">,</span> children <span class="token punctuation">}</span><span class="token operator">:</span> PageProps<span class="token operator">&lt;</span>PostDetailPageData<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// data.mdx.tableOfContents 로 접근 가능하다.</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token comment">/* ... */</span><span class="token punctuation">,</span> tableOfContents <span class="token punctuation">}</span> <span class="token operator">=</span> data<span class="token punctuation">.</span>mdx<span class="token punctuation">;</span>
+
+  <span class="token comment">// ...</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Layout</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span><span class="token comment">/* ... */</span><span class="token punctuation">}</span><span class="token plain-text">
+
+      </span><span class="token punctuation">{</span><span class="token comment">/* 본문 바로 위에 목차를 위치시켰다. */</span><span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TableOfContents</span></span> <span class="token attr-name">data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>tableOfContents<span class="token punctuation">.</span>items<span class="token punctuation">}</span></span> <span class="token attr-name">slug</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>slug<span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PostContent</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PostContent</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+
+      </span><span class="token punctuation">{</span><span class="token comment">/* ... */</span><span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Layout</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div></div>
+<p>그러면 아래처럼 목차가 나온다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/42fd71c8feea03f2bd06382f19da6275/f3015/screenshot-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 87.99999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAADRUlEQVR42q2UXWwUZRSGd7b737qzOz+7szO7O662WaBljW3pj0vTn62Y2BCtUi6aGG5ModhYNRKJoIhAoFJ/KBEirUmDmiDFCqUQiRdy4Q1Gb0i4MVGDF6YRghoSE0n08ZtZ69LYC0O4eOd858z3vfOe93wZj8fj4fzZWf66dZNfrv/EbzcWuPrjt3xx8XNGRzbT091Je1sr7a0tPFzqYv/eV7h8+RI/L/zAzV8XuHHtKn/eus67h8dwuDzOY35uhj9+vyY2fS/wHV9dusirO1/igYZVVIciaLEYtmVQWFFHd3sTJ44f4cqVL5m/8B4nZ8c5/9kEQ1serxDu3rOV2fkJTs29w9ffXODcp8d5tNTBuu61DPSV6FxTEESN7HpxmIOvb2f62Dhnz02y/9Az7HlrmPGJEZ7Y2FkhHB4dYEwUpz86yMmPpzl1Yoq9O0cZ2jTAC5sH2b71KTZtXM/63rXse/lZTs+8z5m5KQ68OcJrB4bYN76Fx568jfC5bYNMfrCDmU+OMXn0bXbteJ5Heor0drTQ2JBnTWEl3Q81U2db9K8rcvrDCc7MH+GNQyPsHnuaw1PbGBgsVQibW1cJySU2bOijp6tIW8uD5Ow0uhIXHoZQ5SiGpqDGZOrutejr7aC/v5f2jnraiqspdhWozacrhA6kYM1iYQmkKh8eySvW0rLvl4E4JEkEwmHUtE2moZFsoRmjdiVy0qQ6rnKPmqBG0dx9zn6v1+tC8kpurRw9SxV6fT4Uy8bMryZuZokmUgQi1f9X1VKFDmq0JF5/4E4I/kuoajr2fbUYpoWRShERbcpJy1WqmhlkobY6rhGR44RlhZiWIC7OOGvHCscWXzBUIdQFkZmrJXN/Hfn8CoyMLUgMorpBMmUSEJN2huP9B1XCHp/PX8595dqivy6hEo+TNk3kaJSogKYqVHmlO29ZlmUam5oIhyN3x8OU8C2bzZLL5bBtG8uyykin0XSdRDKJYRgCKTfqTi2RQFVVd5+TRyKR2zwUhbQ4vAhTtB8OhwgEAsvC7/f/i2Aw6EbnXlamLL5UX1+PJiZ3V1rW9YQr3SF0WsqI9mPiH6goiqvYsaScq6QzGbcjJ9c0zX3vxFCofG3+BucyE/sXMBcSAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 1"
+        title=""
+        src="/blog/static/42fd71c8feea03f2bd06382f19da6275/5a190/screenshot-1.png"
+        srcset="/blog/static/42fd71c8feea03f2bd06382f19da6275/772e8/screenshot-1.png 200w,
+/blog/static/42fd71c8feea03f2bd06382f19da6275/e17e5/screenshot-1.png 400w,
+/blog/static/42fd71c8feea03f2bd06382f19da6275/5a190/screenshot-1.png 800w,
+/blog/static/42fd71c8feea03f2bd06382f19da6275/c1b63/screenshot-1.png 1200w,
+/blog/static/42fd71c8feea03f2bd06382f19da6275/29007/screenshot-1.png 1600w,
+/blog/static/42fd71c8feea03f2bd06382f19da6275/f3015/screenshot-1.png 1804w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>디자인이 너무 밋밋하긴 하지만 동작에는 전혀 문제가 없다. 이렇게 <code>gatsby-plugin-mdx</code> 에서 제공해주는 기능으로 간단하게 목차 구현을 완료했다.</p>
+<p>...인줄 알았으나</p>
+<h2 id="21-tableofcontents-의-버그" style="position:relative"><a href="#21-tableofcontents-%EC%9D%98-%EB%B2%84%EA%B7%B8" aria-label="21 tableofcontents 의 버그 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.1. <code>tableOfContents</code> 의 버그</h2>
+<p><code>tableOfContents</code> 에는 현재 버그가 존재한다. 바로 제목 안에 인라인 코드(`CODE`)가 있으면 제목이 잘려서 보인다는 것이다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/f1669f0f488c217dbac82d12834e10c6/bf8c1/screenshot-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 50%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABt0lEQVR42qXQS08TURjG8ZnOtJ0ZsXR6nU5bjZVLsEZlY+LOaARFaQe+jms/gAuXJq7duDExJogiRoJGY0ECBVqKU2uNYolf4O+ZGSwxcYMufjnve3LOcy6SJEncv3eX1sdnbNYe01h9QnPtKTvrc7TW52ltvGC3voi7+Qp367WwhLu9zO7GPM8f3Wb57Rqd7j7b9Ro5K43kBT58cIdeewG3Pke3scDXnUW+fVoS3vDdfcde+z29zx/odWr8+LLi63VXaW+9pNlo8nN/j05rBTtnBYGXLp5jtnqV6anLVA5Ub17Bmb4mTPhmKpN/cKrXmXFu4FQmmHWmqNyaRNe0INCnx8Qo0+//nURIllFVBev0KPZImUS+iBGLoyjKkfQDPZoIiGVtwpr+/zeMRiJk7AK6YQS3jUQDUQ3ld31AVsNEdEOsPeb3Yc3weXU/MJ3LM3z2PCdHxjhTLhO38iSLJbJDY/6cdWqITGmU1IkShdIwA2aSeCKBdnwQY9BEF6+LGgOHgXHTxEymSGUy2LZN1rIoFIuk0mlCoZBPlgPq4V/9nbc4KU4bH79AQgR7vaqq/kavPuof/gLrZz2BpnBMTQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 2"
+        title=""
+        src="/blog/static/f1669f0f488c217dbac82d12834e10c6/5a190/screenshot-2.png"
+        srcset="/blog/static/f1669f0f488c217dbac82d12834e10c6/772e8/screenshot-2.png 200w,
+/blog/static/f1669f0f488c217dbac82d12834e10c6/e17e5/screenshot-2.png 400w,
+/blog/static/f1669f0f488c217dbac82d12834e10c6/5a190/screenshot-2.png 800w,
+/blog/static/f1669f0f488c217dbac82d12834e10c6/c1b63/screenshot-2.png 1200w,
+/blog/static/f1669f0f488c217dbac82d12834e10c6/29007/screenshot-2.png 1600w,
+/blog/static/f1669f0f488c217dbac82d12834e10c6/bf8c1/screenshot-2.png 1722w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>위 이미지에 있는 &quot;플러그인 적용&quot; 이라는 제목에 주목하자. 나는 이런 제목을 작성한 적이 없다. 데이터를 확인해보면 아래와 같다.</p>
+<div><div class="gatsby-highlight" data-language="tsx"><pre class="language-tsx"><code class="language-tsx"><span class="token comment">// data.mdx.tableOfContents</span>
+<span class="token punctuation">{</span>
+  items<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#1-개요"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"1. 개요"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      url<span class="token operator">:</span> <span class="token string">"#2-구현"</span><span class="token punctuation">,</span>
+      title<span class="token operator">:</span> <span class="token string">"2. 구현"</span><span class="token punctuation">,</span>
+      items<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#21-ga-에-프로젝트-추가"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"2.1. GA 에 프로젝트 추가"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          url<span class="token operator">:</span> <span class="token string">"#22-gatsby-plugin-google-gtag-플러그인-적용"</span><span class="token punctuation">,</span>
+          title<span class="token operator">:</span> <span class="token string">" 플러그인 적용"</span><span class="token punctuation">,</span> <span class="token comment">// 제목이 url 과 너무 다르다!</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#23-참고"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"2.3. 참고"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#3-다음"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"3. 다음"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"#4-참고"</span><span class="token punctuation">,</span> title<span class="token operator">:</span> <span class="token string">"4. 참고"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div>
+<p>중간에 보면 <code>url</code> 은 <code>&quot;#22-gatsby-plugin-google-gtag-플러그인-적용&quot;</code> 인데 <code>title</code> 은 <code>&quot; 플러그인 적용&quot;</code> 으로 되어있다. 해당 데이터의 mdx 원문은 아래와 같다.</p>
+<div><div class="gatsby-highlight" data-language="md"><pre class="language-md"><code class="language-md"><span class="token title important"><span class="token punctuation">##</span> 2.2. `gatsby-plugin-google-gtag` 플러그인 적용</span></code></pre></div></div>
+<p>인라인 코드를 포함한 앞부분이 모두 잘려버린 걸 짐작할 수 있다.</p>
+<p>만약 제목에 인라인 코드를 쓰지 않는다면 문제가 없긴 하다. 하지만 인라인 코드를 자주 쓰는 (나같은) 사람이라면, 이 방식으로는 목차를 만들 수 없다. 대안을 찾아보자.</p>
+<h2 id="23-gatsby-remark-table-of-contents-플러그인" style="position:relative"><a href="#23-gatsby-remark-table-of-contents-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8" aria-label="23 gatsby remark table of contents 플러그인 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.3. <code>gatsby-remark-table-of-contents</code> 플러그인</h2>
+<p>이 때 대안으로 생각할 수 있는 것이 <a href="https://github.com/signalwerk/gatsby-remark-table-of-contents"><code>gatsby-remark-table-of-contents</code></a> 플러그인이다.</p>
+<p>이 플러그인은 글 본문에 자동으로 목차를 추가해준다.</p>
+<p>플러그인을 설치한 뒤</p>
+<div><div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh">$ <span class="token function">npm</span> <span class="token function">install</span> gatsby-remark-autolink-headers <span class="token comment"># 같이 설치해줘야 한다.</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> gatsby-remark-table-of-contents</code></pre></div></div>
+<p><code>gatsby-node.ts</code> 에 설정을 추가해주자.</p>
+<div><div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// gatsby-config.ts</span>
+
+<span class="token keyword">const</span> config<span class="token operator">:</span> GatsbyConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">{</span>
+      resolve<span class="token operator">:</span> <span class="token string">"gatsby-plugin-mdx"</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+        gatsbyRemarkPlugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            resolve<span class="token operator">:</span> <span class="token string">"gatsby-remark-table-of-contents"</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              fromHeading<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+              tight<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token string">"gatsby-remark-autolink-headers"</span><span class="token punctuation">,</span>
+          <span class="token comment">// ...</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div>
+<p>그리고 목차를 넣고자 하는 글의 원하는 부분에 아래처럼 추가해주면 된다.</p>
+<div><div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```toc
+```</code></pre></div></div>
+<p>그러면 플러그인에서 해당 영역이 위치한 부분에 자동으로 목차를 삽입해준다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/ab5ed1ececebab7cf012eec0f3421609/92bb4/screenshot-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.49999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB20lEQVR42q2RbWvTUBiGmzRNk67v3dqs6Ytp6wRlf0B0imvdmAhThKIiFH+V+DcUUZyKqK2IbgjbaNlLX2bVWVEQ8YsfLp+sahUEFf1w5Zw855w7z5Xj8Xg8XKxW6a7Xaa1cY3v1Ju21W3SaS3Sb9+i27tNrPeDFxiOhwc5mg357mbX6Ve5cv0Jz6x0fP7yndqmKm+VxH7ULC7ztLLG1ekNCbtPfuMur7Ye8bjfY7TzhTfcpg94zBjvLwgqD/nOp19lcf0y395LPn3a5XDs/Ciw4Gc4tVjhzuszZxTlOzR+jfOIwJ2ePCEeHlF1mRlSOM1eZoSJrC/OzZDP2KNDFCEbQA+FvxX9hODHHgoQSE4RiCeJWmljSwjBN/IaBz+/Hp+uoqvpLvF4VRVF+DnSJjKdwDk6TKx0gW5zCzjsk7SyBaBwjFPm7DgORGEEJ/C/KgYBJ0rLQRU2Rd0X1onqHKF/Zm4ueR1HRRF/TNKlpeDUfXp9P6j8oh6NRpg5Nky2UKJb2E0ulCVsZEvkiaafERNYhLrhjYtImFB8nGk9gipUZju7ZqfKB74FjciFJ2ZiyM+RyeSbTNnmnQEpGv3St+w00QTdMdOnut8ruIcfZh5Ua/kNN9FzUkcYf8wVx7UtTsv73aAAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 3"
+        title=""
+        src="/blog/static/ab5ed1ececebab7cf012eec0f3421609/5a190/screenshot-3.png"
+        srcset="/blog/static/ab5ed1ececebab7cf012eec0f3421609/772e8/screenshot-3.png 200w,
+/blog/static/ab5ed1ececebab7cf012eec0f3421609/e17e5/screenshot-3.png 400w,
+/blog/static/ab5ed1ececebab7cf012eec0f3421609/5a190/screenshot-3.png 800w,
+/blog/static/ab5ed1ececebab7cf012eec0f3421609/c1b63/screenshot-3.png 1200w,
+/blog/static/ab5ed1ececebab7cf012eec0f3421609/29007/screenshot-3.png 1600w,
+/blog/static/ab5ed1ececebab7cf012eec0f3421609/92bb4/screenshot-3.png 1824w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>좋다. 이제 인라인 코드도 제목에 잘 들어간 걸 확인할 수 있다. 이렇게 플러그인을 사용해 간단히 목차를 구현해보았다.</p>
+<p>아니 그런데...?</p>
+<h2 id="24-gatsby-remark-table-of-contents-플러그인의-버그" style="position:relative"><a href="#24-gatsby-remark-table-of-contents-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%EC%9D%98-%EB%B2%84%EA%B7%B8" aria-label="24 gatsby remark table of contents 플러그인의 버그 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.4. <code>gatsby-remark-table-of-contents</code> 플러그인의 버그</h2>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/b1424019d16fab9eace3a401551ac7e5/92bb4/screenshot-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.49999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB3UlEQVR42qWRW2sTURRG55a5NG0yuXWSTNI4SVQQ8wfEVjGN1b5In4JSa/FXiX9DEcWqiJqIaItQY2tqc7NqG1AQ8cWH5RlHjIKg0oc1+7A555u9zpEkSWKxXqffavBq7Rrb6zfptG7R3VgR3KO3eZ/+5gPetB8Jmgy2mux0VnnRuMqd61fYeP2Bz58+snyxjp8l+Z+lC/PsdVdor9+g+/I2g/Zd3m0/5H2nyW73CXu9pwz7zxgOVgVrDHeei36DrdZjev23fP2yy+Xl86PASjHHpYUai+dmWVqYo372BLVTx6hVj3O6Oh0w6zMzonaSudqM2DPN/Jkq+Zw7CjQE9kSUSDiCHDT3Q7AwwuOE4ynCsQR2OktsMo1pWRimScgwCOk6iqL8EVVVkGX590CfaMrBO1JhqnyYfOkQbsFj0s0zZscxhcF/TWhGY4wnnf3qBoGpsEU5k0YXav4dyoqKogbIP/i+FnqSrKAJfU3TRE9D1UKooZDo/6KcjNlUjlbIF8uUygeJOVki6RyJQomsVyaV94gL/JrIuEzEk9jxBJawsiI2Y6Iq4gc/Ay3xIEmx0XFzTE0VyGRdCl4RR1RDTK0bJppANy10Md1flf1DRe8AaSe4Q03o+SgjjX/mG2acS8JNSqnZAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 4"
+        title=""
+        src="/blog/static/b1424019d16fab9eace3a401551ac7e5/5a190/screenshot-4.png"
+        srcset="/blog/static/b1424019d16fab9eace3a401551ac7e5/772e8/screenshot-4.png 200w,
+/blog/static/b1424019d16fab9eace3a401551ac7e5/e17e5/screenshot-4.png 400w,
+/blog/static/b1424019d16fab9eace3a401551ac7e5/5a190/screenshot-4.png 800w,
+/blog/static/b1424019d16fab9eace3a401551ac7e5/c1b63/screenshot-4.png 1200w,
+/blog/static/b1424019d16fab9eace3a401551ac7e5/29007/screenshot-4.png 1600w,
+/blog/static/b1424019d16fab9eace3a401551ac7e5/92bb4/screenshot-4.png 1824w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<p>저 정체불명의 문자열은 무엇일까? 별 거 아니다. 그냥 플러그인의 버그다.</p>
+<p>플러그인의 깃헙 이슈에 들어가보면 <a href="https://github.com/signalwerk/gatsby-remark-table-of-contents/issues/33">해당 버그가 9월에 이슈로 등록</a>된 것을 확인할 수 있다. 하지만 해결되지 않은 것으로 보인다.</p>
+<p>옵션을 어떻게 해도 해당 문자열은 노출되는 것으로 보인다. 그러면 이 플러그인도 쓸 수 없다.</p>
+<h2 id="25-직접-플러그인-작성" style="position:relative"><a href="#25-%EC%A7%81%EC%A0%91-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EC%9E%91%EC%84%B1" aria-label="25 직접 플러그인 작성 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.5. 직접 플러그인 작성</h2>
+<p><code>gatsby-remark-table-of-contents</code> 플러그인은 버그로 인해 쓰기 곤란해졌다. 하지만 해당 버그만 어떻게든 제거한다면 사용에는 문제가 없어보인다. 그러면 <code>gatsby-remark-table-of-contents</code> 라이브러리 코드를 최대한 참고해 직접 플러그인을 작성해서 사용해보자.</p>
+<h3 id="251-gatsby-remark-table-of-contents-핵심-로직-가져오기" style="position:relative"><a href="#251-gatsby-remark-table-of-contents-%ED%95%B5%EC%8B%AC-%EB%A1%9C%EC%A7%81-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0" aria-label="251 gatsby remark table of contents 핵심 로직 가져오기 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.5.1. <code>gatsby-remark-table-of-contents</code> 핵심 로직 가져오기</h3>
+<p>일단 <code>gatsby-remark-table-of-contents</code> 의 핵심 디펜던시인 <a href="https://github.com/syntax-tree/mdast-util-toc"><code>mdast-util-toc</code></a> 를 설치해주자.</p>
+<div><div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh"><span class="token comment"># 버전을 5로 지정하는 이유는 버전 6 부터 ESM only 이기 때문이다.</span>
+<span class="token comment"># gatsby 는 플러그인에 ESM 을 지원하지 않는다.</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> mdast-util-toc@5</code></pre></div></div>
+<p>그리고 <code>plugins/gatsby-remark-toc/index.js</code> 파일을 생성해서 아래처럼 작성하자.</p>
+<div><div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// plugins/gatsby-remark-toc/index.js</span>
+<span class="token comment">// - `.ts` 가 아니라 `.js` 로 만든 이유는 본래 플러그인도 `.js` 라서 타입이 지정되어 있지 않기 때문이다.</span>
+<span class="token comment">//   타입은 나중에 개선할 때 추가하도록 하겠다.</span>
+
+<span class="token keyword">const</span> util <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"mdast-util-toc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">transformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">markdownAST<span class="token punctuation">,</span> pluginOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> prefs <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">tight</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">fromHeading</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">toHeading</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token string">"toc"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">ordered</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 목차를 위한 빈 마크다운 AST 를 만든다.</span>
+  <span class="token keyword">const</span> tocMarkdownAST <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>markdownAST<span class="token punctuation">,</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// - 원본 마크다운으로부터 제목만 추려서 `tocMarkdownAST` 에 넣자.</span>
+  <span class="token comment">// - 여기서 굳이 제목만 추리는 이유는</span>
+  <span class="token comment">//   `node.depth >= prefs.fromHeading` 이 조건을 적용하기 위해서로 보인다.</span>
+  <span class="token comment">//   해당 조건이 필요 없다면 markdownAST 를 그대로 `mdast-util-toc` 에</span>
+  <span class="token comment">//   넣어도 될 것 같다.</span>
+  markdownAST<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">"heading"</span> <span class="token operator">&amp;&amp;</span> node<span class="token punctuation">.</span>depth <span class="token operator">>=</span> prefs<span class="token punctuation">.</span>fromHeading<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      tocMarkdownAST<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// `mdast-util-toc` 로 목차를 위한 마크다운 AST 를 만든다.</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">util</span><span class="token punctuation">(</span>tocMarkdownAST<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">maxDepth</span><span class="token operator">:</span> prefs<span class="token punctuation">.</span>toHeading<span class="token punctuation">,</span>
+    <span class="token literal-property property">tight</span><span class="token operator">:</span> prefs<span class="token punctuation">.</span>tight<span class="token punctuation">,</span>
+    <span class="token literal-property property">ordered</span><span class="token operator">:</span> prefs<span class="token punctuation">.</span>ordered<span class="token punctuation">,</span>
+    <span class="token literal-property property">skip</span><span class="token operator">:</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>prefs<span class="token punctuation">.</span>exclude<span class="token punctuation">)</span>
+      <span class="token operator">?</span> prefs<span class="token punctuation">.</span>exclude<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"|"</span><span class="token punctuation">)</span>
+      <span class="token operator">:</span> prefs<span class="token punctuation">.</span>exclude<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>map<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// - 마크다운 원문 맨 앞에 목차를 끼워넣는다.</span>
+    <span class="token comment">// - 본래 플러그인은 마크다운 본문 내에 ` ```toc ` 영역을 찾아서</span>
+    <span class="token comment">//   해당 영역에 목차를 끼워넣지만</span>
+    <span class="token comment">//   나는 ` ```toc ` 를 쓰지 않아도 무조건 목차를 추가할 예정이라서</span>
+    <span class="token comment">//   해당 로직은 제거했다.</span>
+    markdownAST<span class="token punctuation">.</span>children <span class="token operator">=</span> <span class="token punctuation">[</span>
+      <span class="token comment">// - 이렇게 하면 목차를 `&lt;div class='toc'>&lt;/div>` 로 한 번 감싸주고,</span>
+      <span class="token comment">//   `### 목차`를 목차 앞에 추가해준다.</span>
+      <span class="token comment">// - 이런 과정이 다 필요없고 목차만 넣고 싶다면</span>
+      <span class="token comment">//   아래 객체 대신 `result.map` 을 직접 넣어주면 된다.</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"parent"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"heading"</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">depth</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token string">"목차"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          result<span class="token punctuation">.</span>map<span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token literal-property property">hProperties</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token string">"toc"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token operator">...</span>markdownAST<span class="token punctuation">.</span>children<span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> markdownAST<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> markdownAST <span class="token punctuation">}</span><span class="token punctuation">,</span> pluginOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">transformer</span><span class="token punctuation">(</span>markdownAST<span class="token punctuation">,</span> pluginOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div>
+<h3 id="252-로컬-플러그인으로-만들기" style="position:relative"><a href="#252-%EB%A1%9C%EC%BB%AC-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%EC%9C%BC%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0" aria-label="252 로컬 플러그인으로 만들기 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.5.2. 로컬 플러그인으로 만들기</h3>
+<p>로컬 플러그인을 만들기 위해서는 플러그인과 같은 디렉토리에 <code>package.json</code> 도 작성해주어야 한다.</p>
+<div><div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token comment">// plugins/gatsby-remark-toc/package.js</span>
+<span class="token punctuation">{</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"gatsby-remark-toc"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"MIT"</span>
+<span class="token punctuation">}</span></code></pre></div></div>
+<p>이제 <code>plugins/gatsby-remark-toc</code> 디렉토리는 <code>gatsby-remark-toc</code> 플러그인으로 취급할 수 있다. 플러그인을 사용하도록 설정에 추가해주자.</p>
+<div><div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// gatsby-config.ts</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">const</span> config<span class="token operator">:</span> GatsbyConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">{</span>
+      resolve<span class="token operator">:</span> <span class="token string">"gatsby-plugin-mdx"</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+        gatsbyRemarkPlugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">"gatsby-remark-toc"</span><span class="token punctuation">,</span>
+          <span class="token string">"gatsby-remark-autolink-headers"</span><span class="token punctuation">,</span>
+          <span class="token comment">// ...</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div>
+<h3 id="253-스타일-수정" style="position:relative"><a href="#253-%EC%8A%A4%ED%83%80%EC%9D%BC-%EC%88%98%EC%A0%95" aria-label="253 스타일 수정 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.5.3. 스타일 수정</h3>
+<p>스타일은 클래스 이름으로 지정해서 적용해주면 된다. 2.5.1. 에서 목차를 <code>&lt;div class=&#x27;toc&#x27;&gt;&lt;/div&gt;</code> 로 감싸주었던 것을 상기하자.</p>
+<div><div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// src/components/MdxContent.tsx</span>
+<span class="token comment">// 마크다운 본문을 감싸고 있는 컴포넌트다.</span>
+
+<span class="token keyword">import</span> styled <span class="token keyword">from</span> <span class="token string">"../themes"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> MdxContent <span class="token operator">=</span> styled<span class="token punctuation">.</span>div<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+  /* ... */
+
+  /*
+    입맛에 맞게 스타일 지정을 해주자
+  */
+  .toc {
+    margin: 0 16px 16px;
+    padding: 16px 0 0 16px;
+    background-color: #1a1a1a;
+    > h3 {
+      margin: 0;
+      font-size: 1.125rem;
+    }
+    > ul {
+      position: relative;
+      margin: 0;
+      padding: 8px 0 16px 20px;
+
+      font-size: 1rem;
+      list-style: none;
+
+      a {
+        color: #dddddd;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 30px;
+      }
+    }
+  }
+
+  /* ... */
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> MdxContent<span class="token punctuation">;</span></code></pre></div></div>
+<p>그러면 이제 아래처럼 잘 적용된 것을 확인할 수 있다.</p>
+<div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/7711d/screenshot-5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 59.00000000000001%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAACUElEQVR42pWSS28SURTHBwiChjczzAyPoeX9HLSyMH4Tv4KJC+NC3bhx0RgXJj4WfgQTiSbGpNWW1rRGoUB5CpUCisZKdyY+4sL8PTOA0BgXLn6555659zdnzhmGYRhcuXodw/4hmsU8Bs0VdHYfo1RcR6tRQrO+g+5eDb1uA723dey1q9jvNtGsbWHt4WVUSgV8/f4Ld+/cguJiVOHF8xjtv8Cg9RTDzho+dvM46G/ioLeJz/0t4iVGg1cYvSvg8H0Rhx92MWzmsL16H53eF/z88Q33bt+YCS9dOIdOJYfy9gPUXudQLzxCY+cJWqUVtMrP0K48R6e6TuTRrilsoF3fQLW4ijJV+Gn4BjeXr82EDrsV2SUZkXAA8Vh4jsgfEvFJHJ8SRSIRpVwIyWQMHMfOhFqtDmk5g2AwBKeTVWFZlg5xhGsCB5eLn8M1gWKeh16vnwmVjSRJkGUZyVQKciajrv6FBcr74feP8XjccLv/xuPxwGg0HhUKgkClp5A9cxapU6eRXsoiLp9EPJ1BLBZTUS6LoghRXScxoeSPCHU6HX1uUK3M6/VCJLmKKMAtjmNB4CkWJ1JhLJriFmE0GGZCA20W6fN8Pi9c1Csn9YzlBRUn9UhBjSlvp/66qDpeECk/PsNRbDAenwktdgcC8RR8oShC4QgcohdWtwR2MaLmOCkApxQE5w+C90o4YbXDYrPBYLLAqGC2QXdsrkKTyQQnTZWnNyu9VKanDEGZtIaeazQa9bCyarWa6cV/wcBsNiMcDsNisWD8G2lVpqL/4TfcgZhMgCYmyQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 5"
+        title=""
+        src="/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/5a190/screenshot-5.png"
+        srcset="/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/772e8/screenshot-5.png 200w,
+/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/e17e5/screenshot-5.png 400w,
+/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/5a190/screenshot-5.png 800w,
+/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/c1b63/screenshot-5.png 1200w,
+/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/29007/screenshot-5.png 1600w,
+/blog/static/9a164dd471950ee4f82cbd0e0f9124c8/7711d/screenshot-5.png 1821w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div>
+<h3 id="254-상세-코드" style="position:relative"><a href="#254-%EC%83%81%EC%84%B8-%EC%BD%94%EB%93%9C" aria-label="254 상세 코드 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.5.4. 상세 코드</h3>
+<p>본문의 코드 조각들은 생략된 부분이 있으므로, 코드 전문을 보고 싶다면 아래를 참고하자.</p>
+<ul>
+<li><a href="https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/plugins/gatsby-remark-toc/index.js">plugins/gatsby-remark-toc/index.js</a></li>
+<li><a href="https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/plugins/gatsby-remark-toc/package.json">plugins/gatsby-remark-toc/package.json</a></li>
+<li><a href="https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/gatsby-config.ts#L39">gatsby-config.ts</a></li>
+<li><a href="https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/src/components/MdxContent.tsx#L7">src/components/MdxContent.tsx</a></li>
+</ul>
+<h1 id="3-다음" style="position:relative"><a href="#3-%EB%8B%A4%EC%9D%8C" aria-label="3 다음 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>3. 다음</h1>
+<p>이로서 목차 자동 생성 기능을 구현해보았다.</p>
+<p>목차가 글 옆에서 떠다니면서 현재 읽고 있는 부분의 제목을 강조해주는 기능을 나중에 구현해도 재미있을 것 같다.</p>
+<p>이외에도 다음에 정리할 것들은 아래와 같다.</p>
+<ul>
+<li>댓글 기능 구현</li>
+<li>코드블록 문법 하이라이팅 기능 구현</li>
+<li>GitHub Pages 배포</li>
+<li>RSS 피드 기능 구현</li>
+<li>등등</li>
+</ul>
+<p>순서는 미정이다.</p>
+<h1 id="4-참고" style="position:relative"><a href="#4-%EC%B0%B8%EA%B3%A0" aria-label="4 참고 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>4. 참고</h1>
+<ul>
+<li>Gatsby Docs - <a href="https://www.gatsbyjs.com/tutorial/remark-plugin-tutorial/">Creating a Remark Transformer Plugin</a></li>
+<li><a href="https://github.com/signalwerk/gatsby-remark-table-of-contents">signalwerk/gatsby-remark-table-of-contents</a></li>
+<li><a href="https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-mdx#headings">gatsby-plugin-mdx - Extending the GraphQL MDX nodes - headings</a></li>
+<li><a href="https://digital-garden.dev/notes/remark-toc">remark generated table of contents</a></li>
+</ul></div><div id="comments"></div></main></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SGJDRX2QGE"></script><script>
+      
+      
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SGJDRX2QGE', {"send_page_view":false});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/230128-gatsby-6-toc/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-043cf1068c190726e82d.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-5d758bb8c14cdec99b21.js\"],\"component---src-pages-drafts-index-tsx\":[\"/component---src-pages-drafts-index-tsx-cd255407528cbe2cfe71.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-3c1674482f63714bb899.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-8029a126c7c6bad7b4e9.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx-0aa5987a0029197807e1.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx-bb764e9538ee0e08a4c5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx-197ce0e43be83251d9cf.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx-8898f2f589abd9fbd760.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx-ffe75688d923c9010fa3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx-150259017346cd254e8c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx-a5931066f00eabc07202.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx-6acd7a7ddd785c43cb40.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx-d106007aba5adfded4b3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx-e72d55f279391654e682.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx-3bdda84a5dccea177b1c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx-70bf453a86852f5a1568.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx-2a6bc2ddbe47eea76d19.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx-20058169b81439136954.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx-4f68e82f4faaace9afb2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx-e77f325ac4cbcc07fa5f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx-d0a4fe304eefcc7cfb56.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx-0cb8716d73d60e4cb443.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx-33c6bf7670b07c6fa8e6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx-0dacd6e8aa683ada0e43.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx-ef1c11ef8d1e9a0a7424.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx-8e1fe2116fe27cad849f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx-bb6eea3a3155505eb087.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx-f837c0ee6823cb6dd064.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx-99145f7548ef6c0d277c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx-7151d87264e84d833aef.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx-60109c71471679079fc6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx-a2f086030fc069c65b94.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx-046fea418ac89f59bc0d.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx-f8f0daef480c122e1e34.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx-f00b4308719142642ddd.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx-bb7c50e793327a335e3c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx-7a298e2f0e893fd61fb0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx-a138e5db4fd6243217f0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx-334d74fe786a3a212927.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx-c5e9e42ab23b71ef0beb.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx-f0f6e11e5212197359c3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx-8e337b48512ad001c5aa.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx-e230593c371de860ebce.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx-c7b2a028ef3a7c21ea46.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx-7648db20e96ff870f1e2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx-e683a8439e4feae92ba8.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx-c057fc02512fe204a066.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx-bef1022f6e7f65d59a52.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx-dcbb9428fa19306d1b65.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx-c5aeb4683088c58cb275.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx-d0b81e965a901e8ccdba.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx-ad558f362eb9dc076870.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx-8eb8c0537affcd5c027b.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx-cd109c3d42c83a9d901e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx-3c62e4d73b82489f6d3e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx-d72b8b3c7a4e60d30211.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx-d12d203920f913aea14a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230119-gatsby-3-series-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230119-gatsby-3-series-index-mdx-2f219cd09d355e42d8b6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230121-react-native-build-error-5-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230121-react-native-build-error-5-index-mdx-f623b743c6c8f23d5856.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230122-gatsby-4-drafts-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230122-gatsby-4-drafts-index-mdx-2006b5d0266a28437ee0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230124-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230124-read-writings-index-mdx-ca056ac4b57cf0584117.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230126-gatsby-5-ga-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230126-gatsby-5-ga-index-mdx-622fa02ffed9870cf9d0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230128-gatsby-6-toc-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230128-gatsby-6-toc-index-mdx-74d37230d53c4a2d1d73.js\"],\"component---src-pages-series-index-tsx\":[\"/component---src-pages-series-index-tsx-cb5733088e385847e57d.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-c27843f88722012caf45.js\"],\"component---src-templates-series-detail-page-template-tsx\":[\"/component---src-templates-series-detail-page-template-tsx-c6e2d752b97b17254304.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-1c573e9827941bc8071b.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="71c3fb518ff1d3b90190";</script><script src="/blog/webpack-runtime-54b67f0932762b359158.js" async></script><script src="/blog/framework-722053c27c5e7561dbbb.js" async></script><script src="/blog/app-043cf1068c190726e82d.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
