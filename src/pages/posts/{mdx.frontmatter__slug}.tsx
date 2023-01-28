@@ -40,6 +40,7 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
       {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
+
       <PostContent>{children}</PostContent>
       <Comments />
     </Layout>
