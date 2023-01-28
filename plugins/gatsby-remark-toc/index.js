@@ -8,7 +8,7 @@ const defaultPrefs = {
   ordered: false,
 };
 
-const transformer = (markdownAST, pluginOptions) => {
+const transformer = (markdownAST /*, pluginOptions*/) => {
   const prefs = { ...defaultPrefs };
 
   const tocMarkdownAST = {
@@ -54,10 +54,6 @@ const transformer = (markdownAST, pluginOptions) => {
   return markdownAST;
 };
 
-module.exports = ({ markdownAST, markdownNode }, pluginOptions) => {
-  const type = markdownNode?.internal?.type;
-  return transformer(markdownAST, {
-    mdx: type && type.toLowerCase() === "mdx",
-    ...pluginOptions,
-  });
+module.exports = ({ markdownAST }, pluginOptions) => {
+  return transformer(markdownAST, pluginOptions);
 };
