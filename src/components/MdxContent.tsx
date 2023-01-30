@@ -1,10 +1,16 @@
 import styled from "../themes";
 
 const MdxContent = styled.div`
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
   line-height: 1.5;
 
-  .toc {
+  > .md {
+    order: 1;
+  }
+  > .toc {
+    order: 0;
     margin: 0 16px 16px;
     padding: 16px 0 0 16px;
     background-color: #1a1a1a;
@@ -171,6 +177,10 @@ const MdxContent = styled.div`
     white-space: break-spaces;
   }
 
+  a > code {
+    color: skyblue;
+  }
+
   pre[class*="language-"] {
     margin-bottom: 16px;
 
@@ -182,6 +192,10 @@ const MdxContent = styled.div`
     border-radius: unset;
     background-color: unset;
     color: unset;
+  }
+
+  img {
+    border: 1px solid #333333;
   }
 `;
 

@@ -35,6 +35,13 @@ const transformer = (markdownAST /*, pluginOptions*/) => {
     markdownAST.children = [
       {
         type: "parent",
+        children: markdownAST.children,
+        data: {
+          hProperties: { className: "md" },
+        },
+      },
+      {
+        type: "parent",
         children: [
           {
             type: "heading",
@@ -47,7 +54,6 @@ const transformer = (markdownAST /*, pluginOptions*/) => {
           hProperties: { className: "toc" },
         },
       },
-      ...markdownAST.children,
     ];
   }
 
