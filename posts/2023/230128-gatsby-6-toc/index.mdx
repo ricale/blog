@@ -445,6 +445,114 @@ export default MdxContent;
 - [gatsby-config.ts](https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/gatsby-config.ts#L39)
 - [src/components/MdxContent.tsx](https://github.com/ricale/blog/blob/40696c0b150bec7bbfb48b569ac207fab15b10c9/src/components/MdxContent.tsx#L7)
 
+## 2.6. `excerpt` 필드를 위한 처리 (22.1.30.추가)
+
+2.5. 내용을 모두 진행하면 목차는 잘 보인다. 하지만 이슈가 하나 있다. `excerpt` 필드와 관련이 있다.
+
+`exceprt` 는 마크다운 본문 내용을 앞에서부터 N 글자만 추린 문자열이다 (N 기본값 = 140). 미리보기에 사용하라는 용도로 자동으로 생성되는 필드인데, 2.5. 에서처럼 목차를 본문 앞에 넣어버리면 이 필드에는 목차 내용이 대부분을 차지하게 된다.
+
+아래가 목차를 앞에 두었을 때 이 글의 `excerpt` 값이다.
+
+> 목차 1. 개요2. 구현  
+> 2.1. tableOfContents2.1. tableOfContents 의 버그2.3. gatsby-remark-table-of-contents 플러그인2.4. gatsby-remark-table-of…
+
+이건 당연히 우리가 바라는 바가 아니다. 따라서 수정하도록 하겠다.
+
+방법은 간단하다. 목차를 분문 맨 뒤에 넣되, CSS 를 사용해서 보이는 것 자체는 맨 앞에서 보이도록 처리할 것이다.
+
+### 2.6.1. 목차를 맨 뒤로
+
+목차를 맨 뒤로 보내기 위해 `gatsby-reamrk-toc` 를 조금 수정해주자.
+
+```js
+// plugins/gatsby-remark-toc/index.js
+
+// ...
+
+const transformer = (markdownAST /*, pluginOptions*/) => {
+  // ...
+
+  if (result.map) {
+    markdownAST.children = [
+      // 마크다운 본문인 markdownAST 을 목차인 result.map 보다 앞으로 가져온다.
+      // 그냥 앞으로 가져오는 게 아니라 <div class="md"></div> 로 감싸준다.
+      {
+        type: "parent",
+        children: markdownAST.children,
+        data: {
+          hProperties: { className: "md" },
+        },
+      },
+      // 목차는 이제 본문보다 뒤에 위치시킨다.
+      {
+        type: "parent",
+        children: [
+          {
+            type: "heading",
+            depth: 3,
+            children: [{ type: "text", value: "목차" }],
+          },
+          result.map,
+        ],
+        data: {
+          hProperties: { className: "toc" },
+        },
+      },
+    ];
+  }
+
+  //...
+};
+
+// ...
+```
+
+이렇게 하면 `excerpt` 값이 (이 글 기준) 아래처럼 바뀐 걸 확인할 수 있다.
+
+> 이전 글들에서는 Gatsby 기본 기능을 구현을 위한 튜토리얼을 소개했고 태그 기능을 구현했고, MDX 글 안에 인라인 이미지와 테이블을 삽입했으며, 시리즈 기능도 만들어보았고, 임시글 기능도 구현했고. Google Analytics 도 적용해보았다.…
+
+하지만 이로서 목차는 글 아래로 이동하게 된다.
+
+### 2.6.2. CSS 로 목차를 맨 위로 이동
+
+글을 읽는 사람 임장에서 목차는 본문보다 앞에 있는 것이 더 좋다. 그러니 CSS 를 사용해서 목차를 맨 앞으로 가져오자.
+
+```tsx
+// src/components/MdxContent.tsx
+
+const MdxContent = styled.div`
+  // ...
+
+  // 마크다운 본문 전체를 감싸고 있던 컴포넌트는 flex 박스로 만든다.
+  display: flex;
+  flex-direction: column;
+
+  // 마크다운 본문은 order 를 1 로 설정하고,
+  // 목차는 order 를 0 으로 설정해준다.
+  // 이러면 목차가 마크다운 본문보다 앞으로 이동하게 된다.
+  > .md {
+    order: 1;
+  }
+  > .toc {
+    order: 0;
+
+    // ...
+  }
+  // ...
+`;
+
+export default MdxContent;
+```
+
+이제 다시 목차가 글보다 위에 있는 것을 확인할 수 있다.
+
+### 2.6.3. 상세 코드
+
+본문의 코드 조각들은 생략된 부분이 있으므로, 코드 전문을 보고 싶다면 아래를 참고하자.
+
+- [plugins/gatsby-remark-toc/index.js](https://github.com/ricale/blog/blob/1cea57f71115b0395cc7aadf9f5159e7e49e916c/plugins/gatsby-remark-toc/index.js#L35)
+- [src/components/MdxContent.tsx](https://github.com/ricale/blog/blob/1cea57f71115b0395cc7aadf9f5159e7e49e916c/src/components/MdxContent.tsx#L4)
+
 # 3. 다음
 
 이로서 목차 자동 생성 기능을 구현해보았다.
