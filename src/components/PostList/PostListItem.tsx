@@ -3,11 +3,11 @@ import { navigate } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import styled from "../../themes";
-import { PostFrontmatter } from "../../types";
+import { Post } from "../../types";
 
 const INVALID_DATE_STRING = "Invalid date";
 
-type PostListItemProps = Omit<PostFrontmatter, "tags">;
+type PostListItemProps = Post;
 
 function PostListItem({
   title,

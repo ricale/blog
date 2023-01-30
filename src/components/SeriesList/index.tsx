@@ -1,37 +1,13 @@
 import * as React from "react";
 
 import styled from "../../themes";
-import { PostFrontmatter } from "../../types";
+import { Series } from "../../types";
 import SeriesListItem from "./SeriesListItem";
 
 type SeriesListProps = {
-  data: {
-    fieldValue: string;
-    totalCount: number;
-    edges: {
-      node: {
-        frontmatter: Omit<PostFrontmatter, "slug" | "tags"> & {
-          originalDate: string;
-        };
-      };
-    }[];
-  }[];
+  data: Series[];
 };
-function SeriesList({ data: source }: SeriesListProps) {
-  const data = source
-    .map(({ edges, ...sr }) => ({
-      ...sr,
-      node: edges.sort((a, b) =>
-        b.node.frontmatter.originalDate.localeCompare(
-          a.node.frontmatter.originalDate
-        )
-      )[0].node,
-    }))
-    .sort((a, b) =>
-      b.node.frontmatter.originalDate.localeCompare(
-        a.node.frontmatter.originalDate
-      )
-    );
+function SeriesList({ data }: SeriesListProps) {
   return (
     <Container>
       {data.map((sr) => (

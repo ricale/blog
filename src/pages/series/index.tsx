@@ -4,29 +4,22 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import ListPageHeader from "../../components/ListPageHeader";
-import { PostFrontmatter } from "../../types";
+import { Series, SeriesSource } from "../../types";
 import SeriesList from "../../components/SeriesList";
+import getSeries from "../../getters/getSeries";
 
 type SeriesPageData = {
   allMdx: {
-    group: {
-      fieldValue: string;
-      totalCount: number;
-      edges: {
-        node: {
-          frontmatter: Omit<PostFrontmatter, "slug" | "tags"> & {
-            originalDate: string;
-          };
-        };
-      }[];
-    }[];
+    group: SeriesSource[];
   };
 };
-function SeriesPage({ data }: PageProps<SeriesPageData>) {
+function SeriesPage({ data: source }: PageProps<SeriesPageData>) {
+  const data: Series[] = getSeries(source.allMdx.group);
+
   return (
     <Layout>
       <ListPageHeader title="시리즈" />
-      <SeriesList data={data.allMdx.group} />
+      <SeriesList data={data} />
     </Layout>
   );
 }

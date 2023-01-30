@@ -3,22 +3,16 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { navigate } from "gatsby";
 
-import { PostFrontmatter } from "../../types";
+import { Series } from "../../types";
 
-type SeriesListItemProps = {
-  fieldValue: string;
-  totalCount: number;
-  node: {
-    frontmatter: Omit<PostFrontmatter, "slug" | "tags">;
-  };
-};
+type SeriesListItemProps = Series;
 function SeriesListItem({
   fieldValue,
   totalCount,
-  node,
+  frontmatter,
   ...props
 }: SeriesListItemProps) {
-  const { date, heroImage, heroImageAlt } = node.frontmatter;
+  const { date, heroImage, heroImageAlt } = frontmatter;
 
   const image = heroImage ? getImage(heroImage) : null;
 

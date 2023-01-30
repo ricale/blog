@@ -4,18 +4,17 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import ListPageHeader from "../../components/ListPageHeader";
-import { PostFrontmatter } from "../../types";
+import { PostSource } from "../../types";
 import PostList from "../../components/PostList";
+import getPosts from "../../getters/getPosts";
 
 type PostsPageData = {
   allMdx: {
-    nodes: {
-      frontmatter: PostFrontmatter;
-    }[];
+    nodes: PostSource[];
   };
 };
 function PostsPage({ data }: PageProps<PostsPageData>) {
-  const posts = data.allMdx.nodes;
+  const posts = getPosts(data.allMdx.nodes);
   return (
     <Layout>
       <ListPageHeader title="글" note={posts.length} />
@@ -47,6 +46,6 @@ export const query = graphql`
   }
 `;
 
-export const Head = () => <Seo />;
+export const Head = () => <Seo title="모든 글" />;
 
 export default PostsPage;

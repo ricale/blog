@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, navigate } from "gatsby";
+import { navigate } from "gatsby";
 import styled from "../themes";
 import { PostFrontmatter } from "../types";
 
@@ -30,7 +30,7 @@ function SimplePostList({ data: source }: SimplePostListProps) {
           {`작성일 ${orderByAsc ? "오름차순" : "내림차순"}`}
         </SortingToggleButton>
       </SortingAction>
-      <SeriesPostList>
+      <PostList>
         {data.map(({ node: { frontmatter } }) => (
           <li
             key={frontmatter.slug}
@@ -40,7 +40,7 @@ function SimplePostList({ data: source }: SimplePostListProps) {
             <span className="title">{frontmatter.title}</span>
           </li>
         ))}
-      </SeriesPostList>
+      </PostList>
     </Container>
   );
 }
@@ -68,7 +68,7 @@ const SortingToggleButton = styled.button`
   cursor: pointer;
 `;
 
-const SeriesPostList = styled.ol`
+const PostList = styled.ol`
   margin-top: 8px;
   padding-left: 0px;
   list-style: none;
