@@ -4,11 +4,8 @@ const colors = {
   background: "black",
   onBackground: "white",
 
-  codeblock: "#111111",
-  onCodeblock: "white",
-
   blockquoteBorder: "#666666",
-  blockquote: "#111111",
+  blockquote: "#1a1a1a",
   onBlockquote: "white",
 
   code: "#333333",

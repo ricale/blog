@@ -7,11 +7,11 @@ import PostCardItem from "./PostCardItem";
 type PostCardListProps = {
   data: Post[];
 };
-function PostCardList({ data }: PostCardListProps) {
+function PostCardList({ data, ...props }: PostCardListProps) {
   return (
-    <Container>
+    <Container {...props}>
       {data.map(({ ...item }, i) => (
-        <Item key={i} {...item} />
+        <PostCardItem key={i} {...item} />
       ))}
     </Container>
   );
@@ -22,10 +22,14 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 24px;
-`;
 
-const Item = styled(PostCardItem)`
-  width: calc(50% - 12px);
+  & > * {
+    width: calc(50% - 12px);
+
+    @media (max-width: 500px) {
+      width: 100%;
+    }
+  }
 `;
 
 export default PostCardList;

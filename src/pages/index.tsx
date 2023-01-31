@@ -27,8 +27,9 @@ function IndexPage({ data: source }: PageProps<IndexPageData>) {
   const recentPosts = getPosts(source.recentPosts.nodes);
   const recentSeries = getSeries(source.series.group).slice(0, 3);
   const popularTags = source.tags.group
+    .filter((item) => item.totalCount > 1)
     .sort((a, b) => b.totalCount - a.totalCount)
-    .slice(0, 20);
+    .slice(0, 30);
 
   return (
     <Layout emphasize>
@@ -47,7 +48,7 @@ function IndexPage({ data: source }: PageProps<IndexPageData>) {
               <h2>최신 시리즈</h2>
               <Link to="/series/">더보기</Link>
             </div>
-            <SeriesList data={recentSeries} />
+            <RecentSeriesList data={recentSeries} />
           </Section>
         </Column>
         <Column>
@@ -70,7 +71,10 @@ const Row = styled.div`
   gap: 24px;
 
   margin: 24px 0;
-  /* padding: 0 8px; */
+
+  @media (max-width: 799px) {
+    flex-direction: column;
+  }
 `;
 type ColumnProps = {
   flex?: number;
@@ -101,6 +105,26 @@ const Section = styled.div`
 
 const PopularTagList = styled(TagList)`
   font-size: 0.875rem;
+`;
+const RecentSeriesList = styled(SeriesList)`
+  gap: 24px;
+
+  & > * {
+    width: calc(33% - 16px);
+  }
+
+  @media (max-width: 768px) {
+    & > * {
+      width: calc(33% - 16px);
+    }
+  }
+
+  @media (max-width: 500px) {
+    gap: 16px;
+    & > * {
+      width: calc(50% - 8px);
+    }
+  }
 `;
 
 export const query = graphql`

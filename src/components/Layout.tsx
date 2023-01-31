@@ -75,7 +75,7 @@ const Container = styled.div`
     padding-right: ${(p) => p.theme.dimens.margin}px;
     padding-bottom: ${(p) => p.theme.dimens.margin}px;
 
-    @media (max-width: 800px) {
+    @media (max-width: 799px) {
       padding-left: ${(p) => p.theme.dimens.margin + 4}px;
       padding-right: ${(p) => p.theme.dimens.margin + 4}px;
     }
@@ -135,9 +135,6 @@ const Header = styled.div<HeaderProps>`
     css`
       padding-top: 56px;
       padding-bottom: 48px;
-      @media (max-width: 800px) {
-        flex-direction: column;
-      }
       & > header {
         font-family: monospace;
         font-size: 5rem;
@@ -148,6 +145,19 @@ const Header = styled.div<HeaderProps>`
       }
       & > nav {
         display: none;
+      }
+
+      @media (max-width: 799px) {
+        flex-direction: column;
+
+        & > header {
+          font-family: monospace;
+          font-size: 4.5rem;
+        }
+        & > address {
+          font-family: monospace;
+          font-size: 1.25rem;
+        }
       }
     `}
 `;

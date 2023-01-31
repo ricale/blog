@@ -1,7 +1,9 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as React from "react";
-import styled from "styled-components";
+import { navigate } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+
 import { Post } from "../../types";
+import styled from "../../themes";
 
 type PostListItemProps = Post;
 
@@ -15,7 +17,7 @@ function PostCardItem({
 }: PostListItemProps) {
   const image = heroImage ? getImage(heroImage) : null;
   return (
-    <Container {...props}>
+    <Container {...props} onClick={() => navigate(`/posts/${slug}`)}>
       <ThumbnailWrapper>
         {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
       </ThumbnailWrapper>
@@ -30,6 +32,7 @@ function PostCardItem({
 const Container = styled.div`
   padding: 2px;
   background-color: #333333;
+  cursor: pointer;
 `;
 
 const ThumbnailWrapper = styled.div`

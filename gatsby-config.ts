@@ -3,7 +3,7 @@ import type { GatsbyConfig } from "gatsby";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 const siteMetadata = {
-  title: "tech blog",
+  title: "techblog",
   author: "ricale",
   siteUrl: "https://ricale.kr/blog/",
   description: "기술 블로그 by ricale",

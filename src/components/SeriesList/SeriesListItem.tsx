@@ -1,9 +1,9 @@
 import * as React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import styled from "styled-components";
 import { navigate } from "gatsby";
 
 import { Series } from "../../types";
+import styled from "../../themes";
 
 type SeriesListItemProps = Series;
 function SeriesListItem({
