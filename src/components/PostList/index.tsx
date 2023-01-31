@@ -1,19 +1,17 @@
 import * as React from "react";
 
 import styled from "../../themes";
-import { PostFrontmatter } from "../../types";
+import { Post } from "../../types";
 import PostListItem from "./PostListItem";
 
 type PostListProps = {
-  data: {
-    frontmatter: PostFrontmatter;
-  }[];
+  data: Post[];
 };
 function PostList({ data }: PostListProps) {
   return (
     <Container>
-      {data.map(({ frontmatter, ...item }, i) => (
-        <PostListItem key={i} {...frontmatter} {...item} />
+      {data.map(({ ...item }, i) => (
+        <PostListItem key={i} {...item} />
       ))}
     </Container>
   );

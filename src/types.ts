@@ -11,9 +11,31 @@ export type PostFrontmatter = {
   previewContent?: string;
 };
 
-export type Post = {
+export type PostSource = {
   frontmatter: PostFrontmatter;
 };
+
+export type Post = PostSource["frontmatter"];
+
+export type SeriesSource = {
+  fieldValue: string;
+  totalCount: number;
+  edges: {
+    node: {
+      frontmatter: Omit<PostFrontmatter, "slug" | "tags"> & {
+        originalDate: string;
+      };
+    };
+  }[];
+};
+
+export type TagSource = {
+  fieldValue: string;
+  totalCount: number;
+};
+
+export type Series = Pick<SeriesSource, "fieldValue" | "totalCount"> &
+  SeriesSource["edges"][0]["node"];
 
 export type SiteMetadata = {
   title: string;

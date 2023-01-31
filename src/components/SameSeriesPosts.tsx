@@ -43,7 +43,7 @@ const Container = styled.div`
   margin-bottom: 16px;
   align-items: center;
 
-  background-color: #111111;
+  background-color: #1a1a1a;
 `;
 
 type HeaderProps = {

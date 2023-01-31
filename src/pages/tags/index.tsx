@@ -7,14 +7,11 @@ import ListPageHeader from "../../components/ListPageHeader";
 import Tag from "../../components/Tag";
 import styled from "../../themes";
 import TagList from "../../components/TagList";
+import { TagSource } from "../../types";
 
-type TagData = {
-  fieldValue: string;
-  totalCount: number;
-};
 type TagsPageData = {
   allMdx: {
-    group: TagData[];
+    group: TagSource[];
   };
 };
 function TagsPage({ data }: PageProps<TagsPageData>) {
@@ -24,29 +21,13 @@ function TagsPage({ data }: PageProps<TagsPageData>) {
       acc[tag.totalCount > 1 ? 0 : 1].push(tag);
       return acc;
     },
-    [[], []] as [TagData[], TagData[]]
+    [[], []] as [TagSource[], TagSource[]]
   );
   return (
     <Layout>
       <ListPageHeader title="태그" />
-      {/* <Tags>
-        {tagsMoreThanOnce.map((tag) => (
-          <li key={tag.fieldValue}>
-            <Tag value={tag.fieldValue} />{" "}
-            {tag.totalCount > 1 && <sup>{`${tag.totalCount}`}</sup>}
-          </li>
-        ))}
-      </Tags> */}
       <Tags tags={tagsMoreThanOnce} showCount />
       <Tags tags={tagsOnlyOnce} />
-      {/* <Tags>
-        {tagsOnlyOnce.map((tag) => (
-          <li key={tag.fieldValue}>
-            <Tag value={tag.fieldValue} />{" "}
-            {tag.totalCount > 1 && <sup>{`${tag.totalCount}`}</sup>}
-          </li>
-        ))}
-      </Tags> */}
     </Layout>
   );
 }

@@ -19,7 +19,7 @@ function ListPageHeader({ title, subtitle, note }: ListPageHeaderProps) {
 }
 
 const Container = styled.div`
-  margin: 40px 0;
+  margin: 40px 0 45px;
   padding-left: 40px;
 
   @media (max-width: 414px) {

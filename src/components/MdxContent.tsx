@@ -29,6 +29,9 @@ const MdxContent = styled.div`
       a {
         color: #dddddd;
       }
+      a > code {
+        color: #dddddd;
+      }
 
       ul {
         list-style: none;

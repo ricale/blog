@@ -2,57 +2,43 @@ import * as React from "react";
 import { navigate } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import styled from "../../themes";
 import { Post } from "../../types";
-
-const INVALID_DATE_STRING = "Invalid date";
+import styled from "../../themes";
 
 type PostListItemProps = Post;
 
-function PostListItem({
+function PostCardItem({
   title,
   slug,
   date,
   heroImage,
   heroImageAlt,
+  ...props
 }: PostListItemProps) {
   const image = heroImage ? getImage(heroImage) : null;
-  const dateIsValid = date !== INVALID_DATE_STRING;
   return (
-    <Container onClick={() => navigate(`/posts/${slug}`)}>
+    <Container {...props} onClick={() => navigate(`/posts/${slug}`)}>
       <ThumbnailWrapper>
         {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
       </ThumbnailWrapper>
       <Info>
-        <h2>{title}</h2>
-        <Subtitle>{dateIsValid ? date : slug}</Subtitle>
+        <Title>{title}</Title>
+        <Subtitle>{date}</Subtitle>
       </Info>
     </Container>
   );
 }
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
   padding: 2px;
-
+  background-color: #333333;
   cursor: pointer;
-
-  &:hover {
-    background-color: #666666;
-  }
 `;
 
 const ThumbnailWrapper = styled.div`
-  position: relative;
-
-  width: 60px;
-  height: 60px;
-
-  background-color: #222222;
+  width: 100%;
+  height: 150px;
 `;
-
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 100%;
@@ -60,17 +46,14 @@ const ThumbnailImage = styled(GatsbyImage)`
 `;
 
 const Info = styled.div`
-  flex: 1;
-
-  & > h2 {
-    margin: 0;
-    font-size: 1.125rem;
-  }
+  padding: 8px;
+`;
+const Title = styled.h3`
+  word-break: keep-all;
+  margin-bottom: 4px;
+`;
+const Subtitle = styled.p`
+  font-size: 0.875rem;
 `;
 
-const Subtitle = styled.div`
-  font-size: 0.8125rem;
-  color: #dddddd;
-`;
-
-export default PostListItem;
+export default PostCardItem;

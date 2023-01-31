@@ -1,7 +1,12 @@
 import * as React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
-import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../themes";
+import styled, {
+  css,
+  GlobalStyle,
+  normalTheme,
+  ThemeProvider,
+} from "../themes";
 import { SiteMetadata } from "../types";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -19,9 +24,10 @@ type LayoutQueryData = {
   };
 };
 type LayoutProps = {
+  emphasize?: boolean;
   children?: React.ReactNode;
 };
-function Layout({ children }: LayoutProps) {
+function Layout({ emphasize, children }: LayoutProps) {
   const data = useStaticQuery<LayoutQueryData>(graphql`
     query {
       site {
@@ -37,7 +43,7 @@ function Layout({ children }: LayoutProps) {
     <ThemeProvider theme={normalTheme}>
       <GlobalStyle />
       <Container>
-        <Header>
+        <Header emphasize={emphasize}>
           <header>
             <Link to="/">{title}</Link>
           </header>
@@ -69,19 +75,23 @@ const Container = styled.div`
     padding-right: ${(p) => p.theme.dimens.margin}px;
     padding-bottom: ${(p) => p.theme.dimens.margin}px;
 
-    @media (max-width: 800px) {
+    @media (max-width: 799px) {
       padding-left: ${(p) => p.theme.dimens.margin + 4}px;
       padding-right: ${(p) => p.theme.dimens.margin + 4}px;
     }
   }
 `;
-const Header = styled.div`
+type HeaderProps = {
+  emphasize?: boolean;
+};
+const Header = styled.div<HeaderProps>`
   display: flex;
   flex-direction: row;
 
   margin: 8px 16px;
 
   & > header {
+    margin-right: 8px;
     font-weight: 600;
     font-size: 1.125rem;
     > a {
@@ -90,7 +100,6 @@ const Header = styled.div`
   }
 
   & > address {
-    margin-left: 8px;
     font-size: 0.875rem;
     font-style: normal;
     > a {
@@ -120,6 +129,37 @@ const Header = styled.div`
       }
     }
   }
+
+  ${(p) =>
+    p.emphasize &&
+    css`
+      padding-top: 56px;
+      padding-bottom: 48px;
+      & > header {
+        font-family: monospace;
+        font-size: 5rem;
+      }
+      & > address {
+        font-family: monospace;
+        font-size: 1.5rem;
+      }
+      & > nav {
+        display: none;
+      }
+
+      @media (max-width: 799px) {
+        flex-direction: column;
+
+        & > header {
+          font-family: monospace;
+          font-size: 4.5rem;
+        }
+        & > address {
+          font-family: monospace;
+          font-size: 1.25rem;
+        }
+      }
+    `}
 `;
 
 export default Layout;
