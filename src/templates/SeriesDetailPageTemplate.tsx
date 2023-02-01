@@ -32,7 +32,7 @@ const SeriesDetailPageTemplate = ({
   const { totalCount, edges } = data.allMdx;
 
   return (
-    <Layout>
+    <Layout minContentHeight={500}>
       <ListPageHeader title={series} subtitle="시리즈" note={totalCount} />
       <SimplePostList data={edges} />
     </Layout>

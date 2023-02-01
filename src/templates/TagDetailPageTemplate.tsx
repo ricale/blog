@@ -28,7 +28,7 @@ const TagDetailPageTemplate = ({
   const { totalCount, edges } = data.allMdx;
 
   return (
-    <Layout>
+    <Layout minContentHeight={500}>
       <ListPageHeader title={tag} subtitle="태그" note={totalCount} />
       <SimplePostList data={edges} />
     </Layout>
