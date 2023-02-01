@@ -36,7 +36,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
 
   margin-top: 60px;
   margin-bottom: 16px;
@@ -44,6 +45,9 @@ const Container = styled.div`
   font-size: 0.8125rem;
 
   color: #aaaaaa;
+  p {
+    white-space: nowrap;
+  }
   a {
     color: #aaaaaa;
   }
