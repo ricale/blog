@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, HeadProps, PageProps } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
@@ -56,7 +56,16 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
-      {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
+      <ThumbnailImageWrapper>
+        {image ? (
+          <GatsbyImage image={image} alt={heroImageAlt ?? ""} />
+        ) : (
+          <StaticImage
+            src="../../images/defaultThumbnail.jpeg"
+            alt="by ricale"
+          />
+        )}
+      </ThumbnailImageWrapper>
 
       <PostContent ref={ref as React.RefObject<HTMLDivElement>}>
         {children}
@@ -77,7 +86,9 @@ const Header = styled.div`
   }
 `;
 
-const ThumbnailImage = styled(GatsbyImage)`
+const ThumbnailImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   margin-bottom: 16px;
 `;
 

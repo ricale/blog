@@ -26,27 +26,41 @@ const MdxContent = styled.div`
   }
   @media (max-width: 1099px) {
     > .toc {
-      order: 0;
-      margin: 0 0 16px;
-      padding: 16px 0 0 16px;
+      position: absolute;
+      top: -62px;
+      right: 8px;
+      z-index: 10;
+
+      padding: 8px;
+
       background-color: #1a1a1a;
-      > h3 {
+
+      > p {
+        margin: 0;
+        font-size: 0.875rem;
+      }
+      > ul {
+        display: none;
+      }
+    }
+    > .toc:hover {
+      left: 8px;
+      padding: 16px;
+      > p {
         margin: 0;
         font-size: 1.125rem;
       }
       > ul {
-        position: relative;
-        padding: 8px 0 16px 20px;
-
+        display: block;
+        margin-top: 8px;
+        padding-left: 20px;
         font-size: 1rem;
-
         a {
           color: #dddddd;
         }
         a > code {
           color: #dddddd;
         }
-
         ul {
           padding-left: 30px;
         }
@@ -59,7 +73,7 @@ const MdxContent = styled.div`
       top: 8px;
       left: calc(50% + 400px);
       height: 100%;
-      > h3 {
+      > p {
         display: none;
       }
       > ul {
