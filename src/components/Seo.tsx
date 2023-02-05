@@ -70,6 +70,11 @@ function Seo({
       <meta property="twitter:description" content={desc} />
       <meta property="twitter:url" content={pageUrl} />
       {!!imageUrl && <meta property="twitter:image" content={imageUrl} />}
+
+      <meta
+        name="google-site-verification"
+        content="Z24DuzLFxq0tVrtFhTxfPETtFXf9rOEG73-HpKk2Pgs"
+      />
     </>
   );
 }
