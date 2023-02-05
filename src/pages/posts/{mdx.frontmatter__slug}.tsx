@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, HeadProps, PageProps } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
@@ -10,6 +10,7 @@ import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import TagList from "../../components/TagList";
 import { PostFrontmatter } from "../../types";
+import highlightCurrentHeading from "../../utils/highlightCurrentHeading";
 
 type PostDetailPageData = {
   mdx: {
@@ -23,10 +24,26 @@ type PostDetailPageData = {
   };
 };
 function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
+  const ref = React.useRef<HTMLDivElement>();
   const { frontmatter, sameSeriesPosts } = data.mdx;
   const { title, slug, date, tags, series, heroImage, heroImageAlt } =
     frontmatter;
   const image = heroImage ? getImage(heroImage) : null;
+
+  React.useEffect(() => {
+    const headingElements = ref.current?.querySelectorAll<HTMLElement>(
+      ".md h1, .md h2, .md h3, .md h4, .md h5, .mh h6"
+    );
+
+    const observer = new IntersectionObserver(
+      () => highlightCurrentHeading(ref, headingElements),
+      { rootMargin: "0px 0px -90% 0px", threshold: [0, 1.0] }
+    );
+
+    headingElements?.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <Layout>
@@ -39,9 +56,20 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
-      {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
+      <ThumbnailImageWrapper>
+        {image ? (
+          <GatsbyImage image={image} alt={heroImageAlt ?? ""} />
+        ) : (
+          <StaticImage
+            src="../../images/defaultThumbnail.jpeg"
+            alt="by ricale"
+          />
+        )}
+      </ThumbnailImageWrapper>
 
-      <PostContent>{children}</PostContent>
+      <PostContent ref={ref as React.RefObject<HTMLDivElement>}>
+        {children}
+      </PostContent>
       <Comments />
     </Layout>
   );
@@ -58,7 +86,9 @@ const Header = styled.div`
   }
 `;
 
-const ThumbnailImage = styled(GatsbyImage)`
+const ThumbnailImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   margin-bottom: 16px;
 `;
 

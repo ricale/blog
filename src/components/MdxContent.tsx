@@ -1,6 +1,8 @@
-import styled from "../themes";
+import styled, { css } from "../themes";
 
 const MdxContent = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -9,33 +11,120 @@ const MdxContent = styled.div`
   > .md {
     order: 1;
   }
+
   > .toc {
-    order: 0;
-    margin: 0 16px 16px;
-    padding: 16px 0 0 16px;
-    background-color: #1a1a1a;
-    > h3 {
-      margin: 0;
-      font-size: 1.125rem;
-    }
+    font-size: 0.875rem;
     > ul {
-      position: relative;
       margin: 0;
-      padding: 8px 0 16px 20px;
-
-      font-size: 1rem;
+      padding: 0;
       list-style: none;
-
-      a {
-        color: #dddddd;
-      }
-      a > code {
-        color: #dddddd;
-      }
 
       ul {
         list-style: none;
-        padding-left: 30px;
+      }
+    }
+  }
+  @media (max-width: 1099px) {
+    > .toc {
+      position: absolute;
+      top: -62px;
+      right: 8px;
+      z-index: 10;
+
+      padding: 8px;
+
+      background-color: #1a1a1a;
+
+      > p {
+        margin: 0;
+        font-size: 0.875rem;
+      }
+      > ul {
+        display: none;
+      }
+    }
+    > .toc:hover {
+      left: 8px;
+      padding: 16px;
+      > p {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+      > ul {
+        display: block;
+        margin-top: 8px;
+        padding-left: 20px;
+        font-size: 1rem;
+        a {
+          color: #dddddd;
+        }
+        a > code {
+          color: #dddddd;
+        }
+        ul {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+  @media (min-width: 1100px) {
+    > .toc {
+      position: absolute;
+      top: 8px;
+      left: calc(50% + 400px);
+      height: 100%;
+      > p {
+        display: none;
+      }
+      > ul {
+        position: sticky;
+        top: 10px;
+        padding: 8px;
+        border-left: 1px solid #ddd;
+
+        white-space: nowrap;
+
+        a {
+          color: #aaaaaa;
+        }
+        a > code {
+          color: #aaaaaa;
+        }
+        code {
+          white-space: nowrap;
+        }
+        overflow: hidden;
+        ul {
+          padding-left: 15px;
+        }
+      }
+
+      .highlight {
+        color: #ffffff;
+        text-decoration: underline;
+        code {
+          color: #ffffff;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  > .toc {
+    ${[...new Array(30)].map(
+      (_, i) =>
+        css`
+          @media (min-width: ${1100 + (i + 1) * 10}px) {
+            width: ${(1100 + i * 10 - 800) / 2}px;
+          }
+        `
+    )}
+
+    @media (min-width: ${1100 + 30 * 10}px) {
+      > ul {
+        white-space: inherit;
+        code {
+          white-space: inherit;
+        }
       }
     }
   }
