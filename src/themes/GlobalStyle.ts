@@ -1,11 +1,11 @@
 import { createGlobalStyle } from "./themedStyledComponents";
 
 const GlobalStyle = createGlobalStyle`
-  html, body, #root {
+  html, body, #___gatsby {
     width: 100%;
     margin: 0;
     padding: 0;
-
+    
     font-family: -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -15,8 +15,6 @@ const GlobalStyle = createGlobalStyle`
       sans-serif,
       "Apple Color Emoji",
       "Segoe UI Emoji";
-
-    overflow-x: hidden;
 
     background-color: ${(p) => p.theme.colors.background};
     color: ${(p) => p.theme.colors.onBackground};

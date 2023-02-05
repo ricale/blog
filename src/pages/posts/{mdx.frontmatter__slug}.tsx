@@ -10,6 +10,7 @@ import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import TagList from "../../components/TagList";
 import { PostFrontmatter } from "../../types";
+import highlightCurrentHeading from "../../utils/highlightCurrentHeading";
 
 type PostDetailPageData = {
   mdx: {
@@ -34,62 +35,9 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
       ".md h1, .md h2, .md h3, .md h4, .md h5, .mh h6"
     );
 
-    console.log("headingElements", headingElements);
-
     const observer = new IntersectionObserver(
-      (entries) => {
-        const targets = entries.filter(
-          (entry) => entry.isIntersecting && entry.intersectionRatio >= 1
-        );
-
-        console.log("targets", targets);
-
-        if (targets.length === 0) {
-          if (!headingElements) {
-            return;
-          }
-          const scrollTop = document.documentElement.scrollTop;
-          console.log("scrollTop", scrollTop);
-          let el;
-          for (let i = 0; i < headingElements.length; i++) {
-            console.log(
-              "headingElements[i].offsetTop",
-              headingElements[i].offsetTop
-            );
-            if (headingElements[i].offsetTop > scrollTop) {
-              el = headingElements[i - 1];
-              break;
-            }
-          }
-          console.log("el", el);
-          if (el) {
-            ref.current
-              ?.querySelectorAll(".highlight")
-              .forEach((element) => element.classList.remove("highlight"));
-
-            console.log("addClass");
-            el.classList.add("highlight");
-
-            const targetId = el.getAttribute("id");
-            const linkSelector = `.toc a[href='#${encodeURI(targetId ?? "")}']`;
-            const linkElement = ref.current?.querySelector(linkSelector);
-            linkElement?.classList.add("highlight");
-          }
-          return;
-        }
-
-        ref.current
-          ?.querySelectorAll(".highlight")
-          .forEach((element) => element.classList.remove("highlight"));
-
-        targets.forEach((it) => {
-          const targetId = it.target.getAttribute("id");
-          const linkSelector = `.toc a[href='#${encodeURI(targetId ?? "")}']`;
-          const linkElement = ref.current?.querySelector(linkSelector);
-          linkElement?.classList.add("highlight");
-        });
-      },
-      { threshold: 1.0 }
+      () => highlightCurrentHeading(ref, headingElements),
+      { rootMargin: "0px 0px -90% 0px", threshold: [0, 1.0] }
     );
 
     headingElements?.forEach((element) => observer.observe(element));

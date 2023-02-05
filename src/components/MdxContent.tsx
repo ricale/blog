@@ -1,6 +1,8 @@
-import styled from "../themes";
+import styled, { css } from "../themes";
 
 const MdxContent = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -18,15 +20,14 @@ const MdxContent = styled.div`
       list-style: none;
 
       ul {
-        padding-left: 20px;
         list-style: none;
       }
     }
   }
-  @media (max-width: 1149px) {
+  @media (max-width: 1099px) {
     > .toc {
       order: 0;
-      margin: 0 16px 16px;
+      margin: 0 0 16px;
       padding: 16px 0 0 16px;
       background-color: #1a1a1a;
       > h3 {
@@ -35,7 +36,6 @@ const MdxContent = styled.div`
       }
       > ul {
         position: relative;
-        margin: 0;
         padding: 8px 0 16px 20px;
 
         font-size: 1rem;
@@ -48,20 +48,69 @@ const MdxContent = styled.div`
         }
 
         ul {
-          list-style: none;
           padding-left: 30px;
         }
       }
     }
   }
-  @media (min-width: 1150px) {
+  @media (min-width: 1100px) {
     > .toc {
-      position: fixed;
-      top: 0;
+      position: absolute;
+      top: 8px;
       left: calc(50% + 400px);
+      height: 100%;
+      > h3 {
+        display: none;
+      }
+      > ul {
+        position: sticky;
+        top: 10px;
+        padding: 8px;
+        border-left: 1px solid #ddd;
+
+        white-space: nowrap;
+
+        a {
+          color: #aaaaaa;
+        }
+        a > code {
+          color: #aaaaaa;
+        }
+        code {
+          white-space: nowrap;
+        }
+        overflow: hidden;
+        ul {
+          padding-left: 15px;
+        }
+      }
 
       .highlight {
-        color: red;
+        color: #ffffff;
+        text-decoration: underline;
+        code {
+          color: #ffffff;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  > .toc {
+    ${[...new Array(30)].map(
+      (_, i) =>
+        css`
+          @media (min-width: ${1100 + (i + 1) * 10}px) {
+            width: ${(1100 + i * 10 - 800) / 2}px;
+          }
+        `
+    )}
+
+    @media (min-width: ${1100 + 30 * 10}px) {
+      > ul {
+        white-space: inherit;
+        code {
+          white-space: inherit;
+        }
       }
     }
   }
