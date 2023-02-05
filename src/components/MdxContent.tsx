@@ -9,33 +9,59 @@ const MdxContent = styled.div`
   > .md {
     order: 1;
   }
-  > .toc {
-    order: 0;
-    margin: 0 16px 16px;
-    padding: 16px 0 0 16px;
-    background-color: #1a1a1a;
-    > h3 {
-      margin: 0;
-      font-size: 1.125rem;
-    }
-    > ul {
-      position: relative;
-      margin: 0;
-      padding: 8px 0 16px 20px;
 
-      font-size: 1rem;
+  > .toc {
+    font-size: 0.875rem;
+    > ul {
+      margin: 0;
+      padding: 0;
       list-style: none;
 
-      a {
-        color: #dddddd;
-      }
-      a > code {
-        color: #dddddd;
-      }
-
       ul {
+        padding-left: 20px;
         list-style: none;
-        padding-left: 30px;
+      }
+    }
+  }
+  @media (max-width: 1149px) {
+    > .toc {
+      order: 0;
+      margin: 0 16px 16px;
+      padding: 16px 0 0 16px;
+      background-color: #1a1a1a;
+      > h3 {
+        margin: 0;
+        font-size: 1.125rem;
+      }
+      > ul {
+        position: relative;
+        margin: 0;
+        padding: 8px 0 16px 20px;
+
+        font-size: 1rem;
+
+        a {
+          color: #dddddd;
+        }
+        a > code {
+          color: #dddddd;
+        }
+
+        ul {
+          list-style: none;
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+  @media (min-width: 1150px) {
+    > .toc {
+      position: fixed;
+      top: 0;
+      left: calc(50% + 400px);
+
+      .highlight {
+        color: red;
       }
     }
   }
