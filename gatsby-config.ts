@@ -139,6 +139,47 @@ const config: GatsbyConfig = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allMdx(
+            filter: { frontmatter: { date: { ne: "" } } }
+            sort: { frontmatter: { date: DESC } }
+          ) {
+            nodes {
+              frontmatter {
+                slug
+                date(formatString: "YYYY-MM-DD")
+              }
+            }
+          }
+        }
+        `,
+        resolveSiteUrl: ({ site }: any) => site.siteMetadata.siteUrl,
+        resolvePages: ({ allMdx: { nodes: mdxs } }: any) => {
+          const posts = (mdxs as any[]).map((mdx) => ({
+            path: `/posts/${mdx.frontmatter.slug}`,
+            lastmod: mdx.frontmatter.date,
+          }));
+
+          return [
+            ...posts,
+            { path: "/", lastmod: posts[0].lastmod },
+            { path: "/posts", lastmod: posts[0].lastmod },
+            { path: "/series", lastmod: posts[0].lastmod },
+            { path: "/tags", lastmod: posts[0].lastmod },
+          ];
+        },
+        serialize: ({ path, lastmod }: any) => ({ url: path, lastmod }),
+      },
+    },
   ],
 };
 
