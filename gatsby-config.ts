@@ -49,6 +49,7 @@ const config: GatsbyConfig = {
             options: {
               maxWidth: 800,
               backgroundColor: "none",
+              showCaptions: true,
             },
           },
         ],
