@@ -32,7 +32,7 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 
   React.useEffect(() => {
     const headingElements = ref.current?.querySelectorAll<HTMLElement>(
-      ".md h1, .md h2, .md h3, .md h4, .md h5, .mh h6"
+      ".md h1, .md h2, .md h3, .md h4, .md h5, .md h6"
     );
 
     const observer = new IntersectionObserver(
