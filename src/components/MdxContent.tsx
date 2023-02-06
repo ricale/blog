@@ -79,8 +79,8 @@ const MdxContent = styled.div`
       > ul {
         position: sticky;
         top: 10px;
-        padding: 8px;
-        border-left: 1px solid #ddd;
+        padding-left: 8px;
+        border-left: 1px solid #aaaaaa;
 
         white-space: nowrap;
 
