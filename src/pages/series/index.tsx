@@ -26,7 +26,7 @@ function SeriesPage({ data: source }: PageProps<SeriesPageData>) {
 
 export const query = graphql`
   query {
-    allMdx(limit: 2000) {
+    allMdx(limit: 2000, filter: { frontmatter: { date: { ne: "" } } }) {
       group(field: { frontmatter: { series: SELECT } }) {
         fieldValue
         totalCount

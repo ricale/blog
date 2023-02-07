@@ -149,7 +149,7 @@ export const query = graphql`
       }
     }
 
-    series: allMdx(limit: 2000) {
+    series: allMdx(limit: 2000, filter: { frontmatter: { date: { ne: "" } } }) {
       group(field: { frontmatter: { series: SELECT } }) {
         fieldValue
         totalCount
@@ -171,7 +171,7 @@ export const query = graphql`
       }
     }
 
-    tags: allMdx(limit: 2000) {
+    tags: allMdx(limit: 2000, filter: { frontmatter: { date: { ne: "" } } }) {
       group(field: { frontmatter: { tags: SELECT } }) {
         fieldValue
         totalCount
