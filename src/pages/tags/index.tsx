@@ -1,10 +1,9 @@
 import * as React from "react";
-import { graphql, Link, PageProps } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import ListPageHeader from "../../components/ListPageHeader";
-import Tag from "../../components/Tag";
 import styled from "../../themes";
 import TagList from "../../components/TagList";
 import { TagSource } from "../../types";
@@ -38,7 +37,7 @@ const Tags = styled(TagList)`
 
 export const query = graphql`
   query {
-    allMdx(limit: 2000) {
+    allMdx(limit: 2000, filter: { frontmatter: { date: { ne: "" } } }) {
       group(field: { frontmatter: { tags: SELECT } }) {
         fieldValue
         totalCount

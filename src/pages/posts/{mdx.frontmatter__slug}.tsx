@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, HeadProps, PageProps } from "gatsby";
-import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
+import { getImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
@@ -11,6 +11,7 @@ import SameSeriesPosts from "../../components/SameSeriesPosts";
 import TagList from "../../components/TagList";
 import { PostFrontmatter } from "../../types";
 import highlightCurrentHeading from "../../utils/highlightCurrentHeading";
+import PostImage from "../../components/PostImage";
 
 type PostDetailPageData = {
   mdx: {
@@ -28,7 +29,6 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
   const { frontmatter, sameSeriesPosts } = data.mdx;
   const { title, slug, date, tags, series, heroImage, heroImageAlt } =
     frontmatter;
-  const image = heroImage ? getImage(heroImage) : null;
 
   React.useEffect(() => {
     const headingElements = ref.current?.querySelectorAll<HTMLElement>(
@@ -56,16 +56,7 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
 
-      <ThumbnailImageWrapper>
-        {image ? (
-          <GatsbyImage image={image} alt={heroImageAlt ?? ""} />
-        ) : (
-          <StaticImage
-            src="../../images/defaultThumbnail.jpeg"
-            alt="by ricale"
-          />
-        )}
-      </ThumbnailImageWrapper>
+      <PostImage data={heroImage} alt={heroImageAlt} />
 
       <PostContent ref={ref as React.RefObject<HTMLDivElement>}>
         {children}
