@@ -9,6 +9,7 @@ const menuItems = [
   { path: "/posts", title: "모든글" },
   { path: "/series", title: "시리즈" },
   { path: "/tags", title: "태그" },
+  { path: "/rss.xml", title: "RSS" },
   ...(isDevelopment ? [{ path: "/drafts", title: "임시글" }] : []),
 ];
 
@@ -46,12 +47,13 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
 
-  margin: 8px 16px;
+  margin: 0px 16px 8px;
+  padding-top: 8px;
 
   & > header {
     margin-right: 8px;
     font-weight: 600;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     > a {
       color: white;
     }
@@ -83,7 +85,9 @@ const Container = styled.div<ContainerProps>`
 
       > li > a {
         display: inline-block;
-        /* padding: 0px 8px; */
+        color: #dddddd;
+        text-decoration: underline;
+        font-size: 0.875rem;
       }
     }
   }
