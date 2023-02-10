@@ -1,0 +1,71 @@
+---
+title: "읽은 글들 - 영상들"
+date: ""
+slug: "read-writings-videos"
+# tags: []
+series: "읽은 글들"
+# previewContent: "메일링, 블로그, 구글링 등을 통해 읽은 글들을 간단히 리뷰하는 글이다."
+# heroImage: "./goodarticles-narrow.jpg"
+# heroImageAlt: "sweetlouise-newspapers-pixabay"
+---
+
+다른 곳에 정리했던 것을 모아둠. "읽은 글들" 시리즈 쓸 때 하나씩 사용할 예정. 그리고 추가적으로 보는 영상들이 있으면 또 추가하고.
+
+### 🎥 [우리 팀의 코드리뷰 문화, 이렇게 조금씩 발전했어요!](https://www.youtube.com/watch?v=PBFUwGPp8DY)
+
+[우아콘 2022](https://woowacon.com/2022)의 [세션](https://woowacon.com/ko/2022/detailVideo/29).
+
+코드 리뷰를 왜 하는지, 어떻게 하고 있는지, 어떤 것들을 개선했는지, 무엇을 배웠는지 공유하는 세션.
+
+PR 단위로 랜덤 리뷰어를 두명씩 배정하되 배정된 사람이 아니라도 자유롭게 리뷰하는 문화라고 한다. 자신에게 할당되지 않은 PR 을 자유롭게 자연스럽게 리뷰하는 분위기, 코드리뷰까지 구현의 연장으로 인정하는 문화. 우리 회사의 우리 파트도 PR 코드리뷰를 적극적으로 하고 있긴 하지만 배민처럼 멤버가 많지도 않고 전사적으로 코드리뷰를 하는 분위기는 아니기 때문에 보면서 꽤 부러웠다.
+
+### 🎥 [Lighthouse 성능 지표를 사용한, '웹 애플리케이션 성능 측정 자동화 모듈' 개발기](https://www.youtube.com/watch?v=34T0IU18R6c)
+
+[NHN FORWARD 2021](https://forward.nhn.com/2021/home)의 [세션](https://forward.nhn.com/2021/sessions/13).
+
+[Lighthouse](https://github.com/GoogleChrome/lighthouse) CLI, [Puppeteer](https://github.com/puppeteer/puppeteer), [Gatsby.js](https://www.gatsbyjs.com/) 로 웹어플리케이션의 성능 측정을 자동화하는 경험에 대한 발표. 이후 Jenkins 등의 CI 와 연동해서 주기적으로 성능을 측정하고 성능 저하에 발빠르게 대응하는 것을 목표로 하고 있다고 한다.
+
+어떤 지표를 측정해야 하는지, 그래서 어떻게 측정하는지, 시각화는 어떻게 하는지 등, 발표와 동일한 환경을 구성할 계획이 없더라도 유익한 정보가 많다.
+
+### 🎥 [피그마 API로 하나 되는 우리 : 피그마 API를 활용해 협업 효율성 올리기](https://tv.naver.com/v/23651902)
+
+[DEVIEW 2021](https://deview.kr/2021)의 [세션](https://deview.kr/2021/sessions/413).
+
+figma API 를 사용해 프론트엔드 코드와 디자인 시스템을 결합하고, figma plugin API 를 사용해 플러그인을 직접 제작, 생산성을 높인 경험을 공유하는 세션.
+
+figma 의 디자인을 스토리북 구축과 컴포넌트 구현에 사용하고, 여러 플러그인 (플로우 차트를 쉽게 그릴 수 있는 플러그인, 구슬 스프레드시트와 조합해 디자인에 들어갈 텍스트를 관리하는 플러그인, 많은 이미지를 한 번에 다운받을 수 있는 플러그인) 을 제작해 사용한다. 생각보다 깊이 있게 알려주기 때문에 figma 를 사용하고 있다면 재미있게 볼 수 있음은 물론이고, fimga API 를 사용하려는 사람들에게도 도움이 될 것 같다.
+
+### 🎥 [웹 반응성 개선하기: Lighthouse Userflow를 사용한 웹 반응성 개선기](https://www.youtube.com/watch?v=lmjfSgkpJr8)
+
+[if(kakao)dev2022](https://if.kakao.com/)의 [세션](https://if.kakao.com/2022/session/75).
+
+웹 반응성 개선 경험에 대한 세션.
+
+웹 반응성이 무엇인지, 어떤 지표를 측정해야 하는지, 어떻게 측정하는지, 그래서 그걸로 어떤 걸 개선했는지를 공유한다. 공유한 개선 사례는 아래와 같은데
+
+- for TBT: SPA 에서 화면 이동 직후 강제 reflow 가 생기는 것을 찾아 없앰 (`requestAnimationFrame` 사용)
+- for INP: React 18 의 `startTransition`을 느리게 업데이트 되어도 되는 요소들에 적용
+- for CLS: 플레이스홀더 용 엘리먼트 추가
+
+첫 번째 두 번째 사례가 아주 볼만했다.
+
+### 🎥 [카카오페이 프론트엔드 개발팀의 Client Side Rendering 환경 고도화](https://www.youtube.com/watch?v=CUSy500EuDs)
+
+[if(kakao)dev2022](https://if.kakao.com/)의 [세션](https://if.kakao.com/2022/session/83).
+
+카카오페이의 프론트엔드 팀이 서비스 운영 및 관리에 대해 존재하던 네 가지 이슈에 대한 개선 경험을 공유하는 세션.
+
+- 이슈1: 유연한 운영이 어려운 기존 프론트엔드 서비스 제공 환경
+- 이슈2: 서비스 배포/롤백이 오래 걸림
+- 이슈3: 퍼블릭 오픈 전 최종 확인 수단 부재
+- 이슈4: 외부 트래픽을 전이시키기 위한 운영성 개발 업무
+
+첫 이슈 해결 방법부터 쿠버네티스가 나와서 "이거 프론트엔드 세션 맞아?" 하고 잠시 당황했지만 해당 이슈 뿐만 아니라 이후 이슈에서도 yarn berry, 운영 환경 내 RC 환경 등 유익한 키워드들이 많이 나와서 볼만했다. 마지막 이슈의 해결 방법을 상세하게 설명해주지 않았던 건 좀 아쉬웠다.
+
+### 🎥 [마이크로프론트엔드. 실무에 쓸만할까?](https://www.youtube.com/watch?v=DOS0YPwdnhk)
+
+[if(kakao)dev2022](https://if.kakao.com/)의 [세션](https://if.kakao.com/2022/session/82).
+
+MSA 를 프론트엔드에 적용한 것에 대한 경험을 공유하는 세션. 세션이 길지 않아서 (10분) MSA 가 어떤 느낌인지 맛보기 좋다.
+
+사족이지만 이 세션 뿐만 아니라 다른 글/세션에서도 종종 MSA 대신 "마이크로 프론트엔드 아키텍쳐"라는 용어를 만들어 쓰던데, 굳이 그렇게 할 필요가 있나 싶다.
