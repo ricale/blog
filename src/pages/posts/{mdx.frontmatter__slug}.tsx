@@ -77,12 +77,6 @@ const Header = styled.div`
   }
 `;
 
-const ThumbnailImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-`;
-
 const WrittenDate = styled.div`
   margin: 16px 0;
 `;
