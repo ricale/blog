@@ -1,9 +1,11 @@
 import * as React from "react";
-import { graphql, PageProps } from "gatsby";
+import { graphql, HeadProps, PageProps } from "gatsby";
+
 import Layout from "../components/Layout";
 import ListPageHeader from "../components/ListPageHeader";
 import SimplePostList from "../components/SimplePostList";
 import { PostFrontmatter } from "../types";
+import Seo from "../components/Seo";
 
 type TagDetailPageTemplateData = {
   allMdx: {
@@ -56,5 +58,21 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export const Head = ({
+  pageContext,
+  data,
+}: HeadProps<TagDetailPageTemplateData, TagDetailPageTemplateContext>) => {
+  const { tag } = pageContext;
+  const { totalCount } = data.allMdx;
+
+  return (
+    <Seo
+      title={`태그 "${tag}"`}
+      description={`${totalCount}개의 글이 있습니다.`}
+      path={`tags/${tag}`}
+    />
+  );
+};
 
 export default TagDetailPageTemplate;
