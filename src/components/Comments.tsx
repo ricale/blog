@@ -5,7 +5,7 @@ function Comments() {
 
   useEffect(() => {
     const scriptTag = document.createElement("script");
-    // NOTE: Utterances 를 위한 설정 코드.
+    // NOTE: ricale - Utterances 를 위한 설정 코드.
     // const attrs = {
     //   src: "https://utteranc.es/client.js",
     //   repo: "ricale/blog",
