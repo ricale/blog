@@ -1,3 +1,6 @@
+// NOTE: ricale
+// It's based on https://github.com/signalwerk/gatsby-remark-table-of-contents
+
 const util = require("mdast-util-toc");
 
 const defaultPrefs = {
