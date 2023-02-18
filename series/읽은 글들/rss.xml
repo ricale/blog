@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>https://ricale.kr/blog</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 18 Feb 2023 00:39:47 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~23.2.10)]]></title><description><![CDATA[React (번역) ‘Create React App 권장을 Vite로 대체’ PR 대한 Dan Abramov의 답변
+
+Create React App 대신 Vite 의 사용(Vite 에도 CRA 처럼 리액트 앱 초기 셋팅을 해주는 기능이 있다)을 권장하는 게…]]></description><link>https://ricale.kr/blog/posts/230210-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230210-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 09 Feb 2023 15:00:00 GMT</pubDate><content:encoded>React (번역) ‘Create React App 권장을 Vite로 대체’ PR 대한 Dan Abramov의 답변
+
+Create React App 대신 Vite 의 사용(Vite 에도 CRA 처럼 리액트 앱 초기 셋팅을 해주는 기능이 있다)을 권장하는 게…</content:encoded></item><item><title><![CDATA[읽은 글들 (~23.1.24)]]></title><description><![CDATA[React (번역) 리액트 상호 작용 시간 4배 향상하기
+
+원문 저자가 본인의 서비스에서 React 성능 문제를 개선했던 경험에 대한 글이다. 대체로 AG Grid 라는 라이브러리에 의한 과도한 리렌더링으로 인해 발생하는 이슈들이었다. 크롬 개발자 도구와…]]></description><link>https://ricale.kr/blog/posts/230124-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230124-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 23 Jan 2023 15:00:00 GMT</pubDate><content:encoded>React (번역) 리액트 상호 작용 시간 4배 향상하기
+
+원문 저자가 본인의 서비스에서 React 성능 문제를 개선했던 경험에 대한 글이다. 대체로 AG Grid 라는 라이브러리에 의한 과도한 리렌더링으로 인해 발생하는 이슈들이었다. 크롬 개발자 도구와…</content:encoded></item><item><title><![CDATA[읽은 글들 (~23.1.5)]]></title><description><![CDATA[React CSS Variables for React Devs
+
+React 와 CSS-in-JS 를 사용하면서 CSS variable 을 쓰는 것에 대한 장단점을 설명하는 글.
+
+장점
+
+자바스크립트 변수로 css 값을 지정하는 것 (예를 들면 styled…]]></description><link>https://ricale.kr/blog/posts/230105-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230105-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Wed, 04 Jan 2023 15:00:00 GMT</pubDate><content:encoded>React CSS Variables for React Devs
+
+React 와 CSS-in-JS 를 사용하면서 CSS variable 을 쓰는 것에 대한 장단점을 설명하는 글.
+
+장점
+
+자바스크립트 변수로 css 값을 지정하는 것 (예를 들면 styled…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.12.3)]]></title><description><![CDATA[JavaScript 자바스크립트에서 안전하게 난수 생성하는 방법
+
+Math.random() 은 진짜 난수가 아닌 의사 난수를 생성하고, 이는 보안적으로 안전하지 않다. 따라서 안전한 난수를 생성하기 위해서는 Web Crypto API 를 사용해야 한다.
+
+(번…]]></description><link>https://ricale.kr/blog/posts/221203-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/221203-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Fri, 02 Dec 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript 자바스크립트에서 안전하게 난수 생성하는 방법
+
+Math.random() 은 진짜 난수가 아닌 의사 난수를 생성하고, 이는 보안적으로 안전하지 않다. 따라서 안전한 난수를 생성하기 위해서는 Web Crypto API 를 사용해야 한다.
+
+(번…</content:encoded></item><item><title><![CDATA[[읽은글] "클라우드 서비스를 떠나는 이유"]]></title><description><![CDATA[Why we're leaving the cloud Ruby on Rails 의 창시자 DHH 가 world.hey.com 에 글을 올렸다. 자신의 회사 37signals 가 왜 클라우드 서비스를 떠나려고 하는지를 정리한 글이다. (구글 번역의 큰 도움을…]]></description><link>https://ricale.kr/blog/posts/221020-read-writing-why-were-leaving-the-cloud</link><guid isPermaLink="false">https://ricale.kr/blog/posts/221020-read-writing-why-were-leaving-the-cloud</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Wed, 19 Oct 2022 15:00:00 GMT</pubDate><content:encoded>Why we&apos;re leaving the cloud Ruby on Rails 의 창시자 DHH 가 world.hey.com 에 글을 올렸다. 자신의 회사 37signals 가 왜 클라우드 서비스를 떠나려고 하는지를 정리한 글이다. (구글 번역의 큰 도움을…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.10.20)]]></title><description><![CDATA[JavaScript Jake Archibald: In The Loop - setTimeout, micro tasks, requestAnimationFrame, requestIdleCallback, …
+
+이벤트루프와 연관된 것들의 동작 원리에 대해 설명한…]]></description><link>https://ricale.kr/blog/posts/221020-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/221020-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Wed, 19 Oct 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript Jake Archibald: In The Loop - setTimeout, micro tasks, requestAnimationFrame, requestIdleCallback, …
+
+이벤트루프와 연관된 것들의 동작 원리에 대해 설명한…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.9.29)]]></title><description><![CDATA[JavaScript [JS] Javascript 동작 원리와 비동기처리
+
+자바스크립트 런타임 환경에서의 스레드 구성과 콜스택, 이벤트루프, 메시지큐, Web API 스레드가 어떻게 같이 동작하는지에 대해 설명하는 글. 이해하기 쉽게 잘 정리되어 있다.
+
+Eve…]]></description><link>https://ricale.kr/blog/posts/220929-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220929-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Wed, 28 Sep 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript [JS] Javascript 동작 원리와 비동기처리
+
+자바스크립트 런타임 환경에서의 스레드 구성과 콜스택, 이벤트루프, 메시지큐, Web API 스레드가 어떻게 같이 동작하는지에 대해 설명하는 글. 이해하기 쉽게 잘 정리되어 있다.
+
+Eve…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.8.23)]]></title><description><![CDATA[React streamich/react-use 단위 테스트 코드
+
+react-use 는 다양한 React hook 들을 모아놓은 라이브러리다. 그리고 위 링크는, 해당 라이브러리 리포지토리의 단위 테스트 코드들이다. 여러 유형에 대한 hook 테스트…]]></description><link>https://ricale.kr/blog/posts/220823-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220823-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 22 Aug 2022 15:00:00 GMT</pubDate><content:encoded>React streamich/react-use 단위 테스트 코드
+
+react-use 는 다양한 React hook 들을 모아놓은 라이브러리다. 그리고 위 링크는, 해당 라이브러리 리포지토리의 단위 테스트 코드들이다. 여러 유형에 대한 hook 테스트…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.7.24)]]></title><description><![CDATA[JavaScript spread operator vs array.concat()
+
+spread 연산자 ([...arr])로 배열을 합치는 것과 .concat() 메서드를 사용해 배열을 합치는 것 중 어느 것의 성능이 더 나은가? 에 관한 글. 결론만…]]></description><link>https://ricale.kr/blog/posts/220724-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220724-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sat, 23 Jul 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript spread operator vs array.concat()
+
+spread 연산자 ([...arr])로 배열을 합치는 것과 .concat() 메서드를 사용해 배열을 합치는 것 중 어느 것의 성능이 더 나은가? 에 관한 글. 결론만…</content:encoded></item><item><title><![CDATA[읽은 글들 (~22.6.29)]]></title><description><![CDATA[JavaScript Processing Arrays non-destructively: for-of vs. .reduce() vs. .flatMap()
+
+제목에 나온대로 for-of, .reduce(), .flatMap() 이 같은 상황에서 어떻게 다르게…]]></description><link>https://ricale.kr/blog/posts/220629-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220629-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Tue, 28 Jun 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript Processing Arrays non-destructively: for-of vs. .reduce() vs. .flatMap()
+
+제목에 나온대로 for-of, .reduce(), .flatMap() 이 같은 상황에서 어떻게 다르게…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~22.5.23)]]></title><description><![CDATA[JavaScript Stop mocking fetch
+
+테스트를 작성할 때 fetch 를 mocking 하지 말고, 대신 MSW 라는 툴을 사용해 네트워크 요청 자체를 mocking 하라는 글. MSW 는 서비스 워커를 통해 모든 네트워크 요청을 가로채…]]></description><link>https://ricale.kr/blog/posts/220523-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220523-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sun, 22 May 2022 15:00:00 GMT</pubDate><content:encoded>JavaScript Stop mocking fetch
+
+테스트를 작성할 때 fetch 를 mocking 하지 말고, 대신 MSW 라는 툴을 사용해 네트워크 요청 자체를 mocking 하라는 글. MSW 는 서비스 워커를 통해 모든 네트워크 요청을 가로채…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~22.5.10)]]></title><description><![CDATA[이 글은 메일링, 블로그, 구글링 등을 통해 읽은 좋은 글들을 모아놓은 글이다. JavaScript
+JavaScript Symbol의 근황
+
+Symbol 에 대한 간략한 소개. 지나가다가 Symbol.iterator만 몇 번 본 적 있지 Symbol 그…]]></description><link>https://ricale.kr/blog/posts/220510-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220510-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 09 May 2022 15:00:00 GMT</pubDate><content:encoded>이 글은 메일링, 블로그, 구글링 등을 통해 읽은 좋은 글들을 모아놓은 글이다. JavaScript
+JavaScript Symbol의 근황
+
+Symbol 에 대한 간략한 소개. 지나가다가 Symbol.iterator만 몇 번 본 적 있지 Symbol 그…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~22.5.3)]]></title><description><![CDATA[JavsScript JavaScript function composition: What’s the big deal?
+
+함수 합성(Function composition)에 관한 글. 함수 합성이 무엇이며, 어떻게 구현하며, 함수 합성을 사용하지 않는 다른…]]></description><link>https://ricale.kr/blog/posts/220503-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220503-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 02 May 2022 15:00:00 GMT</pubDate><content:encoded>JavsScript JavaScript function composition: What’s the big deal?
+
+함수 합성(Function composition)에 관한 글. 함수 합성이 무엇이며, 어떻게 구현하며, 함수 합성을 사용하지 않는 다른…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~22.3.12)]]></title><description><![CDATA[[번역] Proxy와 Reflect Proxy 와 Reflect 에 대한 강의? 글. 맨날 몰라서 찾아보고 까먹고 몰라서 찾아보고 까먹고를 반복하는 녀석인데, 이번에는 쓸만한 구석이 있을 수도 있어서 좀 더 정독했다. 한 번 써보면 확실히 안 까먹을텐데…]]></description><link>https://ricale.kr/blog/posts/220313-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/220313-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sat, 12 Mar 2022 15:00:00 GMT</pubDate><content:encoded>[번역] Proxy와 Reflect Proxy 와 Reflect 에 대한 강의? 글. 맨날 몰라서 찾아보고 까먹고 몰라서 찾아보고 까먹고를 반복하는 녀석인데, 이번에는 쓸만한 구석이 있을 수도 있어서 좀 더 정독했다. 한 번 써보면 확실히 안 까먹을텐데…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.12.2)]]></title><description><![CDATA[브라우저의 사용자 에이전트는 왜 이렇게 복잡하게 생겼을까? 브라우저 사용자 에이전트의 역사에 대한 간략한 소개. 간추리자면 "사용자 에이전트 정보가 이렇게 엉망이 된 이유는 브라우저 개발사들이 경쟁에서 뒤쳐지지 않기 위해 다른 회사 브라우저의 사용자…]]></description><link>https://ricale.kr/blog/posts/211202-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/211202-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Wed, 01 Dec 2021 15:00:00 GMT</pubDate><content:encoded>브라우저의 사용자 에이전트는 왜 이렇게 복잡하게 생겼을까? 브라우저 사용자 에이전트의 역사에 대한 간략한 소개. 간추리자면 &quot;사용자 에이전트 정보가 이렇게 엉망이 된 이유는 브라우저 개발사들이 경쟁에서 뒤쳐지지 않기 위해 다른 회사 브라우저의 사용자…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.11.16)]]></title><description><![CDATA[React useRef Hook for Dummies: How to Use useRef Correctly with Examples React 컴포넌트에서 어떤 값을 관리함에 있어 useState 보다는 useRef 가 효율적일 때가 있다. 그것을…]]></description><link>https://ricale.kr/blog/posts/211116-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/211116-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 15 Nov 2021 15:00:00 GMT</pubDate><content:encoded>React useRef Hook for Dummies: How to Use useRef Correctly with Examples React 컴포넌트에서 어떤 값을 관리함에 있어 useState 보다는 useRef 가 효율적일 때가 있다. 그것을…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.10.13)]]></title><description><![CDATA[React is Declarative - What Does it Mean? React 가 Declarative(선언형)이라는 게 어떤 의미인지 Imperative(명령형)과 비교해서 설명해준다. 선언형을 경험해보지 못한 사람에게 개념을 설명해주기 좋은…]]></description><link>https://ricale.kr/blog/posts/211013-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/211013-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Tue, 12 Oct 2021 15:00:00 GMT</pubDate><content:encoded>React is Declarative - What Does it Mean? React 가 Declarative(선언형)이라는 게 어떤 의미인지 Imperative(명령형)과 비교해서 설명해준다. 선언형을 경험해보지 못한 사람에게 개념을 설명해주기 좋은…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.7.24)]]></title><description><![CDATA[JavaScript Encoding data for POST requests
+
+POST 리퀘스트의 body를 어떻게 실어보내는 것이 좋을지에 대한 글. URLSearchParams, FormData를 포함한 여러 방법을 소개하고 있다.
+
+JS Is Weird
+
+자…]]></description><link>https://ricale.kr/blog/posts/210724-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/210724-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Fri, 23 Jul 2021 15:00:00 GMT</pubDate><content:encoded>JavaScript Encoding data for POST requests
+
+POST 리퀘스트의 body를 어떻게 실어보내는 것이 좋을지에 대한 글. URLSearchParams, FormData를 포함한 여러 방법을 소개하고 있다.
+
+JS Is Weird
+
+자…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.7.5)]]></title><description><![CDATA[CSS Perfect Tooltips With CSS Clipping and Masking
+
+CSS로 말풍선 모양의 툴팁을 구현하는 내용이다. 단순히 네모와 그 아래 세모를 붙이는 것으로 끝나지 않고, 말풍선 모양으로 사진을 클리핑하는 것까지 구현한다. s…]]></description><link>https://ricale.kr/blog/posts/210705-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/210705-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sun, 04 Jul 2021 15:00:00 GMT</pubDate><content:encoded>CSS Perfect Tooltips With CSS Clipping and Masking
+
+CSS로 말풍선 모양의 툴팁을 구현하는 내용이다. 단순히 네모와 그 아래 세모를 붙이는 것으로 끝나지 않고, 말풍선 모양으로 사진을 클리핑하는 것까지 구현한다. s…</content:encoded></item><item><title><![CDATA[읽은 좋은 글들 (~21.6.28)]]></title><description><![CDATA[JavaScript A surprising feature of JavaScript optional chaining
+
+제목 그대로, ?. 문법의 사용법에 관한 글이다. 처음보는 용례까지 있어서 깜짝 놀랐다.
+
+ES2021 Features!
+
+ES2021의 새로운…]]></description><link>https://ricale.kr/blog/posts/210628-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/210628-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sun, 27 Jun 2021 15:00:00 GMT</pubDate><content:encoded>JavaScript A surprising feature of JavaScript optional chaining
+
+제목 그대로, ?. 문법의 사용법에 관한 글이다. 처음보는 용례까지 있어서 깜짝 놀랐다.
+
+ES2021 Features!
+
+ES2021의 새로운…</content:encoded></item></channel></rss>
