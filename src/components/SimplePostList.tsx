@@ -11,9 +11,10 @@ type SimplePostListProps = {
       };
     };
   }[];
+  actions?: React.ReactNode;
 };
 
-function SimplePostList({ data: source }: SimplePostListProps) {
+function SimplePostList({ data: source, actions }: SimplePostListProps) {
   const [orderByAsc, setOrderByAsc] = React.useState(false);
   const data = [...source].sort(
     (a, b) =>
@@ -24,12 +25,16 @@ function SimplePostList({ data: source }: SimplePostListProps) {
 
   return (
     <Container>
-      <SortingAction>
-        <span>정렬:</span>
-        <SortingToggleButton onClick={() => setOrderByAsc((st) => !st)}>
-          {`작성일 ${orderByAsc ? "오름차순" : "내림차순"}`}
-        </SortingToggleButton>
-      </SortingAction>
+      <Actions>
+        <div>{actions}</div>
+        <span className="divider">|</span>
+        <SortingAction>
+          <span>정렬:</span>
+          <a onClick={() => setOrderByAsc((st) => !st)}>
+            {`작성일 ${orderByAsc ? "오름차순" : "내림차순"}`}
+          </a>
+        </SortingAction>
+      </Actions>
       <PostList>
         {data.map(({ node: { frontmatter } }) => (
           <li
@@ -47,25 +52,38 @@ function SimplePostList({ data: source }: SimplePostListProps) {
 
 const Container = styled.div``;
 
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px;
+
+  & > div:first-child {
+    display: flex;
+    align-items: center;
+  }
+  & > span.divider {
+    font-size: 0.75rem;
+  }
+`;
 const SortingAction = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 2px;
 
   > span {
     font-size: 0.875rem;
     color: #ffffff;
   }
-`;
-const SortingToggleButton = styled.button`
-  border: 0;
-  text-decoration: underline;
+  > a {
+    border: 0;
+    text-decoration: underline;
 
-  font-size: 0.875rem;
-  color: #ffffff;
-  background-color: transparent;
-  cursor: pointer;
+    font-size: 0.875rem;
+    color: #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+  }
 `;
 
 const PostList = styled.ol`
