@@ -23,6 +23,11 @@ type SeriesDetailPageTemplateData = {
       };
     }[];
   };
+  site: {
+    siteMetadata: {
+      siteUrl: string;
+    };
+  };
 };
 type SeriesDetailPageTemplateContext = {
   series: string;
@@ -36,19 +41,22 @@ const SeriesDetailPageTemplate = ({
 >) => {
   const { series } = pageContext;
   const { totalCount, edges } = data.allMdx;
+  const { siteUrl } = data.site.siteMetadata;
 
   return (
     <Layout minContentHeight={500}>
       <ListPageHeader title={series} subtitle="시리즈" note={totalCount} />
       <SimplePostList
         data={edges}
-        actions={<RssLink to={`/series/${series}/rss.xml`}>RSS</RssLink>}
+        actions={
+          <RssLink href={`${siteUrl}/series/${series}/rss.xml`}>RSS</RssLink>
+        }
       />
     </Layout>
   );
 };
 
-const RssLink = styled(Link)`
+const RssLink = styled.a`
   margin-bottom: 2px;
   color: #dddddd;
   font-size: 0.875rem;
@@ -77,6 +85,11 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
   }

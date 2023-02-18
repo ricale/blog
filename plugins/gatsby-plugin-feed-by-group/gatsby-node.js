@@ -32,19 +32,6 @@ const runQuery = (handler, query) =>
     return r.data;
   });
 
-const writeRssFile = async (serialized, feedOptions, output) => {
-  const rssFeed = serialized.reduce((merged, item) => {
-    merged.item(item);
-    return merged;
-  }, new RSS(feedOptions));
-  const outputPath = path.join(publicPath, output);
-  const outputDir = path.dirname(outputPath);
-  if (!(await fs.pathExists(outputDir))) {
-    await fs.mkdirp(outputDir);
-  }
-  await fs.writeFile(outputPath, rssFeed.xml());
-};
-
 exports.onPostBuild = async ({ graphql, reporter }, pluginOptions) => {
   const options = {
     ...defaultOptions,
@@ -73,15 +60,19 @@ exports.onPostBuild = async ({ graphql, reporter }, pluginOptions) => {
       continue;
     }
 
-    if (!locals.query.allMdx.group) {
-      const serialized = await feed.serialize(locals);
-      await writeRssFile(serialized, setup(locals), feed.output);
-    } else {
-      const serializedArray = await feed.serialize(locals);
-      const feedOptions = setup(locals);
-      for (const { fieldValue, items } of serializedArray) {
-        await writeRssFile(items, feedOptions, feed.output({ fieldValue }));
+    const serializedArray = await feed.serialize(locals);
+    const feedOptions = setup(locals);
+    for (const { fieldValue, items } of serializedArray) {
+      const rssFeed = items.reduce((merged, item) => {
+        merged.item(item);
+        return merged;
+      }, new RSS(feedOptions));
+      const outputPath = path.join(publicPath, feed.output({ fieldValue }));
+      const outputDir = path.dirname(outputPath);
+      if (!(await fs.pathExists(outputDir))) {
+        await fs.mkdirp(outputDir);
       }
+      await fs.writeFile(outputPath, rssFeed.xml());
     }
   }
 };
