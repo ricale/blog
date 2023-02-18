@@ -1,12 +1,9 @@
 import { SiteMetadata } from "../types";
 
-type SerializeParams = {
+type BaseSerializeParams = {
   query: {
     site: {
-      siteMetadata: SiteMetadata & {
-        site_url: string;
-      };
-      pathPrefix: string;
+      siteMetadata: SiteMetadata;
     };
     allMdx: {
       nodes: {
@@ -32,10 +29,8 @@ const getGatsbyPluginFeedConfig = (siteMetadata: SiteMetadata) => ({
             title
             author
             siteUrl
-            site_url: siteUrl
             description
           }
-          pathPrefix
         }
       }
     `,
@@ -59,7 +54,7 @@ const getGatsbyPluginFeedConfig = (siteMetadata: SiteMetadata) => ({
             }
           }
         `,
-        serialize: ({ query: { site, allMdx } }: SerializeParams) => {
+        serialize: ({ query: { site, allMdx } }: BaseSerializeParams) => {
           return allMdx.nodes.map((node) => ({
             ...node.frontmatter,
             description: node.frontmatter.previewContent ?? node.excerpt,

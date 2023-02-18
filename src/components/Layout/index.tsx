@@ -28,16 +28,22 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
         siteMetadata {
           title
           author
+          siteUrl
         }
       }
     }
   `);
-  const { title, author } = data.site.siteMetadata;
+  const { title, author, siteUrl } = data.site.siteMetadata;
   return (
     <ThemeProvider theme={normalTheme}>
       <GlobalStyle />
       <Container>
-        <Header emphasize={emphasize} title={title} author={author} />
+        <Header
+          emphasize={emphasize}
+          title={title}
+          author={author}
+          siteUrl={siteUrl}
+        />
         <Content minHeight={minContentHeight}>{children}</Content>
         <Footer />
       </Container>

@@ -5,7 +5,6 @@ import { SiteMetadata } from "../types";
 type SeoQueryData = {
   site: {
     siteMetadata: SiteMetadata;
-    pathPrefix: string;
   };
 };
 type SeoProps = {
@@ -33,14 +32,12 @@ function Seo({
           siteUrl
           description
         }
-        pathPrefix
       }
     }
   `);
 
   const {
     siteMetadata: { title: siteTitle, author, siteUrl, description: siteDesc },
-    pathPrefix,
   } = data.site;
 
   const pageTitle = title
@@ -48,7 +45,7 @@ function Seo({
     : `${siteTitle} by ${author}`;
   const seoTitle = title ?? siteTitle;
   const desc = description || siteDesc;
-  const pageUrl = `${siteUrl}${pathPrefix}${path ? `/${path}` : ""}`;
+  const pageUrl = `${siteUrl}${path ? `/${path}` : ""}`;
   const imageUrl = thumbnail ? `${siteUrl}${thumbnail}` : null;
   const keywordsString = keywords ? keywords.join(", ") : null;
 

@@ -9,7 +9,7 @@ const menuItems = [
   { path: "/posts", title: "모든글" },
   { path: "/series", title: "시리즈" },
   { path: "/tags", title: "태그" },
-  { path: "/rss.xml", title: "RSS" },
+  { href: "/rss.xml", title: "RSS" },
   ...(isDevelopment ? [{ path: "/drafts", title: "임시글" }] : []),
 ];
 
@@ -17,8 +17,9 @@ type HeaderProps = {
   emphasize?: boolean;
   title: string;
   author: string;
+  siteUrl: string;
 };
-function Header({ emphasize, title, author }: HeaderProps) {
+function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
   return (
     <Container emphasize={emphasize}>
       <header>
@@ -29,9 +30,13 @@ function Header({ emphasize, title, author }: HeaderProps) {
       </address>
       <nav>
         <ul>
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <Link to={item.path}>{item.title}</Link>
+          {menuItems.map((item, i) => (
+            <li key={i}>
+              {item.path ? (
+                <Link to={item.path}>{item.title}</Link>
+              ) : (
+                <a href={`${siteUrl}${item.href}`}>{item.title}</a>
+              )}
             </li>
           ))}
         </ul>

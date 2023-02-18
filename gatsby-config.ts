@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from "gatsby";
 
 import getGatsbyPluginFeedConfig from "./config/plugins/getGatsbyPluginFeedConfig";
+import getGatsbyPluginFeedByGroupConfig from "./config/plugins/getGatsbyPluginFeedByGroupConfig";
 import getGatsbyPluginMdxConfig from "./config/plugins/getGatsbyPluginMdxConfig";
 import getGatsbyPluginSitemapConfig from "./config/plugins/getGatsbyPluginSitemapConfig";
 
@@ -61,6 +62,7 @@ const config: GatsbyConfig = {
       },
     },
     getGatsbyPluginFeedConfig(siteMetadata),
+    getGatsbyPluginFeedByGroupConfig(siteMetadata),
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

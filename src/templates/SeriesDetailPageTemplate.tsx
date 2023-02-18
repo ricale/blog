@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, HeadProps, PageProps } from "gatsby";
+import { graphql, HeadProps, Link, PageProps } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 
 import Layout from "../components/Layout";
@@ -7,6 +7,7 @@ import ListPageHeader from "../components/ListPageHeader";
 import SimplePostList from "../components/SimplePostList";
 import { PostFrontmatter } from "../types";
 import Seo from "../components/Seo";
+import styled from "../themes";
 
 type SeriesDetailPageTemplateData = {
   allMdx: {
@@ -22,6 +23,11 @@ type SeriesDetailPageTemplateData = {
       };
     }[];
   };
+  site: {
+    siteMetadata: {
+      siteUrl: string;
+    };
+  };
 };
 type SeriesDetailPageTemplateContext = {
   series: string;
@@ -35,14 +41,27 @@ const SeriesDetailPageTemplate = ({
 >) => {
   const { series } = pageContext;
   const { totalCount, edges } = data.allMdx;
+  const { siteUrl } = data.site.siteMetadata;
 
   return (
     <Layout minContentHeight={500}>
       <ListPageHeader title={series} subtitle="시리즈" note={totalCount} />
-      <SimplePostList data={edges} />
+      <SimplePostList
+        data={edges}
+        actions={
+          <RssLink href={`${siteUrl}/series/${series}/rss.xml`}>RSS</RssLink>
+        }
+      />
     </Layout>
   );
 };
+
+const RssLink = styled.a`
+  margin-bottom: 2px;
+  color: #dddddd;
+  font-size: 0.875rem;
+  text-decoration: underline;
+`;
 
 export const pageQuery = graphql`
   query ($series: String) {
@@ -66,6 +85,11 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
   }
