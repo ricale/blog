@@ -1,7 +1,7 @@
 ---
 title: "Gatsby 블로그 만들기 9 - RSS 피드"
-date: ""
-slug: "gatsby-9-rss-feed"
+date: "2023-02-19"
+slug: "230219-gatsby-9-rss-feed"
 tags: ["Gatsby", "Gatsby blog", "Gatsby rss", "RSS"]
 series: "Gatsby 블로그 만들기"
 heroImage: "./jakub-dziubak-XtUd5SiX464-unsplash.jpg"
@@ -163,7 +163,7 @@ RSS 피드를 제공하는 방식에는 피드 내에 본문 전체를 제공하
 
 만약 글 본문 전체를 RSS 피드에 넣고 싶다면 위 방안 중 하나를 고려해보자.
 
-이 블로그는 현실과 타협하여 `excerpt` 값을 넣고 있다.
+이 블로그는 현실과 타협하여 `excerpt` 값(본문의 앞 부분을 잘라서 저정한 문자열, 미리보기 정도로 생각하면 된다)을 넣고 있다.
 
 ```ts
             serialize: ({ query: { site, allMdx } }: any) => {
@@ -263,7 +263,9 @@ exports.onPostBuild = async ({ graphql, reporter }, pluginOptions) => {
 
 ### 2.2.2. `gatsby-plugin-feed` 코드로 새로운 플러그인 작성
 
-그러면 `gatsby-plugin-feed` 의 코드를 적절히 고쳐야 하는데, 그 전에 해당 코드를 어떻게 고치면 좋을지 생각해보자. 해당 플러그인에 어떻게 데이터를 넣을지 확인하면 명확해질 것 같다. `gatsby-config.ts` 에서 `gatsby-plugin-feed` 에 적용했던 옵션을 참고해서, 시리즈별 RSS 피드를 만들기 위해 어떻게 설정을 지정하면 좋을지 작성해보자.
+그러면 `gatsby-plugin-feed` 의 코드를 적절히 고쳐야 하는데, 그 전에 해당 코드를 어떻게 고치면 좋을지 생각해보자. 해당 플러그인에 어떻게 데이터를 넣을지 확인하면 명확해질 것 같다.
+
+`gatsby-config.ts` 에서 `gatsby-plugin-feed` 에 적용했던 옵션을 참고해서, 시리즈별 RSS 피드를 만들기 위해 어떻게 설정을 지정하면 좋을지 작성해보자.
 
 ```ts
 // gatsby-config.ts
@@ -275,13 +277,14 @@ const config: GatsbyConfig = {
   plugins: [
     // ...
     {
-      resolve: "gatsby-plugin-feed-by-group", // 직접 만들 플러그인의 이름
+      // `resolve` 에는 직접 만들 플러그인의 이름을 넣자
+      resolve: "gatsby-plugin-feed-by-group",
       options: {
-        // `options.query` 는 `gatsby-plugin-feed` 에 넣었던 값과 동일하다.
+        // `options.query` 는 `gatsby-plugin-feed` 에 넣었던 값을 변경할 필요가 없어보인다.
         query: /* ... */
         feeds: [
           {
-            // series 별로 grouping 해서 글목록을 가져오는 쿼리
+            // 쿼리는 series 별로 grouping 해서 글목록을 가져오는 쿼리로 변경하자.
             query: `
               {
                 allMdx(limit: 2000, filter: { frontmatter: { date: { ne: "" } } }) {
@@ -305,7 +308,7 @@ const config: GatsbyConfig = {
             // grouping 된 쿼리 결과를 가지고 시리즈별 데이터를 만들자.
             // `gatsby-plugin-feed` 에서는 이 함수의 결과값이 배열이었지만
             // 여기에서는 시리즈별 글목록에 대한 데이터를 만드는 것이므로
-            // 아래처럼 중첩 배열이 된다.
+            // 아래처럼 중첩 배열이 될 것이다.
             // [
             //   {
             //     fieldValue: 'seriseName',
@@ -341,7 +344,7 @@ const config: GatsbyConfig = {
             // 시리즈마다 rss 파일 위치가 달라야하므로 이 값은 문자열에서 함수로 타입을 바꿔주자.
             output: (group: BySeriesOutputParams) =>
               `/series/${group.fieldValue}/rss.xml`,
-            // 제목도 바꿔주면 좋겠지만, 일단은 유지.
+            // 제목도 바꿔주면 좋겠지만, 오늘은 패스하자.
             title: `${siteMetadata.title} by ${siteMetadata.author}`,
           },
         ],
@@ -406,6 +409,8 @@ exports.onPostBuild = async ({ graphql, reporter }, pluginOptions) => {
       }, new RSS(feedOptions));
 
       // 당연히 RSS 피드 파일도 시리즈별로 각각 만든다.
+      // `path.join` 의 두번째 인자가 `feed.output` 이 아닌
+      // `feed.output({ fieldValue })` 인 것을 주목하자
       const outputPath = path.join(publicPath, feed.output({ fieldValue }));
       const outputDir = path.dirname(outputPath);
       if (!(await fs.pathExists(outputDir))) {
@@ -426,6 +431,8 @@ exports.onPostBuild = async ({ graphql, reporter }, pluginOptions) => {
 RSS 피드를 만들었으니 블로그 내에 RSS 피드 링크를 넣어주자.
 
 #### 2.2.3.1. 전체 글목록 RSS 피드 링크
+
+전체 글목록 RSS 피드 링크는 블로그의 최상단 고정 메뉴에 넣어줄 것이다.
 
 그냥 링크만 넣어주면 되기 때문에 어려울 건 없다. 딱 하나 주의해야 할 것은 `<Link />` 컴포넌트를 쓰지 말고 `<a />` 태그를 써야 한다는 것.
 
@@ -488,11 +495,11 @@ const SeriesDetailPageTemplate = ({ pageContext, data }) => {
   return (
     <Layout minContentHeight={500}>
       <ListPageHeader title={series} subtitle="시리즈" note={totalCount} />
+      {/* `SimplePostList` 가 어떻게 수정되었는지는 "2.3. 상세 코드" 섹션을 참고하자. */}
       <SimplePostList
         data={edges}
         actions={
           // 이렇게 링크를 만들어주자.
-          // `SimplePostList` 는 어떻게 수정되었는지는 "2.3. 상세 코드" 섹션을 참고하자.
           <RssLink href={`${siteUrl}/series/${series}/rss.xml`}>RSS</RssLink>
         }
       />
@@ -520,11 +527,13 @@ export const pageQuery = graphql`
 
 ### 2.2.4. 이슈1: `gatsby-plugin-feed-by-group` 와 `gatsby-plugin-feed` 를 통합할 수 없음
 
-2.2.2. 에서 만든 `gatsby-plugin-feed-by-group` 은 `gatsby-plugin-feed` 내용을 복사해서 만든 플러그인이다. 현재 구현을 잘 수정하면 `gatsby-plugin-feed-by-group` 가 `gatsby-plugin-feed` 기능을 포함하면서 시리즈별 RSS 피드를 만드는 기능까지 포함할 수 있을 것 같다. 하지만 실제로는 그렇게 하지 않고 `gatsby-plugin-feed-by-group` 와 `gatsby-plugin-feed` 을 별개로 각각 쓰고 있다.
+2.2.2. 에서 만든 `gatsby-plugin-feed-by-group` 은 `gatsby-plugin-feed` 내용을 복사해서 만든 플러그인이다.
+
+잘 구현하면 `gatsby-plugin-feed-by-group` 가 `gatsby-plugin-feed` 기능을 포함하면서 시리즈별 RSS 피드를 만드는 기능까지 포함할 수 있을 것 같다. 하지만 실제로는 그렇게 하지 않고 `gatsby-plugin-feed-by-group` 와 `gatsby-plugin-feed` 을 별개로 각각 쓰고 있다.
 
 왜냐하면 하나로 통합하면 빌드 시 높은 확률로 에러가 나기 때문이다.
 
-해당 에러 메시지는 너무나 불친절하다. 그래서 실제로 에러가 난 원인을 알 수가 없다.
+해당 에러 메시지는 너무나 불친절하다. 에러의 원인을 추적하고자 했지만 결국 실패했다.
 
 ![](./error-in-terminal.png "지금 상황이랑 맞는 에러 메시지로는 보이지 않는다.")
 
@@ -534,11 +543,11 @@ export const pageQuery = graphql`
 
 ### 2.2.5. 이슈2: 정체불명의 에러
 
-바로 윗항목과 이어진다. `gatsby-plugin-feed-by-group` 와 `gatsby-plugin-feed` 를 분리했기 때문에 그 빈도가 현저히 줄기는 했지만, 여전히 가끔 빌드 시 에러가 난다. 에러 메시지도 위와 동일하다. 에러의 원인을 추적하기 어렵다.
+바로 윗항목과 이어진다. `gatsby-plugin-feed-by-group` 와 `gatsby-plugin-feed` 를 분리했기 때문에 그 빈도가 현저히 줄기는 했지만, 여전히 가끔 빌드 시 에러가 난다. 에러 메시지도 위와 동일하다. 에러의 원인을 추적하기는 어려운 상태다.
 
 일단 에러 발생 후 빌드를 재시도하면 대체로 성공하기 때문에, 원인을 찾는 것은 포기한 상태다.
 
-(퇴근 후 제한적인 시간을 사용했다고는 하지만, 이 에러의 원인을 찾기 위해 일주일은 쓴 것 같다. 결국 못 찾았다.)
+(퇴근 후 제한적인 시간을 사용했다고는 하지만, 이 에러의 원인을 찾기 위해 사나흘은 쓴 것 같다. 결국 못 찾았다.)
 
 ## 2.3. 상세 코드
 
