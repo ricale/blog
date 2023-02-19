@@ -8,10 +8,39 @@ module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
   visit(markdownAST, "code", (node, index, parent) => {
     const [language, params] = (node.lang || "").split(":");
     const options = qs.parse(params);
-    const { title, ...rest } = options;
-    if (!title || !language) {
+    const { title, hideCopyButton, ...rest } = options;
+    if (!language || (!title && hideCopyButton)) {
       return;
     }
+
+    parent.children.splice(index, 1, {
+      type: "parent",
+      children: [
+        ...(!title
+          ? []
+          : [
+              {
+                type: "parent",
+                children: [{ type: "text", value: title }],
+                data: {
+                  hProperties: { className: "codeblock-title" },
+                },
+              },
+            ]),
+        node,
+        ...(hideCopyButton
+          ? []
+          : [
+              {
+                type: "html",
+                value: `<button class='codeblock-copy-button'>복사</button>`,
+              },
+            ]),
+      ],
+      data: {
+        hProperties: { className: "codeblock-container" },
+      },
+    });
 
     let newQuery = "";
     if (Object.keys(rest).length) {
@@ -21,23 +50,6 @@ module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
           .map((key) => `${key}=${rest[key]}`)
           .join("&");
     }
-
-    parent.children.splice(index, 1, {
-      type: "parent",
-      children: [
-        {
-          type: "parent",
-          children: [{ type: "text", value: title }],
-          data: {
-            hProperties: { className: "codeblock-title" },
-          },
-        },
-        node,
-      ],
-      data: {
-        hProperties: { className: "codeblock-container" },
-      },
-    });
 
     node.lang = language + newQuery;
   });
