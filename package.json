@@ -40,7 +40,8 @@
     "react-dom": "^18.2.0",
     "remark-gfm": "^1.0.0",
     "rss": "^1.2.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

@@ -5,6 +5,7 @@ const getGatsbyPluginMdxConfig = () => ({
       remarkPlugins: [require("remark-gfm")],
     },
     gatsbyRemarkPlugins: [
+      "gatsby-remark-codeblock-titles",
       "gatsby-remark-toc",
       "gatsby-remark-autolink-headers",
       {
