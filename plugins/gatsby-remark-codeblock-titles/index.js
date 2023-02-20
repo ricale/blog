@@ -1,8 +1,14 @@
 // NOTE: ricale
-// It's based on https://github.com/DSchau/gatsby-remark-code-titles
+// It's based on
+// - https://github.com/DSchau/gatsby-remark-code-titles
+// - https://github.com/iamskok/gatsby-remark-code-buttons
 
 const visit = require("unist-util-visit");
 const qs = require("query-string");
+const { CONTAINER_CLASS, BUTTON_CLASS } = require("./constants");
+
+const TITLE_CLASS = "codeblock-title";
+const BUTTON_LABEL = "COPY";
 
 module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
   visit(markdownAST, "code", (node, index, parent) => {
@@ -23,7 +29,7 @@ module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
                 type: "parent",
                 children: [{ type: "text", value: title }],
                 data: {
-                  hProperties: { className: "codeblock-title" },
+                  hProperties: { className: TITLE_CLASS },
                 },
               },
             ]),
@@ -32,13 +38,17 @@ module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
           ? []
           : [
               {
-                type: "html",
-                value: `<button class='codeblock-copy-button'>복사</button>`,
+                type: "parent",
+                children: [{ type: "text", value: BUTTON_LABEL }],
+                data: {
+                  hName: "button",
+                  hProperties: { className: BUTTON_CLASS },
+                },
               },
             ]),
       ],
       data: {
-        hProperties: { className: "codeblock-container" },
+        hProperties: { className: CONTAINER_CLASS },
       },
     });
 

@@ -2,7 +2,7 @@ import { css } from "../../themes";
 
 const codeblockCss = css`
   pre[class*="language-"] {
-    margin-bottom: 16px;
+    margin: 0 0 16px;
   }
 
   pre > code {
@@ -13,7 +13,7 @@ const codeblockCss = css`
   }
   .codeblock-container {
     position: relative;
-    padding-top: 4px;
+    padding-top: 0.1px;
     .codeblock-title {
       position: absolute;
       top: 0px;
@@ -23,7 +23,27 @@ const codeblockCss = css`
       font-size: 0.875rem;
       font-family: consolas, monospace;
       background-color: #666666;
-      /* border: 2px solid #2a2a2a; */
+    }
+    .codeblock-copy-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      padding: 4px 6px;
+      border: 0;
+
+      font-size: 0.75rem;
+      color: #dddddd;
+      text-decoration: underline;
+
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .codeblock-title + div pre[class*="language-"] {
+      margin-top: 8px;
+    }
+    .codeblock-title + div + .codeblock-copy-button {
+      top: 8px;
     }
   }
 
@@ -32,9 +52,6 @@ const codeblockCss = css`
       padding-top: 0;
       .codeblock-title {
         position: static;
-      }
-      .codeblock-title + div pre[class*="language-"] {
-        margin-top: 0;
       }
     }
   }
