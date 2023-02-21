@@ -24,8 +24,8 @@ tags:
 [react-native-svg](https://github.com/react-native-svg/react-native-svg) 는 React Native 프로젝트에서 SVG 및 관련 엘리먼트들을 웹과 유사한 형식으로 사용할 수 있게 해주는 라이브러리다. 이 라이브러리를 먼저 설치하자.
 
 ```bash
-$ yarn add react-native-svg
-$ cd ./ios && pod install
+yarn add react-native-svg
+cd ./ios && pod install
 ```
 
 설치만 하면 된다. 특별한 설정은 필요 없다.
@@ -35,7 +35,7 @@ $ cd ./ios && pod install
 react-native-svg 는 `<Svg />`, `<G />`, `<Path />` 등 거의 모든 SVG 관련 컴포넌트를 제공하지만, SVG 파일 자체를 `import` 할 수 있게 해주지는 않는다. SVG 파일들을 `import` 해서 사용하려면 [react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer) 라이브러리도 필요하다. 이 라이브러리는 react-native-svg 라이브러리를 사용해 SVG 파일을 읽어들여 React 컴포넌트로 사용할 수 있게 해준다.
 
 ```bash
-$ yarn add --dev react-native-svg-transformer
+yarn add --dev react-native-svg-transformer
 ```
 
 설치 이후 추가적인 설정이 필요하다. (react-native-svg-transformer 의 [README](https://github.com/kristerkari/react-native-svg-transformer/blob/master/README.md)에도 잘 나와있다.)
