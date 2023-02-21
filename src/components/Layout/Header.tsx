@@ -5,7 +5,7 @@ import styled, { css } from "../../themes";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
-const menuItems = [
+const MENU_ITEMS = [
   { path: "/posts", title: "모든글" },
   { path: "/series", title: "시리즈" },
   { path: "/tags", title: "태그" },
@@ -20,15 +20,18 @@ type HeaderProps = {
   siteUrl: string;
 };
 function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
+  const menuItems = !emphasize ? MENU_ITEMS : MENU_ITEMS.slice(3);
   return (
     <Container emphasize={emphasize}>
-      <header>
-        <Link to="/">{title}</Link>
-      </header>
-      <address>
-        <a href="https://ricale.kr">{`by ${author}`}</a>
-      </address>
-      <nav>
+      <HeaderContainer emphasize={emphasize}>
+        <header>
+          <Link to="/">{title}</Link>
+        </header>
+        <address>
+          <a href="https://ricale.kr">{`by ${author}`}</a>
+        </address>
+      </HeaderContainer>
+      <Menu shrink={emphasize}>
         <ul>
           {menuItems.map((item, i) => (
             <li key={i}>
@@ -40,7 +43,7 @@ function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
             </li>
           ))}
         </ul>
-      </nav>
+      </Menu>
     </Container>
   );
 }
@@ -54,6 +57,24 @@ const Container = styled.div<ContainerProps>`
 
   margin: 0px 16px 8px;
   padding-top: 8px;
+
+  ${(p) =>
+    p.emphasize &&
+    css`
+      @media (max-width: 500px) {
+        flex-direction: column;
+      }
+    `}
+`;
+
+type HeaderContainerProps = {
+  emphasize?: boolean;
+};
+const HeaderContainer = styled.div<HeaderContainerProps>`
+  display: flex;
+  flex-direction: row;
+
+  font-family: monospace;
 
   & > header {
     margin-right: 8px;
@@ -72,29 +93,8 @@ const Container = styled.div<ContainerProps>`
     }
   }
 
-  & > nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-
-    flex: 1;
-    > ul {
-      display: flex;
-      flex-direction: row;
-      gap: 8px;
-
-      margin: 0;
-      margin-left: 16px;
-      padding: 0;
-      list-style: none;
-
-      > li > a {
-        display: inline-block;
-        color: #dddddd;
-        text-decoration: underline;
-        font-size: 0.875rem;
-      }
-    }
+  @media (max-width: 799px) {
+    flex-direction: column;
   }
 
   ${(p) =>
@@ -102,29 +102,61 @@ const Container = styled.div<ContainerProps>`
     css`
       padding-top: 56px;
       padding-bottom: 48px;
+
       & > header {
-        font-family: monospace;
         font-size: 5rem;
       }
       & > address {
-        font-family: monospace;
         font-size: 1.5rem;
-      }
-      & > nav {
-        display: none;
       }
 
       @media (max-width: 799px) {
         flex-direction: column;
 
         & > header {
-          font-family: monospace;
           font-size: 4.5rem;
         }
         & > address {
-          font-family: monospace;
           font-size: 1.25rem;
         }
+      }
+      @media (max-width: 500px) {
+        order: 2;
+      }
+    `}
+`;
+
+type MenuProps = {
+  shrink?: boolean;
+};
+const Menu = styled.nav<MenuProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  flex: 1;
+  > ul {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li > a {
+      display: inline-block;
+      color: #dddddd;
+      text-decoration: underline;
+      font-size: 0.875rem;
+    }
+  }
+
+  ${(p) =>
+    p.shrink &&
+    css`
+      @media (max-width: 500px) {
+        order: 1;
       }
     `}
 `;

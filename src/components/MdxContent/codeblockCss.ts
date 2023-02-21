@@ -47,7 +47,7 @@ const codeblockCss = css`
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 500px) {
     .codeblock-container {
       padding-top: 0;
       .codeblock-title {
