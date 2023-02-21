@@ -183,8 +183,8 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 플러그인을 설치한 뒤
 
 ```sh
-$ npm install gatsby-remark-autolink-headers # 같이 설치해줘야 한다.
-$ npm install gatsby-remark-table-of-contents
+npm install gatsby-remark-autolink-headers # 같이 설치해줘야 한다.
+npm install gatsby-remark-table-of-contents
 ```
 
 `gatsby-node.ts` 에 설정을 추가해주자.
@@ -253,7 +253,7 @@ const config: GatsbyConfig = {
 ```sh
 # 버전을 5로 지정하는 이유는 버전 6 부터 ESM only 이기 때문이다.
 # gatsby 는 플러그인에 ESM 을 지원하지 않는다.
-$ npm install mdast-util-toc@5
+npm install mdast-util-toc@5
 ```
 
 그리고 `plugins/gatsby-remark-toc/index.js` 파일을 생성해서 아래처럼 작성하자.

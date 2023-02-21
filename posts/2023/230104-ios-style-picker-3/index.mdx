@@ -21,7 +21,7 @@ heroImageAlt: "sigmund-mmPK8J0XpAM-unsplash"
 프로젝트의 루트 디렉토리에서 아래 명령어를 실행하자.
 
 ```sh
-$ npx storybook init
+npx storybook init
 ```
 
 그러면 `package.json` 에 Storybook 을 위한 패키지들과 함께 명령어가 추가된다.
@@ -117,7 +117,7 @@ English.args = {
 아래 명령어를 실행해 로컬에서 Storybook 서버를 띄워보고
 
 ```sh
-$ yarn storybook
+yarn storybook
 ```
 
 아래 이미지처럼 잘 뜨는지 확인하자.
@@ -135,7 +135,7 @@ Storybook 은 배포용 패키지도 따로 제공해준다. [@storybook/storybo
 아래 명령어로 패키지를 설치하자.
 
 ```sh
-$ yarn add --dev @storybook/storybook-deployer
+yarn add --dev @storybook/storybook-deployer
 ```
 
 그리고 package.json 에 아래 명령어를 추가해주자.
@@ -153,7 +153,7 @@ $ yarn add --dev @storybook/storybook-deployer
 추가한 명령어를 터미널에서 실행하면 배포가 진행된다.
 
 ```sh
-$ yarn deploy-storybook
+yarn deploy-storybook
 ```
 
 이제 자동으로 gh-pages 브랜치로 GitHub Pages 에 배포된다.

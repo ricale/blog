@@ -20,7 +20,7 @@ tags: ["github", "github 인증", "multi ssh", "ssh", "여러 계정 ssh"]
 일단 `ssh-keygen`을 사용해 인증서를 생성하자.
 
 ```bash
-$ ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"
 Generating public/private ed25519 key pair.
 Enter file in which to save the key (/Users/default/.ssh/id_ed25519):
 Enter passphrase (empty for no passphrase):
@@ -30,13 +30,13 @@ Enter same passphrase again:
 경로를 지정하고 싶다면 `-f` 옵션을 주자
 
 ```bash
-$ ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/myCompany/ed25519
+ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/myCompany/ed25519
 ```
 
 생성된 인증서를 key agent 에 등록시켜야 한다. ssh-agent 를 백그라운드에서 실행하자.
 
 ```bash
-$ eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)"
 ```
 
 설정에는 `~/.ssh/config` 파일이 필요한데, 맥의 경우 자동 생성되지 않았을 수 있다. 그 경우 파일을 직접 생성해서 아래와 같은 내용을 넣어야 한다.
@@ -51,13 +51,13 @@ Host *
 `~/.ssh/config` 파일도 확인했으면 이제 아래 명령어를 통해 인증서를 ssh-agent 에 추가하자.
 
 ```bash
-$ ssh-add -K ~/.ssh/id_ed25519
+ssh-add -K ~/.ssh/id_ed25519
 ```
 
 GitHub에 인증서를 등록하려면 아래 명령어를 통해 공개키를 클립보드로 복사해서 사용하면 된다.
 
 ```bash
-$ pbcopy < ~/.ssh/id_ed25519.pub
+pbcopy < ~/.ssh/id_ed25519.pub
 ```
 
 복사한 공개키는 GitHub [Settings] - [SSH and GPG keys] - [New SSH key] 를 통해 등록하자.
@@ -65,7 +65,7 @@ $ pbcopy < ~/.ssh/id_ed25519.pub
 여기까지 하면 이제 리파지토리의 SSH 주소를 remote 로 사용해 코드를 push/pull 할 수 있다.
 
 ```bash
-$ git remote set-url origin git@github.com:ME/MY_REPOSITORY.git
+git remote set-url origin git@github.com:ME/MY_REPOSITORY.git
 ```
 
 ## 2. 여러 계정의 SSH 설정을 한 기기에서 같이 하기
@@ -124,7 +124,7 @@ Host github-my-company
 # git@github.com:ME/MY-REPOSITORY.git
 ## 변경할 주소
 # git@github-private:ME/MY-REPOSITORY.git
-$ git remote set-url origin git@github-private:ME/MY-REPOSITORY.git
+git remote set-url origin git@github-private:ME/MY-REPOSITORY.git
 ```
 
 다른 쪽 리파지토리도 마찬가지다.
@@ -134,7 +134,7 @@ $ git remote set-url origin git@github-private:ME/MY-REPOSITORY.git
 # git@github.com:COMPANY/COMPANY-REPOSITORY.git
 ## 변경할 주소
 # git@github-my-company:COMPANY/COMPANY-REPOSITORY.git
-$ git remote set-url origin git@github-my-company:COMPANY/COMPANY-REPOSITORY.git
+git remote set-url origin git@github-my-company:COMPANY/COMPANY-REPOSITORY.git
 ```
 
 이제 양쪽 다 SSH 인증을 사용할 수 있다.

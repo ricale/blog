@@ -18,8 +18,10 @@ heroImageAlt: "ricale-screenshot-ricalekr"
 
 아래의 명령어를 실행하면 해결할 수 있다.
 
-    $ sudo arch -x86_64 gem install ffi
-    $ arch -x86_64 pod install
+```sh
+sudo arch -x86_64 gem install ffi
+arch -x86_64 pod install
+```
 
 이후부터는 그냥 `pod install`을 써도 문제 없다.
 
@@ -35,7 +37,7 @@ heroImageAlt: "ricale-screenshot-ricalekr"
 
 아래 명령어를 실행해서 `ios/main.jsbundle` 파일을 직접 생성하면 문제가 해결된다.
 
-```
+```sh
 yarn react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'
 ```
 
