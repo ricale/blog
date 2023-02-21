@@ -22,7 +22,7 @@ const Container = styled.div`
   margin: 40px 0 45px;
   padding-left: 40px;
 
-  @media (max-width: 414px) {
+  @media (max-width: 500px) {
     padding-left: 20px;
   }
 `;
@@ -38,7 +38,7 @@ const TitleRow = styled.div`
     word-break: keep-all;
   }
 
-  @media (max-width: 414px) {
+  @media (max-width: 500px) {
     flex-direction: column;
     align-items: flex-start;
   }

@@ -112,7 +112,7 @@ const PostList = styled.ol`
     }
   }
 
-  @media (max-width: 414px) {
+  @media (max-width: 500px) {
     li {
       flex-direction: column;
       align-items: flex-start;
