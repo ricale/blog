@@ -5,6 +5,16 @@ const codeblockCss = css`
     margin: 0 0 16px;
   }
 
+  .gatsby-highlight-code-line {
+    background-color: #666666;
+    display: block;
+    margin-right: -1em;
+    margin-left: -1em;
+    padding-right: 1em;
+    padding-left: 0.75em;
+    border-left: 0.25em solid #999999;
+  }
+
   pre > code {
     padding: unset;
     border-radius: unset;
@@ -22,7 +32,7 @@ const codeblockCss = css`
 
       font-size: 0.875rem;
       font-family: consolas, monospace;
-      background-color: #666666;
+      background-color: #000000;
     }
     .codeblock-copy-button {
       position: absolute;
@@ -52,6 +62,7 @@ const codeblockCss = css`
       padding-top: 0;
       .codeblock-title {
         position: static;
+        background-color: #666666;
       }
     }
   }
