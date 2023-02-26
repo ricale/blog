@@ -103,16 +103,16 @@ const tocCss = css`
     }
   }
   > .toc {
-    ${[...new Array(30)].map(
+    ${[...new Array(20)].map(
       (_, i) =>
         css`
-          @media (min-width: ${1100 + (i + 1) * 10}px) {
-            width: ${(1100 + i * 10 - 800) / 2}px;
+          @media (min-width: ${1100 + (i + 1) * 20}px) {
+            width: ${(1100 + i * 20 - 800) / 2}px;
           }
         `
     )}
 
-    @media (min-width: ${1100 + 30 * 10}px) {
+    @media (min-width: ${1100}px) {
       > ul {
         white-space: inherit;
         code {
