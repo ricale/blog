@@ -1,0 +1,673 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 5.3.3"/><meta name="description" content="이전 글들에서는 Gatsby 기본 기능을 구현을 위한 튜토리얼을 소개하며 태그 기능을 구현했고, MDX 글 안에 인라인 이미지와 테이블을 삽입했으며, 시리즈 기능도 만들어보았고, 임시글 기능도 구현했고, Google Analytics 도 적용해보았으며…" data-gatsby-head="true"/><meta name="author" content="ricale" data-gatsby-head="true"/><meta name="keywords" content="Gatsby, Gatsby blog, Gatsby codeblock, codeblock" data-gatsby-head="true"/><meta property="og:type" content="article" data-gatsby-head="true"/><meta property="og:title" content="Gatsby 블로그 만들기 10 - 코드블록 개선" data-gatsby-head="true"/><meta property="og:description" content="이전 글들에서는 Gatsby 기본 기능을 구현을 위한 튜토리얼을 소개하며 태그 기능을 구현했고, MDX 글 안에 인라인 이미지와 테이블을 삽입했으며, 시리즈 기능도 만들어보았고, 임시글 기능도 구현했고, Google Analytics 도 적용해보았으며…" data-gatsby-head="true"/><meta property="og:url" content="https://ricale.kr/blog/posts/230226-gatsby-10-codeblock" data-gatsby-head="true"/><meta property="og:image" content="https://ricale.kr/blog/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg" data-gatsby-head="true"/><meta property="twitter:card" content="summary_large_image" data-gatsby-head="true"/><meta property="twitter:title" content="Gatsby 블로그 만들기 10 - 코드블록 개선" data-gatsby-head="true"/><meta property="twitter:description" content="이전 글들에서는 Gatsby 기본 기능을 구현을 위한 튜토리얼을 소개하며 태그 기능을 구현했고, MDX 글 안에 인라인 이미지와 테이블을 삽입했으며, 시리즈 기능도 만들어보았고, 임시글 기능도 구현했고, Google Analytics 도 적용해보았으며…" data-gatsby-head="true"/><meta property="twitter:url" content="https://ricale.kr/blog/posts/230226-gatsby-10-codeblock" data-gatsby-head="true"/><meta property="twitter:image" content="https://ricale.kr/blog/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg" data-gatsby-head="true"/><meta name="google-site-verification" content="Z24DuzLFxq0tVrtFhTxfPETtFXf9rOEG73-HpKk2Pgs" data-gatsby-head="true"/><meta name="theme-color" content="#87ceeb"/><style data-href="/blog/styles.2ddee08ef8b338fb9417.css" data-identity="gatsby-global-css">.codeblock-copy-toast{align-items:center;bottom:16px;display:flex;flex-direction:column;justify-content:flex-end;left:0;position:fixed;right:0}@keyframes fade-in-and-out{0%{opacity:0}5%{opacity:1}95%{opacity:1}to{opacity:0}}.codeblock-copy-toast-message{animation:fade-in-and-out 2s linear;background-color:#666;border-radius:2px;box-shadow:0 0 2px #fff;padding:4px 8px}code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><title data-gatsby-head="true">Gatsby 블로그 만들기 10 - 코드블록 개선 | techblog</title><link rel="icon" href="/blog/favicon-32x32.png?v=e4b26f44c4d5cbdfa5de205fa43822e7" type="image/png"/><link rel="manifest" href="/blog/manifest.webmanifest" crossorigin="anonymous"/><link rel="apple-touch-icon" sizes="48x48" href="/blog/icons/icon-48x48.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="72x72" href="/blog/icons/icon-72x72.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="96x96" href="/blog/icons/icon-96x96.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="144x144" href="/blog/icons/icon-144x144.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="192x192" href="/blog/icons/icon-192x192.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="256x256" href="/blog/icons/icon-256x256.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="384x384" href="/blog/icons/icon-384x384.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><link rel="apple-touch-icon" sizes="512x512" href="/blog/icons/icon-512x512.png?v=e4b26f44c4d5cbdfa5de205fa43822e7"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><link rel="preconnect" href="https://www.googletagmanager.com"/><link rel="dns-prefetch" href="https://www.googletagmanager.com"/><link rel="alternate" type="application/rss+xml" title="techblog by ricale" href="/blog/rss.xml"/><style data-styled="" data-styled-version="5.3.6">html,body,#___gatsby{width:100%;margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";background-color:black;color:white;}/*!sc*/
+h1,h2,h3,h4,h5,h6,p{margin:0;}/*!sc*/
+a{color:skyblue;-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+a:hover{-webkit-text-decoration:underline;text-decoration:underline;}/*!sc*/
+input,button,select{margin:0;padding:0;font-size:16px;-webkit-appearance:none;-moz-appearance:none;appearance:none;}/*!sc*/
+*{box-sizing:border-box;}/*!sc*/
+data-styled.g1[id="sc-global-ivDGhe1"]{content:"sc-global-ivDGhe1,"}/*!sc*/
+.NcSfy{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;margin:0px 16px 8px;padding-top:8px;}/*!sc*/
+data-styled.g2[id="sc-bcXHqe"]{content:"NcSfy,"}/*!sc*/
+.kQcYu{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;font-family:monospace;}/*!sc*/
+.kQcYu > header{margin-right:8px;font-weight:600;font-size:1.25rem;}/*!sc*/
+.kQcYu > header > a{color:white;}/*!sc*/
+.kQcYu > address{font-size:0.875rem;font-style:normal;}/*!sc*/
+.kQcYu > address > a{color:white;}/*!sc*/
+@media (max-width:799px){.kQcYu{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}}/*!sc*/
+data-styled.g3[id="sc-gswNZR"]{content:"kQcYu,"}/*!sc*/
+.bpDwEs{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end;-webkit-flex:1;-ms-flex:1;flex:1;}/*!sc*/
+.bpDwEs > ul{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+.bpDwEs > ul > li > a{display:inline-block;color:#dddddd;-webkit-text-decoration:underline;text-decoration:underline;font-size:0.875rem;}/*!sc*/
+data-styled.g4[id="sc-dkrFOg"]{content:"bpDwEs,"}/*!sc*/
+.ldgvP{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:4px;margin-top:60px;margin-bottom:16px;font-size:0.8125rem;color:#aaaaaa;}/*!sc*/
+.ldgvP p{white-space:nowrap;}/*!sc*/
+.ldgvP a{color:#aaaaaa;}/*!sc*/
+.ldgvP strong,.ldgvP strong > a{font-weight:normal;color:#ffffff;}/*!sc*/
+data-styled.g5[id="sc-hLBbgP"]{content:"ldgvP,"}/*!sc*/
+.dacKWb{max-width:800px;margin:0 auto;}/*!sc*/
+.dacKWb > main{padding-left:16px;padding-right:16px;padding-bottom:16px;}/*!sc*/
+@media (max-width:799px){.dacKWb > main{padding-left:20px;padding-right:20px;}}/*!sc*/
+data-styled.g6[id="sc-eDvSVe"]{content:"dacKWb,"}/*!sc*/
+.bBXMvW{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;font-size:16px;line-height:1.5;}/*!sc*/
+.bBXMvW h1,.bBXMvW h2,.bBXMvW h3,.bBXMvW h4,.bBXMvW h5,.bBXMvW h6{margin-top:24px;margin-bottom:16px;line-height:1.25;font-weight:600;}/*!sc*/
+.bBXMvW h1 > a.anchor path,.bBXMvW h2 > a.anchor path,.bBXMvW h3 > a.anchor path,.bBXMvW h4 > a.anchor path,.bBXMvW h5 > a.anchor path,.bBXMvW h6 > a.anchor path{fill:white;}/*!sc*/
+.bBXMvW h1{padding-bottom:0.3em;border-bottom:1px solid #21262d;font-size:2.125em;}/*!sc*/
+.bBXMvW h2{padding-bottom:0.3em;border-bottom:1px solid #21262d;font-size:1.625em;}/*!sc*/
+.bBXMvW h3{font-size:1.5em;}/*!sc*/
+.bBXMvW h4{font-size:1.25em;}/*!sc*/
+.bBXMvW h5{font-size:1em;}/*!sc*/
+.bBXMvW h6{font-size:0.9375em;}/*!sc*/
+.bBXMvW ul,.bBXMvW ol{margin-bottom:16px;}/*!sc*/
+.bBXMvW li > ul,.bBXMvW li > ol{margin-top:0;margin-bottom:0;}/*!sc*/
+.bBXMvW img{border:1px solid #333333;}/*!sc*/
+.bBXMvW .gatsby-resp-image-figure{margin:0 0 16px;}/*!sc*/
+.bBXMvW .gatsby-resp-image-figure .gatsby-resp-image-wrapper{margin-bottom:0;}/*!sc*/
+.bBXMvW .gatsby-resp-image-figure .gatsby-resp-image-figcaption{margin-top:4px;text-align:center;font-size:0.875rem;color:#aaaaaa;}/*!sc*/
+.bBXMvW .gatsby-resp-image-wrapper{margin-bottom:16px;}/*!sc*/
+.bBXMvW > .md{-webkit-order:1;-ms-flex-order:1;order:1;}/*!sc*/
+.bBXMvW > .toc{font-size:0.875rem;}/*!sc*/
+.bBXMvW > .toc > ul{margin:0;padding:0;list-style:none;}/*!sc*/
+.bBXMvW > .toc > ul ul{list-style:none;}/*!sc*/
+@media (max-width:1099px){.bBXMvW > .toc{position:absolute;top:-62px;right:8px;z-index:10;padding:8px;background-color:#1a1a1a;}.bBXMvW > .toc > p{margin:0;font-size:0.875rem;}.bBXMvW > .toc > ul{display:none;}.bBXMvW > .toc:hover{left:8px;padding:16px;}.bBXMvW > .toc:hover > p{margin:0;font-size:1.125rem;}.bBXMvW > .toc:hover > ul{display:block;margin-top:8px;padding-left:20px;font-size:1rem;}.bBXMvW > .toc:hover > ul a{color:#dddddd;}.bBXMvW > .toc:hover > ul a > code{color:#dddddd;}.bBXMvW > .toc:hover > ul ul{padding-left:30px;}}/*!sc*/
+@media (min-width:1100px){.bBXMvW > .toc{position:absolute;top:8px;left:calc(50% + 400px);height:100%;}.bBXMvW > .toc > p{display:none;}.bBXMvW > .toc > ul{position:-webkit-sticky;position:sticky;top:10px;padding-left:8px;border-left:1px solid #aaaaaa;white-space:nowrap;overflow:hidden;}.bBXMvW > .toc > ul a{color:#aaaaaa;}.bBXMvW > .toc > ul a > code{color:#aaaaaa;}.bBXMvW > .toc > ul code{white-space:nowrap;}.bBXMvW > .toc > ul ul{padding-left:15px;}.bBXMvW > .toc .highlight{color:#ffffff;-webkit-text-decoration:underline;text-decoration:underline;}.bBXMvW > .toc .highlight code{color:#ffffff;-webkit-text-decoration:underline;text-decoration:underline;}}/*!sc*/
+@media (min-width:1120px){.bBXMvW > .toc{width:150px;}}/*!sc*/
+@media (min-width:1140px){.bBXMvW > .toc{width:160px;}}/*!sc*/
+@media (min-width:1160px){.bBXMvW > .toc{width:170px;}}/*!sc*/
+@media (min-width:1180px){.bBXMvW > .toc{width:180px;}}/*!sc*/
+@media (min-width:1200px){.bBXMvW > .toc{width:190px;}}/*!sc*/
+@media (min-width:1220px){.bBXMvW > .toc{width:200px;}}/*!sc*/
+@media (min-width:1240px){.bBXMvW > .toc{width:210px;}}/*!sc*/
+@media (min-width:1260px){.bBXMvW > .toc{width:220px;}}/*!sc*/
+@media (min-width:1280px){.bBXMvW > .toc{width:230px;}}/*!sc*/
+@media (min-width:1300px){.bBXMvW > .toc{width:240px;}}/*!sc*/
+@media (min-width:1320px){.bBXMvW > .toc{width:250px;}}/*!sc*/
+@media (min-width:1340px){.bBXMvW > .toc{width:260px;}}/*!sc*/
+@media (min-width:1360px){.bBXMvW > .toc{width:270px;}}/*!sc*/
+@media (min-width:1380px){.bBXMvW > .toc{width:280px;}}/*!sc*/
+@media (min-width:1400px){.bBXMvW > .toc{width:290px;}}/*!sc*/
+@media (min-width:1420px){.bBXMvW > .toc{width:300px;}}/*!sc*/
+@media (min-width:1440px){.bBXMvW > .toc{width:310px;}}/*!sc*/
+@media (min-width:1460px){.bBXMvW > .toc{width:320px;}}/*!sc*/
+@media (min-width:1480px){.bBXMvW > .toc{width:330px;}}/*!sc*/
+@media (min-width:1500px){.bBXMvW > .toc{width:340px;}}/*!sc*/
+@media (min-width:1100px){.bBXMvW > .toc > ul{white-space:inherit;}.bBXMvW > .toc > ul code{white-space:inherit;}}/*!sc*/
+.bBXMvW pre[class*="language-"]{margin:0 0 16px;}/*!sc*/
+.bBXMvW .gatsby-highlight-code-line{display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:0.75em;border-left:0.25em solid #999999;background-color:#444444;}/*!sc*/
+.bBXMvW pre > code{padding:unset;border-radius:unset;background-color:unset;color:unset;}/*!sc*/
+.bBXMvW .codeblock-container{position:relative;padding-top:0.1px;}/*!sc*/
+.bBXMvW .codeblock-container .codeblock-title{position:absolute;top:0px;left:8px;padding:2px 8px;font-size:0.875rem;font-family:consolas,monospace;background-color:#000000;}/*!sc*/
+.bBXMvW .codeblock-container .codeblock-copy-button{position:absolute;top:0;right:0;padding:4px 6px;border:0;font-size:0.75rem;color:#dddddd;-webkit-text-decoration:underline;text-decoration:underline;background-color:transparent;cursor:pointer;}/*!sc*/
+.bBXMvW .codeblock-container .codeblock-title + div pre[class*="language-"]{margin-top:8px;}/*!sc*/
+.bBXMvW .codeblock-container .codeblock-title + div + .codeblock-copy-button{top:8px;}/*!sc*/
+@media (max-width:500px){.bBXMvW .codeblock-container{padding-top:0;}.bBXMvW .codeblock-container .codeblock-title{position:static;background-color:#666666;}}/*!sc*/
+.bBXMvW blockquote{position:relative;margin-left:0;margin-right:0;margin-bottom:16px;padding:16px 32px;border-left:1px solid #666666;border-left-width:10px;background-color:#1a1a1a;}/*!sc*/
+.bBXMvW blockquote > :first-child{margin-top:0;}/*!sc*/
+.bBXMvW blockquote > :last-child{margin-bottom:0;}/*!sc*/
+.bBXMvW blockquote > ul,.bBXMvW blockquote > ol{padding-left:20px;}/*!sc*/
+.bBXMvW blockquote:before{content:'"';position:absolute;top:-10px;left:5px;font-size:3em;color:#666666;}/*!sc*/
+.bBXMvW blockquote:after{content:'"';position:absolute;bottom:-30px;right:5px;font-size:3em;color:#666666;}/*!sc*/
+.bBXMvW p{margin-top:0;margin-bottom:16px;}/*!sc*/
+.bBXMvW hr{height:0.25em;margin:24px 0;border:0;background-color:#30363d;}/*!sc*/
+.bBXMvW code{padding:0.2em 0.4em;border-radius:2px;font-size:0.85em;background-color:#333333;color:#DDDDDD;white-space:break-spaces;}/*!sc*/
+.bBXMvW a > code{color:skyblue;}/*!sc*/
+data-styled.g16[id="sc-eDWCr"]{content:"bBXMvW,"}/*!sc*/
+.dXMwZF{margin-bottom:16px;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#1a1a1a;}/*!sc*/
+data-styled.g17[id="sc-bqWxrE"]{content:"dXMwZF,"}/*!sc*/
+.fyhhHu{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding:16px;cursor:pointer;}/*!sc*/
+.fyhhHu > h2{margin:0;font-size:1rem;}/*!sc*/
+.fyhhHu > span{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);}/*!sc*/
+data-styled.g18[id="sc-ksBlkl"]{content:"fyhhHu,"}/*!sc*/
+.fTbagy{display:inline-block;padding:4px 8px;border-radius:2px;background-color:#222222;color:skyblue;-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+data-styled.g21[id="sc-fEXmlR"]{content:"fTbagy,"}/*!sc*/
+.gNkJwK{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}/*!sc*/
+data-styled.g22[id="sc-bjfHbI"]{content:"gNkJwK,"}/*!sc*/
+.fBJyUF{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-bottom:16px;}/*!sc*/
+.fBJyUF > p{position:absolute;right:4px;top:calc(100% - 4px);font-size:0.625rem;color:#aaaaaa;}/*!sc*/
+data-styled.g23[id="sc-idXgbr"]{content:"fBJyUF,"}/*!sc*/
+.bmJkeD{margin:60px 0 72px;padding:0 24px;}/*!sc*/
+.bmJkeD > h1{font-size:2.5rem;word-break:keep-all;margin:0;}/*!sc*/
+data-styled.g93[id="sc-dEVLtI"]{content:"bmJkeD,"}/*!sc*/
+.gWJTYF{margin:16px 0;}/*!sc*/
+data-styled.g94[id="sc-brePNt"]{content:"gWJTYF,"}/*!sc*/
+.gPJPve{margin-bottom:60px;}/*!sc*/
+data-styled.g95[id="sc-gJqSRm"]{content:"gPJPve,"}/*!sc*/
+</style><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/blog/sitemap-index.xml"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="sc-eDvSVe dacKWb"><div class="sc-bcXHqe NcSfy"><div class="sc-gswNZR kQcYu"><header><a href="/blog/">techblog</a></header><address><a href="https://ricale.kr">by ricale</a></address></div><nav class="sc-dkrFOg bpDwEs"><ul><li><a href="/blog/posts/">모든글</a></li><li><a href="/blog/series/">시리즈</a></li><li><a href="/blog/tags/">태그</a></li><li><a href="https://ricale.kr/blog/rss.xml">RSS</a></li></ul></nav></div><main class="sc-jSUZER dgtqKi"><div class="sc-dEVLtI bmJkeD"><h1>Gatsby 블로그 만들기 10 - 코드블록 개선</h1><div class="sc-brePNt gWJTYF">2023. 2. 26.</div><ul class="sc-bjfHbI gNkJwK"><li><a class="sc-fEXmlR fTbagy" href="/blog/tags/Gatsby/">Gatsby</a></li><li><a class="sc-fEXmlR fTbagy" href="/blog/tags/Gatsby blog/">Gatsby blog</a></li><li><a class="sc-fEXmlR fTbagy" href="/blog/tags/Gatsby codeblock/">Gatsby codeblock</a></li><li><a class="sc-fEXmlR fTbagy" href="/blog/tags/codeblock/">codeblock</a></li></ul></div><div class="sc-bqWxrE dXMwZF"><div class="sc-ksBlkl fyhhHu"><h2>시리즈 <a href="/blog/series/Gatsby 블로그 만들기/">&quot;Gatsby 블로그 만들기&quot;</a></h2><span>▲</span></div></div><div class="sc-idXgbr fBJyUF"><div data-gatsby-image-wrapper="" class="gatsby-image-wrapper gatsby-image-wrapper-constrained"><div style="max-width:4015px;display:block"><img alt="" role="presentation" aria-hidden="true" src="data:image/svg+xml;charset=utf-8,%3Csvg height=&#x27;1844&#x27; width=&#x27;4015&#x27; xmlns=&#x27;http://www.w3.org/2000/svg&#x27; version=&#x27;1.1&#x27;%3E%3C/svg%3E" style="max-width:100%;display:block;position:static"/></div><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#d8d8c8;position:absolute;top:0;left:0;bottom:0;right:0"></div><picture><source type="image/webp" data-srcset="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/a8f6a/edward-nguyen-wy1_f76J9CA-unsplash.webp 1004w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/45a8d/edward-nguyen-wy1_f76J9CA-unsplash.webp 2008w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/19341/edward-nguyen-wy1_f76J9CA-unsplash.webp 4015w" sizes="(min-width: 4015px) 4015px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 4015px) 4015px, 100vw" decoding="async" loading="lazy" data-src="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg" data-srcset="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/66ff7/edward-nguyen-wy1_f76J9CA-unsplash.jpg 1004w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/5cfa7/edward-nguyen-wy1_f76J9CA-unsplash.jpg 2008w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg 4015w" alt="edward-nguyen-wy1_f76J9CA-unsplash"/></picture><noscript><picture><source type="image/webp" srcSet="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/a8f6a/edward-nguyen-wy1_f76J9CA-unsplash.webp 1004w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/45a8d/edward-nguyen-wy1_f76J9CA-unsplash.webp 2008w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/19341/edward-nguyen-wy1_f76J9CA-unsplash.webp 4015w" sizes="(min-width: 4015px) 4015px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 4015px) 4015px, 100vw" decoding="async" loading="lazy" src="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg" srcSet="/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/66ff7/edward-nguyen-wy1_f76J9CA-unsplash.jpg 1004w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/5cfa7/edward-nguyen-wy1_f76J9CA-unsplash.jpg 2008w,/blog/static/577389a7047718cdfcd3d9f71ed3b8bf/d9665/edward-nguyen-wy1_f76J9CA-unsplash.jpg 4015w" alt="edward-nguyen-wy1_f76J9CA-unsplash"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div><p>edward-nguyen-wy1_f76J9CA-unsplash</p></div><div class="sc-eDWCr sc-gJqSRm bBXMvW gPJPve"><div class="md"><p>이전 글들에서는 Gatsby <a href="https://ricale.kr/blog/posts/230111-gatsby-1/">기본 기능을 구현을 위한 튜토리얼을 소개하며 태그 기능을 구현</a>했고, <a href="https://ricale.kr/blog/posts/230112-gatsby-2/">MDX 글 안에 인라인 이미지와 테이블을 삽입</a>했으며, <a href="https://ricale.kr/blog/posts/230119-gatsby-3-series/">시리즈 기능도 만들어</a>보았고, <a href="https://ricale.kr/blog/posts/230122-gatsby-4-drafts/">임시글 기능도 구현</a>했고, <a href="https://ricale.kr/blog/posts/230126-gatsby-5-ga/">Google Analytics 도 적용</a>해보았으며, <a href="https://ricale.kr/blog/posts/230128-gatsby-6-toc/">목차 자동 생성 기능</a> 및 <a href="https://ricale.kr/blog/posts/230206-gatsby-7-sticky-toc/">sticky 스타일</a>까지 구현했고, 추가로 <a href="https://ricale.kr/blog/posts/230211-gatsby-8-comments/">댓글 기능</a>도 구현한 뒤 <a href="https://ricale.kr/blog/posts/230219-gatsby-9-rss-feed/">RSS 피드도 적용</a>했다.</p><p>이번에는 코드블록을 개선해보자.</p><h1 id="1-개요" style="position:relative"><a href="#1-%EA%B0%9C%EC%9A%94" aria-label="1 개요 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>1. 개요</h1><p>코드블록은 마크다운에서 아래와 같은 문법을 썼을 때</p><div><div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js
+import React from "react";
+
+function SampleComp({ ...props }) {
+  return &lt;div>샘플용 컴포넌트&lt;/div>;
+}
+
+export default SampleComp;
+```</code></pre></div></div><p>아래처럼 보여주는 기능을 말한다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/79cd5f424ff700b5b770cc28a9c77e01/d3b46/screenshot-1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 27.500000000000004%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAs0lEQVR42o2R2QqFMBBD+xOKW8EFQap1w10R/P+PyiUD+nj14TBDGkLaKs/zoLVGFEUIw1AmoU5833+FviAI4DgOVN/3OM8T+75jXVds24ZlWdC2Lbquk/lG0zTiLYoCqqoqHMchIdd1Sfg0TaINw4CyLEHPP+ix1iLPcyhjDOZ5BpuyIXcGjuOIuq5fw26eQNa9Q9jo3hnGs688V+ZHpGmKJEkQxzGyLJOdOh/6K/S7rosfL52xgmM1MW4AAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 1"
+        title=""
+        src="/blog/static/79cd5f424ff700b5b770cc28a9c77e01/5a190/screenshot-1.png"
+        srcset="/blog/static/79cd5f424ff700b5b770cc28a9c77e01/772e8/screenshot-1.png 200w,
+/blog/static/79cd5f424ff700b5b770cc28a9c77e01/e17e5/screenshot-1.png 400w,
+/blog/static/79cd5f424ff700b5b770cc28a9c77e01/5a190/screenshot-1.png 800w,
+/blog/static/79cd5f424ff700b5b770cc28a9c77e01/c1b63/screenshot-1.png 1200w,
+/blog/static/79cd5f424ff700b5b770cc28a9c77e01/29007/screenshot-1.png 1600w,
+/blog/static/79cd5f424ff700b5b770cc28a9c77e01/d3b46/screenshot-1.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><p>여기에 우리는 세 가지 기능을 적용해 볼 것이다.</p><ol>
+<li>문법 하이라이팅</li>
+<li>코드블록 제목</li>
+<li>코드블록 내용 복사 기능</li>
+</ol><h1 id="2-구현" style="position:relative"><a href="#2-%EA%B5%AC%ED%98%84" aria-label="2 구현 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2. 구현</h1><p>문법 하이라이팅은 플러그인을 사용해 간단히 구현할 것이다. 코드블록 제목과 코드블록 내용 복사 기능은 기존의 플러그인만으로는 조금 아쉽기 때문에 플러그인을 조금 고쳐서 적용해볼 것이다.</p><h2 id="21-문법-하이라이팅---gatsby-remark-prismjs" style="position:relative"><a href="#21-%EB%AC%B8%EB%B2%95-%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8C%85---gatsby-remark-prismjs" aria-label="21 문법 하이라이팅   gatsby remark prismjs permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.1. 문법 하이라이팅 - <code>gatsby-remark-prismjs</code></h2><p>문법 하이라이팅 방법은 간단하다. <code>gatsby-remark-prismjs</code> 플러그인을 적용해주면 된다.</p><p>먼저 설치하고</p><div class="codeblock-container"><div><div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> gatsby-remark-prismjs prismjs</code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>설정도 추가해주자.</p><div class="codeblock-container"><div class="codeblock-title">gatsby-config.ts</div><div><div class="gatsby-highlight has-highlighted-lines" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// ...</span>
+
+<span class="token keyword">const</span> config<span class="token operator">:</span> GatsbyConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">{</span>
+      resolve<span class="token operator">:</span> <span class="token string">"gatsby-plugin-mdx"</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+        gatsbyRemarkPlugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// ...</span>
+<span class="gatsby-highlight-code-line">          <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">            resolve<span class="token operator">:</span> <span class="token string">"gatsby-remark-prismjs"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">            options<span class="token operator">:</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">              <span class="token comment">// 인라인 코드 블록 (`code`) 에는 별도의 하이라이팅을 하지 않겠다는 설정</span></span><span class="gatsby-highlight-code-line">              noInlineHighlight<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">            <span class="token punctuation">}</span><span class="token punctuation">,</span></span>          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>마지막으로 테마도 적용해줘야 한다. <code>gatsby-browser.ts</code> 에서 적용하자.</p><div class="codeblock-container"><div class="codeblock-title">gatsby-browser.ts</div><div><div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">"prismjs/themes/prism-solarizedlight.css"</span><span class="token punctuation">)</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>여기서 어떤 테마를 적용할 수 있는지는 <a href="https://prismjs.com/">prismjs</a> 공식 페이지에서 볼 수 있다. 테마마다 어떤 css 파일을 import 해야하는지는 <a href="https://github.com/PrismJS/prism/tree/1d5047df37aacc900f8270b1c6215028f6988eb1/themes">이 목록</a>을 참고하자.</p><p>여기까지 적용하면 아래처럼 코드가 문법에 맞춰 하이라이팅 된 것을 볼 수 있다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/05d77ef24abf3c171c1251aa32bd1307/d3b46/screenshot-2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 27.500000000000004%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAxUlEQVR42pWRyw6DIBBF+QsjQvogRhNFUMpgpSZd9f//6Ba03faxOBkWN4e5GcZLDikkpJQQlUAldsqy/AvOOYqiAPOOsC4rbreIqw+ga8BlJlhrYcdxn18wxmBM2a7rwKw2WCgiOoNHdLjHGUQBa4xwzm2hvu8/kjNaazRNAzakB13SVumnZQ4IIW1JhDA5DMPwVfYmC9u2BZvslIS0S53fhN576CTLVX4lV98qH+QB6qg2zqcz6rqGUgoiH6eqfka8DvkEND2xyhiEPusAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 2"
+        title=""
+        src="/blog/static/05d77ef24abf3c171c1251aa32bd1307/5a190/screenshot-2.png"
+        srcset="/blog/static/05d77ef24abf3c171c1251aa32bd1307/772e8/screenshot-2.png 200w,
+/blog/static/05d77ef24abf3c171c1251aa32bd1307/e17e5/screenshot-2.png 400w,
+/blog/static/05d77ef24abf3c171c1251aa32bd1307/5a190/screenshot-2.png 800w,
+/blog/static/05d77ef24abf3c171c1251aa32bd1307/c1b63/screenshot-2.png 1200w,
+/blog/static/05d77ef24abf3c171c1251aa32bd1307/29007/screenshot-2.png 1600w,
+/blog/static/05d77ef24abf3c171c1251aa32bd1307/d3b46/screenshot-2.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><p>이 외에도 <code>gatsby-remark-prismjs</code> 플러그인은 아래의 유용한 기능들을 옵션으로 제공한다.</p><ul>
+<li>쉘 스크립트 문법을 위한 프롬프트 추가</li>
+<li>특정 라인 하이라이팅 추가</li>
+<li>라인 넘버링 추가</li>
+</ul><p>이 옵션들은 <a href="https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-remark-prismjs">공식 문서</a>에 잘 설명되어 있으니 필요하다면 해당 문서를 참고하자.</p><h2 id="22-코드블록에-제목-삽입" style="position:relative"><a href="#22-%EC%BD%94%EB%93%9C%EB%B8%94%EB%A1%9D%EC%97%90-%EC%A0%9C%EB%AA%A9-%EC%82%BD%EC%9E%85" aria-label="22 코드블록에 제목 삽입 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.2. 코드블록에 제목 삽입</h2><p>코드블록에 해당 코드가 포함된 파일명 등으로 제목을 넣고 싶을 수 있다. 맨 윗줄에 주석으로 제목을 표시할 수도 있지만 그다지 예쁘지는 않다. 제목을 넣을 수 있는 기능을 적용해보자.</p><h3 id="221-gatsby-remark-code-titles" style="position:relative"><a href="#221-gatsby-remark-code-titles" aria-label="221 gatsby remark code titles permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.2.1. <code>gatsby-remark-code-titles</code></h3><p><a href="https://github.com/DSchau/gatsby-remark-code-titles"><code>gatsby-remark-code-titles</code></a> 플러그인을 적용하면 쉽게 제목을 추가할 수 있다.</p><div class="codeblock-container"><div><div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh"><span class="token function">npm</span> i gatsby-remark-code-titles</code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>설치한 뒤 아래처럼 설정을 추가하면 된다.</p><div class="codeblock-container"><div class="codeblock-title">gatsby-config.ts</div><div><div class="gatsby-highlight has-highlighted-lines" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// ...</span>
+
+<span class="token keyword">const</span> config<span class="token operator">:</span> GatsbyConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">{</span>
+      resolve<span class="token operator">:</span> <span class="token string">"gatsby-plugin-mdx"</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+        gatsbyRemarkPlugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// ...</span>
+<span class="gatsby-highlight-code-line">          <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">            resolve<span class="token operator">:</span> <span class="token string">'gatsby-remark-code-titles'</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">            options<span class="token operator">:</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">              className<span class="token operator">:</span> <span class="token string">'your-custom-class-name'</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">            <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">          <span class="token punctuation">}</span><span class="token punctuation">,</span></span>          <span class="token punctuation">{</span>
+            resolve<span class="token operator">:</span> <span class="token string">"gatsby-remark-prismjs"</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              noInlineHighlight<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>이제 MDX 내에서 코드블록을 작성할 때 아래처럼 제목을 넣어줄 수 있다.</p><div><div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">```js:title=SampleComp.tsx
+import React from "react";
+
+function SampleComp({ ...props }) {
+  return &lt;div>샘플용 컴포넌트&lt;/div>;
+}
+
+export default SampleComp;
+```</code></pre></div></div><p>그러면 아래처럼 적용된 것을 볼 수 있다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/016dae777b296c275440b516aee6b909/d3b46/screenshot-3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 30.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAw0lEQVR42pWRyw6CMBREm9DCLygE0LLj1VJ7LaWauPD/f2mkde9jce5sJpO5GcY5R9M0qOsax8MBeZ5DCJH0XxhjYCIXcOQQtgDnPLQy0GQwjiP6vk/6C9GbQrngsAshuIDHesHz5rD6FX7bQESY5xnTNH1lGIZ3YHxvUQvI0N6QcA9+VwfnPRZjkvGvhvFcjMXVXmH3UGspBWqlUjut9UfU7osaWxZFAZZlGdqmhTxJnNszpJToui4NVVXVz5RliTjwC6DMqNYF0LaMAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 3"
+        title=""
+        src="/blog/static/016dae777b296c275440b516aee6b909/5a190/screenshot-3.png"
+        srcset="/blog/static/016dae777b296c275440b516aee6b909/772e8/screenshot-3.png 200w,
+/blog/static/016dae777b296c275440b516aee6b909/e17e5/screenshot-3.png 400w,
+/blog/static/016dae777b296c275440b516aee6b909/5a190/screenshot-3.png 800w,
+/blog/static/016dae777b296c275440b516aee6b909/c1b63/screenshot-3.png 1200w,
+/blog/static/016dae777b296c275440b516aee6b909/29007/screenshot-3.png 1600w,
+/blog/static/016dae777b296c275440b516aee6b909/d3b46/screenshot-3.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><p>제목이 좀 밋밋해 보인다면 스타일을 수정해서 예쁘게 꾸미자.</p><h3 id="222-gatsby-remark-code-titles-를-수정해서-사용" style="position:relative"><a href="#222-gatsby-remark-code-titles-%EB%A5%BC-%EC%88%98%EC%A0%95%ED%95%B4%EC%84%9C-%EC%82%AC%EC%9A%A9" aria-label="222 gatsby remark code titles 를 수정해서 사용 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.2.2. <code>gatsby-remark-code-titles</code> 를 수정해서 사용</h3><p>그런데 스타일을 수정하려고 보니 마음에 들지 않는 점이 있다. 플러그인을 적용하고 제목을 지정하면 해당 MDX 구문은 아래처럼 HTML 로 나온다.</p><div class="codeblock-container"><div><div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gatsby-code-title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>SampleComp.tsx<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gatsby-highlight<span class="token punctuation">"</span></span> <span class="token attr-name">data-language</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>language-ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>code</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>language-ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token comment">&lt;!-- 코드블록 본문 --></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>code</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>물론 이 구조만으로도 충분히 <code>gatsby-code-title</code> 클래스로 예쁘게 스타일을 지정할 수 있다. (만약 이 구조에 만족한다면 이 섹션을 읽지 않아도 괜찮다. 바로 2.3. 으로 넘어가자.)</p><p>하지만 나는 마음에 들지 않았다. 내가 원하는 구조는 아래 같은 구조였다.</p><div class="codeblock-container"><div><div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>codeblock-container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>codeblock-title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>SampleComp.tsx<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gatsby-highlight<span class="token punctuation">"</span></span> <span class="token attr-name">data-language</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>language-ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>code</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>language-ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token comment">&lt;!-- 코드블록 본문 --></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>code</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>이렇게 코드블록 제목과 본문을 같이 어우르는 컨테이너가 있어야 코드블록 제목에 <code>position: absolute;</code> 스타일을 달아서 내가 원하는 모양으로 만들 수 있었다. 하지만 <code>gatsby-remark-code-titles</code> 플러그인은 HTML 구조를 바꿀 수 있는 기능을 지원해주지는 않았다.</p><p>그렇다면 이전 글들에서 계속 해왔던대로 <code>gatsby-remark-code-titles</code> 플러그인 코드를 복사해와서 조금 고쳐서, 내부 플러그인으로 <code>gatsby-remark-codeblock</code> 플러그인을 작성해보자.</p><div class="codeblock-container"><div class="codeblock-title">plugins/gatsby-remark-codeblock/index.js</div><div><div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// https://github.com/DSchau/gatsby-remark-code-titles 의 코드를 토대로 작성</span>
+
+<span class="token keyword">const</span> visit <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"unist-util-visit"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> qs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"query-string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">gatsbyRemarkCodeTitles</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> markdownAST <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">visit</span><span class="token punctuation">(</span>markdownAST<span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token punctuation">,</span> index<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">[</span>language<span class="token punctuation">,</span> params<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>lang <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> options <span class="token operator">=</span> qs<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> title<span class="token punctuation">,</span> <span class="token operator">...</span>rest <span class="token punctuation">}</span> <span class="token operator">=</span> options<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>title <span class="token operator">||</span> <span class="token operator">!</span>language<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">let</span> newQuery <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>rest<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      newQuery <span class="token operator">=</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">:</span><span class="token template-punctuation string">`</span></span> <span class="token operator">+</span>
+        Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>rest<span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>key<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>rest<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="gatsby-highlight-code-line">    parent<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"parent"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span></span><span class="gatsby-highlight-code-line">        <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">          <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"parent"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">          <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> title <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">          <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">            <span class="token literal-property property">hProperties</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token string">"codeblock-title"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">          <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">        <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">        node<span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">      <span class="token punctuation">]</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">      <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">        <span class="token literal-property property">hProperties</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token string">"codeblock-container"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">      <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+    node<span class="token punctuation">.</span>lang <span class="token operator">=</span> language <span class="token operator">+</span> newQuery<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> markdownAST<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>이제 MDX 가 원하는 형태의 HTML 로 변환되어 나온다. 스타일도 적용해보자.</p><div class="codeblock-container"><div class="codeblock-title">src/components/MdxContent/codeblockCss.ts</div><div><div class="gatsby-highlight" data-language="scss"><pre class="language-scss"><code class="language-scss">const codeblockCss = css`
+  <span class="token comment">// ...</span>
+  <span class="token selector">.codeblock-container </span><span class="token punctuation">{</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    <span class="token property">padding-top</span><span class="token punctuation">:</span> 0.1px<span class="token punctuation">;</span>
+    <span class="token selector">.codeblock-title </span><span class="token punctuation">{</span>
+      <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+      <span class="token property">top</span><span class="token punctuation">:</span> 0px<span class="token punctuation">;</span>
+      <span class="token property">left</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+      <span class="token property">padding</span><span class="token punctuation">:</span> 2px 8px<span class="token punctuation">;</span>
+
+      <span class="token property">font-size</span><span class="token punctuation">:</span> 0.875rem<span class="token punctuation">;</span>
+      <span class="token property">font-family</span><span class="token punctuation">:</span> consolas<span class="token punctuation">,</span> monospace<span class="token punctuation">;</span>
+      <span class="token property">background-color</span><span class="token punctuation">:</span> #000000<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token selector">.codeblock-title + div pre[class*="language-"] </span><span class="token punctuation">{</span>
+      <span class="token property">margin-top</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+`<span class="token punctuation">;</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>이제 원하는대로 제목이 노출된다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/d3b46/screenshot-4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 29.000000000000004%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA5UlEQVR42o2Ry26DMBREzQ8gXhVIcWCFQME2Btv4Qciu6v9/0dQ0i+6SLI5GuosjzR1SFAWutEXTNCjyAlVVofwqcd6zLPuIPM+RpikIISCCCQQbYJ2FXg2M3qDCBrks4IxjnmcIIV4ipcQwDEiSBITfGO7ugd1ofO8KPw8Lbx38vuM4DizrCsbYS05p3/dP4XSb4LSHVhreW9z3ENNjcw7G2reyaZrAOf8XSiHhNw9nokAZuCgLIUApFSszyFh5fsMS3zOO41PY1A3aOMr1cgW9ULRti67rQClFXdcfcQ5aluXfKL+E6axWD8Fb2AAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 4"
+        title=""
+        src="/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/5a190/screenshot-4.png"
+        srcset="/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/772e8/screenshot-4.png 200w,
+/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/e17e5/screenshot-4.png 400w,
+/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/5a190/screenshot-4.png 800w,
+/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/c1b63/screenshot-4.png 1200w,
+/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/29007/screenshot-4.png 1600w,
+/blog/static/8e7280ae49a3dc9c7a1cbda5a02cd805/d3b46/screenshot-4.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><h2 id="23-코드블록에-복사-버튼-삽입" style="position:relative"><a href="#23-%EC%BD%94%EB%93%9C%EB%B8%94%EB%A1%9D%EC%97%90-%EB%B3%B5%EC%82%AC-%EB%B2%84%ED%8A%BC-%EC%82%BD%EC%9E%85" aria-label="23 코드블록에 복사 버튼 삽입 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.3. 코드블록에 복사 버튼 삽입</h2><p>기술 문서나 기술 블로그를 돌아다니다 보면 코드블록의 내용을 클립보드에 복사할 수 있는 버튼이 포함되어 있는 경우가 있다.</p><div><figure class="gatsby-resp-image-figure" style="">
+    <span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/83f29eca056477ce2391e98aded73c38/ce0a7/copy-button-example.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 24%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA0klEQVR42o2Oy07DMBBF8/8/F6l0QUsXgFDrxImsOH7b8cFEUJBgwUhX98xT0/V9z+Fw4HJ5Yr69cn0+c3t74eF45HR65L9Ra93VCTEwjpJpmlFKIWVjOTEMI0IItNZNK845jLGY1aAXzdrcaItfEymU++HO2ZUYPClFcmrNGFseGsedfTvkrCW0mS+2xuwcnCeYthcy21bYSqEz4oqXI1Er1CTwzVclscsM2X0r/eDs71w/PdmF6AxdzZGaAiW2L4OjJE9u/JHvvT8VftdKhC3zDtzlgz3xiryMAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="copy button example"
+        title="Gatsby 공식 문서의 코드블록. 우측 상단에 &#39;Copy&#39; 버튼이 있다."
+        src="/blog/static/83f29eca056477ce2391e98aded73c38/5a190/copy-button-example.png"
+        srcset="/blog/static/83f29eca056477ce2391e98aded73c38/772e8/copy-button-example.png 200w,
+/blog/static/83f29eca056477ce2391e98aded73c38/e17e5/copy-button-example.png 400w,
+/blog/static/83f29eca056477ce2391e98aded73c38/5a190/copy-button-example.png 800w,
+/blog/static/83f29eca056477ce2391e98aded73c38/c1b63/copy-button-example.png 1200w,
+/blog/static/83f29eca056477ce2391e98aded73c38/ce0a7/copy-button-example.png 1590w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span>
+    <figcaption class="gatsby-resp-image-figcaption">Gatsby 공식 문서의 코드블록. 우측 상단에 &#39;Copy&#39; 버튼이 있다.</figcaption>
+  </figure></div><p>이것도 넣어보자.</p><h3 id="231-gatsby-remark-code-buttons" style="position:relative"><a href="#231-gatsby-remark-code-buttons" aria-label="231 gatsby remark code buttons permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.3.1. <code>gatsby-remark-code-buttons</code></h3><p><a href="https://github.com/iamskok/gatsby-remark-code-buttons"><code>gatsby-remark-code-buttons</code></a> 플러그인을 적용하면 쉽게 복사 버튼을 추가할 수 있다.</p><div class="codeblock-container"><div><div class="gatsby-highlight" data-language="sh"><pre class="language-sh"><code class="language-sh"><span class="token function">npm</span> i gatsby-remark-code-buttons</code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>설치한 뒤 아래처럼 설정을 추가하면 된다.</p><div class="codeblock-container"><div class="codeblock-title">gatsby-config.ts</div><div><div class="gatsby-highlight has-highlighted-lines" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// ...</span>
+
+<span class="token keyword">const</span> config<span class="token operator">:</span> GatsbyConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">{</span>
+      resolve<span class="token operator">:</span> <span class="token string">"gatsby-plugin-mdx"</span><span class="token punctuation">,</span>
+      options<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...</span>
+        gatsbyRemarkPlugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// ...</span>
+<span class="gatsby-highlight-code-line">          <span class="token string">'gatsby-remark-code-buttons'</span><span class="token punctuation">,</span></span>        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>공식 문서에는 MDX 를 지원하지 않는다고 적혀있지만 (&quot;This plugin doesn&#x27;t support MDX. Example of MDX copy button.&quot;) 클립보드 복사 기능 자체는 문제 없이 동작한다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/a790ff1f26affbe04f29f0d72193820f/d3b46/screenshot-5.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 32%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA1ElEQVR42o2QzW6FIBCFUUFXLnwDNRq9gHKBgn9N06Tv/0ynjOsmdfHNIczkzAHGGAMXHGUpwIsCeZ4lchTp/JQsy9A0DYQQYHRhtEH4CFjXN14vBW1XTNOEcRxv/Q+au64LdV2DkWuwAWc88b17/FwBcYs4zhMhBBhjsCxLWrb+CfVohozvhFSssYg+YtsCvj5P7PuO7TjgnIPW+hFSyvRtJRgV+7Zw1iVNJBPv/b2VEpA+gZJWVQXGOcc8zlCzgpwklFJ3cxgGdF33iL7v0bbt/eRfP0On/10MtAEAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 5"
+        title=""
+        src="/blog/static/a790ff1f26affbe04f29f0d72193820f/5a190/screenshot-5.png"
+        srcset="/blog/static/a790ff1f26affbe04f29f0d72193820f/772e8/screenshot-5.png 200w,
+/blog/static/a790ff1f26affbe04f29f0d72193820f/e17e5/screenshot-5.png 400w,
+/blog/static/a790ff1f26affbe04f29f0d72193820f/5a190/screenshot-5.png 800w,
+/blog/static/a790ff1f26affbe04f29f0d72193820f/c1b63/screenshot-5.png 1200w,
+/blog/static/a790ff1f26affbe04f29f0d72193820f/29007/screenshot-5.png 1600w,
+/blog/static/a790ff1f26affbe04f29f0d72193820f/d3b46/screenshot-5.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><p>스타일은 직접 (관련 엘리먼트들의 클래스 이름을) 지정할 수 있는 많은 옵션을 제공하므로, 플러그인의 공식 문서를 참고하자.</p><h3 id="232-gatsby-remark-code-buttons-를-수정해서-사용" style="position:relative"><a href="#232-gatsby-remark-code-buttons-%EB%A5%BC-%EC%88%98%EC%A0%95%ED%95%B4%EC%84%9C-%EC%82%AC%EC%9A%A9" aria-label="232 gatsby remark code buttons 를 수정해서 사용 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.3.2. <code>gatsby-remark-code-buttons</code> 를 수정해서 사용</h3><p>그런데 이 플러그인도 2.2.1. 의 <code>gatsby-remark-code-titles</code> 와 동일한 이슈가 있다. HTML 구조가 마음에 들지 않는다는 것이다.</p><p>그러니 이번에도 플러그인의 코드를 참고해서 2.2.2. 에서 만든 내부 플러그인에 복사 버튼 기능을 추가하자.</p><p>(<code>gatsby-remark-code-buttons</code> 의 기본 기능에 만족한다면 이 섹션은 넘어가도 된다. 2.4. 로 가자.)</p><p>먼저 복사 버튼 엘리먼트를 추가할 것이다.</p><div class="codeblock-container"><div class="codeblock-title">plugins/gatsby-remark-codeblock/index.js</div><div><div class="gatsby-highlight has-highlighted-lines" data-language="js"><pre class="language-js"><code class="language-js"><span class="token comment">// ...</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token constant">CONTAINER_CLASS</span><span class="token punctuation">,</span> <span class="token constant">BUTTON_CLASS</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./constants"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">TITLE_CLASS</span> <span class="token operator">=</span> <span class="token string">"codeblock-title"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">BUTTON_LABEL</span> <span class="token operator">=</span> <span class="token string">"COPY"</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">gatsbyRemarkCodeTitles</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> markdownAST <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">visit</span><span class="token punctuation">(</span>markdownAST<span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">node<span class="token punctuation">,</span> index<span class="token punctuation">,</span> parent</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">[</span>language<span class="token punctuation">,</span> params<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>lang <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> options <span class="token operator">=</span> qs<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>
+      title<span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">      hideCopyButton<span class="token punctuation">,</span> <span class="token comment">// 복사버튼을 표시하지 않고 싶을 때 사용할 옵션</span></span>      <span class="token operator">...</span>rest
+    <span class="token punctuation">}</span> <span class="token operator">=</span> options<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>language<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    parent<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"parent"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token comment">// ...</span>
+        node<span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">        <span class="token comment">// `hideCopyButton` 옵션이 지정되지 않았다면</span></span><span class="gatsby-highlight-code-line">        <span class="token comment">// 코드블록 본문 뒤에 복사 버튼을 추가한다.</span></span><span class="gatsby-highlight-code-line">        <span class="token operator">...</span><span class="token punctuation">(</span>hideCopyButton</span><span class="gatsby-highlight-code-line">          <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="gatsby-highlight-code-line">          <span class="token operator">:</span> <span class="token punctuation">[</span></span><span class="gatsby-highlight-code-line">              <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">                <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"parent"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">                <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"text"</span><span class="token punctuation">,</span> <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token constant">BUTTON_LABEL</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">                <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">                  <span class="token literal-property property">hName</span><span class="token operator">:</span> <span class="token string">"button"</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">                  <span class="token literal-property property">hProperties</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token constant">BUTTON_CLASS</span> <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">                <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">              <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">            <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">hProperties</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">className</span><span class="token operator">:</span> <span class="token constant">CONTAINER_CLASS</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> markdownAST<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>그리고 복사 기능을 <code>plugins/gatsby-remark-codeblock/gatsby-browser.js</code> 에 구현해주자.</p><p>이 부분은 <code>gatsby-remark-code-buttons</code> 의 구현을 대부분 가져오지 않고 직접 구현했는데 이유는 두 가지가 있다.</p><ul>
+<li>해당 플러그인에는 엘리먼트의 클래스 이름 및 문구들을 직접 지정할 수 있는 옵션이 많이 었었지만, 나 혼자 쓸 플러그인에 그런 기능은 필요 없으므로 모두 뺐다.</li>
+<li>해당 플러그인에서는 복사 기능을 <code>document.execCommand(&#x27;copy&#x27;);</code> API 를 사용해 구현했는데, 이건 근래에 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand">권장되는 방식이 아니</a>므로 <code>navigator.clipboard</code> API 를 사용해 구현했다.</li>
+</ul><div class="codeblock-container"><div class="codeblock-title">plugins/gatsby-remark-codeblock/gatsby-browser.js</div><div><div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token constant">BUTTON_CLASS</span><span class="token punctuation">,</span> <span class="token constant">CONTAINER_CLASS</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./constants"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./toast.css"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">TOAST_CLASS</span> <span class="token operator">=</span> <span class="token string">"codeblock-copy-toast"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">TOAST_MESSAGE_CLASS</span> <span class="token operator">=</span> <span class="token string">"codeblock-copy-toast-message"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">TOAST_MESSAGE</span> <span class="token operator">=</span> <span class="token string">"코드가 복사되었습니다."</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">TOAST_DURATION</span> <span class="token operator">=</span> <span class="token number">2000</span><span class="token punctuation">;</span>
+
+<span class="token comment">// `onClientEntry` 은 브라우저 런타임 환경이 실행될 때 실행된다.</span>
+<span class="token comment">// `window.onload`` 혹은 `document.addEventListener("DOMContentLoaded")`` 를 생각하면 된다.</span>
+exports<span class="token punctuation">.</span><span class="token function-variable function">onClientEntry</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"body"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">evt</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> targetElement <span class="token operator">=</span> evt<span class="token punctuation">.</span>target<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>targetElement<span class="token punctuation">.</span>className <span class="token operator">!==</span> <span class="token constant">BUTTON_CLASS</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// 눌린 버튼의 코드블록 본문 엘리먼트를 찾아내 내용을 가져온다.</span>
+    <span class="token keyword">const</span> code <span class="token operator">=</span> targetElement
+      <span class="token punctuation">.</span><span class="token function">closest</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">CONTAINER_CLASS</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"pre"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerText<span class="token punctuation">;</span>
+
+    <span class="token comment">// 위에서 가져온 내용을 클립보드에 넣는다.</span>
+    <span class="token keyword">await</span> navigator<span class="token punctuation">.</span>clipboard<span class="token punctuation">.</span><span class="token function">writeText</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 복사가 성공했음을 알리는 토스트 엘리먼트를 만들어서 보여준다.</span>
+    <span class="token keyword">const</span> toastElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    toastElement<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token constant">TOAST_CLASS</span><span class="token punctuation">;</span>
+    toastElement<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+      &lt;div class="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">TOAST_MESSAGE_CLASS</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">TOAST_MESSAGE</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/div>
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>toastElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>toastElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token constant">TOAST_DURATION</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div><button class="codeblock-copy-button">COPY</button></div><p>이제 복사 버튼이 잘 추가된 걸 확인할 수 있다.</p><div><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 800px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/blog/static/596133508cf214aee55946efd9455c45/d3b46/screenshot-6.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 28.500000000000004%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAzUlEQVR42pWRSY6DMBBFAXEBwiSSYMQKJLDxjO1m1fe/029wDkB68aRafL2akrqq0fcEbdviUTxQ1RXKskRRFF9z5buuQ5qmSOQmEVyAMRZKaChnIaQAoxTbtt3CGIMQItZ5niPhlMObgMNw/AYNbzXs7hBCiKF1XW+hZ/Npmj5CRhl27c4JNY6fAOd2WOegjflKtixLFM7z/BFKIbGbU6IsjDbw3kMrFUOc81uuLa6VL3EUvp4vDP0A8iYYCME4jueT+njk/9A0DbIswx/TkqzTCWBaEwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="screenshot 6"
+        title=""
+        src="/blog/static/596133508cf214aee55946efd9455c45/5a190/screenshot-6.png"
+        srcset="/blog/static/596133508cf214aee55946efd9455c45/772e8/screenshot-6.png 200w,
+/blog/static/596133508cf214aee55946efd9455c45/e17e5/screenshot-6.png 400w,
+/blog/static/596133508cf214aee55946efd9455c45/5a190/screenshot-6.png 800w,
+/blog/static/596133508cf214aee55946efd9455c45/c1b63/screenshot-6.png 1200w,
+/blog/static/596133508cf214aee55946efd9455c45/29007/screenshot-6.png 1600w,
+/blog/static/596133508cf214aee55946efd9455c45/d3b46/screenshot-6.png 1690w"
+        sizes="(max-width: 800px) 100vw, 800px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></div><p>눌러보면 잘 동작한다.</p><h2 id="24-상세-코드" style="position:relative"><a href="#24-%EC%83%81%EC%84%B8-%EC%BD%94%EB%93%9C" aria-label="24 상세 코드 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>2.4. 상세 코드</h2><p>위 코드 조각들은 생략된 부분이 있으므로, 코드 전문을 보고 싶다면 아래를 참고하자.</p><ul>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/gatsby-config.ts#L39">gatsby-config.ts</a>
+<ul>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/config/plugins/getGatsbyPluginMdxConfig.ts#L7">config/plugins/getGatsbyPluginMdxConfig.ts</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/gatsby-browser.ts">gatsby-browser.ts</a></li>
+<li>plugins/gatsby-remark-codeblock<!-- -->
+<ul>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/plugins/gatsby-remark-codeblock/index.js">plugins/gatsby-remark-codeblock/index.js</a></li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/plugins/gatsby-remark-codeblock/gatsby-browser.js">plugins/gatsby-remark-codeblock/gatsby-browser.js</a></li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/plugins/gatsby-remark-codeblock/constants.js">plugins/gatsby-remark-codeblock/constants.js</a></li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/plugins/gatsby-remark-codeblock/toast.css">plugins/gatsby-remark-codeblock/toast.css</a></li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/plugins/gatsby-remark-codeblock/package.json">plugins/gatsby-remark-codeblock/package.json</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/ricale/blog/blob/58aa51105b654f814f32b1cc8a3e8b476bd00c3d/src/components/MdxContent/codeblockCss.ts">src/components/MdxContent/codeblockCss.ts</a></li>
+</ul><h2 id="3-다음" style="position:relative"><a href="#3-%EB%8B%A4%EC%9D%8C" aria-label="3 다음 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>3. 다음</h2><p>이로서 코드블록 관련 기능을 구현해보았다. 이제 다음에 정리할 것은 &quot;GitHub Pages 배포&quot; 정도만 남은 것 같다.</p><h2 id="4-참고" style="position:relative"><a href="#4-%EC%B0%B8%EA%B3%A0" aria-label="4 참고 permalink" class="anchor before"><div><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></div></a>4. 참고</h2><ul>
+<li><a href="https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-remark-prismjs">gatsby/packages/gatsby-remark-prismjs</a></li>
+<li><a href="https://github.com/DSchau/gatsby-remark-code-titles">gatsby-remark-code-titles</a></li>
+<li><a href="https://github.com/iamskok/gatsby-remark-code-buttons">gatsby-remark-code-buttons</a></li>
+</ul></div>
+<div class="toc"><p>목차</p><ul>
+<li><a href="#1-%EA%B0%9C%EC%9A%94">1. 개요</a></li>
+<li><a href="#2-%EA%B5%AC%ED%98%84">2. 구현</a>
+<ul>
+<li><a href="#21-%EB%AC%B8%EB%B2%95-%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8C%85---gatsby-remark-prismjs">2.1. 문법 하이라이팅 - <code>gatsby-remark-prismjs</code></a></li>
+<li><a href="#22-%EC%BD%94%EB%93%9C%EB%B8%94%EB%A1%9D%EC%97%90-%EC%A0%9C%EB%AA%A9-%EC%82%BD%EC%9E%85">2.2. 코드블록에 제목 삽입</a>
+<ul>
+<li><a href="#221-gatsby-remark-code-titles">2.2.1. <code>gatsby-remark-code-titles</code></a></li>
+<li><a href="#222-gatsby-remark-code-titles-%EB%A5%BC-%EC%88%98%EC%A0%95%ED%95%B4%EC%84%9C-%EC%82%AC%EC%9A%A9">2.2.2. <code>gatsby-remark-code-titles</code> 를 수정해서 사용</a></li>
+</ul>
+</li>
+<li><a href="#23-%EC%BD%94%EB%93%9C%EB%B8%94%EB%A1%9D%EC%97%90-%EB%B3%B5%EC%82%AC-%EB%B2%84%ED%8A%BC-%EC%82%BD%EC%9E%85">2.3. 코드블록에 복사 버튼 삽입</a>
+<ul>
+<li><a href="#231-gatsby-remark-code-buttons">2.3.1. <code>gatsby-remark-code-buttons</code></a></li>
+<li><a href="#232-gatsby-remark-code-buttons-%EB%A5%BC-%EC%88%98%EC%A0%95%ED%95%B4%EC%84%9C-%EC%82%AC%EC%9A%A9">2.3.2. <code>gatsby-remark-code-buttons</code> 를 수정해서 사용</a></li>
+</ul>
+</li>
+<li><a href="#24-%EC%83%81%EC%84%B8-%EC%BD%94%EB%93%9C">2.4. 상세 코드</a></li>
+<li><a href="#3-%EB%8B%A4%EC%9D%8C">3. 다음</a></li>
+<li><a href="#4-%EC%B0%B8%EA%B3%A0">4. 참고</a></li>
+</ul>
+</li>
+</ul></div></div><div id="comments"></div></main><div class="sc-hLBbgP ldgvP"><p>Copyright 2021<!-- --> <strong><a href="https://ricale.kr/">ricale</a>.</strong></p><p><a href="https://creativecommons.org/licenses/by-nc-sa/2.0/kr/">CC BY-NC-SA 2.0 KR</a>.</p><p>Powered by<!-- --> <strong><a href="https://www.gatsbyjs.com/">Gatsby</a></strong> <!-- -->and<!-- --> <strong><a href="https://pages.github.com/">GitHub Pages</a></strong>.</p></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SGJDRX2QGE"></script><script>
+      
+      
+      if(true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SGJDRX2QGE', {"send_page_view":false});
+      }
+      </script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/230226-gatsby-10-codeblock/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+          <script
+            id="gatsby-chunk-mapping"
+          >
+            window.___chunkMapping="{\"app\":[\"/app-effe32c768b5a1fd085c.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-bda92c1e7ba1e8d47d0f.js\"],\"component---src-pages-drafts-index-tsx\":[\"/component---src-pages-drafts-index-tsx-4f559ab9fa43acd2d012.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-b64cd8851682176a5621.js\"],\"component---src-pages-posts-index-tsx\":[\"/component---src-pages-posts-index-tsx-907d7d62cb7318f4e7cb.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210304-auto-update-env-variable-files-index-mdx-e412d5bf0f5ce7b9ad2a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210320-sqlite-3-data-types-index-mdx-a81c9bb8a7d300dd0f15.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210325-apply-eslint-index-mdx-467f0cbc0ece09f1dd34.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210330-chrome-web-worker-issue-index-mdx-de6ecb1291764b230b5c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210416-create-n-length-array-index-mdx-d1e1fc1120f4c4629054.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-1-index-mdx-1d6aeedca824c1dbdacc.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210430-tech-interview-questions-2-index-mdx-d06413817842fe3a06e2.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210503-create-react-app-github-pages-index-mdx-36ca0295eef531c7744a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210505-cra-webpack-1-resolve-alias-index-mdx-c94d7bc113974857256d.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210527-cra-webpack-2-module-index-mdx-d377c1aab3b9e13d10fe.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210613-nextjs-github-pages-index-mdx-05b93e44c1b27b633709.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210628-read-writings-index-mdx-5c47eaa9265033f0709a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210705-read-writings-index-mdx-27ca20a9effc213cfcc0.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210724-read-writings-index-mdx-a122888ca50671c30d62.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210821-react-native-webview-android-back-button-index-mdx-1a1ee492eee411e21266.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210823-react-native-ios-build-error-index-mdx-c398c39bff9320721107.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210831-react-native-build-setting-for-envs-index-mdx-c5a0f2e03a58c70e61d1.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-210901-github-ssh-multi-account-index-mdx-a67e00a20650e359c0d6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211013-read-writings-index-mdx-3d5efa0aa3524a885659.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211116-read-writings-index-mdx-d0368938a5fca5841887.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211118-firbase-authentication-issue-in-production-index-mdx-d2850181f1229683f1bd.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2021-211202-read-writings-index-mdx-b26fa49b0e0e556b815f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220102-react-native-apple-login-revoke-index-mdx-0bcf219e3e48ee97a6e3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220226-mui-custom-theme-typescript-index-mdx-e5db91a0d747ee0f2c01.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-build-error-2-index-mdx-75c134c459aa875b45cd.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220227-react-native-webview-cookie-index-mdx-7365e703406b7239c6eb.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220313-read-writings-index-mdx-dc84ce707e1ba7889db4.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220409-react-native-svg-icon-component-index-mdx-c18bff760b4acb2a0377.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220502-node-version-by-project-index-mdx-e794addf4258a5fdfe63.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220503-read-writings-index-mdx-94fdc9b800c7347981dd.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220509-frontend-test-code-1-index-mdx-097eee578bee2ef71b14.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220510-read-writings-index-mdx-f9a56d78873790e71824.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220514-apply-prettier-index-mdx-cfea41134a86bcbf7420.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220516-react-native-build-error-3-index-mdx-2e7c9294d9b0e8a2a90e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-book-review-scrum-3-index-mdx-851ee9d5e06636002240.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220523-read-writings-index-mdx-e86c5088c9fd5d793bd1.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220629-read-writings-index-mdx-93e7099f0234fb23ee00.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220724-read-writings-index-mdx-50b6e092e170ce87e41c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220810-book-review-programming-life-index-mdx-b5a1239e832ed0d27733.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220823-read-writings-index-mdx-ea04097bdbc6a9d3dac7.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220926-is-javascript-single-threaded-index-mdx-cdfbe775f640ad28da26.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-220929-read-writings-index-mdx-f7a49ede5107e4da9b73.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221003-things-about-promise-index-mdx-9e63e0e2616a5f9adca6.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writing-why-were-leaving-the-cloud-index-mdx-7d46d944f3bf98ab7c2e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221020-read-writings-index-mdx-68a4a888c9350e3eff84.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221107-react-native-build-error-4-index-mdx-e77734057bfe85af7083.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221203-read-writings-index-mdx-85d559b504cb542fa8aa.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221214-ios-style-picker-1-index-mdx-9c7b356dd7179e8a806a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2022-221225-ios-style-picker-2-index-mdx-9d485c366225c57a813f.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230104-ios-style-picker-3-index-mdx-f208f3ad82cb90906c5c.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230105-read-writings-index-mdx-067aa4faea29f64c0dba.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230111-gatsby-1-index-mdx-8d2a224ad996cfd63bdb.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230112-gatsby-2-index-mdx-20dbe1c2e6912936d989.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230119-gatsby-3-series-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230119-gatsby-3-series-index-mdx-ed3114db3a0e59fb65c5.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230121-react-native-build-error-5-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230121-react-native-build-error-5-index-mdx-ed7eb876f5843db5c07e.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230122-gatsby-4-drafts-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230122-gatsby-4-drafts-index-mdx-f6aaac95b4b3b42e2290.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230124-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230124-read-writings-index-mdx-fd7a45b5a2bdfa55bd68.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230126-gatsby-5-ga-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230126-gatsby-5-ga-index-mdx-4125095c5305fab9e0be.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230128-gatsby-6-toc-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230128-gatsby-6-toc-index-mdx-620524c5a562a745b9ba.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230206-gatsby-7-sticky-toc-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230206-gatsby-7-sticky-toc-index-mdx-509d4c29d6169f182e92.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230210-read-writings-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230210-read-writings-index-mdx-ed3980491a22e5d1776a.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230211-gatsby-8-comments-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230211-gatsby-8-comments-index-mdx-f6048741db8b56647b88.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230219-gatsby-9-rss-feed-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230219-gatsby-9-rss-feed-index-mdx-a1d56567c245a4c8dcf3.js\"],\"component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230226-gatsby-10-codeblock-index-mdx\":[\"/component---src-pages-posts-mdx-frontmatter-slug-tsx-content-file-path-users-kangseong-workspace-private-ricalelog-posts-2023-230226-gatsby-10-codeblock-index-mdx-9a8df7527a2e6acd6e3a.js\"],\"component---src-pages-series-index-tsx\":[\"/component---src-pages-series-index-tsx-60486bfa0bdedd17b221.js\"],\"component---src-pages-tags-index-tsx\":[\"/component---src-pages-tags-index-tsx-428e1338d2d53c1764f8.js\"],\"component---src-templates-series-detail-page-template-tsx\":[\"/component---src-templates-series-detail-page-template-tsx-95240de3bf4cc69b49b3.js\"],\"component---src-templates-tag-detail-page-template-tsx\":[\"/component---src-templates-tag-detail-page-template-tsx-b95b89adf49724b76747.js\"]}";
+          </script>
+        <script>window.___webpackCompilationHash="24e6008801ac4bd62a2c";</script><script src="/blog/webpack-runtime-55a9acc79c7a4a0f56c6.js" async></script><script src="/blog/framework-722053c27c5e7561dbbb.js" async></script><script src="/blog/app-effe32c768b5a1fd085c.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
