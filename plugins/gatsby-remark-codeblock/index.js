@@ -15,7 +15,7 @@ module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
     const [language, params] = (node.lang || "").split(":");
     const options = qs.parse(params);
     const { title, hideCopyButton, ...rest } = options;
-    if (!language || (!title && hideCopyButton)) {
+    if (!language) {
       return;
     }
 
