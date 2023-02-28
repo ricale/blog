@@ -65,6 +65,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
   });
 };
 
+type SameSeriesPostsData = {
+  frontmatter: {
+    date: string;
+  };
+};
+
 export const createResolvers: GatsbyNode["createResolvers"] = ({
   createResolvers,
 }) => {
@@ -73,28 +79,30 @@ export const createResolvers: GatsbyNode["createResolvers"] = ({
       sameSeriesPosts: {
         type: ["Mdx"],
         // FIXME: ricale
-        // 타입 적용
+        // Gatsby 에서 `createResolvers` 타입을 `Function` 으로만 제공해서
+        // `resolve` 에 대한 타입 지정이 되질 않는다.
         // @ts-ignore
         resolve: async (source, args, context, info) => {
           if (!source.frontmatter.series) {
             return;
           }
 
-          const { entries } = await context.nodeModel.findAll({
-            query: {
-              filter: {
-                frontmatter: {
-                  series: {
-                    eq: source.frontmatter.series,
+          const { entries }: { entries: SameSeriesPostsData[] } =
+            await context.nodeModel.findAll({
+              query: {
+                filter: {
+                  frontmatter: {
+                    series: {
+                      eq: source.frontmatter.series,
+                    },
+                    date: { ne: "" },
                   },
-                  date: { ne: "" },
                 },
               },
-            },
-            type: "Mdx",
-          });
+              type: "Mdx",
+            });
 
-          return [...entries].sort((a: any, b: any) =>
+          return [...entries].sort((a, b) =>
             a.frontmatter.date.localeCompare(b.frontmatter.date)
           );
         },

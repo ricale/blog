@@ -22,7 +22,7 @@ function SameSeriesPosts({ name, data, current }: SameSeriesPostsProps) {
     <Container>
       <Header collapsed={collapsed} onClick={() => setCollapsed((st) => !st)}>
         <h2>
-          시리즈 <Link to={`/series/${name}/`}>{`"${name}"`}</Link>
+          <Link to={`/series/${name}/`}>{`시리즈 "${name}"`}</Link>
         </h2>
         <span>▲</span>
       </Header>
@@ -54,20 +54,26 @@ const Header = styled.div<HeaderProps>`
   justify-content: space-between;
   padding: 16px;
   cursor: pointer;
+  user-select: none;
 
   > h2 {
     margin: 0;
     font-size: 1rem;
+    > a {
+      color: #ffffff;
+    }
   }
 
   > span {
-    user-select: none;
     transform: rotate(${(p) => (p.collapsed ? 0 : 180)}deg);
   }
 `;
 
 const List = styled.ol`
-  margin: 0 16px;
+  margin: 0;
+  border-top: 1px solid #000000;
+  padding-top: 16px;
+  padding-left: 48px;
   padding-bottom: 16px;
 `;
 
@@ -75,12 +81,18 @@ type ListItemProps = {
   active: boolean;
 };
 const ListItem = styled.li<ListItemProps>`
+  margin-bottom: 4px;
+  font-size: 0.9375rem;
+  color: #aaaaaa;
+  & > a {
+    color: #aaaaaa;
+  }
   ${(p) =>
     p.active &&
     css`
+      color: #ffffff;
       & > a {
-        font-weight: bold;
-        font-style: italic;
+        color: #ffffff;
         text-decoration: underline;
       }
     `}

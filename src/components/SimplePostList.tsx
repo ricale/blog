@@ -26,8 +26,12 @@ function SimplePostList({ data: source, actions }: SimplePostListProps) {
   return (
     <Container>
       <Actions>
-        <div>{actions}</div>
-        <span className="divider">|</span>
+        {actions && (
+          <>
+            <div>{actions}</div>
+            <span className="divider">|</span>
+          </>
+        )}
         <SortingAction>
           <span>정렬:</span>
           <a onClick={() => setOrderByAsc((st) => !st)}>
