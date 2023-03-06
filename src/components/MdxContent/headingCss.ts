@@ -19,13 +19,13 @@ const headingCss = css`
 
   h1 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid ${(p) => p.theme.colors.headingBorder};
     font-size: 2.125em;
   }
 
   h2 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid ${(p) => p.theme.colors.headingBorder};
     font-size: 1.625em;
   }
 

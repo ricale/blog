@@ -40,7 +40,7 @@ const Container = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #666666;
+    background-color: ${(p) => p.theme.colors.postListItemHover};
   }
 `;
 
@@ -50,7 +50,7 @@ const ThumbnailWrapper = styled.div`
   width: 60px;
   height: 60px;
 
-  background-color: #222222;
+  background-color: ${(p) => p.theme.colors.postListItemThumbnail};
 `;
 
 const ThumbnailImage = styled(GatsbyImage)`
@@ -70,7 +70,7 @@ const Info = styled.div`
 
 const Subtitle = styled.div`
   font-size: 0.8125rem;
-  color: #dddddd;
+  color: ${(p) => p.theme.colors.postListItemSubtitleText};
 `;
 
 export default PostListItem;

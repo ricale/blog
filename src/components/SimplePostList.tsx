@@ -77,14 +77,14 @@ const SortingAction = styled.div`
 
   > span {
     font-size: 0.875rem;
-    color: #ffffff;
+    color: ${(p) => p.theme.colors.onBackground};
   }
   > a {
     border: 0;
     text-decoration: underline;
 
     font-size: 0.875rem;
-    color: #ffffff;
+    color: ${(p) => p.theme.colors.onBackground};
     background-color: transparent;
     cursor: pointer;
   }
@@ -103,7 +103,7 @@ const PostList = styled.ol`
     padding: 2px;
     margin-bottom: 4px;
     :hover {
-      background-color: #666666;
+      background-color: ${(p) => p.theme.colors.hoverSimplePostSeries};
     }
 
     > .date {

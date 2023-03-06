@@ -2,7 +2,7 @@ import { css } from "../../themes";
 
 const imageCss = css`
   img {
-    border: 1px solid #333333;
+    border: 1px solid ${(p) => p.theme.colors.imageBorder};
   }
 
   .gatsby-resp-image-figure {
@@ -14,7 +14,7 @@ const imageCss = css`
       margin-top: 4px;
       text-align: center;
       font-size: 0.875rem;
-      color: #aaaaaa;
+      color: ${(p) => p.theme.colors.imageCaptionText};
     }
   }
   .gatsby-resp-image-wrapper {

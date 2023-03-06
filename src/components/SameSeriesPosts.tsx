@@ -43,7 +43,7 @@ const Container = styled.div`
   margin-bottom: 16px;
   align-items: center;
 
-  background-color: #1a1a1a;
+  background-color: ${(p) => p.theme.colors.sameSereisPosts};
 `;
 
 type HeaderProps = {
@@ -60,7 +60,7 @@ const Header = styled.div<HeaderProps>`
     margin: 0;
     font-size: 1rem;
     > a {
-      color: #ffffff;
+      color: ${(p) => p.theme.colors.onBackground};
     }
   }
 
@@ -71,7 +71,7 @@ const Header = styled.div<HeaderProps>`
 
 const List = styled.ol`
   margin: 0;
-  border-top: 1px solid #000000;
+  border-top: 1px solid ${(p) => p.theme.colors.background};
   padding-top: 16px;
   padding-left: 48px;
   padding-bottom: 16px;
@@ -83,16 +83,16 @@ type ListItemProps = {
 const ListItem = styled.li<ListItemProps>`
   margin-bottom: 4px;
   font-size: 0.9375rem;
-  color: #aaaaaa;
+  color: ${(p) => p.theme.colors.inactiveText};
   & > a {
-    color: #aaaaaa;
+    color: ${(p) => p.theme.colors.inactiveText};
   }
   ${(p) =>
     p.active &&
     css`
-      color: #ffffff;
+      color: ${(p) => p.theme.colors.onBackground};
       & > a {
-        color: #ffffff;
+        color: ${(p) => p.theme.colors.onBackground};
         text-decoration: underline;
       }
     `}

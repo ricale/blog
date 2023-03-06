@@ -26,7 +26,7 @@ const tocCss = css`
 
       padding: 8px;
 
-      background-color: #1a1a1a;
+      background-color: ${(p) => p.theme.colors.fixedToc};
 
       > p {
         margin: 0;
@@ -49,10 +49,10 @@ const tocCss = css`
         padding-left: 20px;
         font-size: 1rem;
         a {
-          color: #dddddd;
+          color: ${(p) => p.theme.colors.onFixedToc};
         }
         a > code {
-          color: #dddddd;
+          color: ${(p) => p.theme.colors.onFixedToc};
         }
         ul {
           padding-left: 30px;
@@ -73,15 +73,15 @@ const tocCss = css`
         position: sticky;
         top: 10px;
         padding-left: 8px;
-        border-left: 1px solid #aaaaaa;
+        border-left: 1px solid ${(p) => p.theme.colors.inactiveText};
 
         white-space: nowrap;
 
         a {
-          color: #aaaaaa;
+          color: ${(p) => p.theme.colors.inactiveText};
         }
         a > code {
-          color: #aaaaaa;
+          color: ${(p) => p.theme.colors.inactiveText};
         }
         code {
           white-space: nowrap;
@@ -93,10 +93,10 @@ const tocCss = css`
       }
 
       .highlight {
-        color: #ffffff;
+        color: ${(p) => p.theme.colors.onBackground};
         text-decoration: underline;
         code {
-          color: #ffffff;
+          color: ${(p) => p.theme.colors.onBackground};
           text-decoration: underline;
         }
       }

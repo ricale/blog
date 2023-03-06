@@ -31,7 +31,7 @@ function PostCardItem({
 
 const Container = styled.div`
   padding: 2px;
-  background-color: #333333;
+  background-color: ${(p) => p.theme.colors.postCardItem};
   cursor: pointer;
 `;
 

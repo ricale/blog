@@ -97,7 +97,7 @@ const Section = styled.div`
     }
     > a {
       font-size: 0.875rem;
-      color: #dddddd;
+      color: ${(p) => p.theme.colors.inactiveText};
       text-decoration: underline;
     }
   }
