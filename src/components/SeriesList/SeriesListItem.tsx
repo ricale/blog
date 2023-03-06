@@ -46,7 +46,7 @@ const ThumbnailWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: #222222;
+  background-color: ${(p) => p.theme.colors.seriesListItemThumbnail};
 `;
 
 const ThumbnailImage = styled(GatsbyImage)`
@@ -66,7 +66,7 @@ const Info = styled.div`
   flex-direction: column;
   padding: 8px;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: ${(p) => p.theme.colors.seriesListItemInfo};
 
   & > h3 {
     flex: 1;
@@ -79,8 +79,8 @@ const Info = styled.div`
   & > h3 > small {
     padding: 2px 4px;
 
-    background-color: rgba(183, 179, 204, 0.6);
-    color: #ffff00;
+    background-color: ${(p) => p.theme.colors.sereisListItemCount};
+    color: ${(p) => p.theme.colors.seriesListItemCountText};
     font-size: 0.85rem;
     font-weight: normal;
   }

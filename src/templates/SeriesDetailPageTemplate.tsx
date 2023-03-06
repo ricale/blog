@@ -58,7 +58,7 @@ const SeriesDetailPageTemplate = ({
 
 const RssLink = styled.a`
   margin-bottom: 2px;
-  color: #dddddd;
+  color: ${(p) => p.theme.colors.onBackground};
   font-size: 0.875rem;
   text-decoration: underline;
 `;

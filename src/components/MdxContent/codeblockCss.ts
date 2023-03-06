@@ -11,8 +11,8 @@ const codeblockCss = css`
     margin-left: -1em;
     padding-right: 1em;
     padding-left: 0.75em;
-    border-left: 0.25em solid #999999;
-    background-color: #444444;
+    border-left: 0.25em solid ${(p) => p.theme.colors.codeblockHighlightBorder};
+    background-color: ${(p) => p.theme.colors.codeblockHighlight};
   }
 
   pre > code {
@@ -32,7 +32,7 @@ const codeblockCss = css`
 
       font-size: 0.875rem;
       font-family: consolas, monospace;
-      background-color: #000000;
+      background-color: ${(p) => p.theme.colors.codeblockTitle};
     }
     .codeblock-copy-button {
       position: absolute;
@@ -43,7 +43,7 @@ const codeblockCss = css`
       border: 0;
 
       font-size: 0.75rem;
-      color: #dddddd;
+      color: ${(p) => p.theme.colors.codeblockCopyButtonLabel};
       text-decoration: underline;
 
       background-color: transparent;
@@ -62,7 +62,7 @@ const codeblockCss = css`
       padding-top: 0;
       .codeblock-title {
         position: static;
-        background-color: #666666;
+        background-color: ${(p) => p.theme.colors.codeblockTitleInMobile};
       }
     }
   }

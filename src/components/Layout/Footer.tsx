@@ -44,17 +44,17 @@ const Container = styled.div`
 
   font-size: 0.8125rem;
 
-  color: #aaaaaa;
+  color: ${(p) => p.theme.colors.inactiveText};
   p {
     white-space: nowrap;
   }
   a {
-    color: #aaaaaa;
+    color: ${(p) => p.theme.colors.inactiveText};
   }
   strong,
   strong > a {
     font-weight: normal;
-    color: #ffffff;
+    color: ${(p) => p.theme.colors.onBackground};
   }
 `;
 

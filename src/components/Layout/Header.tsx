@@ -146,7 +146,7 @@ const Menu = styled.nav<MenuProps>`
 
     > li > a {
       display: inline-block;
-      color: #dddddd;
+      color: ${(p) => p.theme.colors.headerText};
       text-decoration: underline;
       font-size: 0.875rem;
     }

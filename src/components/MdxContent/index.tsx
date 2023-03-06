@@ -4,6 +4,7 @@ import codeblockCss from "./codeblockCss";
 import headingCss from "./headingCss";
 import imageCss from "./imageCss";
 import listCss from "./listCss";
+import tableCss from "./tableCss";
 import tocCss from "./tocCss";
 
 const MdxContent = styled.div`
@@ -20,6 +21,7 @@ const MdxContent = styled.div`
   ${tocCss}
   ${codeblockCss}
   ${blockquoteCss}
+  ${tableCss}
 
   p {
     margin-top: 0;
@@ -31,7 +33,7 @@ const MdxContent = styled.div`
     margin: 24px 0;
     border: 0;
 
-    background-color: #30363d;
+    background-color: ${(p) => p.theme.colors.hr};
   }
 
   code {

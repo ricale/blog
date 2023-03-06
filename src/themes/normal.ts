@@ -1,20 +1,55 @@
 const base = 16;
 
 const colors = {
-  background: "black",
-  onBackground: "white",
+  background: "#000000",
+  onBackground: "#ffffff",
+
+  inactiveText: "#aaaaaa",
+
+  headerText: "#dddddd",
 
   blockquoteBorder: "#666666",
   blockquote: "#1a1a1a",
-  onBlockquote: "white",
+  onBlockquote: "#ffffff",
+
+  fixedToc: "#1a1a1a",
+  onFixedToc: "#dddddd",
 
   code: "#333333",
-  onCode: "#DDDDDD",
+  onCode: "#dddddd",
+
+  codeblockHighlightBorder: "#999999",
+  codeblockHighlight: "#444444",
+  codeblockTitle: "#000000",
+  codeblockTitleInMobile: "#666666",
+  codeblockCopyButtonLabel: "#dddddd",
+
+  headingBorder: "#222222",
 
   tag: "#222222",
   onTag: "skyblue",
 
-  tableBorder: "white",
+  hr: "#333333",
+
+  imageBorder: "#333333",
+  imageCaptionText: "#aaaaaa",
+
+  tableBorder: "#333333",
+
+  postCardItem: "#333333",
+
+  postListItemHover: "#666666",
+  postListItemThumbnail: "#222222",
+  postListItemSubtitleText: "#dddddd",
+
+  seriesListItemThumbnail: "#222222",
+  sereisListItemCount: "#b7b3cc99",
+  seriesListItemCountText: "#ffff00",
+  seriesListItemInfo: "#00000099",
+
+  sameSereisPosts: "#1a1a1a",
+
+  hoverSimplePostSeries: "#666666",
 };
 
 const normal = {

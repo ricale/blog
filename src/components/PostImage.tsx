@@ -38,7 +38,7 @@ const Container = styled.div`
     top: calc(100% - 4px);
 
     font-size: 0.625rem;
-    color: #aaaaaa;
+    color: ${(p) => p.theme.colors.inactiveText};
   }
 `;
 

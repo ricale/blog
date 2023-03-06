@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, HeadProps, PageProps } from "gatsby";
+import { graphql, HeadProps, Link, PageProps } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 
 import Layout from "../../components/Layout";
@@ -48,7 +48,9 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
   return (
     <Layout>
       <Header>
-        <h1>{title}</h1>
+        <h1>
+          <Link to={`/posts/${slug}`}>{title}</Link>
+        </h1>
         <WrittenDate>{date}</WrittenDate>
 
         <TagList tags={tags} />
@@ -74,6 +76,10 @@ const Header = styled.div`
     font-size: 2.5rem;
     word-break: keep-all;
     margin: 0;
+
+    > a {
+      color: ${(p) => p.theme.colors.onBackground};
+    }
   }
 `;
 
