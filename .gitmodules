@@ -1,0 +1,6 @@
+[submodule "drafts"]
+	path = drafts
+	url = git@github-private:ricale/blog-drafts.git
+[submodule "posts"]
+	path = posts
+	url = git@github-private:ricale/blog-posts.git
