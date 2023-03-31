@@ -1,9 +1,9 @@
 import * as React from "react";
 import { navigate } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import styled from "../../themes";
 import { Post } from "../../types";
+import ThumbnailImage from "../ThumbnailImage";
 
 const INVALID_DATE_STRING = "Invalid date";
 
@@ -16,12 +16,11 @@ function PostListItem({
   heroImage,
   heroImageAlt,
 }: PostListItemProps) {
-  const image = heroImage ? getImage(heroImage) : null;
   const dateIsValid = date !== INVALID_DATE_STRING;
   return (
     <Container onClick={() => navigate(`/posts/${slug}`)}>
       <ThumbnailWrapper>
-        {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
+        <ThumbnailImage source={heroImage} alt={heroImageAlt} />
       </ThumbnailWrapper>
       <Info>
         <h2>{title}</h2>
@@ -51,12 +50,6 @@ const ThumbnailWrapper = styled.div`
   height: 60px;
 
   background-color: ${(p) => p.theme.colors.postListItemThumbnail};
-`;
-
-const ThumbnailImage = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const Info = styled.div`
