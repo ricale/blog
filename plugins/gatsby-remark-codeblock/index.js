@@ -10,9 +10,24 @@ const { CONTAINER_CLASS, BUTTON_CLASS } = require("./constants");
 const TITLE_CLASS = "codeblock-title";
 const BUTTON_LABEL = "COPY";
 
+function getLanguageAndParams(lang) {
+  const haveBraces = lang.match(/\{[^}]+:[^}]+\}/g);
+  if (!haveBraces) {
+    return lang.split(":");
+  }
+
+  const lastItem = haveBraces[haveBraces.length - 1];
+  const endOfLastItem = lang.indexOf(lastItem) + lastItem.length;
+  const colonIndex = lang.indexOf(":", endOfLastItem);
+  if (colonIndex === -1) {
+    return [lang, ""];
+  }
+  return [lang.slice(0, colonIndex), lang.slice(colonIndex + 1)];
+}
+
 module.exports = function gatsbyRemarkCodeTitles({ markdownAST }) {
   visit(markdownAST, "code", (node, index, parent) => {
-    const [language, params] = (node.lang || "").split(":");
+    const [language, params] = getLanguageAndParams(node.lang || "");
     const options = qs.parse(params);
     const { title, hideCopyButton, ...rest } = options;
     if (!language) {

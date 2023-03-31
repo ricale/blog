@@ -15,6 +15,12 @@ const codeblockCss = css`
     background-color: ${(p) => p.theme.colors.codeblockHighlight};
   }
 
+  .line-numbers .line-numbers-rows {
+    bottom: 0;
+    padding-top: 17.5px;
+    padding-left: 12px;
+  }
+
   pre > code {
     padding: unset;
     border-radius: unset;
