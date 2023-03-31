@@ -1,9 +1,9 @@
 import * as React from "react";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { navigate } from "gatsby";
 
 import { Series } from "../../types";
 import styled from "../../themes";
+import ThumbnailImage from "../ThumbnailImage";
 
 type SeriesListItemProps = Series;
 function SeriesListItem({
@@ -13,13 +13,10 @@ function SeriesListItem({
   ...props
 }: SeriesListItemProps) {
   const { date, heroImage, heroImageAlt } = frontmatter;
-
-  const image = heroImage ? getImage(heroImage) : null;
-
   return (
     <Container onClick={() => navigate(`/series/${fieldValue}`)} {...props}>
       <ThumbnailWrapper>
-        {!!image && <ThumbnailImage image={image} alt={heroImageAlt ?? ""} />}
+        <ThumbnailImage source={heroImage} alt={heroImageAlt} />
       </ThumbnailWrapper>
       <Info>
         <h3>
@@ -47,12 +44,6 @@ const ThumbnailWrapper = styled.div`
   height: 100%;
 
   background-color: ${(p) => p.theme.colors.seriesListItemThumbnail};
-`;
-
-const ThumbnailImage = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const Info = styled.div`
