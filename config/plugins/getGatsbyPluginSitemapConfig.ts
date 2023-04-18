@@ -49,16 +49,16 @@ const getGatsbyPluginSitemapConfig = () => ({
       site.siteMetadata.siteUrl,
     resolvePages: ({ allMdx: { nodes: mdxs } }: ResolvePagesParams) => {
       const posts = mdxs.map((mdx) => ({
-        path: `/posts/${mdx.frontmatter.slug}`,
+        path: `/posts/${mdx.frontmatter.slug}/`,
         lastmod: mdx.frontmatter.date,
       }));
 
       return [
         ...posts,
         { path: "/", lastmod: posts[0].lastmod },
-        { path: "/posts", lastmod: posts[0].lastmod },
-        { path: "/series", lastmod: posts[0].lastmod },
-        { path: "/tags", lastmod: posts[0].lastmod },
+        { path: "/posts/", lastmod: posts[0].lastmod },
+        { path: "/series/", lastmod: posts[0].lastmod },
+        { path: "/tags/", lastmod: posts[0].lastmod },
       ];
     },
     serialize: ({ path, lastmod }: SerializeParams) => ({ url: path, lastmod }),
