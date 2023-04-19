@@ -7,11 +7,15 @@ const codeblockCss = css`
 
   .gatsby-highlight-code-line {
     display: block;
-    margin-right: -1em;
+
     margin-left: -1em;
-    padding-right: 1em;
+    margin-right: -1em;
+    padding-top: 1.8px;
+    padding-bottom: 1.8px;
     padding-left: 0.75em;
+    padding-right: 1em;
     border-left: 0.25em solid ${(p) => p.theme.colors.codeblockHighlightBorder};
+
     background-color: ${(p) => p.theme.colors.codeblockHighlight};
   }
 
@@ -34,6 +38,8 @@ const codeblockCss = css`
       position: absolute;
       top: 0px;
       left: 8px;
+      z-index: 1;
+
       padding: 2px 8px;
 
       font-size: 0.875rem;
