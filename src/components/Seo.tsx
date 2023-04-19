@@ -72,6 +72,7 @@ function Seo({
         name="google-site-verification"
         content="Z24DuzLFxq0tVrtFhTxfPETtFXf9rOEG73-HpKk2Pgs"
       />
+      <meta name="msvalidate.01" content="06C6843D272653A5EF82A3F39E712F62" />
     </>
   );
 }
