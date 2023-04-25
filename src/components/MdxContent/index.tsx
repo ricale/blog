@@ -50,6 +50,10 @@ const MdxContent = styled.div`
   a > code {
     color: skyblue;
   }
+
+  & > .md > :first-child {
+    margin-top: 0;
+  }
 `;
 
 export default MdxContent;

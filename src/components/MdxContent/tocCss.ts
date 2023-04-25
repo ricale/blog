@@ -19,45 +19,7 @@ const tocCss = css`
   }
   @media (max-width: 1099px) {
     > .toc {
-      position: absolute;
-      top: -62px;
-      right: 8px;
-      z-index: 10;
-
-      padding: 8px;
-
-      background-color: ${(p) => p.theme.colors.fixedToc};
-
-      > p {
-        margin: 0;
-        font-size: 0.875rem;
-      }
-      > ul {
-        display: none;
-      }
-    }
-    > .toc:hover {
-      left: 8px;
-      padding: 16px;
-      > p {
-        margin: 0;
-        font-size: 1.125rem;
-      }
-      > ul {
-        display: block;
-        margin-top: 8px;
-        padding-left: 20px;
-        font-size: 1rem;
-        a {
-          color: ${(p) => p.theme.colors.onFixedToc};
-        }
-        a > code {
-          color: ${(p) => p.theme.colors.onFixedToc};
-        }
-        ul {
-          padding-left: 30px;
-        }
-      }
+      display: none;
     }
   }
   @media (min-width: 1100px) {
