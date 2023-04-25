@@ -5,6 +5,10 @@ const codeblockCss = css`
     margin: 0 0 16px;
   }
 
+  code[class*="language-"] {
+    font-size: 0.85rem;
+  }
+
   .gatsby-highlight-code-line {
     display: block;
 
