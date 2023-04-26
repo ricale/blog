@@ -8,10 +8,8 @@ import styled from "../../themes";
 import MdxContent from "../../components/MdxContent";
 import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
-import TagList from "../../components/TagList";
 import { PostFrontmatter } from "../../types";
 import highlightCurrentHeading from "../../utils/highlightCurrentHeading";
-import PostImage from "../../components/PostImage";
 
 type PostDetailPageData = {
   mdx: {
@@ -27,8 +25,7 @@ type PostDetailPageData = {
 function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
   const ref = React.useRef<HTMLDivElement>();
   const { frontmatter, sameSeriesPosts } = data.mdx;
-  const { title, slug, date, tags, series, heroImage, heroImageAlt } =
-    frontmatter;
+  const { title, slug, date, series, heroImage, heroImageAlt } = frontmatter;
 
   React.useEffect(() => {
     const headingElements = ref.current?.querySelectorAll<HTMLElement>(
@@ -52,13 +49,9 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
           <Link to={`/posts/${slug}`}>{title}</Link>
         </h1>
         <WrittenDate>{date}</WrittenDate>
-
-        <TagList tags={tags} />
       </Header>
 
       <SameSeriesPosts name={series} data={sameSeriesPosts} current={slug} />
-
-      <PostImage data={heroImage} alt={heroImageAlt} />
 
       <PostContent ref={ref as React.RefObject<HTMLDivElement>}>
         {children}
@@ -69,8 +62,8 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
 }
 
 const Header = styled.div`
-  margin: 60px 0 72px;
-  padding: 0 24px;
+  margin: 72px 0 84px;
+  padding: 0 32px;
 
   & > h1 {
     font-size: 2.5rem;
@@ -84,7 +77,7 @@ const Header = styled.div`
 `;
 
 const WrittenDate = styled.div`
-  margin: 16px 0;
+  margin-left: 2px;
 `;
 
 const PostContent = styled(MdxContent)`
