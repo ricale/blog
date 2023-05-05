@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 25 Apr 2023 09:10:03 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[React Native 에서 차트 구현 - 3. 라인차트 레전드 기능]]></title><description><![CDATA[이전 글들에서는 라인차트의 기본 기능 및 옵션 기능을 구현해보았다. 오늘은 차트의 레전드(범례) 기능을 구현해보자.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 05 May 2023 07:52:26 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~23.5.5)]]></title><description><![CDATA[JavaScript What's new in ECMAScript 2023
+
+ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에 따르면 현재 나와있는 예정에서 거의 변화가 없을 것이라고 한다…]]></description><link>https://ricale.kr/blog/posts/230505-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230505-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 04 May 2023 15:00:00 GMT</pubDate><content:encoded>JavaScript What&apos;s new in ECMAScript 2023
+
+ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에 따르면 현재 나와있는 예정에서 거의 변화가 없을 것이라고 한다…</content:encoded></item><item><title><![CDATA[React Native 에서 차트 구현 - 3. 라인차트 레전드 기능]]></title><description><![CDATA[이전 글들에서는 라인차트의 기본 기능 및 옵션 기능을 구현해보았다. 오늘은 차트의 레전드(범례) 기능을 구현해보자.
 
 레전드를 구현하는 방법은 두 가지가 있다.
 
