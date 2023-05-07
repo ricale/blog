@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 May 2023 03:27:49 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[알고리즘 문제 - 정수]]></title><description><![CDATA[시리즈 "알고리즘 문제풀기" 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 May 2023 15:01:03 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[React Native 에서 차트 구현 - 4. 라인차트 아이템 선택 기능]]></title><description><![CDATA[이전 글까지는 라인 차트의 기본 기능을 구현하고, 옵션 기능을 구현하고, 레전드(범례) 기능까지 구현했다. 오늘은 터치를 통해 특정 아이템을 선택하는 기능을 구현하자.
+
+요구사항이나 차트 라이브러리에 따라 다르긴 하지만, 보통 차트에서 특정 아이템을…]]></description><link>https://ricale.kr/blog/posts/230508-chart-in-react-native-with-d3-4</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230508-chart-in-react-native-with-d3-4</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sun, 07 May 2023 15:00:00 GMT</pubDate><content:encoded>이전 글까지는 라인 차트의 기본 기능을 구현하고, 옵션 기능을 구현하고, 레전드(범례) 기능까지 구현했다. 오늘은 터치를 통해 특정 아이템을 선택하는 기능을 구현하자.
+
+요구사항이나 차트 라이브러리에 따라 다르긴 하지만, 보통 차트에서 특정 아이템을…</content:encoded></item><item><title><![CDATA[알고리즘 문제 - 정수]]></title><description><![CDATA[시리즈 "알고리즘 문제풀기" 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
 
 Baekjoon Online Judge - 1040. 정수
 
