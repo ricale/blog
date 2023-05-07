@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 05 May 2023 07:52:26 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[알고리즘 문제 - 문자열 숫자 곱하기]]></title><description><![CDATA[시리즈 "알고리즘 문제풀기" 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 07 May 2023 03:27:50 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[알고리즘 문제 - 정수]]></title><description><![CDATA[시리즈 "알고리즘 문제풀기" 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
+
+Baekjoon Online Judge - 1040. 정수
+
+자연수 N 과 K 가 주어질 때, N 보다 크면서 K 개의 서로 다른 숫자로…]]></description><link>https://ricale.kr/blog/posts/230507-algorithm-3-integer</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230507-algorithm-3-integer</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sat, 06 May 2023 15:00:00 GMT</pubDate><content:encoded>시리즈 &quot;알고리즘 문제풀기&quot; 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
+
+Baekjoon Online Judge - 1040. 정수
+
+자연수 N 과 K 가 주어질 때, N 보다 크면서 K 개의 서로 다른 숫자로…</content:encoded></item><item><title><![CDATA[알고리즘 문제 - 문자열 숫자 곱하기]]></title><description><![CDATA[시리즈 "알고리즘 문제풀기" 개요 1~2주 (최소) 1개 문제 풀기를 목표로 한다.JavaScript 로 푼다.
 
 LeetCode - 43. Multiply Strings
 
