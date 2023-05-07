@@ -17,7 +17,8 @@ const getGatsbyPluginMdxConfig = () => ({
       {
         resolve: "gatsby-remark-images",
         options: {
-          maxWidth: 800,
+          maxWidth: 600,
+          quality: 80,
           backgroundColor: "none",
           showCaptions: true,
         },
