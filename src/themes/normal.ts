@@ -50,6 +50,9 @@ const colors = {
   sameSereisPosts: "#1a1a1a",
 
   hoverSimplePostSeries: "#666666",
+
+  nearbyPostLink: "#1a1a1a",
+  onNearbyPostLink: "#ffffff",
 };
 
 const normal = {
