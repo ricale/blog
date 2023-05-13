@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import styled from "../../themes";
 import MdxContent from "../../components/MdxContent";
+import NearbySeriesPostLinks from "../../components/NearbySeriesPostLinks";
 import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import { PostFrontmatter } from "../../types";
@@ -25,7 +26,7 @@ type PostDetailPageData = {
 function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
   const ref = React.useRef<HTMLDivElement>();
   const { frontmatter, sameSeriesPosts } = data.mdx;
-  const { title, slug, date, series, heroImage, heroImageAlt } = frontmatter;
+  const { title, slug, date, series } = frontmatter;
 
   React.useEffect(() => {
     const headingElements = ref.current?.querySelectorAll<HTMLElement>(
@@ -56,6 +57,9 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
       <PostContent ref={ref as React.RefObject<HTMLDivElement>}>
         {children}
       </PostContent>
+
+      <NearbySeriesPostLinks data={sameSeriesPosts} current={slug} />
+
       <Comments />
     </Layout>
   );
@@ -81,7 +85,7 @@ const WrittenDate = styled.div`
 `;
 
 const PostContent = styled(MdxContent)`
-  margin-bottom: 60px;
+  margin-bottom: 120px;
 `;
 
 export const query = graphql`
