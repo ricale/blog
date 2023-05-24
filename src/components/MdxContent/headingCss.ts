@@ -26,7 +26,7 @@ const headingCss = css`
   h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid ${(p) => p.theme.colors.headingBorder};
-    font-size: 1.625em;
+    font-size: 1.75em;
   }
 
   h3 {
