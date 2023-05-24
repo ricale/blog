@@ -23,6 +23,7 @@ const getGatsbyPluginMdxConfig = () => ({
           showCaptions: true,
         },
       },
+      "gatsby-remark-copy-linked-files",
     ],
   },
 });

@@ -5,6 +5,11 @@ const imageCss = css`
     border: 1px solid ${(p) => p.theme.colors.imageBorder};
   }
 
+  img:not([class]) {
+    max-width: 600px;
+    margin-bottom: 16px;
+  }
+
   .gatsby-resp-image-figure {
     margin: 0 0 16px;
     .gatsby-resp-image-wrapper {

@@ -29,6 +29,7 @@
     "gatsby-plugin-sitemap": "^6.5.0",
     "gatsby-plugin-styled-components": "^6.3.0",
     "gatsby-remark-autolink-headers": "^6.4.0",
+    "gatsby-remark-copy-linked-files": "^6.10.0",
     "gatsby-remark-images": "^7.4.0",
     "gatsby-remark-prismjs": "^7.4.0",
     "gatsby-source-filesystem": "^5.3.1",
