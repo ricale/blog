@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 24 May 2023 10:26:00 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~23.5.5)]]></title><description><![CDATA[JavaScript What's new in ECMAScript 2023
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 26 May 2023 10:17:50 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~23.5.26)]]></title><description><![CDATA[메일링, 블로그, 구글링 등을 통해 읽은 글들을 모아놓은 글이다. JavaScript
+Does Async-Await and Promises Guarantee Asynchronous Code? No (and Here’s Why)
 
-ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에 따르면 현재 나와있는 예정에서 거의 변화가 없을 것이라고 한다…]]></description><link>https://ricale.kr/blog/posts/230505-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230505-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 04 May 2023 15:00:00 GMT</pubDate><content:encoded>JavaScript What&apos;s new in ECMAScript 2023
+async/await 와 Pr…]]></description><link>https://ricale.kr/blog/posts/230526-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230526-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 25 May 2023 15:00:00 GMT</pubDate><content:encoded>메일링, 블로그, 구글링 등을 통해 읽은 글들을 모아놓은 글이다. JavaScript
+Does Async-Await and Promises Guarantee Asynchronous Code? No (and Here’s Why)
 
-ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에 따르면 현재 나와있는 예정에서 거의 변화가 없을 것이라고 한다…</content:encoded></item><item><title><![CDATA[읽은 글들 (~23.4.17)]]></title><description><![CDATA[JavaScript JavaScript import maps are now supported cross-browser
+async/await 와 Pr…</content:encoded></item><item><title><![CDATA[읽은 글들 (~23.5.5)]]></title><description><![CDATA[메일링, 블로그, 구글링 등을 통해 읽은 글들을 모아놓은 글이다. JavaScript
+What's new in ECMAScript 2023
+
+ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에…]]></description><link>https://ricale.kr/blog/posts/230505-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230505-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 04 May 2023 15:00:00 GMT</pubDate><content:encoded>메일링, 블로그, 구글링 등을 통해 읽은 글들을 모아놓은 글이다. JavaScript
+What&apos;s new in ECMAScript 2023
+
+ECMA 2023 스펙이 공식적으로 확정되는 것은 6월 말 쯤으로 예정되어 있지만, 최근 TC39 미팅에서의 언급에…</content:encoded></item><item><title><![CDATA[읽은 글들 (~23.4.17)]]></title><description><![CDATA[JavaScript JavaScript import maps are now supported cross-browser
 
 외부 모듈을 ES 모듈 형식으로 사용할 수 있게 도와주느는 <script type="importmap"> 에 대해서 설명하는 글…]]></description><link>https://ricale.kr/blog/posts/230417-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/230417-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sun, 16 Apr 2023 15:00:00 GMT</pubDate><content:encoded>JavaScript JavaScript import maps are now supported cross-browser
 
