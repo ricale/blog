@@ -34,6 +34,12 @@ const Container = styled.div`
   .emgithub-container table td {
     padding: 0;
   }
+  .emgithub-file {
+    margin-top: 0;
+  }
+  .emgithub-file .file-meta-dark {
+    background-color: rgb(35, 36, 31);
+  }
 `;
 
 export default Emgithub;

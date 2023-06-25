@@ -1,7 +1,7 @@
 const base = 16;
 
 const colors = {
-  background: "#000000",
+  background: "#060606",
   onBackground: "#ffffff",
 
   inactiveText: "#aaaaaa",
@@ -20,7 +20,7 @@ const colors = {
 
   codeblockHighlightBorder: "#999999",
   codeblockHighlight: "#444444",
-  codeblockTitle: "#000000",
+  codeblockTitle: "#060606",
   codeblockTitleInMobile: "#666666",
   codeblockCopyButtonLabel: "#dddddd",
 
