@@ -30,7 +30,7 @@ const config: GatsbyConfig = {
         name: siteMetadata.title,
         short_name: siteMetadata.title,
         short_url: "/",
-        background_color: "#000000",
+        background_color: "#060606",
         theme_color: "#87ceeb",
         display: "standalone",
         icon: "src/images/icon.png",

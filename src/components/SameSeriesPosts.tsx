@@ -66,6 +66,7 @@ const Header = styled.div<HeaderProps>`
 
   > span {
     transform: rotate(${(p) => (p.collapsed ? 0 : 180)}deg);
+    transition: transform 0.2s;
   }
 `;
 
