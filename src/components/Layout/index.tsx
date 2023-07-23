@@ -44,7 +44,7 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
         >
           {children}
         </main>
-        <Footer />
+        <Footer showLinks={!emphasize} />
       </Container>
     </ThemeProvider>
   );
