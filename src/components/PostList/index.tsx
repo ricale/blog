@@ -7,9 +7,9 @@ import PostListItem from "./PostListItem";
 type PostListProps = {
   data: Post[];
 };
-function PostList({ data }: PostListProps) {
+function PostList({ data, ...props }: PostListProps) {
   return (
-    <Container>
+    <Container {...props}>
       {data.map(({ ...item }, i) => (
         <PostListItem key={i} {...item} />
       ))}
@@ -20,7 +20,7 @@ function PostList({ data }: PostListProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 `;
 
 export default PostList;
