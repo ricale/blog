@@ -44,7 +44,11 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
           author={author}
           siteUrl={siteUrl}
         />
-        <Content minHeight={minContentHeight}>{children}</Content>
+        <main
+          style={minContentHeight ? { minHeight: minContentHeight } : undefined}
+        >
+          {children}
+        </main>
         <Footer />
       </Container>
     </ThemeProvider>
@@ -65,17 +69,6 @@ const Container = styled.div`
       padding-right: ${(p) => p.theme.dimens.margin + 4}px;
     }
   }
-`;
-
-type ContentProps = {
-  minHeight?: number;
-};
-const Content = styled.main<ContentProps>`
-  ${(p) =>
-    p.minHeight !== undefined &&
-    css`
-      min-height: ${p.minHeight}px;
-    `}
 `;
 
 export default Layout;
