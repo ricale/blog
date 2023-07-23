@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
+import { RICALE_HOME_URL } from "../../constants/urls";
 import styled, { css } from "../../themes";
 import RelatedLinks from "../RelatedLinks";
 
@@ -29,7 +30,7 @@ function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
           <Link to="/">{title}</Link>
         </header>
         <address>
-          <a href="https://ricale.kr">{`by ${author}`}</a>
+          <a href={RICALE_HOME_URL}>{`by ${author}`}</a>
         </address>
         {emphasize && <RelatedLinks />}
       </HeaderContainer>
