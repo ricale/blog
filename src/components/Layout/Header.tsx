@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
+import { RICALE_HOME_URL } from "../../constants/urls";
 import styled, { css } from "../../themes";
+import RelatedLinks from "../RelatedLinks";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -28,8 +30,9 @@ function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
           <Link to="/">{title}</Link>
         </header>
         <address>
-          <a href="https://ricale.kr">{`by ${author}`}</a>
+          <a href={RICALE_HOME_URL}>{`by ${author}`}</a>
         </address>
+        {emphasize && <RelatedLinks />}
       </HeaderContainer>
       <Menu shrink={emphasize}>
         <ul>
@@ -100,8 +103,10 @@ const HeaderContainer = styled.div<HeaderContainerProps>`
   ${(p) =>
     p.emphasize &&
     css`
-      padding-top: 56px;
-      padding-bottom: 48px;
+      flex-direction: column;
+
+      padding-top: 76px;
+      padding-bottom: 68px;
 
       & > header {
         font-size: 5rem;
@@ -109,10 +114,11 @@ const HeaderContainer = styled.div<HeaderContainerProps>`
       & > address {
         font-size: 1.5rem;
       }
+      & > :last-child {
+        margin-top: 8px;
+      }
 
       @media (max-width: 799px) {
-        flex-direction: column;
-
         & > header {
           font-size: 4.5rem;
         }
@@ -121,6 +127,12 @@ const HeaderContainer = styled.div<HeaderContainerProps>`
         }
       }
       @media (max-width: 500px) {
+        & > header {
+          font-size: 4rem;
+        }
+        & > address {
+          font-size: 1.125rem;
+        }
         order: 2;
       }
     `}

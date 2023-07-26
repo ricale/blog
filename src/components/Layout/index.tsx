@@ -1,12 +1,7 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
-import styled, {
-  css,
-  GlobalStyle,
-  normalTheme,
-  ThemeProvider,
-} from "../../themes";
+import styled, { GlobalStyle, normalTheme, ThemeProvider } from "../../themes";
 import { SiteMetadata } from "../../types";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -49,7 +44,7 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
         >
           {children}
         </main>
-        <Footer />
+        <Footer showLinks={!emphasize} />
       </Container>
     </ThemeProvider>
   );
@@ -58,6 +53,7 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
+  overflow-x: hidden;
 
   > main {
     padding-left: ${(p) => p.theme.dimens.margin}px;
