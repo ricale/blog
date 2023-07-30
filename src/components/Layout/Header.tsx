@@ -11,7 +11,6 @@ const MENU_ITEMS = [
   { path: "/posts", title: "모든글" },
   { path: "/series", title: "시리즈" },
   { path: "/tags", title: "태그" },
-  { href: "/rss.xml", title: "RSS" },
   ...(isDevelopment ? [{ path: "/drafts", title: "임시글" }] : []),
 ];
 
@@ -32,17 +31,13 @@ function Header({ emphasize, title, author, siteUrl }: HeaderProps) {
         <address>
           <a href={RICALE_HOME_URL}>{`by ${author}`}</a>
         </address>
-        {emphasize && <RelatedLinks />}
+        {emphasize && <RelatedLinks siteUrl={siteUrl} />}
       </HeaderContainer>
       <Menu shrink={emphasize}>
         <ul>
           {menuItems.map((item, i) => (
             <li key={i}>
-              {item.path ? (
-                <Link to={item.path}>{item.title}</Link>
-              ) : (
-                <a href={`${siteUrl}${item.href}`}>{item.title}</a>
-              )}
+              <Link to={item.path}>{item.title}</Link>
             </li>
           ))}
         </ul>
