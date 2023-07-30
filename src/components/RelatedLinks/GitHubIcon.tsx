@@ -1,10 +1,10 @@
+// https://www.svgrepo.com/svg/360450/github
 import * as React from "react";
 
 type GitHubIconProps = {
-  fill?: string;
   size?: number;
 };
-function GitHubIcon({ fill = "#FFFFFF", size = 24 }: GitHubIconProps) {
+function GitHubIcon({ size = 24 }: GitHubIconProps) {
   return (
     <svg
       fill="currentColor"

@@ -7,8 +7,12 @@ import {
 import styled from "../../themes";
 import GitHubIcon from "./GitHubIcon";
 import HomeIcon from "./HomeIcon";
+import RssIcon from "./RssIcon";
 
-function RelatedLinks() {
+type ReleateLinksProps = {
+  siteUrl: string;
+};
+function RelatedLinks({ siteUrl }: ReleateLinksProps) {
   return (
     <Container>
       <a href={RICALE_HOME_URL}>
@@ -16,6 +20,9 @@ function RelatedLinks() {
       </a>
       <a href={BLOG_GITHUB_REPOSITORY_URL}>
         <GitHubIcon size={24} />
+      </a>
+      <a href={`${siteUrl}/rss.xml`}>
+        <RssIcon size={24} />
       </a>
     </Container>
   );

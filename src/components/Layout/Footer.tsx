@@ -9,12 +9,13 @@ import {
 } from "../../constants/urls";
 
 type FooterProps = {
+  siteUrl: string;
   showLinks?: boolean;
 };
-function Footer({ showLinks }: FooterProps) {
+function Footer({ siteUrl, showLinks }: FooterProps) {
   return (
     <Container>
-      {showLinks && <RelatedLinks />}
+      {showLinks && <RelatedLinks siteUrl={siteUrl} />}
       <InfoRow>
         <p>
           Copyright 2021{" "}

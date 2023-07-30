@@ -44,7 +44,7 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
         >
           {children}
         </main>
-        <Footer showLinks={!emphasize} />
+        <Footer showLinks={!emphasize} siteUrl={siteUrl} />
       </Container>
     </ThemeProvider>
   );
@@ -53,7 +53,6 @@ function Layout({ emphasize, minContentHeight, children }: LayoutProps) {
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  overflow-x: hidden;
 
   > main {
     padding-left: ${(p) => p.theme.dimens.margin}px;

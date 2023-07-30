@@ -1,10 +1,10 @@
+// https://www.svgrepo.com/svg/360500/home-f
 import * as React from "react";
 
 type HomeIconProps = {
-  fill?: string;
   size?: number;
 };
-function HomeIcon({ fill = "#FFFFFF", size = 24 }: HomeIconProps) {
+function HomeIcon({ size = 24 }: HomeIconProps) {
   return (
     <svg
       fill="currentColor"
