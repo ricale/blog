@@ -53,6 +53,9 @@ const colors = {
 
   nearbyPostLink: "#1a1a1a",
   onNearbyPostLink: "#ffffff",
+
+  scrollToButton: "#131313",
+  onScrollToButton: "#aaaaaa",
 };
 
 const normal = {

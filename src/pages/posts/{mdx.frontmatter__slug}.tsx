@@ -11,6 +11,7 @@ import Comments from "../../components/Comments";
 import SameSeriesPosts from "../../components/SameSeriesPosts";
 import { PostFrontmatter } from "../../types";
 import highlightCurrentHeading from "../../utils/highlightCurrentHeading";
+import ScrollToEndButton from "../../components/ScrollToEndButton";
 
 type PostDetailPageData = {
   mdx: {
@@ -59,6 +60,8 @@ function PostDetailPage({ data, children }: PageProps<PostDetailPageData>) {
       </PostContent>
 
       <NearbySeriesPostLinks data={sameSeriesPosts} current={slug} />
+
+      <ScrollToEndButton />
 
       <Comments />
     </Layout>
