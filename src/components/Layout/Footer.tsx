@@ -24,7 +24,7 @@ function Footer({ siteUrl, showLinks }: FooterProps) {
           </strong>
         </p>
         <p>
-          <a href={CCL_URL}>CC BY-NC-SA 2.0 KR</a>.
+          <a href={CCL_URL}>CC BY-NC-SA 4.0 DEED</a>.
         </p>
         <p>
           Powered by{" "}
