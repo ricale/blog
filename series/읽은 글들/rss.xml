@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 28 Jun 2024 08:42:57 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~24.4.4)]]></title><description><![CDATA[JavaScript Why Does 'is-number' Package Have 59M Weekly Downloads?
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 28 Aug 2024 09:03:20 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~24.8.28)]]></title><description><![CDATA[Frontend [번역] 웹 컴포넌트 성공 사례
+
+"웹 컴포넌트는 기존의 프론트엔드 프레임워크와 배타적이지 않다. 오히려 그들 사이에서 공통으로 사용될 수 있는 컴포넌트 라이브러리로써, 그들을 보완하는 존재가 될 것이다." 라는 취지의 글
+
+The User…]]></description><link>https://ricale.kr/blog/posts/240828-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/240828-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Tue, 27 Aug 2024 15:00:00 GMT</pubDate><content:encoded>Frontend [번역] 웹 컴포넌트 성공 사례
+
+&quot;웹 컴포넌트는 기존의 프론트엔드 프레임워크와 배타적이지 않다. 오히려 그들 사이에서 공통으로 사용될 수 있는 컴포넌트 라이브러리로써, 그들을 보완하는 존재가 될 것이다.&quot; 라는 취지의 글
+
+The User…</content:encoded></item><item><title><![CDATA[읽은 글들 (~24.4.4)]]></title><description><![CDATA[JavaScript Why Does 'is-number' Package Have 59M Weekly Downloads?
 
 불필요한 디펜던시 체이닝에 대해 성토하는 글. 읽어볼만한 주제다.
 
