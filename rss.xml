@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 30 Sep 2024 09:05:32 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~24.9.30)]]></title><description><![CDATA[JavaScript JS Dates Are About to Be Fixed
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 06 Oct 2024 02:25:56 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[알고리즘 오답노트 (~24.10.6)]]></title><description><![CDATA[BOJ - 2618. 경찰차 이걸 DP 로 어떻게 풀라는 거지...? 라는 생각에 고민하다가 감도 못잡고 풀이를 찾아봤다. 솔직히 풀이를 이해하는데도 시간이 꽤 걸렸다.
+
+풀이 참고
+[ 백준 2618 ] 경찰차 (C++)
+BOJ - 1102. 발전소
+
+"외판원…]]></description><link>https://ricale.kr/blog/posts/241006-algorithm-wrong-answers</link><guid isPermaLink="false">https://ricale.kr/blog/posts/241006-algorithm-wrong-answers</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Sat, 05 Oct 2024 15:00:00 GMT</pubDate><content:encoded>BOJ - 2618. 경찰차 이걸 DP 로 어떻게 풀라는 거지...? 라는 생각에 고민하다가 감도 못잡고 풀이를 찾아봤다. 솔직히 풀이를 이해하는데도 시간이 꽤 걸렸다.
+
+풀이 참고
+[ 백준 2618 ] 경찰차 (C++)
+BOJ - 1102. 발전소
+
+&quot;외판원…</content:encoded></item><item><title><![CDATA[읽은 글들 (~24.9.30)]]></title><description><![CDATA[JavaScript JS Dates Are About to Be Fixed
 
 타임존을 포함하는 Date API 인 Temporal API 에 대해 소개하는 글.
 
