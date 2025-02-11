@@ -54,7 +54,7 @@ type ContentProps = {
 };
 const Content = styled.div<ContentProps>`
   padding: 0 16px;
-  max-height: ${(p) => (p.open ? 2000 : 0)}px;
+  max-height: ${(p) => (p.open ? 4000 : 0)}px;
 
   overflow: hidden;
   transition: max-height ${TRANSITION_DURATION}s;
