@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 11 Feb 2025 10:08:53 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[Next.js + Github Pages 간단 블로그 만들기]]></title><description><![CDATA[TIL 컨셉의 정말 간단한 블로그를 새로 만들고 싶어졌다. 기존의 기술 블로그에는 정제된 글을 쓰고 싶다고 한다면 새로 만들 블로그에는 그날 그날의 한 일을 부담 없이 가볍게 편하게 적어보고 싶어졌다. 그래서 새로운 블로그를 만들어보기로 했다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[techblog by ricale]]></title><description><![CDATA[기술 블로그 by ricale]]></description><link>http://github.com/dylang/node-rss</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 03 Mar 2025 04:22:12 GMT</lastBuildDate><author><![CDATA[ricale]]></author><item><title><![CDATA[읽은 글들 (~25.2.28)]]></title><description><![CDATA[React Native Shopify의 5년간 React Native 사용 경험
+
+(GeekNews 요약)
+
+Shopify 가 모든 앱 개발을 네이티브에서 React Native 로 전환하면서 경험하고 느낀 것을 공유한 글. 상당히 긍정적인 시선이다.
+
+원문은…]]></description><link>https://ricale.kr/blog/posts/250228-read-writings</link><guid isPermaLink="false">https://ricale.kr/blog/posts/250228-read-writings</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Thu, 27 Feb 2025 15:00:00 GMT</pubDate><content:encoded>React Native Shopify의 5년간 React Native 사용 경험
+
+(GeekNews 요약)
+
+Shopify 가 모든 앱 개발을 네이티브에서 React Native 로 전환하면서 경험하고 느낀 것을 공유한 글. 상당히 긍정적인 시선이다.
+
+원문은…</content:encoded></item><item><title><![CDATA[Next.js + Github Pages 간단 블로그 만들기]]></title><description><![CDATA[TIL 컨셉의 정말 간단한 블로그를 새로 만들고 싶어졌다. 기존의 기술 블로그에는 정제된 글을 쓰고 싶다고 한다면 새로 만들 블로그에는 그날 그날의 한 일을 부담 없이 가볍게 편하게 적어보고 싶어졌다. 그래서 새로운 블로그를 만들어보기로 했다.
 
 기술…]]></description><link>https://ricale.kr/blog/posts/250211-nextjs-github-pages</link><guid isPermaLink="false">https://ricale.kr/blog/posts/250211-nextjs-github-pages</guid><dc:creator><![CDATA[ricale]]></dc:creator><pubDate>Mon, 10 Feb 2025 15:00:00 GMT</pubDate><content:encoded>TIL 컨셉의 정말 간단한 블로그를 새로 만들고 싶어졌다. 기존의 기술 블로그에는 정제된 글을 쓰고 싶다고 한다면 새로 만들 블로그에는 그날 그날의 한 일을 부담 없이 가볍게 편하게 적어보고 싶어졌다. 그래서 새로운 블로그를 만들어보기로 했다.
 
